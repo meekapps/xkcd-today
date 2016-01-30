@@ -10,16 +10,14 @@
 #import "PersistenceController.h"
 #import "XKCD.h"
 
-static NSString *const kBackgroundSessionIdentifier = @"net.meekapps.xkcd.backgroundSession";
+static NSString *const kBackgroundSessionIdentifier = @"com.meekapps.xkcd.backgroundSession";
 
 static NSString *const kXKCDServerBase = @"https://xkcd.com/";
 static NSString *const kXKCDComicExtention = @"info.0.json";
 
-typedef void(^XKCDCompletionBlock)(XKCDComic *comic);
-
 @interface XKCD()
-@property (copy) XKCDCompletionBlock completion;
-@property (nonatomic) BOOL loading;
+@property (copy) XKCDComicCompletion completion;
+@property (strong, readwrite, nonatomic) NSNumber *latestComicIndex;
 @end
 
 @implementation XKCD
@@ -34,15 +32,39 @@ typedef void(^XKCDCompletionBlock)(XKCDComic *comic);
 }
 
 - (void) fetchLatestComic:(void(^)(XKCDComic *comic))completion {
+  __weak XKCD *weakSelf = self;
+  [self fetchComicWithIndex:nil
+                 completion:^(XKCDComic *comic) {
+                   if (!comic) {
+                     NSLog(@"error fetching latest comic");
+                   } else {
+                     //update latest comic index
+                     weakSelf.latestComicIndex = comic.index;
+                     
+                     NSLog(@"fetched latest comic (%@)", weakSelf.latestComicIndex);
+                   }
+                   
+                   completion(comic);
+                 }];
+}
+
+- (void) fetchComicWithIndex:(NSNumber*)index
+                  completion:(XKCDComicCompletion)completion {
   NSManagedObjectContext *managedObjectContext = [PersistenceController sharedInstance].managedObjectContext;
   NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
   NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass([XKCDComic class])
                                                        inManagedObjectContext:managedObjectContext];
   fetchRequest.entity = entityDescription;
   
-  NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date"
+  NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index"
                                                                  ascending:NO];
   fetchRequest.sortDescriptors = @[sortDescriptor];
+  fetchRequest.fetchLimit = 1;
+
+  //Fetch explicit index if argument is passed - fetches highgest index (newest) otherwise.
+  if (index) {
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"index MATCHES %@", index, nil];
+  }
   
   NSError *error = nil;
   NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest
@@ -64,7 +86,19 @@ typedef void(^XKCDCompletionBlock)(XKCDComic *comic);
 - (void) getLatestComic:(void(^)(XKCDComic *comic))completion {
   NSLog(@"getting latest comic...");
   
-  self.loading = YES;
+  __weak XKCD *weakSelf = self;
+  [self getComicWithIndex:nil
+               completion:^(XKCDComic *comic) {
+                 if (comic) {
+                   weakSelf.latestComicIndex = comic.index;
+                   NSLog(@"got latest comic (%@)", weakSelf.latestComicIndex);
+                 }
+                 completion(comic);
+               }];
+}
+
+- (void) getComicWithIndex:(NSNumber *)index
+                completion:(XKCDComicCompletion)completion {
   
   NSURLSession *session = nil;
   NSURLSessionConfiguration *backgroundSessionConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:[self backgroundSessionIdentifier]];
@@ -78,7 +112,7 @@ typedef void(^XKCDCompletionBlock)(XKCDComic *comic);
   backgroundSessionConfiguration.timeoutIntervalForRequest = 15.0F;
   backgroundSessionConfiguration.timeoutIntervalForResource = 15.0F;
   
-  NSString *urlString = [self comicUrlString];
+  NSString *urlString = [self comicUrlStringWithIndex:index];
   NSURL *url = [NSURL URLWithString:urlString];
   NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
   
@@ -91,12 +125,7 @@ typedef void(^XKCDCompletionBlock)(XKCDComic *comic);
   };
   
   [downloadTask resume];
-}
-
-- (void) setLoading:(BOOL)loading {
-  _loading = loading;
   
-
 }
 
 #pragma mark - NSURLSession Delegate
@@ -109,7 +138,6 @@ didFinishDownloadingToURL:(NSURL *)location {
   __weak XKCD *weakSelf = self;
   [self unpackPayload:data
            completion:^(XKCDComic *comic) {
-             weakSelf.loading = NO;
              weakSelf.completion(comic);
   }];
 }
@@ -147,10 +175,15 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
 
 #pragma mark - Private
 
-- (NSString*) comicUrlString {
-  return [NSString stringWithFormat:@"%@%@", kXKCDServerBase, kXKCDComicExtention];
+// Returns NSString URL for comic with index. Passing index = nil returns latest comic URL.
+// e.g. no index: http://xkcd.com/info.0.json, index: http://xkcd.com/614/info.0.json,
+- (NSString*) comicUrlStringWithIndex:(NSNumber*)index {
+  NSString *optionalIndexComponent = index ? [NSString stringWithFormat:@"%@/", index] : @"";
+  NSString *path = [NSString stringWithFormat:@"%@%@%@", kXKCDServerBase, optionalIndexComponent, kXKCDComicExtention];
+  return path;
 }
 
+// com.meekapps.xkcd.backgroundSession.<UUID>
 - (NSString*) backgroundSessionIdentifier {
   NSUUID *randomUuid = [NSUUID UUID];
   NSString *uuidString = [randomUuid UUIDString];
@@ -158,7 +191,9 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
   return identifier;
 }
 
-- (void) unpackPayload:(NSData*)data completion:(XKCDCompletionBlock)completion {
+// Unpacks payload NSData into XKCDComic object.
+- (void) unpackPayload:(NSData*)data
+            completion:(XKCDComicCompletion)completion {
   NSError *error = nil;
   id unpackedPayload = [NSJSONSerialization JSONObjectWithData:data
                                                        options:kNilOptions
@@ -169,7 +204,6 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
     return;
   }
   
-  NSLog(@"payload: %@", unpackedPayload);
   XKCDComic *comic = [self comicWithPayload:unpackedPayload];
   completion(comic);
 }
@@ -201,7 +235,7 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
   id title = payload[@"title"];
   if (title && [title isKindOfClass:[NSString class]]) comic.title = title;
   
-  NSLog(@"Persisting XKCDComic: %@", comic);
+  NSLog(@"Inserting XKCDComic into NSManagedObjectContext: %@", comic);
   
   return comic;
 }
