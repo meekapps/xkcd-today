@@ -10,6 +10,9 @@
 
 @interface TodayViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel, *titleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
+- (IBAction)tappedView:(id)sender;
 
 @end
