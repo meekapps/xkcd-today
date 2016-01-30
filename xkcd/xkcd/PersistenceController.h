@@ -18,6 +18,5 @@
 + (instancetype) sharedInstance;
 
 - (void)saveContext;
-- (NSURL *)applicationDocumentsDirectory;
 
 @end

@@ -105,6 +105,8 @@
 		412191B71C5D12720005971C /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
 		412191BA1C5D12720005971C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		412191BC1C5D12720005971C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		41FB0AAE1C5D221F00EE4732 /* xkcd today.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "xkcd today.entitlements"; sourceTree = "<group>"; };
+		41FB0AAF1C5D241300EE4732 /* xkcd.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = xkcd.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 		412191581C5C624E0005971C /* xkcd */ = {
 			isa = PBXGroup;
 			children = (
+				41FB0AAF1C5D241300EE4732 /* xkcd.entitlements */,
 				412191A61C5C68370005971C /* Categories */,
 				412191981C5C63AA0005971C /* Core */,
 				412191991C5C63B10005971C /* Views */,
@@ -271,6 +274,7 @@
 		412191B51C5D12720005971C /* xkcd today */ = {
 			isa = PBXGroup;
 			children = (
+				41FB0AAE1C5D221F00EE4732 /* xkcd today.entitlements */,
 				412191B61C5D12720005971C /* TodayViewController.h */,
 				412191B71C5D12720005971C /* TodayViewController.m */,
 				412191B91C5D12720005971C /* MainInterface.storyboard */,
@@ -365,6 +369,12 @@
 				TargetAttributes = {
 					412191551C5C624E0005971C = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = TFCWAQ62U3;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					412191711C5C624E0005971C = {
 						CreatedOnToolsVersion = 7.2;
@@ -376,6 +386,12 @@
 					};
 					412191B01C5D12720005971C = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = TFCWAQ62U3;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -610,10 +626,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = xkcd/xkcd.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = xkcd/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.meekapps.xkcd;
+				PRODUCT_BUNDLE_IDENTIFIER = com.meekapps.xkcd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -621,10 +641,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = xkcd/xkcd.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = xkcd/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.meekapps.xkcd;
+				PRODUCT_BUNDLE_IDENTIFIER = com.meekapps.xkcd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -679,10 +703,14 @@
 		412191C11C5D12720005971C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "xkcd today/xkcd today.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "xkcd today/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.meekapps.xkcd.xkcd-today";
+				PRODUCT_BUNDLE_IDENTIFIER = com.meekapps.xkcd.today;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -690,10 +718,14 @@
 		412191C21C5D12720005971C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "xkcd today/xkcd today.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "xkcd today/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.meekapps.xkcd.xkcd-today";
+				PRODUCT_BUNDLE_IDENTIFIER = com.meekapps.xkcd.today;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -717,6 +749,7 @@
 				412191881C5C624E0005971C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		412191891C5C624E0005971C /* Build configuration list for PBXNativeTarget "xkcdTests" */ = {
 			isa = XCConfigurationList;
@@ -725,6 +758,7 @@
 				4121918B1C5C624E0005971C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4121918C1C5C624E0005971C /* Build configuration list for PBXNativeTarget "xkcdUITests" */ = {
 			isa = XCConfigurationList;
@@ -733,6 +767,7 @@
 				4121918E1C5C624E0005971C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		412191C01C5D12720005971C /* Build configuration list for PBXNativeTarget "xkcd today" */ = {
 			isa = XCConfigurationList;
@@ -741,6 +776,7 @@
 				412191C21C5D12720005971C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
