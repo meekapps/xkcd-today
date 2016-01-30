@@ -96,7 +96,8 @@ static CGFloat const kDefaultPadding = 8.0F;
 - (IBAction)previousAction:(id)sender {
   NSLog(@"previos button pressed");
   
-  if (self.currentIndex.unsignedIntegerValue == 0) return;
+  NSNumber *oldestIndex = @(0);
+  if ([self.currentIndex equals:oldestIndex]) return;
   
   NSNumber *previousIndex = [[self.currentIndex subtract:1] copy];
   [self loadComicWithIndex:previousIndex];
@@ -105,7 +106,8 @@ static CGFloat const kDefaultPadding = 8.0F;
 - (IBAction)nextAction:(id)sender {
   NSLog(@"next button pressed");
   
-  if (self.currentIndex.unsignedIntegerValue == [XKCD sharedInstance].latestComicIndex.unsignedIntegerValue) return;
+  NSNumber *latestIndex = [XKCD sharedInstance].latestComicIndex;
+  if (self.currentIndex && latestIndex && [self.currentIndex equals:latestIndex]) return;
   
   NSNumber *nextIndex = [[self.currentIndex add:1] copy];
   [self loadComicWithIndex:nextIndex];
@@ -113,8 +115,15 @@ static CGFloat const kDefaultPadding = 8.0F;
 }
 
 - (IBAction)randomAction:(id)sender {
-  //TODO: random
   NSLog(@"random button pressed");
+  NSNumber *latestIndex = [XKCD sharedInstance].latestComicIndex;
+  if (!latestIndex) return;
+  
+  NSNumber *randomIndex = [NSNumber randomWithMinimum:@(1)
+                                              maximum:latestIndex];
+  if (!randomIndex) return;
+  
+  [self loadComicWithIndex:randomIndex];
 }
 
 #pragma mark - Private

@@ -11,6 +11,11 @@
 @interface NSNumber (Operations)
 
 - (NSNumber*) add:(NSInteger)integer;
+- (BOOL) equals:(NSNumber*)number;
+- (BOOL) greaterThan:(NSNumber*)number;
+- (BOOL) lessThan:(NSNumber*)number;
 - (NSNumber*) subtract:(NSInteger)integer;
++ (NSNumber*) randomWithMinimum:(NSNumber*)minimum
+                        maximum:(NSNumber*)maximum;
 
 @end
