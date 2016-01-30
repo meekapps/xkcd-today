@@ -25,7 +25,7 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  [self initialLoad];
+  [self loadLatestWithCompletion:^(NCUpdateResult updateResult) {}];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -45,20 +45,26 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
 
 #pragma mark - Private
 
-- (void) initialLoad {
+- (void) loadLatestWithCompletion:(void(^)(NCUpdateResult updateResult))completion {
   self.titleLabel.text = @"Loading";
   //Fetch most recent persisted comic from Core Data.
   __weak TodayViewController *weakSelf = self;
   [[XKCD sharedInstance] fetchLatestComic:^(XKCDComic *fetchedComic) {
+    
     if (fetchedComic) {
       [weakSelf updateViewsWithComic:fetchedComic];
     }
     
     //GET latest comic from HTTP request, update UI if it is new.
     [[XKCD sharedInstance] getLatestComic:^(XKCDComic *httpComic) {
+      NCUpdateResult updateResult = NCUpdateResultFailed;
+      
       if (![fetchedComic.index equals:httpComic.index]) {
         [weakSelf updateViewsWithComic:httpComic];
+        updateResult = NCUpdateResultNewData;
       }
+      
+      completion(updateResult);
     }];
   }];
 }
