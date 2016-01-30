@@ -160,18 +160,6 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
   }
 }
 
-- (void) URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session {
-  NSLog(@"session did finish");
-  //TODO: app extension solution
-//  AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//  if (appDelegate.backgroundSessionCompletionHandler) {
-//    void (^completionHandler)() = appDelegate.backgroundSessionCompletionHandler;
-//    appDelegate.backgroundSessionCompletionHandler = nil;
-//    completionHandler();
-//  }
-}
-
-
 #pragma mark - Private
 
 // Returns NSString URL for comic with index. Passing index = nil returns latest comic URL.

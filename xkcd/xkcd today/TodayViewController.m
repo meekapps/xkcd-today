@@ -9,6 +9,7 @@
 #import "TodayViewController.h"
 #import "PersistenceController.h"
 #import <NotificationCenter/NotificationCenter.h>
+#import "NSNumber+Operations.h"
 #import "UIImage+AsyncImage.h"
 #import "XKCD.h"
 
@@ -35,16 +36,6 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
   [super didReceiveMemoryWarning];
 }
 
-- (void)widgetPerformUpdateWithCompletionHandler:(void (^)(NCUpdateResult))completionHandler {
-    // Perform any setup necessary in order to update the view.
-    
-    // If an error is encountered, use NCUpdateResultFailed
-    // If there's no update required, use NCUpdateResultNoData
-    // If there's an update, use NCUpdateResultNewData
-
-    completionHandler(NCUpdateResultNewData);
-}
-
 #pragma mark - Actions
 
 - (IBAction)tappedView:(id)sender {
@@ -55,6 +46,7 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
 #pragma mark - Private
 
 - (void) initialLoad {
+  self.titleLabel.text = @"Loading";
   //Fetch most recent persisted comic from Core Data.
   __weak TodayViewController *weakSelf = self;
   [[XKCD sharedInstance] fetchLatestComic:^(XKCDComic *fetchedComic) {
@@ -64,7 +56,7 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
     
     //GET latest comic from HTTP request, update UI if it is new.
     [[XKCD sharedInstance] getLatestComic:^(XKCDComic *httpComic) {
-      if (fetchedComic.index.unsignedIntegerValue != httpComic.index.unsignedIntegerValue) {
+      if (![fetchedComic.index equals:httpComic.index]) {
         [weakSelf updateViewsWithComic:httpComic];
       }
     }];
