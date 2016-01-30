@@ -27,6 +27,10 @@
 		412191B81C5D12720005971C /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191B71C5D12720005971C /* TodayViewController.m */; };
 		412191BB1C5D12720005971C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 412191B91C5D12720005971C /* MainInterface.storyboard */; };
 		412191BF1C5D12720005971C /* xkcd today.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 412191B11C5D12720005971C /* xkcd today.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		414207991C5D284F009853D7 /* XKCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191A11C5C64F20005971C /* XKCD.m */; };
+		4142079A1C5D28EB009853D7 /* XKCDComic.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191921C5C634D0005971C /* XKCDComic.m */; };
+		4142079B1C5D28F5009853D7 /* PersistenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4121919E1C5C643B0005971C /* PersistenceController.m */; };
+		4142079C1C5D295C009853D7 /* xkcd.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 412191651C5C624E0005971C /* xkcd.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -490,6 +494,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4142079C1C5D295C009853D7 /* xkcd.xcdatamodeld in Sources */,
+				4142079B1C5D28F5009853D7 /* PersistenceController.m in Sources */,
+				4142079A1C5D28EB009853D7 /* XKCDComic.m in Sources */,
+				414207991C5D284F009853D7 /* XKCD.m in Sources */,
 				412191B81C5D12720005971C /* TodayViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -707,6 +715,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "xkcd today/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.meekapps.xkcd.today;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -722,6 +731,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "xkcd today/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.meekapps.xkcd.today;
 				PRODUCT_NAME = "$(TARGET_NAME)";

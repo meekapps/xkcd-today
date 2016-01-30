@@ -7,7 +7,9 @@
 //
 
 #import "TodayViewController.h"
+#import "PersistenceController.h"
 #import <NotificationCenter/NotificationCenter.h>
+#import "XKCD.h"
 
 @interface TodayViewController () <NCWidgetProviding>
 
@@ -16,13 +18,32 @@
 @implementation TodayViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+  [super viewDidLoad];
+
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+  
+  //Fetch most recent persisted comic from Core Data.
+  __weak TodayViewController *weakSelf = self;
+  [[XKCD sharedInstance] fetchLatestComic:^(XKCDComic *fetchedComic) {
+    if (fetchedComic) {
+      [weakSelf updateWithComic:fetchedComic];
+    }
+    
+    //GET latest comic from HTTP request, update UI if it is new.
+    [[XKCD sharedInstance] getLatestComic:^(XKCDComic *httpComic) {
+      NSLog(@"got comic: %@", httpComic);
+      if (fetchedComic.index != httpComic.index) {
+        [weakSelf updateWithComic:httpComic];
+      }
+    }];
+  }];
 }
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+  [super didReceiveMemoryWarning];
 }
 
 - (void)widgetPerformUpdateWithCompletionHandler:(void (^)(NCUpdateResult))completionHandler {
@@ -33,6 +54,12 @@
     // If there's an update, use NCUpdateResultNewData
 
     completionHandler(NCUpdateResultNewData);
+}
+
+#pragma mark - Private
+
+- (void) updateWithComic:(XKCDComic*)comic {
+  NSLog(@"updating with comic: %@", comic);
 }
 
 @end

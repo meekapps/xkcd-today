@@ -89,6 +89,7 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="refreshButtonItem" destination="Ktg-nE-Rhz" id="ZVX-Wg-vAL"/>
                         <outlet property="scrollView" destination="5Xz-kH-D38" id="QTu-fp-UgE"/>
                         <outlet property="toolbar" destination="eiZ-Gg-gto" id="3Of-b6-7Zs"/>
                         <outlet property="view" destination="kKz-r4-rUW" id="8eG-qf-7g0"/>

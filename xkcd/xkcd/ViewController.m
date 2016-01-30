@@ -13,6 +13,9 @@
 
 @interface ViewController ()
 @property (strong, nonatomic) UIImageView *comicImageView;
+@property (strong, nonatomic) UIActivityIndicatorView *loaderView;
+@property (nonatomic) BOOL loaderVisible;
+@property (strong, nonatomic) UIBarButtonItem *refreshButtonItem;
 @end
 
 @implementation ViewController
@@ -92,12 +95,34 @@
   return self.comicImageView;
 }
 
+- (void) setLoaderVisible:(BOOL)visible {
+  _loaderVisible = visible;
+  
+  if (visible) {
+    self.refreshButtonItem = self.navigationItem.rightBarButtonItem;
+    UIBarButtonItem *loaderButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.loaderView];
+    [self.loaderView startAnimating];
+    self.navigationItem.rightBarButtonItem = loaderButtonItem;
+  } else {
+    self.navigationItem.rightBarButtonItem = self.refreshButtonItem;
+  }
+}
+
+- (UIActivityIndicatorView*) loaderView {
+  if (!_loaderView) {
+    _loaderView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+  }
+  return _loaderView;
+}
+
 #pragma mark - Actions
 
 - (IBAction)refreshAction:(id)sender {
+  self.loaderVisible = YES;
   __weak ViewController *weakSelf = self;
   [[XKCD sharedInstance] getLatestComic:^(XKCDComic *comic) {
     [weakSelf updateWithComic:comic];
+    weakSelf.loaderVisible = NO;
   }];
 }
 

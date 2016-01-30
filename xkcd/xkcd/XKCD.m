@@ -68,7 +68,7 @@ typedef void(^XKCDCompletionBlock)(XKCDComic *comic);
   
   NSURLSession *session = nil;
   NSURLSessionConfiguration *backgroundSessionConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:[self backgroundSessionIdentifier]];
-//  backgroundSessionConfiguration.sharedContainerIdentifier = kSharedDefaultsSuiteName;
+  backgroundSessionConfiguration.sharedContainerIdentifier = @"group.com.meekapps.xkcd";
   session =  [NSURLSession sessionWithConfiguration:backgroundSessionConfiguration
                                            delegate:self
                                       delegateQueue:nil];
@@ -135,13 +135,13 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
 
 - (void) URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session {
   NSLog(@"session did finish");
-  
-  AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-  if (appDelegate.backgroundSessionCompletionHandler) {
-    void (^completionHandler)() = appDelegate.backgroundSessionCompletionHandler;
-    appDelegate.backgroundSessionCompletionHandler = nil;
-    completionHandler();
-  }
+  //TODO: app extension solution
+//  AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//  if (appDelegate.backgroundSessionCompletionHandler) {
+//    void (^completionHandler)() = appDelegate.backgroundSessionCompletionHandler;
+//    appDelegate.backgroundSessionCompletionHandler = nil;
+//    completionHandler();
+//  }
 }
 
 
