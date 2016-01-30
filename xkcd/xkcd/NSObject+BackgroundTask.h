@@ -3,7 +3,7 @@
 //  Meek Apps
 //
 //  Created by Mike Keller on 11/20/14.
-//  Copyright (c) 2014 Perka. All rights reserved.
+//  Copyright (c) 2014 meek apps. All rights reserved.
 //
 //  Perform a generic background task block.
 

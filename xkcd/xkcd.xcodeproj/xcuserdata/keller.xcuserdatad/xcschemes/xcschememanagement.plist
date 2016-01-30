@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>xkcd today.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>xkcd.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -23,6 +28,11 @@
 			<true/>
 		</dict>
 		<key>4121917C1C5C624E0005971C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>412191B01C5D12720005971C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
