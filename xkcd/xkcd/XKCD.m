@@ -63,7 +63,7 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
 
   //Fetch explicit index if argument is passed - fetches highgest index (newest) otherwise.
   if (index) {
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"index MATCHES %@", index, nil];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"index == %@", index, nil];
   }
   
   NSError *error = nil;
@@ -80,18 +80,16 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
   }
   
   XKCDComic *comic = fetchedObjects.firstObject;
+  NSLog(@"fetched comic with index (%@)", index);
   completion(comic);
 }
 
 - (void) getLatestComic:(void(^)(XKCDComic *comic))completion {
-  NSLog(@"getting latest comic...");
-  
   __weak XKCD *weakSelf = self;
   [self getComicWithIndex:nil
                completion:^(XKCDComic *comic) {
                  if (comic) {
                    weakSelf.latestComicIndex = comic.index;
-                   NSLog(@"got latest comic (%@)", weakSelf.latestComicIndex);
                  }
                  completion(comic);
                }];
@@ -120,6 +118,7 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
   self.completion = ^void(XKCDComic *comic) {
     [session finishTasksAndInvalidate];
     dispatch_async(dispatch_get_main_queue(), ^{
+      NSLog(@"got comic from http (%@)", index);
       completion(comic);
     });
   };
@@ -204,11 +203,11 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
     return;
   }
   
-  XKCDComic *comic = [self comicWithPayload:unpackedPayload];
+  XKCDComic *comic = [self createAndInsertComicWithPayload:unpackedPayload];
   completion(comic);
 }
 
-- (XKCDComic*) comicWithPayload:(NSDictionary*)payload {
+- (XKCDComic*) createAndInsertComicWithPayload:(NSDictionary*)payload {
   NSManagedObjectContext *managedObjectContext = [PersistenceController sharedInstance].managedObjectContext;
   NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass([XKCDComic class])
                                                        inManagedObjectContext:managedObjectContext];

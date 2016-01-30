@@ -31,6 +31,7 @@
 		4142079A1C5D28EB009853D7 /* XKCDComic.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191921C5C634D0005971C /* XKCDComic.m */; };
 		4142079B1C5D28F5009853D7 /* PersistenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4121919E1C5C643B0005971C /* PersistenceController.m */; };
 		4142079C1C5D295C009853D7 /* xkcd.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 412191651C5C624E0005971C /* xkcd.xcdatamodeld */; };
+		414207A11C5D4998009853D7 /* NSNumber+Operations.m in Sources */ = {isa = PBXBuildFile; fileRef = 414207A01C5D4998009853D7 /* NSNumber+Operations.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +110,8 @@
 		412191B71C5D12720005971C /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
 		412191BA1C5D12720005971C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		412191BC1C5D12720005971C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4142079F1C5D4998009853D7 /* NSNumber+Operations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Operations.h"; sourceTree = "<group>"; };
+		414207A01C5D4998009853D7 /* NSNumber+Operations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Operations.m"; sourceTree = "<group>"; };
 		41FB0AAE1C5D221F00EE4732 /* xkcd today.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "xkcd today.entitlements"; sourceTree = "<group>"; };
 		41FB0AAF1C5D241300EE4732 /* xkcd.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = xkcd.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -257,6 +260,8 @@
 		412191A61C5C68370005971C /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				4142079F1C5D4998009853D7 /* NSNumber+Operations.h */,
+				414207A01C5D4998009853D7 /* NSNumber+Operations.m */,
 				412191A31C5C68340005971C /* NSObject+BackgroundTask.h */,
 				412191A41C5C68340005971C /* NSObject+BackgroundTask.m */,
 				412191A71C5C70A70005971C /* UIColor+XKCD.h */,
@@ -465,6 +470,7 @@
 				4121915E1C5C624E0005971C /* AppDelegate.m in Sources */,
 				4121915B1C5C624E0005971C /* main.m in Sources */,
 				412191A21C5C64F20005971C /* XKCD.m in Sources */,
+				414207A11C5D4998009853D7 /* NSNumber+Operations.m in Sources */,
 				412191931C5C634D0005971C /* XKCDComic+CoreDataProperties.m in Sources */,
 				412191671C5C624E0005971C /* xkcd.xcdatamodeld in Sources */,
 				412191A51C5C68340005971C /* NSObject+BackgroundTask.m in Sources */,

@@ -6,6 +6,7 @@
 //  Copyright © 2016 meek apps. All rights reserved.
 //
 
+#import "NSNumber+Operations.h"
 #import "PersistenceController.h"
 #import "ViewController.h"
 #import "UIImage+AsyncImage.h"
@@ -15,13 +16,15 @@ static CGFloat const kDefaultPadding = 8.0F;
 
 @interface ViewController ()
 @property (strong, nonatomic) UIImageView *comicImageView;
-@property (nonatomic) NSUInteger currentIndex;
+@property (copy, nonatomic) NSNumber *currentIndex;
 @property (strong, nonatomic) UIActivityIndicatorView *loaderView;
 @property (nonatomic) BOOL loaderVisible;
 @property (strong, nonatomic) UIBarButtonItem *refreshButtonItem;
 @end
 
 @implementation ViewController
+
+#pragma mark - Lifecycle
 
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -33,7 +36,7 @@ static CGFloat const kDefaultPadding = 8.0F;
   [super didReceiveMemoryWarning];
 }
 
-#pragma mark - Overrides
+#pragma mark - Properties
 
 - (void) setComicImage:(UIImage*)image {
   self.comicImageView.image = image;
@@ -79,12 +82,6 @@ static CGFloat const kDefaultPadding = 8.0F;
   return _comicImageView;
 }
 
-#pragma mark - UIScrollViewDelegate
-
-- (UIView *) viewForZoomingInScrollView:(UIScrollView *)scrollView {
-  return self.comicImageView;
-}
-
 #pragma mark - Actions
 
 - (IBAction)refreshAction:(id)sender {
@@ -97,13 +94,22 @@ static CGFloat const kDefaultPadding = 8.0F;
 }
 
 - (IBAction)previousAction:(id)sender {
-  //TODO: previous
-  NSLog(@"previous button pressed");
+  NSLog(@"previos button pressed");
+  
+  if (self.currentIndex.unsignedIntegerValue == 0) return;
+  
+  NSNumber *previousIndex = [[self.currentIndex subtract:1] copy];
+  [self loadComicWithIndex:previousIndex];
 }
 
 - (IBAction)nextAction:(id)sender {
-  //TODO: next
   NSLog(@"next button pressed");
+  
+  if (self.currentIndex.unsignedIntegerValue == [XKCD sharedInstance].latestComicIndex.unsignedIntegerValue) return;
+  
+  NSNumber *nextIndex = [[self.currentIndex add:1] copy];
+  [self loadComicWithIndex:nextIndex];
+  
 }
 
 - (IBAction)randomAction:(id)sender {
@@ -118,21 +124,48 @@ static CGFloat const kDefaultPadding = 8.0F;
   __weak ViewController *weakSelf = self;
   [[XKCD sharedInstance] fetchLatestComic:^(XKCDComic *fetchedComic) {
     if (fetchedComic) {
-      weakSelf.currentIndex = fetchedComic.index.unsignedIntegerValue;
+      weakSelf.currentIndex = [fetchedComic.index copy];
       [weakSelf updateViewsWithComic:fetchedComic];
     }
     
     //GET latest comic from HTTP request, update UI if it is new.
     [[XKCD sharedInstance] getLatestComic:^(XKCDComic *httpComic) {
-      if (fetchedComic.index != httpComic.index) {
-        weakSelf.currentIndex = httpComic.index.unsignedIntegerValue;
+      if (fetchedComic.index.unsignedIntegerValue != httpComic.index.unsignedIntegerValue) {
+        weakSelf.currentIndex = [httpComic.index copy];
         [weakSelf updateViewsWithComic:httpComic];
       }
     }];
   }];
 }
 
-- (void) updateComicImageWithComic:(XKCDComic*)comic {
+- (void) loadComicWithIndex:(NSNumber*)index {
+  if (!index) return;
+  
+  __weak ViewController *weakSelf = self;
+  [[XKCD sharedInstance] fetchComicWithIndex:index
+                                  completion:^(XKCDComic *comic) {
+                                    //Fetched comic from Core Data
+                                    if (comic) {
+                                      [weakSelf updateViewsWithComic:comic];
+                                      weakSelf.currentIndex = [index copy];
+                                      
+                                      //Not in Core Data, get from http.
+                                    } else {
+                                      [[XKCD sharedInstance] getComicWithIndex:index
+                                                                    completion:^(XKCDComic *comic) {
+                                                                      [weakSelf updateViewsWithComic:comic];
+                                                                      weakSelf.currentIndex = [index copy];
+                                                                    }];
+                                    }
+                                  }];
+}
+
+- (void) updateViewsWithComic:(XKCDComic*)comic {
+  if (!comic) return;
+  
+  //nav bar title
+  self.title = comic.title;
+  
   //set the stored image, if possible
   UIImage *image = [UIImage imageWithData:comic.image];
   if (image) {
@@ -155,13 +188,10 @@ static CGFloat const kDefaultPadding = 8.0F;
              }];
 }
 
-- (void) updateViewsWithComic:(XKCDComic*)comic {
-  if (!comic) return;
-  
-  //nav bar title
-  self.title = comic.title;
-  
-  [self updateComicImageWithComic:comic];
+#pragma mark - UIScrollViewDelegate
+
+- (UIView *) viewForZoomingInScrollView:(UIScrollView *)scrollView {
+  return self.comicImageView;
 }
 
 @end
