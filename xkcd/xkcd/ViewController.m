@@ -87,7 +87,8 @@ static CGFloat const kDefaultPadding = 8.0F;
 - (IBAction)refreshAction:(id)sender {
   self.loaderVisible = YES;
   __weak ViewController *weakSelf = self;
-  [[XKCD sharedInstance] getLatestComic:^(XKCDComic *comic) {
+  [[XKCD sharedInstance] getComicWithIndex:self.currentIndex
+                                completion:^(XKCDComic *comic) {
     [weakSelf updateViewsWithComic:comic];
     weakSelf.loaderVisible = NO;
   }];
@@ -147,23 +148,32 @@ static CGFloat const kDefaultPadding = 8.0F;
   }];
 }
 
+//Load comic with index. Attempts local Core Data load, if fails, performs HTTP request.
 - (void) loadComicWithIndex:(NSNumber*)index {
   if (!index) return;
   
+  self.loaderVisible = YES;
+  
   __weak ViewController *weakSelf = self;
+  void(^finalizeWithComic)(XKCDComic *comic) = ^void(XKCDComic *comic) {
+    if (comic) weakSelf.currentIndex = [index copy];
+    
+    [weakSelf updateViewsWithComic:comic];
+    
+    weakSelf.loaderVisible = NO;
+  };
+
   [[XKCD sharedInstance] fetchComicWithIndex:index
                                   completion:^(XKCDComic *comic) {
                                     //Fetched comic from Core Data
                                     if (comic) {
-                                      [weakSelf updateViewsWithComic:comic];
-                                      weakSelf.currentIndex = [index copy];
+                                      finalizeWithComic(comic);
                                       
-                                      //Not in Core Data, get from http.
+                                    //Not in Core Data, get from http.
                                     } else {
                                       [[XKCD sharedInstance] getComicWithIndex:index
                                                                     completion:^(XKCDComic *comic) {
-                                                                      [weakSelf updateViewsWithComic:comic];
-                                                                      weakSelf.currentIndex = [index copy];
+                                                                      finalizeWithComic(comic);
                                                                     }];
                                     }
                                   }];
@@ -188,12 +198,14 @@ static CGFloat const kDefaultPadding = 8.0F;
   [UIImage imageFromUrl:urlString
              completion:^(UIImage *image) {
                
-               //updates UI
-               [weakSelf setComicImage:image];
-               
-               //sets managed object image in context to be persisted.
-               comic.image = UIImagePNGRepresentation(image);
-               [[PersistenceController sharedInstance] saveContext];
+               if (image) {
+                 //updates UI
+                 [weakSelf setComicImage:image];
+                 
+                 //sets managed object image in context to be persisted.
+                 comic.image = UIImagePNGRepresentation(image);
+                 [[PersistenceController sharedInstance] saveContext];
+               }
              }];
 }
 
