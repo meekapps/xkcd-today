@@ -12,7 +12,7 @@
 #import "XKCD.h"
 
 @interface ViewController ()
-
+@property (strong, nonatomic) UIImageView *comicImageView;
 @end
 
 @implementation ViewController
@@ -20,12 +20,22 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   
+  self.comicImageView = [[UIImageView alloc] init];
+  self.comicImageView.contentMode = UIViewContentModeScaleAspectFit;
+  [self.scrollView addSubview:_comicImageView];
+  
+  //Fetch most recent persisted comic from Core Data.
   __weak ViewController *weakSelf = self;
-  [[XKCD sharedInstance] fetchLatestComic:^(XKCDComic *comic) {
-    [weakSelf updateWithComic:comic];
-    
-    [[XKCD sharedInstance] getLatestComic:^(XKCDComic *comic) {
-      [weakSelf updateWithComic:comic];
+  [[XKCD sharedInstance] fetchLatestComic:^(XKCDComic *fetchedComic) {
+    if (fetchedComic) {
+      [weakSelf updateWithComic:fetchedComic];
+    }
+
+    //GET latest comic from HTTP request, update UI if it is new.
+    [[XKCD sharedInstance] getLatestComic:^(XKCDComic *httpComic) {
+      if (fetchedComic.index != httpComic.index) {
+        [weakSelf updateWithComic:httpComic];
+      }
     }];
   }];
 }
@@ -35,21 +45,51 @@
 }
 
 - (void) updateWithComic:(XKCDComic*)comic {
-  //stored image
+  if (!comic) return;
+  
+  //nav bar title
+  self.title = comic.title;
+  
+  //set the stored image, if possible
   UIImage *image = [UIImage imageWithData:comic.image];
   if (image) {
-    self.comicImageView.image = image;
+    [self setComicImage:image];
+    return;
   }
 
-  //download image
+  //download image if it hasn't been already and save in Core Data.
   NSString *urlString = comic.imageUrl;
   __weak ViewController *weakSelf = self;
   [UIImage imageFromUrl:urlString
              completion:^(UIImage *image) {
-               weakSelf.comicImageView.image = image;
+               
+               //updates UI
+               [weakSelf setComicImage:image];
+               
+               //sets managed object image in context to be persisted.
                comic.image = UIImagePNGRepresentation(image);
+               [[PersistenceController sharedInstance] saveContext];
              }];
   
+}
+
+- (void) setComicImage:(UIImage*)image {
+  self.comicImageView.image = image;
+  
+  //Calculate frame
+  CGFloat padding = 8.0F;
+  CGFloat width = self.scrollView.bounds.size.width - padding * 2.0F;
+  CGFloat navBarHeight = self.navigationController.navigationBar.bounds.size.height;
+  CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+  CGFloat toolBarHeight = self.toolbar.bounds.size.height;
+  CGFloat height = self.scrollView.bounds.size.height - navBarHeight - statusBarHeight - toolBarHeight - padding * 2.0F;
+  self.comicImageView.frame = CGRectMake(padding, padding, width, height);
+  
+  self.scrollView.contentSize = self.comicImageView.bounds.size;
+}
+
+- (UIView *) viewForZoomingInScrollView:(UIScrollView *)scrollView {
+  return self.comicImageView;
 }
 
 #pragma mark - Actions
@@ -59,6 +99,21 @@
   [[XKCD sharedInstance] getLatestComic:^(XKCDComic *comic) {
     [weakSelf updateWithComic:comic];
   }];
+}
+
+- (IBAction)previousAction:(id)sender {
+  //TODO: previous
+  NSLog(@"previous button pressed");
+}
+
+- (IBAction)nextAction:(id)sender {
+  //TODO: next
+  NSLog(@"next button pressed");
+}
+
+- (IBAction)randomAction:(id)sender {
+  //TODO: random
+  NSLog(@"random button pressed");
 }
 
 @end

@@ -13,7 +13,10 @@
 
 + (instancetype) sharedInstance;
 
+/// Fetches the most recent comic from Core Data.
 - (void) fetchLatestComic:(void(^)(XKCDComic *comic))completion;
+
+/// GETs the most recent comic from an HTTP request.
 - (void) getLatestComic:(void(^)(XKCDComic *comic))completion;
 
 @end

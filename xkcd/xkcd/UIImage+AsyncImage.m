@@ -12,8 +12,13 @@
 
 + (void) imageFromUrl:(NSString*)urlString
            completion:(void(^)(UIImage *image))completion {
-  
+
   NSURL *url = [NSURL URLWithString:urlString];
+
+  if (!url) {
+    completion(nil);
+    return;
+  }
   
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     NSError *error = nil;

@@ -10,9 +10,13 @@
 
 @interface ViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UIImageView *comicImageView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 
 - (IBAction)refreshAction:(id)sender;
+- (IBAction)previousAction:(id)sender;
+- (IBAction)nextAction:(id)sender;
+- (IBAction)randomAction:(id)sender;
 
 @end
 
