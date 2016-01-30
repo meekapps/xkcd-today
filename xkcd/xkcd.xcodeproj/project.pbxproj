@@ -20,7 +20,6 @@
 		412191941C5C634D0005971C /* XKCDComic.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191921C5C634D0005971C /* XKCDComic.m */; };
 		4121919F1C5C643B0005971C /* PersistenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4121919E1C5C643B0005971C /* PersistenceController.m */; };
 		412191A21C5C64F20005971C /* XKCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191A11C5C64F20005971C /* XKCD.m */; };
-		412191A51C5C68340005971C /* NSObject+BackgroundTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191A41C5C68340005971C /* NSObject+BackgroundTask.m */; };
 		412191A91C5C70A70005971C /* UIColor+XKCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191A81C5C70A70005971C /* UIColor+XKCD.m */; };
 		412191AC1C5C73FB0005971C /* UIImage+AsyncImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191AB1C5C73FB0005971C /* UIImage+AsyncImage.m */; };
 		412191B41C5D12720005971C /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 412191B31C5D12720005971C /* NotificationCenter.framework */; };
@@ -32,6 +31,8 @@
 		4142079B1C5D28F5009853D7 /* PersistenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4121919E1C5C643B0005971C /* PersistenceController.m */; };
 		4142079C1C5D295C009853D7 /* xkcd.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 412191651C5C624E0005971C /* xkcd.xcdatamodeld */; };
 		414207A11C5D4998009853D7 /* NSNumber+Operations.m in Sources */ = {isa = PBXBuildFile; fileRef = 414207A01C5D4998009853D7 /* NSNumber+Operations.m */; };
+		414207A21C5D6831009853D7 /* UIImage+AsyncImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191AB1C5C73FB0005971C /* UIImage+AsyncImage.m */; };
+		414207A31C5D6950009853D7 /* NSNumber+Operations.m in Sources */ = {isa = PBXBuildFile; fileRef = 414207A01C5D4998009853D7 /* NSNumber+Operations.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,8 +99,6 @@
 		4121919E1C5C643B0005971C /* PersistenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PersistenceController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		412191A01C5C64F20005971C /* XKCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XKCD.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		412191A11C5C64F20005971C /* XKCD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XKCD.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		412191A31C5C68340005971C /* NSObject+BackgroundTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "NSObject+BackgroundTask.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		412191A41C5C68340005971C /* NSObject+BackgroundTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSObject+BackgroundTask.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		412191A71C5C70A70005971C /* UIColor+XKCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "UIColor+XKCD.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		412191A81C5C70A70005971C /* UIColor+XKCD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "UIColor+XKCD.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		412191AA1C5C73FB0005971C /* UIImage+AsyncImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "UIImage+AsyncImage.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -262,8 +261,6 @@
 			children = (
 				4142079F1C5D4998009853D7 /* NSNumber+Operations.h */,
 				414207A01C5D4998009853D7 /* NSNumber+Operations.m */,
-				412191A31C5C68340005971C /* NSObject+BackgroundTask.h */,
-				412191A41C5C68340005971C /* NSObject+BackgroundTask.m */,
 				412191A71C5C70A70005971C /* UIColor+XKCD.h */,
 				412191A81C5C70A70005971C /* UIColor+XKCD.m */,
 				412191AA1C5C73FB0005971C /* UIImage+AsyncImage.h */,
@@ -473,7 +470,6 @@
 				414207A11C5D4998009853D7 /* NSNumber+Operations.m in Sources */,
 				412191931C5C634D0005971C /* XKCDComic+CoreDataProperties.m in Sources */,
 				412191671C5C624E0005971C /* xkcd.xcdatamodeld in Sources */,
-				412191A51C5C68340005971C /* NSObject+BackgroundTask.m in Sources */,
 				4121919F1C5C643B0005971C /* PersistenceController.m in Sources */,
 				412191941C5C634D0005971C /* XKCDComic.m in Sources */,
 				412191A91C5C70A70005971C /* UIColor+XKCD.m in Sources */,
@@ -500,6 +496,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				414207A31C5D6950009853D7 /* NSNumber+Operations.m in Sources */,
+				414207A21C5D6831009853D7 /* UIImage+AsyncImage.m in Sources */,
 				4142079C1C5D295C009853D7 /* xkcd.xcdatamodeld in Sources */,
 				4142079B1C5D28F5009853D7 /* PersistenceController.m in Sources */,
 				4142079A1C5D28EB009853D7 /* XKCDComic.m in Sources */,
@@ -721,7 +719,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "xkcd today/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.meekapps.xkcd.today;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -737,7 +735,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "xkcd today/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.meekapps.xkcd.today;
 				PRODUCT_NAME = "$(TARGET_NAME)";
