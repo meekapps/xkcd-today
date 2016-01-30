@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4121912F1C5C60320005971C"
+               BlueprintIdentifier = "412191551C5C624E0005971C"
                BuildableName = "xkcd.app"
                BlueprintName = "xkcd"
                ReferencedContainer = "container:xkcd.xcodeproj">
@@ -28,11 +28,31 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "412191711C5C624E0005971C"
+               BuildableName = "xkcdTests.xctest"
+               BlueprintName = "xkcdTests"
+               ReferencedContainer = "container:xkcd.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4121917C1C5C624E0005971C"
+               BuildableName = "xkcdUITests.xctest"
+               BlueprintName = "xkcdUITests"
+               ReferencedContainer = "container:xkcd.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4121912F1C5C60320005971C"
+            BlueprintIdentifier = "412191551C5C624E0005971C"
             BuildableName = "xkcd.app"
             BlueprintName = "xkcd"
             ReferencedContainer = "container:xkcd.xcodeproj">
@@ -55,7 +75,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4121912F1C5C60320005971C"
+            BlueprintIdentifier = "412191551C5C624E0005971C"
             BuildableName = "xkcd.app"
             BlueprintName = "xkcd"
             ReferencedContainer = "container:xkcd.xcodeproj">
@@ -74,7 +94,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4121912F1C5C60320005971C"
+            BlueprintIdentifier = "412191551C5C624E0005971C"
             BuildableName = "xkcd.app"
             BlueprintName = "xkcd"
             ReferencedContainer = "container:xkcd.xcodeproj">

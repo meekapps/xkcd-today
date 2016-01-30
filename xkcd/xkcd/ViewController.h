@@ -10,6 +10,9 @@
 
 @interface ViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIImageView *comicImageView;
+
+- (IBAction)refreshAction:(id)sender;
 
 @end
 
