@@ -26,8 +26,6 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-
-  self.view.backgroundColor = [UIColor themeColor];
   
   self.refreshButtonItem = self.navigationItem.rightBarButtonItem;
   
@@ -187,6 +185,17 @@
   
   //nav bar title
   self.title = comic.title;
+  
+  //update the toolbar buttons
+  if (self.currentIndex) {
+    //latest comic
+    NSNumber *latestIndex = [XKCD sharedInstance].latestComicIndex;
+    self.nextButton.enabled = ![self.currentIndex equals:latestIndex];
+    
+    //oldest comic
+    NSNumber *firstIndex = @(1);
+    self.previousButton.enabled = ![self.currentIndex equals:firstIndex];
+  }
   
   //set the stored image, if possible
   UIImage *image = [UIImage imageWithData:comic.image];

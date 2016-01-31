@@ -15,18 +15,24 @@
 }
 
 - (BOOL) equals:(NSNumber*)number {
+  if (!number) return NO;
+  
   NSComparisonResult result = [self compare:number];
   BOOL equal = result == NSOrderedSame;
   return equal;
 }
 
 - (BOOL) greaterThan:(NSNumber*)number {
+  if (!number) return NO;
+  
   NSComparisonResult result = [self compare:number];
   BOOL greater = result == NSOrderedAscending;
   return greater;
 }
 
 - (BOOL) lessThan:(NSNumber*)number {
+  if (!number) return NO;
+  
   NSComparisonResult result = [self compare:number];
   BOOL less = result == NSOrderedDescending;
   return less;

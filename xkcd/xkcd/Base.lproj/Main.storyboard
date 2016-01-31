@@ -104,6 +104,9 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="nextButton" destination="R52-au-fWt" id="tYJ-d5-gEc"/>
+                        <outlet property="previousButton" destination="byj-ar-CdK" id="P57-wP-Jll"/>
+                        <outlet property="randomButton" destination="1lh-Qm-eUx" id="kLy-Fv-3Cg"/>
                         <outlet property="refreshButtonItem" destination="Ktg-nE-Rhz" id="ZVX-Wg-vAL"/>
                         <outlet property="scrollView" destination="5Xz-kH-D38" id="DTz-Vx-O8E"/>
                         <outlet property="toolbar" destination="eiZ-Gg-gto" id="3Of-b6-7Zs"/>
