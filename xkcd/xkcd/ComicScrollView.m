@@ -80,6 +80,7 @@ static CGFloat const kDefaultPadding = 20.0F;
   
   //Zoom to fit
   self.zoomScale = self.minimumZoomScale;
+
   NSLog(@"setting minimum zoom scale: %@, maximum %@", @(minimumZoomScale), @(maximumZoomScale));
 }
 
