@@ -6,11 +6,12 @@
 //  Copyright © 2016 meek apps. All rights reserved.
 //
 
+#import "ComicScrollView.h"
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet ComicScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 
 - (IBAction)refreshAction:(id)sender;
