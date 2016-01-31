@@ -163,7 +163,7 @@
   //set the stored image, if possible
   UIImage *image = [UIImage imageWithData:comic.image];
   if (image) {
-    self.scrollView.comicImage = image;
+    [self.scrollView setImage:image];
     return;
   }
   
@@ -175,7 +175,7 @@
                
                if (image) {
                  //updates UI
-                 weakSelf.scrollView.comicImage = image;
+                 [weakSelf.scrollView setImage:image];
                  
                  //sets managed object image in context to be persisted.
                  comic.image = UIImagePNGRepresentation(image);

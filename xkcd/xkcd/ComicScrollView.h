@@ -10,6 +10,8 @@
 
 @interface ComicScrollView : UIScrollView <UIScrollViewDelegate>
 
-@property (strong, nonatomic) UIImage *comicImage;
+@property (weak, nonatomic) IBOutlet UIImageView *comicImageView;
+
+- (void) setImage:(UIImage*)image;
 
 @end

@@ -36,6 +36,24 @@
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="5Xz-kH-D38" customClass="ComicScrollView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="97a-9u-Nb9">
+                                        <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="375" placeholder="YES" id="dFa-jr-KcB"/>
+                                            <constraint firstAttribute="height" constant="559" placeholder="YES" id="ydP-9k-sHR"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="97a-9u-Nb9" firstAttribute="leading" secondItem="5Xz-kH-D38" secondAttribute="leading" id="00r-sd-XXs"/>
+                                    <constraint firstAttribute="trailing" secondItem="97a-9u-Nb9" secondAttribute="trailing" id="9uR-V2-pX5"/>
+                                    <constraint firstItem="97a-9u-Nb9" firstAttribute="top" secondItem="5Xz-kH-D38" secondAttribute="top" constant="64" id="eM7-pw-6ee"/>
+                                    <constraint firstAttribute="bottom" secondItem="97a-9u-Nb9" secondAttribute="bottom" constant="44" id="eWf-fq-WeP"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="comicImageView" destination="97a-9u-Nb9" id="lyY-FL-ifA"/>
+                                </connections>
                             </scrollView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eiZ-Gg-gto">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
