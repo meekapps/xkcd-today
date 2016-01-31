@@ -34,11 +34,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="5Xz-kH-D38">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="5Xz-kH-D38" customClass="ComicScrollView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <connections>
-                                    <outlet property="delegate" destination="VAm-ex-Dun" id="qya-AL-M3B"/>
-                                </connections>
                             </scrollView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eiZ-Gg-gto">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
@@ -90,7 +87,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="refreshButtonItem" destination="Ktg-nE-Rhz" id="ZVX-Wg-vAL"/>
-                        <outlet property="scrollView" destination="5Xz-kH-D38" id="QTu-fp-UgE"/>
+                        <outlet property="scrollView" destination="5Xz-kH-D38" id="DTz-Vx-O8E"/>
                         <outlet property="toolbar" destination="eiZ-Gg-gto" id="3Of-b6-7Zs"/>
                         <outlet property="view" destination="kKz-r4-rUW" id="8eG-qf-7g0"/>
                     </connections>

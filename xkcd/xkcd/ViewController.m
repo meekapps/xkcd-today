@@ -12,10 +12,7 @@
 #import "UIImage+AsyncImage.h"
 #import "XKCD.h"
 
-static CGFloat const kDefaultPadding = 8.0F;
-
 @interface ViewController ()
-@property (strong, nonatomic) UIImageView *comicImageView;
 @property (copy, nonatomic) NSNumber *currentIndex;
 @property (strong, nonatomic) UIActivityIndicatorView *loaderView;
 @property (nonatomic) BOOL loaderVisible;
@@ -38,20 +35,7 @@ static CGFloat const kDefaultPadding = 8.0F;
 
 #pragma mark - Properties
 
-- (void) setComicImage:(UIImage*)image {
-  self.comicImageView.image = image;
-  
-  //Calculate frame
-  CGFloat padding = kDefaultPadding;
-  CGFloat width = self.scrollView.bounds.size.width - padding * 2.0F;
-  CGFloat navBarHeight = self.navigationController.navigationBar.bounds.size.height;
-  CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
-  CGFloat toolBarHeight = self.toolbar.bounds.size.height;
-  CGFloat height = self.scrollView.bounds.size.height - navBarHeight - statusBarHeight - toolBarHeight - padding * 2.0F;
-  self.comicImageView.frame = CGRectMake(padding, padding, width, height);
-  
-  self.scrollView.contentSize = self.comicImageView.bounds.size;
-}
+
 
 - (void) setLoaderVisible:(BOOL)visible {
   _loaderVisible = visible;
@@ -71,15 +55,6 @@ static CGFloat const kDefaultPadding = 8.0F;
     _loaderView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
   }
   return _loaderView;
-}
-
-- (UIImageView*) comicImageView {
-  if (!_comicImageView) {
-    _comicImageView = [[UIImageView alloc] init];
-    _comicImageView.contentMode = UIViewContentModeScaleAspectFit;
-    [self.scrollView addSubview:_comicImageView];
-  }
-  return _comicImageView;
 }
 
 #pragma mark - Actions
@@ -188,7 +163,7 @@ static CGFloat const kDefaultPadding = 8.0F;
   //set the stored image, if possible
   UIImage *image = [UIImage imageWithData:comic.image];
   if (image) {
-    [self setComicImage:image];
+    self.scrollView.comicImage = image;
     return;
   }
   
@@ -200,19 +175,13 @@ static CGFloat const kDefaultPadding = 8.0F;
                
                if (image) {
                  //updates UI
-                 [weakSelf setComicImage:image];
+                 weakSelf.scrollView.comicImage = image;
                  
                  //sets managed object image in context to be persisted.
                  comic.image = UIImagePNGRepresentation(image);
                  [[PersistenceController sharedInstance] saveContext];
                }
              }];
-}
-
-#pragma mark - UIScrollViewDelegate
-
-- (UIView *) viewForZoomingInScrollView:(UIScrollView *)scrollView {
-  return self.comicImageView;
 }
 
 @end
