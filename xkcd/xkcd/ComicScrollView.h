@@ -10,6 +10,7 @@
 
 @interface ComicScrollView : UIScrollView <UIScrollViewDelegate>
 
+@property (nonatomic) UIEdgeInsets barInsets;
 @property (weak, nonatomic) IBOutlet UIImageView *comicImageView;
 
 - (void) setImage:(UIImage*)image;

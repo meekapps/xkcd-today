@@ -9,6 +9,7 @@
 #import "NSNumber+Operations.h"
 #import "PersistenceController.h"
 #import "ViewController.h"
+#import "UIColor+XKCD.h"
 #import "UIImage+AsyncImage.h"
 #import "XKCD.h"
 
@@ -26,11 +27,24 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
+  self.view.backgroundColor = [UIColor themeColor];
+  
   [self initialLoad];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(handleOrientationChange)
+                                               name:UIDeviceOrientationDidChangeNotification
+                                             object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
+}
+
+- (void) dealloc {
+  [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                  name:UIDeviceOrientationDidChangeNotification
+                                                object:nil];
 }
 
 #pragma mark - Properties
@@ -104,6 +118,10 @@
 
 #pragma mark - Private
 
+- (void) handleOrientationChange {
+  [self setScrollViewInsets];
+}
+
 - (void) initialLoad {
   //Fetch most recent persisted comic from Core Data.
   __weak ViewController *weakSelf = self;
@@ -154,6 +172,15 @@
                                   }];
 }
 
+//Sets UIEdgeInsets propert to on scroll view with current orientation bar sizes.
+- (void) setScrollViewInsets {
+  CGFloat navBarHeight = self.navigationController.navigationBar.bounds.size.height;
+  CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+  CGFloat topBarsHeight = navBarHeight + statusBarHeight;
+  CGFloat toolbarHeight = self.toolbar.bounds.size.height;
+  self.scrollView.barInsets = UIEdgeInsetsMake(topBarsHeight, 0.0F, toolbarHeight, 0.0F);
+}
+
 - (void) updateViewsWithComic:(XKCDComic*)comic {
   if (!comic) return;
   
@@ -164,6 +191,7 @@
   UIImage *image = [UIImage imageWithData:comic.image];
   if (image) {
     [self.scrollView setImage:image];
+    [self setScrollViewInsets];
     return;
   }
   
@@ -176,6 +204,7 @@
                if (image) {
                  //updates UI
                  [weakSelf.scrollView setImage:image];
+                 [self setScrollViewInsets];
                  
                  //sets managed object image in context to be persisted.
                  comic.image = UIImagePNGRepresentation(image);

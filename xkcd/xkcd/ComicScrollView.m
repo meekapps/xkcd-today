@@ -8,7 +8,7 @@
 
 #import "ComicScrollView.h"
 
-static CGFloat const kDefaultPadding = 20.0F;
+static CGFloat const kDefaultPadding = 10.0F;
 
 @interface ComicScrollView()
 @end
@@ -19,19 +19,34 @@ static CGFloat const kDefaultPadding = 20.0F;
   self = [super initWithCoder:aDecoder];
   if (self) {
     self.delegate = self;
-    self.translatesAutoresizingMaskIntoConstraints = NO;
-    self.comicImageView.translatesAutoresizingMaskIntoConstraints = NO;
+
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
     tapRecognizer.numberOfTapsRequired = 2;
     [self addGestureRecognizer:tapRecognizer];
+    
+    self.translatesAutoresizingMaskIntoConstraints = NO;
+    self.comicImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateZoomLevels)
+                                                 name:UIDeviceOrientationDidChangeNotification
+                                               object:nil];
   }
   return self;
 }
 
+- (void) dealloc {
+  [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                  name:UIDeviceOrientationDidChangeNotification
+                                                object:nil];
+}
+
 - (void) setImage:(UIImage*)image {
   self.comicImageView.image = image;
+  self.contentSize = image.size;
 
-  [self updateZoom];
+  [self updateZoomLevels];
+  [self centerContent];
 }
 
 #pragma mark - Actions
@@ -47,30 +62,61 @@ static CGFloat const kDefaultPadding = 20.0F;
 
 #pragma mark - Private
 
-- (void) updateZoom {
+//The vertical ratio of displayable area to content size.
+- (CGFloat) heightRatio {
+
+  CGFloat topMargin = self.barInsets.top;
+  CGFloat bottomMargin = self.barInsets.bottom;
   
-  CGFloat widthRatio = self.bounds.size.width / self.comicImageView.image.size.width;
-  CGFloat heightRatio = self.bounds.size.height / self.comicImageView.image.size.height;
+  return (self.bounds.size.height - kDefaultPadding * 2.0F - topMargin - bottomMargin) / self.comicImageView.image.size.height;
+}
+
+//The horizontal ratio of displayable area to content size.
+- (CGFloat) widthRatio {
+  return (self.bounds.size.width - kDefaultPadding * 2.0F) / self.comicImageView.image.size.width;
+}
+
+//Update minimumZoomScale, maximumZoomScale, and starting zoomScale.
+- (void) updateZoomLevels {
+  
+  BOOL portrait = self.comicImageView.image.size.height > self.comicImageView.image.size.width;
+  
+  CGFloat widthRatio = [self widthRatio];
+  CGFloat heightRatio = [self heightRatio];
   
   //Minimum
-  CGFloat startingZoomScale = MIN(widthRatio, heightRatio);
-  CGFloat minimumZoomScale = MIN(1, startingZoomScale); //min zoom be <= than 1
+  CGFloat minimumZoomScale = MIN(widthRatio, heightRatio);
+  minimumZoomScale = MIN(1, minimumZoomScale);
   self.minimumZoomScale = minimumZoomScale;
 
   //Maximum
   CGFloat maximumZoomScale = MAX(widthRatio, heightRatio);
-  maximumZoomScale = MAX(1, maximumZoomScale); //max zoom should be >= 1
+  maximumZoomScale = MAX(1.5, maximumZoomScale); //max zoom should be >= 1.5
   self.maximumZoomScale = maximumZoomScale;
   
   //Zoom to fit
-  self.zoomScale = startingZoomScale;
+  self.zoomScale = minimumZoomScale;
+}
 
-  NSLog(@"setting minimum zoom scale: %@, maximum %@, starting: %@", @(minimumZoomScale), @(maximumZoomScale), @(startingZoomScale));
+//Add content insets to center content horizonally.
+- (void) centerContent {
+  UIEdgeInsets insets = UIEdgeInsetsMake(kDefaultPadding,
+                                         kDefaultPadding,
+                                         kDefaultPadding,
+                                         kDefaultPadding);
+  CGFloat contentScale = [self widthRatio];
+  if (self.zoomScale < contentScale) {
+    CGFloat left = ((self.bounds.size.width) - self.zoomScale * self.comicImageView.image.size.width) / 2.0F;
+    insets.left = left;
+  }
+  
+  self.contentInset = insets;
 }
 
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+  [self centerContent];
 }
 
 - (UIView *) viewForZoomingInScrollView:(UIScrollView *)scrollView {
