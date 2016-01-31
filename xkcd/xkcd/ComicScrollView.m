@@ -79,8 +79,6 @@ static CGFloat const kDefaultPadding = 10.0F;
 //Update minimumZoomScale, maximumZoomScale, and starting zoomScale.
 - (void) updateZoomLevels {
   
-  BOOL portrait = self.comicImageView.image.size.height > self.comicImageView.image.size.width;
-  
   CGFloat widthRatio = [self widthRatio];
   CGFloat heightRatio = [self heightRatio];
   

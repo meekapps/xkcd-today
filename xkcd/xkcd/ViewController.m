@@ -29,6 +29,8 @@
 
   self.view.backgroundColor = [UIColor themeColor];
   
+  self.refreshButtonItem = self.navigationItem.rightBarButtonItem;
+  
   [self initialLoad];
   
   [[NSNotificationCenter defaultCenter] addObserver:self
@@ -55,7 +57,6 @@
   _loaderVisible = visible;
   
   if (visible) {
-    self.refreshButtonItem = self.navigationItem.rightBarButtonItem;
     UIBarButtonItem *loaderButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.loaderView];
     [self.loaderView startAnimating];
     self.navigationItem.rightBarButtonItem = loaderButtonItem;
