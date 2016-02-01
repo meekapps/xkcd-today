@@ -100,7 +100,7 @@ static CGFloat const kDefaultPadding = 10.0F;
 - (void) centerContent {
   UIEdgeInsets insets = UIEdgeInsetsMake(kDefaultPadding,
                                          kDefaultPadding,
-                                         kDefaultPadding,
+                                         kDefaultPadding + self.barInsets.top + self.barInsets.bottom,
                                          kDefaultPadding);
   CGFloat contentScale = [self widthRatio];
   if (self.zoomScale < contentScale) {
