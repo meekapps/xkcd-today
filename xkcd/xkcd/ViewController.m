@@ -29,12 +29,19 @@
   
   self.refreshButtonItem = self.navigationItem.rightBarButtonItem;
   
-  [self initialLoad];
-  
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(handleOrientationChange)
                                                name:UIDeviceOrientationDidChangeNotification
                                              object:nil];
+}
+
+- (void) viewDidLayoutSubviews {
+  [super viewDidLayoutSubviews];
+  
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    [self initialLoad];
+  });
 }
 
 - (void)didReceiveMemoryWarning {
@@ -132,7 +139,7 @@
     
     //GET latest comic from HTTP request, update UI if it is new.
     [[XKCD sharedInstance] getLatestComic:^(XKCDComic *httpComic) {
-      if (fetchedComic.index.unsignedIntegerValue != httpComic.index.unsignedIntegerValue) {
+      if (![fetchedComic.index equals:httpComic.index]) {
         weakSelf.currentIndex = [httpComic.index copy];
         [weakSelf updateViewsWithComic:httpComic];
       }
