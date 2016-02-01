@@ -49,6 +49,13 @@ static CGFloat const kDefaultPadding = 10.0F;
   [self centerContent];
 }
 
+- (void) setBarInsets:(UIEdgeInsets)barInsets {
+  _barInsets = barInsets;
+  
+  [self updateZoomLevels];
+  [self centerContent];
+}
+
 #pragma mark - Actions
 
 - (void) handleDoubleTap:(UITapGestureRecognizer*)recognizer {
