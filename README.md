@@ -1,3 +1,3 @@
 # xkcd-today
 
-An iOS Today View widget that shows xkcd.
+xkcd reader app and today view widget for iOS.
