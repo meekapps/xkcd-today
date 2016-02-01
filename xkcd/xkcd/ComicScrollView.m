@@ -52,10 +52,16 @@ static CGFloat const kDefaultPadding = 10.0F;
 #pragma mark - Actions
 
 - (void) handleDoubleTap:(UITapGestureRecognizer*)recognizer {
+  
+  //Zoomed out any amount, zoom out
   if(self.zoomScale > self.minimumZoomScale) {
     [self setZoomScale:self.minimumZoomScale animated:YES];
+    
+  //Zoom in centered to tap point.
   } else {
-    [self setZoomScale:self.maximumZoomScale animated:YES];
+    CGPoint tapPoint = [recognizer locationInView:self];
+    CGRect zoomRect = [self zoomRectWithPoint:tapPoint scale:self.maximumZoomScale];
+    [self zoomToRect:zoomRect animated:YES];
   }
 
 }
@@ -102,6 +108,8 @@ static CGFloat const kDefaultPadding = 10.0F;
                                          kDefaultPadding,
                                          kDefaultPadding + self.barInsets.top + self.barInsets.bottom,
                                          kDefaultPadding);
+  
+  //Add left inset if content is smaller than displayable width to center it.
   CGFloat contentScale = [self widthRatio];
   if (self.zoomScale < contentScale) {
     CGFloat left = ((self.bounds.size.width) - self.zoomScale * self.comicImageView.image.size.width) / 2.0F;
@@ -109,6 +117,32 @@ static CGFloat const kDefaultPadding = 10.0F;
   }
   
   self.contentInset = insets;
+}
+
+- (CGRect) zoomRectWithPoint:(CGPoint)point scale:(CGFloat)scale {
+  CGFloat boundsWidth = self.bounds.size.width;
+  CGFloat boundsHeight = self.bounds.size.height;
+  
+  //current zoom contentSize
+  CGFloat contentWidth = self.contentSize.width / self.zoomScale;
+  CGFloat contentHeight = self.contentSize.height / self.zoomScale;
+  CGSize contentSize = CGSizeMake(contentWidth, contentHeight);
+
+  //translate zoom point to content
+  point.x = (point.x / boundsWidth) * contentSize.width;
+  point.y = (point.y / boundsHeight) * contentSize.height;
+  
+  //zoom size
+  CGFloat zoomWidth = boundsWidth / scale;
+  CGFloat zoomHeight = boundsHeight / scale;
+  CGSize zoomSize = CGSizeMake(zoomWidth, zoomHeight);
+
+  //zoom rect
+  CGFloat zoomX = point.x - zoomSize.width / 2.0F;
+  CGFloat zoomY = point.y - zoomSize.height / 2.0F;
+  CGRect zoomRect = CGRectMake(zoomX, zoomY, zoomWidth, zoomHeight);
+  
+  return zoomRect;
 }
 
 #pragma mark - UIScrollViewDelegate
