@@ -13,6 +13,9 @@
 #import "UIImage+AsyncImage.h"
 #import "XKCD.h"
 
+static NSInteger kHoverboardIndex = 1608;
+static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
+
 @interface ViewController ()
 @property (copy, nonatomic) NSNumber *currentIndex;
 @property (strong, nonatomic) UIActivityIndicatorView *loaderView;
@@ -95,7 +98,7 @@
   NSNumber *oldestIndex = @(0);
   if ([self.currentIndex equals:oldestIndex]) return;
   
-  NSNumber *previousIndex = [[self.currentIndex subtract:1] copy];
+  NSNumber *previousIndex = [self.currentIndex subtract:1];
   [self loadComicWithIndex:previousIndex];
 }
 
@@ -105,7 +108,7 @@
   NSNumber *latestIndex = [XKCD sharedInstance].latestComicIndex;
   if (self.currentIndex && latestIndex && [self.currentIndex equals:latestIndex]) return;
   
-  NSNumber *nextIndex = [[self.currentIndex add:1] copy];
+  NSNumber *nextIndex = [self.currentIndex add:1];
   [self loadComicWithIndex:nextIndex];
   
 }
@@ -218,16 +221,44 @@
   [UIImage imageFromUrl:urlString
              completion:^(UIImage *image) {
                
+               [weakSelf.scrollView setImage:image];
+               
                if (image) {
                  //updates UI
-                 [weakSelf.scrollView setImage:image];
-                 [self setScrollViewInsets];
+                 [weakSelf setScrollViewInsets];
                  
                  //sets managed object image in context to be persisted.
                  comic.image = UIImagePNGRepresentation(image);
                  [[PersistenceController sharedInstance] saveContext];
                }
              }];
+  
+  //hoverboard
+  if ([comic.index equals:@(kHoverboardIndex)]) {
+    [self showHoverboardError];
+    return;
+  }
+}
+
+- (void) showHoverboardError {
+  NSString *message = @"This app is not hoverboard enabled. Play in browser?";
+  UIAlertController *hoverboardAlert = [UIAlertController alertControllerWithTitle:@"Error -41"
+                                                                           message:message
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"No"
+                                                         style:UIAlertActionStyleCancel
+                                                       handler:^(UIAlertAction * _Nonnull action) {
+                                                       }];
+  [hoverboardAlert addAction:cancelAction];
+  UIAlertAction *playAction = [UIAlertAction actionWithTitle:@"Play"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+                                                       [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kHoverboardUrl]];
+                                                     }];
+  [hoverboardAlert addAction:playAction];
+  [self.navigationController presentViewController:hoverboardAlert animated:YES completion:^{
+  }];
+  
 }
 
 @end
