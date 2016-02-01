@@ -83,6 +83,7 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
     UIImage *cachedImage = [UIImage imageWithData:cachedImageData];
     if (cachedImage) {
       self.imageView.image = cachedImage;
+      [self updatePreferredSize];
       return;
     }
   }
@@ -98,12 +99,18 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
                if (image) {
                  //updates UI
                  weakSelf.imageView.image = image;
+                 [self updatePreferredSize];
                  
                  //sets managed object image in context to be persisted.
                  comic.image = UIImagePNGRepresentation(image);
                  [[PersistenceController sharedInstance] saveContext];
                }
              }];
+}
+
+- (void) updatePreferredSize {
+  CGFloat height = MAX(200.0F, self.imageView.bounds.size.height);
+  self.preferredContentSize = CGSizeMake(self.view.bounds.size.width, height);
 }
 
 @end
