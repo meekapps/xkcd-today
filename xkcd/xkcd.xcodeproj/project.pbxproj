@@ -34,6 +34,10 @@
 		414207A21C5D6831009853D7 /* UIImage+AsyncImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191AB1C5C73FB0005971C /* UIImage+AsyncImage.m */; };
 		414207A31C5D6950009853D7 /* NSNumber+Operations.m in Sources */ = {isa = PBXBuildFile; fileRef = 414207A01C5D4998009853D7 /* NSNumber+Operations.m */; };
 		417024631C5DB98F0084531D /* ComicScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 417024621C5DB98F0084531D /* ComicScrollView.m */; };
+		4170629A1C606E2F0003A3FD /* LaunchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 417062991C606E2F0003A3FD /* LaunchManager.m */; };
+		417062A31C606FC30003A3FD /* SpotlightManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 417062A21C606FC30003A3FD /* SpotlightManager.m */; };
+		417062A41C60783F0003A3FD /* SpotlightManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 417062A21C606FC30003A3FD /* SpotlightManager.m */; };
+		417062A51C6078490003A3FD /* LaunchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 417062991C606E2F0003A3FD /* LaunchManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +118,10 @@
 		414207A01C5D4998009853D7 /* NSNumber+Operations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Operations.m"; sourceTree = "<group>"; };
 		417024611C5DB98F0084531D /* ComicScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComicScrollView.h; sourceTree = "<group>"; };
 		417024621C5DB98F0084531D /* ComicScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComicScrollView.m; sourceTree = "<group>"; };
+		417062981C606E2F0003A3FD /* LaunchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchManager.h; sourceTree = "<group>"; };
+		417062991C606E2F0003A3FD /* LaunchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchManager.m; sourceTree = "<group>"; };
+		417062A11C606FC30003A3FD /* SpotlightManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightManager.h; sourceTree = "<group>"; };
+		417062A21C606FC30003A3FD /* SpotlightManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightManager.m; sourceTree = "<group>"; };
 		41FB0AAE1C5D221F00EE4732 /* xkcd today.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "xkcd today.entitlements"; sourceTree = "<group>"; };
 		41FB0AAF1C5D241300EE4732 /* xkcd.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = xkcd.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -242,8 +250,12 @@
 			children = (
 				4121915C1C5C624E0005971C /* AppDelegate.h */,
 				4121915D1C5C624E0005971C /* AppDelegate.m */,
+				417062981C606E2F0003A3FD /* LaunchManager.h */,
+				417062991C606E2F0003A3FD /* LaunchManager.m */,
 				4121919D1C5C643B0005971C /* PersistenceController.h */,
 				4121919E1C5C643B0005971C /* PersistenceController.m */,
+				417062A11C606FC30003A3FD /* SpotlightManager.h */,
+				417062A21C606FC30003A3FD /* SpotlightManager.m */,
 				412191A01C5C64F20005971C /* XKCD.h */,
 				412191A11C5C64F20005971C /* XKCD.m */,
 			);
@@ -475,8 +487,10 @@
 				412191A21C5C64F20005971C /* XKCD.m in Sources */,
 				414207A11C5D4998009853D7 /* NSNumber+Operations.m in Sources */,
 				412191931C5C634D0005971C /* XKCDComic+CoreDataProperties.m in Sources */,
+				417062A31C606FC30003A3FD /* SpotlightManager.m in Sources */,
 				412191671C5C624E0005971C /* xkcd.xcdatamodeld in Sources */,
 				4121919F1C5C643B0005971C /* PersistenceController.m in Sources */,
+				4170629A1C606E2F0003A3FD /* LaunchManager.m in Sources */,
 				412191941C5C634D0005971C /* XKCDComic.m in Sources */,
 				412191A91C5C70A70005971C /* UIColor+XKCD.m in Sources */,
 			);
@@ -502,6 +516,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				417062A51C6078490003A3FD /* LaunchManager.m in Sources */,
+				417062A41C60783F0003A3FD /* SpotlightManager.m in Sources */,
 				414207A31C5D6950009853D7 /* NSNumber+Operations.m in Sources */,
 				414207A21C5D6831009853D7 /* UIImage+AsyncImage.m in Sources */,
 				4142079C1C5D295C009853D7 /* xkcd.xcdatamodeld in Sources */,

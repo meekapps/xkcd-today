@@ -7,6 +7,7 @@
 //
 
 #import "NSNumber+Operations.h"
+#import "LaunchManager.h"
 #import "PersistenceController.h"
 #import "ViewController.h"
 #import "UIColor+XKCD.h"
@@ -32,10 +33,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   
   self.refreshButtonItem = self.navigationItem.rightBarButtonItem;
   
-  [[NSNotificationCenter defaultCenter] addObserver:self
-                                           selector:@selector(handleOrientationChange)
-                                               name:UIDeviceOrientationDidChangeNotification
-                                             object:nil];
+  [self addNotificationObservers];
 }
 
 - (void) viewDidLayoutSubviews {
@@ -52,9 +50,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 }
 
 - (void) dealloc {
-  [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                  name:UIDeviceOrientationDidChangeNotification
-                                                object:nil];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Properties
@@ -78,6 +74,32 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
     _loaderView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
   }
   return _loaderView;
+}
+
+#pragma mark - Notifications
+
+- (void) addNotificationObservers {
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(handleOrientationChangeNotification:)
+                                               name:UIDeviceOrientationDidChangeNotification
+                                             object:nil];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(handleShowComicNotification:)
+                                               name:ShowComicNotification
+                                             object:nil];
+}
+
+- (void) handleOrientationChangeNotification:(NSNotification*)notification {
+  [self setScrollViewInsets];
+}
+
+- (void) handleShowComicNotification:(NSNotification*)notification {
+  NSDictionary *userInfo = notification.userInfo;
+  if (!userInfo || !userInfo[kIndexKey]) return;
+  
+  NSNumber *index = userInfo[kIndexKey];
+  [self loadComicWithIndex:index];
 }
 
 #pragma mark - Actions
@@ -126,10 +148,6 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 }
 
 #pragma mark - Private
-
-- (void) handleOrientationChange {
-  [self setScrollViewInsets];
-}
 
 - (void) initialLoad {
   //Fetch most recent persisted comic from Core Data.
