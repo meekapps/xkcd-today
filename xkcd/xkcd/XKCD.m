@@ -81,7 +81,7 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
   }
   
   XKCDComic *comic = fetchedObjects.firstObject;
-  NSLog(@"fetched comic with index (%@)", index);
+  NSLog(@"fetched comic, %@", index ? index : @"latest");
   completion(comic);
 }
 
@@ -119,8 +119,8 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
   self.completion = ^void(XKCDComic *comic) {
     [session finishTasksAndInvalidate];
     dispatch_async(dispatch_get_main_queue(), ^{
-      NSLog(@"got comic from http (%@)", index);
       [[SpotlightManager sharedManager] indexComic:comic];
+      NSLog(@"got comic from http, %@", index ? index : @"latest");
       completion(comic);
     });
   };
