@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "SpotlightManager.h"
 #import "PersistenceController.h"
 
 @interface AppDelegate ()
@@ -17,6 +18,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   self.window.tintColor = [UIColor blackColor];
+  
+  [[SpotlightManager sharedManager] handleLaunchOptions:launchOptions];
   
   return YES;
 }
@@ -36,6 +39,12 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
   [[PersistenceController sharedInstance] saveContext];
+}
+
+- (BOOL)application:(UIApplication *)application
+continueUserActivity:(NSUserActivity *)userActivity
+ restorationHandler:(void (^)(NSArray *))restorationHandler {
+  return [[SpotlightManager sharedManager] handleLaunchObject:userActivity];
 }
 
 @end

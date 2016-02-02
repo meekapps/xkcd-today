@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "PersistenceController.h"
+#import "SpotlightManager.h"
 #import "XKCD.h"
 
 static NSString *const kBackgroundSessionIdentifier = @"com.meekapps.xkcd.backgroundSession";
@@ -119,6 +120,7 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
     [session finishTasksAndInvalidate];
     dispatch_async(dispatch_get_main_queue(), ^{
       NSLog(@"got comic from http (%@)", index);
+      [[SpotlightManager sharedManager] indexComic:comic];
       completion(comic);
     });
   };
