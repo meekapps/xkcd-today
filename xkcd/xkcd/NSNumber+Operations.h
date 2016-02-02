@@ -3,7 +3,7 @@
 //  xkcd
 //
 //  Created by Mike Keller on 1/30/16.
-//  Copyright © 2016 Perka. All rights reserved.
+//  Copyright © 2016 Meek Apps. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

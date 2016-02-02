@@ -18,7 +18,7 @@
 		412191821C5C624E0005971C /* xkcdUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191811C5C624E0005971C /* xkcdUITests.m */; };
 		412191931C5C634D0005971C /* XKCDComic+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191901C5C634D0005971C /* XKCDComic+CoreDataProperties.m */; };
 		412191941C5C634D0005971C /* XKCDComic.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191921C5C634D0005971C /* XKCDComic.m */; };
-		4121919F1C5C643B0005971C /* PersistenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4121919E1C5C643B0005971C /* PersistenceController.m */; };
+		4121919F1C5C643B0005971C /* PersistenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4121919E1C5C643B0005971C /* PersistenceManager.m */; };
 		412191A21C5C64F20005971C /* XKCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191A11C5C64F20005971C /* XKCD.m */; };
 		412191A91C5C70A70005971C /* UIColor+XKCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191A81C5C70A70005971C /* UIColor+XKCD.m */; };
 		412191AC1C5C73FB0005971C /* UIImage+AsyncImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191AB1C5C73FB0005971C /* UIImage+AsyncImage.m */; };
@@ -28,7 +28,7 @@
 		412191BF1C5D12720005971C /* xkcd today.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 412191B11C5D12720005971C /* xkcd today.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		414207991C5D284F009853D7 /* XKCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191A11C5C64F20005971C /* XKCD.m */; };
 		4142079A1C5D28EB009853D7 /* XKCDComic.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191921C5C634D0005971C /* XKCDComic.m */; };
-		4142079B1C5D28F5009853D7 /* PersistenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4121919E1C5C643B0005971C /* PersistenceController.m */; };
+		4142079B1C5D28F5009853D7 /* PersistenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4121919E1C5C643B0005971C /* PersistenceManager.m */; };
 		4142079C1C5D295C009853D7 /* xkcd.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 412191651C5C624E0005971C /* xkcd.xcdatamodeld */; };
 		414207A11C5D4998009853D7 /* NSNumber+Operations.m in Sources */ = {isa = PBXBuildFile; fileRef = 414207A01C5D4998009853D7 /* NSNumber+Operations.m */; };
 		414207A21C5D6831009853D7 /* UIImage+AsyncImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191AB1C5C73FB0005971C /* UIImage+AsyncImage.m */; };
@@ -100,8 +100,8 @@
 		412191901C5C634D0005971C /* XKCDComic+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XKCDComic+CoreDataProperties.m"; sourceTree = "<group>"; };
 		412191911C5C634D0005971C /* XKCDComic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XKCDComic.h; sourceTree = "<group>"; };
 		412191921C5C634D0005971C /* XKCDComic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XKCDComic.m; sourceTree = "<group>"; };
-		4121919D1C5C643B0005971C /* PersistenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PersistenceController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		4121919E1C5C643B0005971C /* PersistenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PersistenceController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4121919D1C5C643B0005971C /* PersistenceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PersistenceManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		4121919E1C5C643B0005971C /* PersistenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PersistenceManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		412191A01C5C64F20005971C /* XKCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XKCD.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		412191A11C5C64F20005971C /* XKCD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XKCD.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		412191A71C5C70A70005971C /* UIColor+XKCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "UIColor+XKCD.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -252,8 +252,8 @@
 				4121915D1C5C624E0005971C /* AppDelegate.m */,
 				417062981C606E2F0003A3FD /* LaunchManager.h */,
 				417062991C606E2F0003A3FD /* LaunchManager.m */,
-				4121919D1C5C643B0005971C /* PersistenceController.h */,
-				4121919E1C5C643B0005971C /* PersistenceController.m */,
+				4121919D1C5C643B0005971C /* PersistenceManager.h */,
+				4121919E1C5C643B0005971C /* PersistenceManager.m */,
 				417062A11C606FC30003A3FD /* SpotlightManager.h */,
 				417062A21C606FC30003A3FD /* SpotlightManager.m */,
 				412191A01C5C64F20005971C /* XKCD.h */,
@@ -489,7 +489,7 @@
 				412191931C5C634D0005971C /* XKCDComic+CoreDataProperties.m in Sources */,
 				417062A31C606FC30003A3FD /* SpotlightManager.m in Sources */,
 				412191671C5C624E0005971C /* xkcd.xcdatamodeld in Sources */,
-				4121919F1C5C643B0005971C /* PersistenceController.m in Sources */,
+				4121919F1C5C643B0005971C /* PersistenceManager.m in Sources */,
 				4170629A1C606E2F0003A3FD /* LaunchManager.m in Sources */,
 				412191941C5C634D0005971C /* XKCDComic.m in Sources */,
 				412191A91C5C70A70005971C /* UIColor+XKCD.m in Sources */,
@@ -521,7 +521,7 @@
 				414207A31C5D6950009853D7 /* NSNumber+Operations.m in Sources */,
 				414207A21C5D6831009853D7 /* UIImage+AsyncImage.m in Sources */,
 				4142079C1C5D295C009853D7 /* xkcd.xcdatamodeld in Sources */,
-				4142079B1C5D28F5009853D7 /* PersistenceController.m in Sources */,
+				4142079B1C5D28F5009853D7 /* PersistenceManager.m in Sources */,
 				4142079A1C5D28EB009853D7 /* XKCDComic.m in Sources */,
 				414207991C5D284F009853D7 /* XKCD.m in Sources */,
 				412191B81C5D12720005971C /* TodayViewController.m in Sources */,

@@ -3,11 +3,11 @@
 //  xkcd today
 //
 //  Created by Mike Keller on 1/30/16.
-//  Copyright © 2016 Perka. All rights reserved.
+//  Copyright © 2016 Meek Apps. All rights reserved.
 //
 
 #import "TodayViewController.h"
-#import "PersistenceController.h"
+#import "PersistenceManager.h"
 #import <NotificationCenter/NotificationCenter.h>
 #import "NSNumber+Operations.h"
 #import "UIImage+AsyncImage.h"
@@ -46,7 +46,8 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
 #pragma mark - Private
 
 - (void) loadLatestWithCompletion:(void(^)(NCUpdateResult updateResult))completion {
-  self.titleLabel.text = @"Loading";
+  self.titleLabel.text = nil;
+  
   //Fetch most recent persisted comic from Core Data.
   __weak TodayViewController *weakSelf = self;
   [[XKCD sharedInstance] fetchLatestComic:^(XKCDComic *fetchedComic) {
@@ -103,7 +104,7 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
                  
                  //sets managed object image in context to be persisted.
                  comic.image = UIImagePNGRepresentation(image);
-                 [[PersistenceController sharedInstance] saveContext];
+                 [[PersistenceManager sharedManager] saveContext];
                }
              }];
 }

@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "PersistenceController.h"
+#import "PersistenceManager.h"
 #import "SpotlightManager.h"
 #import "XKCD.h"
 

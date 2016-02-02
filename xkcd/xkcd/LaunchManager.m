@@ -1,9 +1,9 @@
 //
 //  LaunchHelper.h
-//  Meek Apps
+//  xkcd
 //
 //  Created by Mike Keller on 11/27/15.
-//  Copyright © 2015 Perka. All rights reserved.
+//  Copyright © 2016 Meek Apps. All rights reserved.
 //
 //  LaunchHandling: a protocol that a LaunchHelper subclass should conform to. A class conforming to LaunchHandling
 //  is contracted to process a launchObject (any object that can be passed in the launchOptions dictionary in

@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "SpotlightManager.h"
-#import "PersistenceController.h"
+#import "PersistenceManager.h"
 
 @interface AppDelegate ()
 @end
@@ -28,7 +28,7 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-  [[PersistenceController sharedInstance] saveContext];
+  [[PersistenceManager sharedManager] saveContext];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -38,7 +38,7 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-  [[PersistenceController sharedInstance] saveContext];
+  [[PersistenceManager sharedManager] saveContext];
 }
 
 - (BOOL)application:(UIApplication *)application

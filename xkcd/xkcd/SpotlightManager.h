@@ -3,8 +3,9 @@
 //  xkcd
 //
 //  Created by Mike Keller on 2/2/16.
-//  Copyright © 2016 Perka. All rights reserved.
+//  Copyright © 2016 Meek Apps. All rights reserved.
 //
+//  
 
 #import "LaunchManager.h"
 #import "XKCDComic.h"

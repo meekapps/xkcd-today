@@ -8,7 +8,7 @@
 
 #import "NSNumber+Operations.h"
 #import "LaunchManager.h"
-#import "PersistenceController.h"
+#import "PersistenceManager.h"
 #import "ViewController.h"
 #import "UIColor+XKCD.h"
 #import "UIImage+AsyncImage.h"

@@ -5,16 +5,18 @@
 //  Created by Mike Keller on 1/29/16.
 //  Copyright © 2016 meek apps. All rights reserved.
 //
+//  Sets up and provides common access to Core Data.
+//  Single context stack.
 
-#import "PersistenceController.h"
+#import "PersistenceManager.h"
 
-@implementation PersistenceController
+@implementation PersistenceManager
 
-+ (instancetype) sharedInstance {
++ (instancetype) sharedManager {
   static dispatch_once_t onceToken;
-  static PersistenceController *instance = nil;
+  static PersistenceManager *instance = nil;
   dispatch_once(&onceToken, ^{
-    instance = [[PersistenceController alloc] init];
+    instance = [[PersistenceManager alloc] init];
   });
   return instance;
 }
