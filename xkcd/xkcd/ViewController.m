@@ -115,7 +115,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 }
 
 - (IBAction)previousAction:(id)sender {
-  NSLog(@"previos button pressed");
+  NSLog(@"previous button pressed");
   
   NSNumber *oldestIndex = @(0);
   if ([self.currentIndex equals:oldestIndex]) return;
@@ -247,7 +247,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
                  
                  //sets managed object image in context to be persisted.
                  comic.image = UIImagePNGRepresentation(image);
-                 [[PersistenceController sharedInstance] saveContext];
+                 [[PersistenceManager sharedManager] saveContext];
                }
              }];
   

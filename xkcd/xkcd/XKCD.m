@@ -51,7 +51,7 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
 
 - (void) fetchComicWithIndex:(NSNumber*)index
                   completion:(XKCDComicCompletion)completion {
-  NSManagedObjectContext *managedObjectContext = [PersistenceController sharedInstance].managedObjectContext;
+  NSManagedObjectContext *managedObjectContext = [PersistenceManager sharedManager].managedObjectContext;
   NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
   NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass([XKCDComic class])
                                                        inManagedObjectContext:managedObjectContext];
@@ -198,7 +198,7 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
 }
 
 - (XKCDComic*) createAndInsertComicWithPayload:(NSDictionary*)payload {
-  NSManagedObjectContext *managedObjectContext = [PersistenceController sharedInstance].managedObjectContext;
+  NSManagedObjectContext *managedObjectContext = [PersistenceManager sharedManager].managedObjectContext;
   NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass([XKCDComic class])
                                                        inManagedObjectContext:managedObjectContext];
   XKCDComic *comic = [[XKCDComic alloc] initWithEntity:entityDescription

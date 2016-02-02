@@ -106,9 +106,11 @@
 
 #pragma mark - Private
 
-//Returns keywords, which consists of a default set and the comic title.
+//Returns keywords, which consists of a default set and the comic title components.
 - (NSArray*) keywordsWithComic:(XKCDComic*)comic {
-  NSArray *keywords = @[@"xkcd", @"webcomic", @"comic", @"romance", @"sarcasm", @"math", @"language", comic.title];
+  NSArray *keywords = @[@"xkcd", @"webcomic", @"comic", @"romance", @"sarcasm", @"math", @"language"];
+  NSArray *titleComponents = [comic.title componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+  keywords = [keywords arrayByAddingObjectsFromArray:titleComponents];
   return keywords;
 }
 
