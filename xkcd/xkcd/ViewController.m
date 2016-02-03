@@ -18,7 +18,7 @@ static NSInteger kHoverboardIndex = 1608;
 static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 
 @interface ViewController ()
-@property (copy, nonatomic) NSNumber *currentIndex;
+@property (copy, nonatomic) NSNumber *currentIndex, *launchIndex;
 @property (strong, nonatomic) UIActivityIndicatorView *loaderView;
 @property (nonatomic) BOOL loaderVisible;
 @property (strong, nonatomic) UIBarButtonItem *refreshButtonItem;
@@ -28,12 +28,18 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 
 #pragma mark - Lifecycle
 
-- (void)viewDidLoad {
+- (instancetype) initWithCoder:(NSCoder *)aDecoder {
+  self = [super initWithCoder:aDecoder];
+  if (self) {
+    [self addNotificationObservers];
+  }
+  return self;
+}
+
+- (void) viewDidLoad {
   [super viewDidLoad];
   
   self.refreshButtonItem = self.navigationItem.rightBarButtonItem;
-  
-  [self addNotificationObservers];
 }
 
 - (void) viewDidLayoutSubviews {
@@ -41,11 +47,15 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
-    [self initialLoad];
+    if (self.launchIndex) {
+      [self loadComicWithIndex:self.launchIndex];
+    } else {
+      [self initialLoad];
+    }
   });
 }
 
-- (void)didReceiveMemoryWarning {
+- (void) didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
 }
 
@@ -54,8 +64,6 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 }
 
 #pragma mark - Properties
-
-
 
 - (void) setLoaderVisible:(BOOL)visible {
   _loaderVisible = visible;
@@ -95,16 +103,23 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 }
 
 - (void) handleShowComicNotification:(NSNotification*)notification {
+
   NSDictionary *userInfo = notification.userInfo;
-  if (!userInfo || !userInfo[kIndexKey]) return;
   
-  NSNumber *index = userInfo[kIndexKey];
-  [self loadComicWithIndex:index];
+  self.launchIndex = userInfo[kIndexKey];
+  
+  if (self.isViewLoaded) {
+    if (self.launchIndex) {
+      [self loadComicWithIndex:self.launchIndex];
+    } else {
+      [self initialLoad];
+    }
+  }
 }
 
 #pragma mark - Actions
 
-- (IBAction)refreshAction:(id)sender {
+- (IBAction) refreshAction:(id)sender {
   self.loaderVisible = YES;
   __weak ViewController *weakSelf = self;
   [[XKCD sharedInstance] getComicWithIndex:self.currentIndex
@@ -114,7 +129,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   }];
 }
 
-- (IBAction)previousAction:(id)sender {
+- (IBAction) previousAction:(id)sender {
   NSLog(@"previous button pressed");
   
   NSNumber *oldestIndex = @(0);
@@ -124,7 +139,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   [self loadComicWithIndex:previousIndex];
 }
 
-- (IBAction)nextAction:(id)sender {
+- (IBAction) nextAction:(id)sender {
   NSLog(@"next button pressed");
   
   NSNumber *latestIndex = [XKCD sharedInstance].latestComicIndex;
@@ -135,7 +150,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   
 }
 
-- (IBAction)randomAction:(id)sender {
+- (IBAction) randomAction:(id)sender {
   NSLog(@"random button pressed");
   NSNumber *latestIndex = [XKCD sharedInstance].latestComicIndex;
   if (!latestIndex) return;
@@ -152,25 +167,23 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 - (void) initialLoad {
   //Fetch most recent persisted comic from Core Data.
   __weak ViewController *weakSelf = self;
-  [[XKCD sharedInstance] fetchLatestComic:^(XKCDComic *fetchedComic) {
-    if (fetchedComic) {
-      weakSelf.currentIndex = [fetchedComic.index copy];
-      [weakSelf updateViewsWithComic:fetchedComic];
+  XKCDComic *fetchedComic = [[XKCD sharedInstance] fetchLatestComic];
+  if (fetchedComic) {
+    weakSelf.currentIndex = [fetchedComic.index copy];
+    [weakSelf updateViewsWithComic:fetchedComic];
+  }
+  
+  //GET latest comic from HTTP request, update UI if it is new.
+  [[XKCD sharedInstance] getLatestComic:^(XKCDComic *httpComic) {
+    if (![fetchedComic.index equals:httpComic.index]) {
+      weakSelf.currentIndex = [httpComic.index copy];
+      [weakSelf updateViewsWithComic:httpComic];
     }
-    
-    //GET latest comic from HTTP request, update UI if it is new.
-    [[XKCD sharedInstance] getLatestComic:^(XKCDComic *httpComic) {
-      if (![fetchedComic.index equals:httpComic.index]) {
-        weakSelf.currentIndex = [httpComic.index copy];
-        [weakSelf updateViewsWithComic:httpComic];
-      }
-    }];
   }];
 }
 
 //Load comic with index. Attempts local Core Data load, if fails, performs HTTP request.
 - (void) loadComicWithIndex:(NSNumber*)index {
-  if (!index) return;
   
   self.loaderVisible = YES;
   
@@ -183,20 +196,18 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
     weakSelf.loaderVisible = NO;
   };
 
-  [[XKCD sharedInstance] fetchComicWithIndex:index
-                                  completion:^(XKCDComic *comic) {
-                                    //Fetched comic from Core Data
-                                    if (comic) {
-                                      finalizeWithComic(comic);
+  XKCDComic *fetchedComic = [[XKCD sharedInstance] fetchComicWithIndex:index];
+  //Fetched comic from Core Data
+  if (fetchedComic) {
+    finalizeWithComic(fetchedComic);
                                       
-                                    //Not in Core Data, get from http.
-                                    } else {
-                                      [[XKCD sharedInstance] getComicWithIndex:index
-                                                                    completion:^(XKCDComic *comic) {
-                                                                      finalizeWithComic(comic);
-                                                                    }];
-                                    }
+  //Not in Core Data, get from http.
+  } else {
+    [[XKCD sharedInstance] getComicWithIndex:index
+                                  completion:^(XKCDComic *comic) {
+                                    finalizeWithComic(comic);
                                   }];
+  }
 }
 
 //Sets UIEdgeInsets propert to on scroll view with current orientation bar sizes.

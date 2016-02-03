@@ -42,7 +42,6 @@ NSString *const ShowComicNotification = @"ShowComicNotification";
 - (BOOL) handleLaunchOptions:(NSDictionary*)launchOptions {
   
   id launchObject = [self launchObjectFromLaunchOptions:launchOptions];
-  if (!launchObject) return NO;
   
   return [self handleLaunchObject:launchObject];
 }
@@ -52,7 +51,7 @@ NSString *const ShowComicNotification = @"ShowComicNotification";
   
   NSNumber *index = [self indexWithLaunchObject:launchObject];
   
-  NSDictionary *userInfo = @{kIndexKey : index};
+  NSDictionary *userInfo = index ? @{kIndexKey : index} : nil;
   NSNotification *notification = [NSNotification notificationWithName:ShowComicNotification
                                                                object:nil
                                                              userInfo:userInfo];

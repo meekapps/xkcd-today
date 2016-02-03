@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ShortcutsManager.h"
 #import "SpotlightManager.h"
 #import "PersistenceManager.h"
 
@@ -19,7 +20,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   self.window.tintColor = [UIColor blackColor];
   
-  [[SpotlightManager sharedManager] handleLaunchOptions:launchOptions];
+  if (![[ShortcutsManager sharedManager] handleLaunchOptions:launchOptions]) {
+    [[SpotlightManager sharedManager] handleLaunchOptions:launchOptions];
+  }
   
   return YES;
 }
@@ -45,6 +48,12 @@
 continueUserActivity:(NSUserActivity *)userActivity
  restorationHandler:(void (^)(NSArray *))restorationHandler {
   return [[SpotlightManager sharedManager] handleLaunchObject:userActivity];
+}
+
+- (void) application:(UIApplication *)application
+performActionForShortcutItem:(nonnull UIApplicationShortcutItem *)shortcutItem
+   completionHandler:(nonnull void (^)(BOOL))completionHandler {
+  completionHandler([[ShortcutsManager sharedManager] handleLaunchObject:shortcutItem]);
 }
 
 @end
