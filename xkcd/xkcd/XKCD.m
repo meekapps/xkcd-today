@@ -34,19 +34,22 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
 
 - (void) addToFavorites:(NSNumber *)index {
   XKCDComic *comic = [[XKCD sharedInstance] fetchComicWithIndex:index];
-  comic.favorite = @(YES);
+  NSNumber *favoritesCount = @([[XKCD sharedInstance] fetchFavorites].count);
+  comic.favorite = favoritesCount; //add to end of favorites list.
   [[PersistenceManager sharedManager] saveContext];
 }
 
 - (void) removeFromFavorites:(NSNumber *)index {
   XKCDComic *comic = [[XKCD sharedInstance] fetchComicWithIndex:index];
-  comic.favorite = @(NO);
+  comic.favorite = nil;
   [[PersistenceManager sharedManager] saveContext];
 }
 
 - (NSArray*) fetchFavorites {
   NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"XKCDComic"];
-  request.predicate = [NSPredicate predicateWithFormat:@"favorite != 0"];
+  request.predicate = [NSPredicate predicateWithFormat:@"favorite != nil"];
+  NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"favorite" ascending:YES];
+  request.sortDescriptors = @[sortDescriptor];
   NSManagedObjectContext *context = [PersistenceManager sharedManager].managedObjectContext;
   NSError *error = nil;
   NSArray *results = [context executeFetchRequest:request
