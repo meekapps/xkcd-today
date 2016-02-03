@@ -24,12 +24,12 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-
-  [self loadLatestWithCompletion:^(NCUpdateResult updateResult) {}];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
+  
+  [self loadLatestWithCompletion:^(NCUpdateResult updateResult) {}];
 }
 
 - (void)didReceiveMemoryWarning {
