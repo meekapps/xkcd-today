@@ -18,11 +18,10 @@ typedef void(^XKCDComicCompletion)(XKCDComic *comic);
 + (instancetype) sharedInstance;
 
 /// Fetches latest (highest index) comic from Core Data.
-- (void) fetchLatestComic:(XKCDComicCompletion)completion;
+- (XKCDComic*) fetchLatestComic;
 
 /// Fetches comic from with index from Core Data. Passing index=nil fetches latest (highest index) comic.
-- (void) fetchComicWithIndex:(NSNumber*)index
-                  completion:(XKCDComicCompletion)completion;
+- (XKCDComic*) fetchComicWithIndex:(NSNumber*)index;
 
 /// GETs latest comic from an HTTP request.
 - (void) getLatestComic:(XKCDComicCompletion)completion;

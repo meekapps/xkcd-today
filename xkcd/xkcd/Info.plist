@@ -56,15 +56,19 @@
 	<array>
 		<dict>
 			<key>UIApplicationShortcutItemTitle</key>
-			<string>Latest</string>
+			<string>Random</string>
 			<key>UIApplicationShortcutItemType</key>
-			<string>$(PRODUCT_BUNDLE_IDENTIFIER).latest</string>
+			<string>random</string>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeShuffle</string>
 		</dict>
 		<dict>
 			<key>UIApplicationShortcutItemTitle</key>
-			<string>Random</string>
+			<string>Latest</string>
 			<key>UIApplicationShortcutItemType</key>
-			<string>$(PRODUCT_BUNDLE_IDENTIFIER).random</string>
+			<string>latest</string>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeHome</string>
 		</dict>
 	</array>
 </dict>

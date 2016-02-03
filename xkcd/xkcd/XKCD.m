@@ -32,25 +32,12 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
   return instance;
 }
 
-- (void) fetchLatestComic:(void(^)(XKCDComic *comic))completion {
-  __weak XKCD *weakSelf = self;
-  [self fetchComicWithIndex:nil
-                 completion:^(XKCDComic *comic) {
-                   if (!comic) {
-                     NSLog(@"error fetching latest comic");
-                   } else {
-                     //update latest comic index
-                     weakSelf.latestComicIndex = comic.index;
-                     
-                     NSLog(@"fetched latest comic (%@)", weakSelf.latestComicIndex);
-                   }
-                   
-                   completion(comic);
-                 }];
+- (XKCDComic*) fetchLatestComic {
+  XKCDComic *comic = [self fetchComicWithIndex:nil];
+  return comic;
 }
 
-- (void) fetchComicWithIndex:(NSNumber*)index
-                  completion:(XKCDComicCompletion)completion {
+- (XKCDComic*) fetchComicWithIndex:(NSNumber*)index {
   NSManagedObjectContext *managedObjectContext = [PersistenceManager sharedManager].managedObjectContext;
   NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
   NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass([XKCDComic class])
@@ -76,13 +63,12 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
       ![fetchedObjects.firstObject isKindOfClass:[XKCDComic class]]) {
     
     NSLog(@"error fetching: %@", error);
-    completion(nil);
-    return;
+    return nil;
   }
   
   XKCDComic *comic = fetchedObjects.firstObject;
   NSLog(@"fetched comic, %@", index ? index : @"latest");
-  completion(comic);
+  return comic;
 }
 
 - (void) getLatestComic:(void(^)(XKCDComic *comic))completion {
@@ -127,6 +113,14 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
   
   [downloadTask resume];
   
+}
+
+//Returns comic with highest index.
+- (NSNumber*) latestComicIndex {
+  XKCDComic *comic = [self fetchLatestComic];
+  if (!comic) return nil;
+  
+  return comic.index;
 }
 
 #pragma mark - NSURLSession Delegate

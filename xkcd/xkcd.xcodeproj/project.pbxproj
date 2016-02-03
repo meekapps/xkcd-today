@@ -38,6 +38,7 @@
 		417062A31C606FC30003A3FD /* SpotlightManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 417062A21C606FC30003A3FD /* SpotlightManager.m */; };
 		417062A41C60783F0003A3FD /* SpotlightManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 417062A21C606FC30003A3FD /* SpotlightManager.m */; };
 		417062A51C6078490003A3FD /* LaunchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 417062991C606E2F0003A3FD /* LaunchManager.m */; };
+		41FD61C41C61B5230096C39F /* ShortcutsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD61C31C61B5230096C39F /* ShortcutsManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +125,8 @@
 		417062A21C606FC30003A3FD /* SpotlightManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightManager.m; sourceTree = "<group>"; };
 		41FB0AAE1C5D221F00EE4732 /* xkcd today.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "xkcd today.entitlements"; sourceTree = "<group>"; };
 		41FB0AAF1C5D241300EE4732 /* xkcd.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = xkcd.entitlements; sourceTree = "<group>"; };
+		41FD61C21C61B5230096C39F /* ShortcutsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortcutsManager.h; sourceTree = "<group>"; };
+		41FD61C31C61B5230096C39F /* ShortcutsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortcutsManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,6 +257,8 @@
 				417062991C606E2F0003A3FD /* LaunchManager.m */,
 				4121919D1C5C643B0005971C /* PersistenceManager.h */,
 				4121919E1C5C643B0005971C /* PersistenceManager.m */,
+				41FD61C21C61B5230096C39F /* ShortcutsManager.h */,
+				41FD61C31C61B5230096C39F /* ShortcutsManager.m */,
 				417062A11C606FC30003A3FD /* SpotlightManager.h */,
 				417062A21C606FC30003A3FD /* SpotlightManager.m */,
 				412191A01C5C64F20005971C /* XKCD.h */,
@@ -486,6 +491,7 @@
 				4121915B1C5C624E0005971C /* main.m in Sources */,
 				412191A21C5C64F20005971C /* XKCD.m in Sources */,
 				414207A11C5D4998009853D7 /* NSNumber+Operations.m in Sources */,
+				41FD61C41C61B5230096C39F /* ShortcutsManager.m in Sources */,
 				412191931C5C634D0005971C /* XKCDComic+CoreDataProperties.m in Sources */,
 				417062A31C606FC30003A3FD /* SpotlightManager.m in Sources */,
 				412191671C5C624E0005971C /* xkcd.xcdatamodeld in Sources */,

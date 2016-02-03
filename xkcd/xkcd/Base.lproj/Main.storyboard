@@ -22,7 +22,7 @@
             </objects>
             <point key="canvasLocation" x="-353.5" y="-36.5"/>
         </scene>
-        <!--xkcd-->
+        <!--View Controller-->
         <scene sceneID="L2V-wg-pGR">
             <objects>
                 <viewController id="VAm-ex-Dun" customClass="ViewController" sceneMemberID="viewController">
@@ -95,7 +95,7 @@
                             <constraint firstItem="L5d-ss-wZH" firstAttribute="top" secondItem="5Xz-kH-D38" secondAttribute="bottom" id="hbd-z1-9NJ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="xkcd" id="HoG-Kd-eFH">
+                    <navigationItem key="navigationItem" id="HoG-Kd-eFH">
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="Ktg-nE-Rhz">
                             <connections>
                                 <action selector="refreshAction:" destination="VAm-ex-Dun" id="iBu-P0-Jmh"/>

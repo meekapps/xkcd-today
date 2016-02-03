@@ -15,10 +15,10 @@
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *nextButton, *previousButton, *randomButton;
 
-- (IBAction)refreshAction:(id)sender;
-- (IBAction)previousAction:(id)sender;
-- (IBAction)nextAction:(id)sender;
-- (IBAction)randomAction:(id)sender;
+- (IBAction) refreshAction:(id)sender;
+- (IBAction) previousAction:(id)sender;
+- (IBAction) nextAction:(id)sender;
+- (IBAction) randomAction:(id)sender;
 
 @end
 
