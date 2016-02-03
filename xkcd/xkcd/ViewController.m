@@ -232,6 +232,13 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   //nav bar title
   self.title = comic.title;
   
+  //update the favorites button
+  if (comic.favorite != nil) {
+    //TODO: show
+  } else {
+    //TODO: hide
+  }
+  
   //update the toolbar buttons
   if (self.currentIndex) {
     //latest comic

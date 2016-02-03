@@ -112,6 +112,8 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="addToFavoritesButton" destination="JWV-6E-O5i" id="RqH-hI-wFR"/>
+                        <outlet property="favoritesButton" destination="jtG-7f-OYn" id="FyB-AQ-pu2"/>
                         <outlet property="nextButton" destination="R52-au-fWt" id="tYJ-d5-gEc"/>
                         <outlet property="previousButton" destination="byj-ar-CdK" id="P57-wP-Jll"/>
                         <outlet property="randomButton" destination="1lh-Qm-eUx" id="kLy-Fv-3Cg"/>
