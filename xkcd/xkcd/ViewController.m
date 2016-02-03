@@ -164,7 +164,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 }
 
 - (IBAction) addToFavoritesAction:(id)sender {
-  NSLog(@"add to favorites");
+  [[XKCD sharedInstance] addToFavorites:self.currentIndex];
 }
 
 #pragma mark - Private

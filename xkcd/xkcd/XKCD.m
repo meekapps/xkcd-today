@@ -32,6 +32,30 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
   return instance;
 }
 
+- (void) addToFavorites:(NSNumber *)index {
+  XKCDComic *comic = [[XKCD sharedInstance] fetchComicWithIndex:index];
+  comic.favorite = @(YES);
+  [[PersistenceManager sharedManager] saveContext];
+}
+
+- (void) removeFromFavorites:(NSNumber *)index {
+  XKCDComic *comic = [[XKCD sharedInstance] fetchComicWithIndex:index];
+  comic.favorite = @(NO);
+  [[PersistenceManager sharedManager] saveContext];
+}
+
+- (NSArray*) fetchFavorites {
+  NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"XKCDComic"];
+  request.predicate = [NSPredicate predicateWithFormat:@"favorite != 0"];
+  NSManagedObjectContext *context = [PersistenceManager sharedManager].managedObjectContext;
+  NSError *error = nil;
+  NSArray *results = [context executeFetchRequest:request
+                                            error:&error];
+  if (!results || error) return nil;
+  
+  return results;
+}
+
 - (XKCDComic*) fetchLatestComic {
   XKCDComic *comic = [self fetchComicWithIndex:nil];
   return comic;
@@ -192,11 +216,19 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
 }
 
 - (XKCDComic*) createAndInsertComicWithPayload:(NSDictionary*)payload {
-  NSManagedObjectContext *managedObjectContext = [PersistenceManager sharedManager].managedObjectContext;
-  NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass([XKCDComic class])
-                                                       inManagedObjectContext:managedObjectContext];
-  XKCDComic *comic = [[XKCDComic alloc] initWithEntity:entityDescription
-                        insertIntoManagedObjectContext:managedObjectContext];
+  
+  //index
+  id index = payload[@"num"];
+  XKCDComic *comic = [[XKCD sharedInstance] fetchComicWithIndex:index];
+  if (!comic) {
+    NSManagedObjectContext *managedObjectContext = [PersistenceManager sharedManager].managedObjectContext;
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass([XKCDComic class])
+                                                         inManagedObjectContext:managedObjectContext];
+    comic = [[XKCDComic alloc] initWithEntity:entityDescription
+               insertIntoManagedObjectContext:managedObjectContext];
+  }
+  
+  if (index && [index isKindOfClass:[NSNumber class]]) comic.index = index;
   
   //date
   id day = payload[@"day"];
@@ -209,10 +241,6 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
   //image url
   id imageUrl = payload[@"img"];
   if (imageUrl && [imageUrl isKindOfClass:[NSString class]]) comic.imageUrl = imageUrl;
-  
-  //index
-  id index = payload[@"num"];
-  if (index && [index isKindOfClass:[NSNumber class]]) comic.index = index;
   
   //title
   id title = payload[@"title"];

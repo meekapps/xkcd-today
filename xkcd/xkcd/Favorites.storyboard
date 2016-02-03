@@ -33,7 +33,42 @@
                     <view key="view" contentMode="scaleToFill" id="sp3-ro-GXB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="54" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EI0-Np-7o5">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavoriteTableViewCell" textLabel="Bis-2f-ZrQ" style="IBUITableViewCellStyleDefault" id="CH0-SY-jBM" customClass="FavoriteTableViewCell">
+                                        <rect key="frame" x="0.0" y="92" width="375" height="54"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CH0-SY-jBM" id="UXz-OZ-rEb">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="53.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Bis-2f-ZrQ">
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="53.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="TPj-hM-SnB" id="lgd-Sx-LeY"/>
+                                    <outlet property="delegate" destination="TPj-hM-SnB" id="08j-HQ-vSl"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="EI0-Np-7o5" secondAttribute="trailing" id="dDK-8K-q7E"/>
+                            <constraint firstItem="EI0-Np-7o5" firstAttribute="top" secondItem="sp3-ro-GXB" secondAttribute="top" id="eu8-MQ-rh4"/>
+                            <constraint firstItem="EI0-Np-7o5" firstAttribute="leading" secondItem="sp3-ro-GXB" secondAttribute="leading" id="oFA-fA-C5W"/>
+                            <constraint firstItem="Bt8-Wo-dWs" firstAttribute="top" secondItem="EI0-Np-7o5" secondAttribute="bottom" id="s82-ny-irk"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Favorites" id="DPg-A4-T86">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="4Co-bc-UZ7">
@@ -42,6 +77,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="EI0-Np-7o5" id="Grm-3p-3qw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1XX-Oj-qpW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -41,6 +41,7 @@
 		41FD61D21C61C8C10096C39F /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD61D11C61C8C10096C39F /* FavoritesViewController.m */; };
 		41FD61D41C61C8E90096C39F /* Favorites.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41FD61D31C61C8E90096C39F /* Favorites.storyboard */; };
 		41FD61D51C61CAA30096C39F /* XKCDComic.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD61CD1C61C8810096C39F /* XKCDComic.m */; };
+		41FD61D81C61CD620096C39F /* FavoriteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD61D71C61CD620096C39F /* FavoriteTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +133,8 @@
 		41FD61D01C61C8C10096C39F /* FavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesViewController.h; sourceTree = "<group>"; };
 		41FD61D11C61C8C10096C39F /* FavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesViewController.m; sourceTree = "<group>"; };
 		41FD61D31C61C8E90096C39F /* Favorites.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Favorites.storyboard; sourceTree = "<group>"; };
+		41FD61D61C61CD620096C39F /* FavoriteTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteTableViewCell.h; sourceTree = "<group>"; };
+		41FD61D71C61CD620096C39F /* FavoriteTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,6 +283,8 @@
 				417024621C5DB98F0084531D /* ComicScrollView.m */,
 				41FD61D01C61C8C10096C39F /* FavoritesViewController.h */,
 				41FD61D11C61C8C10096C39F /* FavoritesViewController.m */,
+				41FD61D61C61CD620096C39F /* FavoriteTableViewCell.h */,
+				41FD61D71C61CD620096C39F /* FavoriteTableViewCell.m */,
 				4121915F1C5C624E0005971C /* ViewController.h */,
 				412191601C5C624E0005971C /* ViewController.m */,
 			);
@@ -498,6 +503,7 @@
 				412191AC1C5C73FB0005971C /* UIImage+AsyncImage.m in Sources */,
 				4121915E1C5C624E0005971C /* AppDelegate.m in Sources */,
 				4121915B1C5C624E0005971C /* main.m in Sources */,
+				41FD61D81C61CD620096C39F /* FavoriteTableViewCell.m in Sources */,
 				412191A21C5C64F20005971C /* XKCD.m in Sources */,
 				41FD61D21C61C8C10096C39F /* FavoritesViewController.m in Sources */,
 				414207A11C5D4998009853D7 /* NSNumber+Operations.m in Sources */,
