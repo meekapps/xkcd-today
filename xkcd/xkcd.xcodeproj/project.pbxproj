@@ -16,8 +16,6 @@
 		4121916C1C5C624E0005971C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4121916A1C5C624E0005971C /* LaunchScreen.storyboard */; };
 		412191771C5C624E0005971C /* xkcdTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191761C5C624E0005971C /* xkcdTests.m */; };
 		412191821C5C624E0005971C /* xkcdUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191811C5C624E0005971C /* xkcdUITests.m */; };
-		412191931C5C634D0005971C /* XKCDComic+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191901C5C634D0005971C /* XKCDComic+CoreDataProperties.m */; };
-		412191941C5C634D0005971C /* XKCDComic.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191921C5C634D0005971C /* XKCDComic.m */; };
 		4121919F1C5C643B0005971C /* PersistenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4121919E1C5C643B0005971C /* PersistenceManager.m */; };
 		412191A21C5C64F20005971C /* XKCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191A11C5C64F20005971C /* XKCD.m */; };
 		412191A91C5C70A70005971C /* UIColor+XKCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191A81C5C70A70005971C /* UIColor+XKCD.m */; };
@@ -27,7 +25,6 @@
 		412191BB1C5D12720005971C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 412191B91C5D12720005971C /* MainInterface.storyboard */; };
 		412191BF1C5D12720005971C /* xkcd today.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 412191B11C5D12720005971C /* xkcd today.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		414207991C5D284F009853D7 /* XKCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191A11C5C64F20005971C /* XKCD.m */; };
-		4142079A1C5D28EB009853D7 /* XKCDComic.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191921C5C634D0005971C /* XKCDComic.m */; };
 		4142079B1C5D28F5009853D7 /* PersistenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4121919E1C5C643B0005971C /* PersistenceManager.m */; };
 		4142079C1C5D295C009853D7 /* xkcd.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 412191651C5C624E0005971C /* xkcd.xcdatamodeld */; };
 		414207A11C5D4998009853D7 /* NSNumber+Operations.m in Sources */ = {isa = PBXBuildFile; fileRef = 414207A01C5D4998009853D7 /* NSNumber+Operations.m */; };
@@ -39,6 +36,11 @@
 		417062A41C60783F0003A3FD /* SpotlightManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 417062A21C606FC30003A3FD /* SpotlightManager.m */; };
 		417062A51C6078490003A3FD /* LaunchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 417062991C606E2F0003A3FD /* LaunchManager.m */; };
 		41FD61C41C61B5230096C39F /* ShortcutsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD61C31C61B5230096C39F /* ShortcutsManager.m */; };
+		41FD61CE1C61C8810096C39F /* XKCDComic+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD61CB1C61C8810096C39F /* XKCDComic+CoreDataProperties.m */; };
+		41FD61CF1C61C8810096C39F /* XKCDComic.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD61CD1C61C8810096C39F /* XKCDComic.m */; };
+		41FD61D21C61C8C10096C39F /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD61D11C61C8C10096C39F /* FavoritesViewController.m */; };
+		41FD61D41C61C8E90096C39F /* Favorites.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41FD61D31C61C8E90096C39F /* Favorites.storyboard */; };
+		41FD61D51C61CAA30096C39F /* XKCDComic.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD61CD1C61C8810096C39F /* XKCDComic.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,10 +99,6 @@
 		4121917D1C5C624E0005971C /* xkcdUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = xkcdUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		412191811C5C624E0005971C /* xkcdUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = xkcdUITests.m; sourceTree = "<group>"; };
 		412191831C5C624E0005971C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4121918F1C5C634D0005971C /* XKCDComic+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "XKCDComic+CoreDataProperties.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		412191901C5C634D0005971C /* XKCDComic+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XKCDComic+CoreDataProperties.m"; sourceTree = "<group>"; };
-		412191911C5C634D0005971C /* XKCDComic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XKCDComic.h; sourceTree = "<group>"; };
-		412191921C5C634D0005971C /* XKCDComic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XKCDComic.m; sourceTree = "<group>"; };
 		4121919D1C5C643B0005971C /* PersistenceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PersistenceManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4121919E1C5C643B0005971C /* PersistenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PersistenceManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		412191A01C5C64F20005971C /* XKCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XKCD.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -127,6 +125,13 @@
 		41FB0AAF1C5D241300EE4732 /* xkcd.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = xkcd.entitlements; sourceTree = "<group>"; };
 		41FD61C21C61B5230096C39F /* ShortcutsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortcutsManager.h; sourceTree = "<group>"; };
 		41FD61C31C61B5230096C39F /* ShortcutsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortcutsManager.m; sourceTree = "<group>"; };
+		41FD61CA1C61C8810096C39F /* XKCDComic+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XKCDComic+CoreDataProperties.h"; sourceTree = "<group>"; };
+		41FD61CB1C61C8810096C39F /* XKCDComic+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XKCDComic+CoreDataProperties.m"; sourceTree = "<group>"; };
+		41FD61CC1C61C8810096C39F /* XKCDComic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XKCDComic.h; sourceTree = "<group>"; };
+		41FD61CD1C61C8810096C39F /* XKCDComic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XKCDComic.m; sourceTree = "<group>"; };
+		41FD61D01C61C8C10096C39F /* FavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesViewController.h; sourceTree = "<group>"; };
+		41FD61D11C61C8C10096C39F /* FavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesViewController.m; sourceTree = "<group>"; };
+		41FD61D31C61C8E90096C39F /* Favorites.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Favorites.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,6 +236,7 @@
 		412191961C5C63830005971C /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				41FD61D31C61C8E90096C39F /* Favorites.storyboard */,
 				4121916A1C5C624E0005971C /* LaunchScreen.storyboard */,
 				412191621C5C624E0005971C /* Main.storyboard */,
 			);
@@ -240,10 +246,10 @@
 		412191971C5C63980005971C /* NSManagedObjects */ = {
 			isa = PBXGroup;
 			children = (
-				4121918F1C5C634D0005971C /* XKCDComic+CoreDataProperties.h */,
-				412191901C5C634D0005971C /* XKCDComic+CoreDataProperties.m */,
-				412191911C5C634D0005971C /* XKCDComic.h */,
-				412191921C5C634D0005971C /* XKCDComic.m */,
+				41FD61CA1C61C8810096C39F /* XKCDComic+CoreDataProperties.h */,
+				41FD61CB1C61C8810096C39F /* XKCDComic+CoreDataProperties.m */,
+				41FD61CC1C61C8810096C39F /* XKCDComic.h */,
+				41FD61CD1C61C8810096C39F /* XKCDComic.m */,
 			);
 			name = NSManagedObjects;
 			sourceTree = "<group>";
@@ -272,6 +278,8 @@
 			children = (
 				417024611C5DB98F0084531D /* ComicScrollView.h */,
 				417024621C5DB98F0084531D /* ComicScrollView.m */,
+				41FD61D01C61C8C10096C39F /* FavoritesViewController.h */,
+				41FD61D11C61C8C10096C39F /* FavoritesViewController.m */,
 				4121915F1C5C624E0005971C /* ViewController.h */,
 				412191601C5C624E0005971C /* ViewController.m */,
 			);
@@ -451,6 +459,7 @@
 			files = (
 				4121916C1C5C624E0005971C /* LaunchScreen.storyboard in Resources */,
 				412191691C5C624E0005971C /* Assets.xcassets in Resources */,
+				41FD61D41C61C8E90096C39F /* Favorites.storyboard in Resources */,
 				412191641C5C624E0005971C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -490,15 +499,16 @@
 				4121915E1C5C624E0005971C /* AppDelegate.m in Sources */,
 				4121915B1C5C624E0005971C /* main.m in Sources */,
 				412191A21C5C64F20005971C /* XKCD.m in Sources */,
+				41FD61D21C61C8C10096C39F /* FavoritesViewController.m in Sources */,
 				414207A11C5D4998009853D7 /* NSNumber+Operations.m in Sources */,
 				41FD61C41C61B5230096C39F /* ShortcutsManager.m in Sources */,
-				412191931C5C634D0005971C /* XKCDComic+CoreDataProperties.m in Sources */,
 				417062A31C606FC30003A3FD /* SpotlightManager.m in Sources */,
 				412191671C5C624E0005971C /* xkcd.xcdatamodeld in Sources */,
 				4121919F1C5C643B0005971C /* PersistenceManager.m in Sources */,
+				41FD61CE1C61C8810096C39F /* XKCDComic+CoreDataProperties.m in Sources */,
 				4170629A1C606E2F0003A3FD /* LaunchManager.m in Sources */,
-				412191941C5C634D0005971C /* XKCDComic.m in Sources */,
 				412191A91C5C70A70005971C /* UIColor+XKCD.m in Sources */,
+				41FD61CF1C61C8810096C39F /* XKCDComic.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,13 +532,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41FD61D51C61CAA30096C39F /* XKCDComic.m in Sources */,
 				417062A51C6078490003A3FD /* LaunchManager.m in Sources */,
 				417062A41C60783F0003A3FD /* SpotlightManager.m in Sources */,
 				414207A31C5D6950009853D7 /* NSNumber+Operations.m in Sources */,
 				414207A21C5D6831009853D7 /* UIImage+AsyncImage.m in Sources */,
 				4142079C1C5D295C009853D7 /* xkcd.xcdatamodeld in Sources */,
 				4142079B1C5D28F5009853D7 /* PersistenceManager.m in Sources */,
-				4142079A1C5D28EB009853D7 /* XKCDComic.m in Sources */,
 				414207991C5D284F009853D7 /* XKCD.m in Sources */,
 				412191B81C5D12720005971C /* TodayViewController.m in Sources */,
 			);

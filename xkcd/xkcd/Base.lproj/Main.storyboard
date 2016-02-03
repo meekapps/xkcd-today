@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -96,18 +97,24 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="HoG-Kd-eFH">
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="Ktg-nE-Rhz">
-                            <connections>
-                                <action selector="refreshAction:" destination="VAm-ex-Dun" id="iBu-P0-Jmh"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="bookmarks" id="jtG-7f-OYn">
+                                <connections>
+                                    <action selector="favoritesAction:" destination="VAm-ex-Dun" id="IXM-jK-hrx"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="add" id="JWV-6E-O5i">
+                                <connections>
+                                    <action selector="addToFavoritesAction:" destination="VAm-ex-Dun" id="0u1-9c-kQa"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="nextButton" destination="R52-au-fWt" id="tYJ-d5-gEc"/>
                         <outlet property="previousButton" destination="byj-ar-CdK" id="P57-wP-Jll"/>
                         <outlet property="randomButton" destination="1lh-Qm-eUx" id="kLy-Fv-3Cg"/>
-                        <outlet property="refreshButtonItem" destination="Ktg-nE-Rhz" id="ZVX-Wg-vAL"/>
                         <outlet property="scrollView" destination="5Xz-kH-D38" id="DTz-Vx-O8E"/>
                         <outlet property="toolbar" destination="eiZ-Gg-gto" id="3Of-b6-7Zs"/>
                         <outlet property="view" destination="kKz-r4-rUW" id="8eG-qf-7g0"/>

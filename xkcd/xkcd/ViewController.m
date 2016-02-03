@@ -21,7 +21,6 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 @property (copy, nonatomic) NSNumber *currentIndex, *launchIndex;
 @property (strong, nonatomic) UIActivityIndicatorView *loaderView;
 @property (nonatomic) BOOL loaderVisible;
-@property (strong, nonatomic) UIBarButtonItem *refreshButtonItem;
 @end
 
 @implementation ViewController
@@ -38,8 +37,6 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 
 - (void) viewDidLoad {
   [super viewDidLoad];
-  
-  self.refreshButtonItem = self.navigationItem.rightBarButtonItem;
 }
 
 - (void) viewDidLayoutSubviews {
@@ -68,13 +65,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 - (void) setLoaderVisible:(BOOL)visible {
   _loaderVisible = visible;
   
-  if (visible) {
-    UIBarButtonItem *loaderButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.loaderView];
-    [self.loaderView startAnimating];
-    self.navigationItem.rightBarButtonItem = loaderButtonItem;
-  } else {
-    self.navigationItem.rightBarButtonItem = self.refreshButtonItem;
-  }
+  //TODO: new loader
 }
 
 - (UIActivityIndicatorView*) loaderView {
@@ -119,15 +110,15 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 
 #pragma mark - Actions
 
-- (IBAction) refreshAction:(id)sender {
-  self.loaderVisible = YES;
-  __weak ViewController *weakSelf = self;
-  [[XKCD sharedInstance] getComicWithIndex:self.currentIndex
-                                completion:^(XKCDComic *comic) {
-    [weakSelf updateViewsWithComic:comic];
-    weakSelf.loaderVisible = NO;
-  }];
-}
+//- (IBAction) refreshAction:(id)sender {
+//  self.loaderVisible = YES;
+//  __weak ViewController *weakSelf = self;
+//  [[XKCD sharedInstance] getComicWithIndex:self.currentIndex
+//                                completion:^(XKCDComic *comic) {
+//    [weakSelf updateViewsWithComic:comic];
+//    weakSelf.loaderVisible = NO;
+//  }];
+//}
 
 - (IBAction) previousAction:(id)sender {
   NSLog(@"previous button pressed");
@@ -160,6 +151,20 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   if (!randomIndex) return;
   
   [self loadComicWithIndex:randomIndex];
+}
+
+- (IBAction)favoritesAction:(id)sender {
+  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Favorites"
+                                                       bundle:[NSBundle mainBundle]];
+  UIViewController *favorites = [storyboard instantiateInitialViewController];
+  [self.navigationController presentViewController:favorites
+                                          animated:YES
+                                        completion:^{
+                                        }];
+}
+
+- (IBAction) addToFavoritesAction:(id)sender {
+  NSLog(@"add to favorites");
 }
 
 #pragma mark - Private
