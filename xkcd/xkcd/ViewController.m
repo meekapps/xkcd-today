@@ -6,8 +6,8 @@
 //  Copyright © 2016 meek apps. All rights reserved.
 //
 
-#import "NSNumber+Operations.h"
 #import "LaunchManager.h"
+#import "NSNumber+Operations.h"
 #import "PersistenceManager.h"
 #import "ViewController.h"
 #import "UIColor+XKCD.h"
@@ -156,8 +156,10 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 - (IBAction)favoritesAction:(id)sender {
   UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Favorites"
                                                        bundle:[NSBundle mainBundle]];
-  UIViewController *favorites = [storyboard instantiateInitialViewController];
-  [self.navigationController presentViewController:favorites
+  UINavigationController *favoritesNavigationController = [storyboard instantiateInitialViewController];
+  FavoritesViewController *favoritesViewController = favoritesNavigationController.viewControllers.firstObject;
+  favoritesViewController.delegate = self;
+  [self.navigationController presentViewController:favoritesNavigationController
                                           animated:YES
                                         completion:^{
                                         }];
@@ -293,6 +295,13 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   [self.navigationController presentViewController:hoverboardAlert animated:YES completion:^{
   }];
   
+}
+
+#pragma mark - FavoritesViewControllerDelegte
+
+- (void) favoritesViewController:(FavoritesViewController *)favoritesViewController
+         didSelectComicWithIndex:(NSNumber *)index {
+  [self loadComicWithIndex:index];
 }
 
 @end

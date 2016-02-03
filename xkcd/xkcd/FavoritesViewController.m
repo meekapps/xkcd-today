@@ -50,4 +50,17 @@
   return cell;
 }
 
+#pragma mark - UITableViewDelegate
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  if ([self.delegate respondsToSelector:@selector(favoritesViewController:didSelectComicWithIndex:)]) {
+    XKCDComic *comic = self.favorites[indexPath.row];
+    [self.delegate favoritesViewController:self didSelectComicWithIndex:comic.index];
+  }
+  
+  [self.navigationController dismissViewControllerAnimated:YES
+                                                completion:^{
+  }];
+}
+
 @end

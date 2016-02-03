@@ -45,7 +45,7 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
   [[PersistenceManager sharedManager] saveContext];
 }
 
-- (NSArray*) fetchFavorites {
+- (NSArray<XKCDComic*>*) fetchFavorites {
   NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"XKCDComic"];
   request.predicate = [NSPredicate predicateWithFormat:@"favorite != nil"];
   NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"favorite" ascending:YES];

@@ -8,9 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class FavoritesViewController;
+@protocol FavoritesViewControllerDelegate <NSObject>
+- (void) favoritesViewController:(FavoritesViewController*)favoritesViewController
+         didSelectComicWithIndex:(NSNumber*)index;
+@end
+
 @interface FavoritesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) id<FavoritesViewControllerDelegate>delegate;
 
 - (IBAction)doneAction:(id)sender;
 

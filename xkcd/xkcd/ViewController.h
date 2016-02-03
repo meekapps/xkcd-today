@@ -7,9 +7,10 @@
 //
 
 #import "ComicScrollView.h"
+#import "FavoritesViewController.h"
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <FavoritesViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet ComicScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;

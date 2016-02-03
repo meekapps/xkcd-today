@@ -24,7 +24,7 @@ typedef void(^XKCDComicCompletion)(XKCDComic *comic);
 - (void) removeFromFavorites:(NSNumber*)index;
 
 /// Fetches favorites.
-- (NSArray*) fetchFavorites;
+- (NSArray<XKCDComic*>*) fetchFavorites;
 
 /// Fetches latest (highest index) comic from Core Data.
 - (XKCDComic*) fetchLatestComic;
