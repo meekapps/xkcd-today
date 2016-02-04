@@ -260,24 +260,11 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
     [self setScrollViewInsets];
     return;
   }
-  
-  //download image if it hasn't been already and save in Core Data.
-  NSString *urlString = comic.imageUrl;
   __weak ViewController *weakSelf = self;
-  [UIImage imageFromUrl:urlString
-             completion:^(UIImage *image) {
-               
-               [weakSelf.scrollView setImage:image];
-               
-               if (image) {
-                 //updates UI
-                 [weakSelf setScrollViewInsets];
-                 
-                 //sets managed object image in context to be persisted.
-                 comic.image = UIImagePNGRepresentation(image);
-                 [[PersistenceManager sharedManager] saveContext];
-               }
-             }];
+  [comic getImage:^(UIImage * _Nonnull image) {
+    [weakSelf.scrollView setImage:image];
+    [weakSelf setScrollViewInsets];
+  }];
   
   //hoverboard
   if ([comic.index equals:@(kHoverboardIndex)]) {

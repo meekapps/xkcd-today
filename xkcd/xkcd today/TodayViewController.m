@@ -88,24 +88,12 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
     }
   }
   
-  //Image URL
-  NSString *imageUrl = comic.imageUrl;
-  if (!imageUrl) return;
-  
+  //Image
   __weak TodayViewController *weakSelf = self;
-  [UIImage imageFromUrl:imageUrl
-             completion:^(UIImage *image) {
-               
-               if (image) {
-                 //updates UI
-                 weakSelf.imageView.image = image;
-                 [self updatePreferredSize];
-                 
-                 //sets managed object image in context to be persisted.
-                 comic.image = UIImagePNGRepresentation(image);
-                 [[PersistenceManager sharedManager] saveContext];
-               }
-             }];
+  [comic getImage:^(UIImage * _Nonnull image) {
+    weakSelf.imageView.image = image;
+    [weakSelf updatePreferredSize];
+  }];
 }
 
 - (void) updatePreferredSize {

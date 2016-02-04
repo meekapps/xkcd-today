@@ -53,22 +53,10 @@
   };
   
   //Image
-  if (comic.image) {
-    attributes.thumbnailData = comic.image;
+  [comic getImage:^(UIImage * _Nonnull image) {
+    attributes.thumbnailData = UIImagePNGRepresentation(image);
     finishIndexing();
-    
-  } else if (comic.imageUrl) {
-    //wait for image download to finish index
-    NSLog(@"download image thumbnail");
-    [UIImage imageFromUrl:comic.imageUrl
-               completion:^(UIImage *image) {
-                 attributes.thumbnailData = UIImagePNGRepresentation(image);
-                 finishIndexing();
-               }];
-  }
-
-  
-  
+  }];
 }
 
 #pragma mark - LaunchingHandling

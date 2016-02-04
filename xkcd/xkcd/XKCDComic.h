@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface XKCDComic : NSManagedObject
 
-// Insert code here to declare functionality of your managed object subclass
+/// Fetch the image from Core Data, if available; over HTTP if only the URL is cached.
+- (void) getImage:(void(^)(UIImage *image))completion;
 
 @end
 
