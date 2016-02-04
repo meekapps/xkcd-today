@@ -6,8 +6,8 @@
 //  Copyright © 2016 meek apps. All rights reserved.
 //
 
-#import "NSNumber+Operations.h"
 #import "LaunchManager.h"
+#import "NSNumber+Operations.h"
 #import "PersistenceManager.h"
 #import "ViewController.h"
 #import "UIColor+XKCD.h"
@@ -18,10 +18,10 @@ static NSInteger kHoverboardIndex = 1608;
 static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 
 @interface ViewController ()
-@property (copy, nonatomic) NSNumber *currentIndex, *launchIndex;
+@property (strong, nonatomic) XKCDComic *currentComic;
+@property (copy, nonatomic) NSNumber *launchIndex;
 @property (strong, nonatomic) UIActivityIndicatorView *loaderView;
 @property (nonatomic) BOOL loaderVisible;
-@property (strong, nonatomic) UIBarButtonItem *refreshButtonItem;
 @end
 
 @implementation ViewController
@@ -38,8 +38,6 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 
 - (void) viewDidLoad {
   [super viewDidLoad];
-  
-  self.refreshButtonItem = self.navigationItem.rightBarButtonItem;
 }
 
 - (void) viewDidLayoutSubviews {
@@ -68,13 +66,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 - (void) setLoaderVisible:(BOOL)visible {
   _loaderVisible = visible;
   
-  if (visible) {
-    UIBarButtonItem *loaderButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.loaderView];
-    [self.loaderView startAnimating];
-    self.navigationItem.rightBarButtonItem = loaderButtonItem;
-  } else {
-    self.navigationItem.rightBarButtonItem = self.refreshButtonItem;
-  }
+  //TODO: new loader
 }
 
 - (UIActivityIndicatorView*) loaderView {
@@ -119,23 +111,23 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 
 #pragma mark - Actions
 
-- (IBAction) refreshAction:(id)sender {
-  self.loaderVisible = YES;
-  __weak ViewController *weakSelf = self;
-  [[XKCD sharedInstance] getComicWithIndex:self.currentIndex
-                                completion:^(XKCDComic *comic) {
-    [weakSelf updateViewsWithComic:comic];
-    weakSelf.loaderVisible = NO;
-  }];
-}
+//- (IBAction) refreshAction:(id)sender {
+//  self.loaderVisible = YES;
+//  __weak ViewController *weakSelf = self;
+//  [[XKCD sharedInstance] getComicWithIndex:self.currentIndex
+//                                completion:^(XKCDComic *comic) {
+//    [weakSelf updateViewsWithComic:comic];
+//    weakSelf.loaderVisible = NO;
+//  }];
+//}
 
 - (IBAction) previousAction:(id)sender {
   NSLog(@"previous button pressed");
   
   NSNumber *oldestIndex = @(0);
-  if ([self.currentIndex equals:oldestIndex]) return;
+  if ([self.currentComic.index equals:oldestIndex]) return;
   
-  NSNumber *previousIndex = [self.currentIndex subtract:1];
+  NSNumber *previousIndex = [self.currentComic.index subtract:1];
   [self loadComicWithIndex:previousIndex];
 }
 
@@ -143,9 +135,9 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   NSLog(@"next button pressed");
   
   NSNumber *latestIndex = [XKCD sharedInstance].latestComicIndex;
-  if (self.currentIndex && latestIndex && [self.currentIndex equals:latestIndex]) return;
+  if (self.currentComic.index && latestIndex && [self.currentComic.index equals:latestIndex]) return;
   
-  NSNumber *nextIndex = [self.currentIndex add:1];
+  NSNumber *nextIndex = [self.currentComic.index add:1];
   [self loadComicWithIndex:nextIndex];
   
 }
@@ -162,6 +154,22 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   [self loadComicWithIndex:randomIndex];
 }
 
+- (IBAction)showFavoritesAction:(id)sender {
+  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Favorites"
+                                                       bundle:[NSBundle mainBundle]];
+  UINavigationController *favoritesNavigationController = [storyboard instantiateInitialViewController];
+  FavoritesViewController *favoritesViewController = favoritesNavigationController.viewControllers.firstObject;
+  favoritesViewController.delegate = self;
+  [self.navigationController presentViewController:favoritesNavigationController
+                                          animated:YES
+                                        completion:^{
+                                        }];
+}
+
+- (IBAction) toggleFavoriteAction:(id)sender {
+  [[XKCD sharedInstance] toggleFavorite:self.currentComic.index];
+}
+
 #pragma mark - Private
 
 - (void) initialLoad {
@@ -169,14 +177,14 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   __weak ViewController *weakSelf = self;
   XKCDComic *fetchedComic = [[XKCD sharedInstance] fetchLatestComic];
   if (fetchedComic) {
-    weakSelf.currentIndex = [fetchedComic.index copy];
+    weakSelf.currentComic = fetchedComic;
     [weakSelf updateViewsWithComic:fetchedComic];
   }
   
   //GET latest comic from HTTP request, update UI if it is new.
   [[XKCD sharedInstance] getLatestComic:^(XKCDComic *httpComic) {
     if (![fetchedComic.index equals:httpComic.index]) {
-      weakSelf.currentIndex = [httpComic.index copy];
+      weakSelf.currentComic = httpComic;
       [weakSelf updateViewsWithComic:httpComic];
     }
   }];
@@ -189,7 +197,9 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   
   __weak ViewController *weakSelf = self;
   void(^finalizeWithComic)(XKCDComic *comic) = ^void(XKCDComic *comic) {
-    if (comic) weakSelf.currentIndex = [index copy];
+    if (comic) {
+      weakSelf.currentComic = comic;
+    }
     
     [weakSelf updateViewsWithComic:comic];
     
@@ -225,15 +235,22 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   //nav bar title
   self.title = comic.title;
   
+  //update the favorites button
+  if (comic.favorite != nil) {
+    //TODO: show
+  } else {
+    //TODO: hide
+  }
+  
   //update the toolbar buttons
-  if (self.currentIndex) {
+  if (self.currentComic.index) {
     //latest comic
     NSNumber *latestIndex = [XKCD sharedInstance].latestComicIndex;
-    self.nextButton.enabled = ![self.currentIndex equals:latestIndex];
+    self.nextButton.enabled = ![self.currentComic.index equals:latestIndex];
     
     //oldest comic
     NSNumber *firstIndex = @(1);
-    self.previousButton.enabled = ![self.currentIndex equals:firstIndex];
+    self.previousButton.enabled = ![self.currentComic.index equals:firstIndex];
   }
   
   //set the stored image, if possible
@@ -288,6 +305,13 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   [self.navigationController presentViewController:hoverboardAlert animated:YES completion:^{
   }];
   
+}
+
+#pragma mark - FavoritesViewControllerDelegte
+
+- (void) favoritesViewController:(FavoritesViewController *)favoritesViewController
+         didSelectComicWithIndex:(NSNumber *)index {
+  [self loadComicWithIndex:index];
 }
 
 @end

@@ -7,18 +7,20 @@
 //
 
 #import "ComicScrollView.h"
+#import "FavoritesViewController.h"
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <FavoritesViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet ComicScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *nextButton, *previousButton, *randomButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *nextButton, *previousButton, *randomButton, *toggleFavoriteButton, *showFavoritesButton;
 
-- (IBAction) refreshAction:(id)sender;
 - (IBAction) previousAction:(id)sender;
 - (IBAction) nextAction:(id)sender;
 - (IBAction) randomAction:(id)sender;
+- (IBAction) toggleFavoriteAction:(id)sender;
+- (IBAction) showFavoritesAction:(id)sender;
 
 @end
 

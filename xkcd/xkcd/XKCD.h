@@ -17,6 +17,12 @@ typedef void(^XKCDComicCompletion)(XKCDComic *comic);
 
 + (instancetype) sharedInstance;
 
+/// Adds or removes comic to/from favorites.
+- (void) toggleFavorite:(NSNumber*)index;
+
+/// Fetches favorites.
+- (NSArray<XKCDComic*>*) fetchFavorites;
+
 /// Fetches latest (highest index) comic from Core Data.
 - (XKCDComic*) fetchLatestComic;
 
