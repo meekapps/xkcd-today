@@ -11,6 +11,8 @@
 @class FavoritesViewController;
 @protocol FavoritesViewControllerDelegate <NSObject>
 - (void) favoritesViewController:(FavoritesViewController*)favoritesViewController
+      didDeleteFavoriteWithIndex:(NSNumber*)index;
+- (void) favoritesViewController:(FavoritesViewController*)favoritesViewController
          didSelectComicWithIndex:(NSNumber*)index;
 @end
 

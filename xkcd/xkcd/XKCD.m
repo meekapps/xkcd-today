@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "NSNumber+Operations.h"
 #import "PersistenceManager.h"
 #import "SpotlightManager.h"
 #import "XKCD.h"
@@ -37,6 +38,12 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
   
   //Remove
   if (comic.favorite) {
+    NSArray *favorites = [self fetchFavorites];
+    for (NSUInteger i = comic.favorite.unsignedIntegerValue + 1; i < favorites.count; i++) {
+      XKCDComic *thisComic = favorites[i];
+      thisComic.favorite = [thisComic.favorite subtract:1];
+    }
+    
     comic.favorite = nil;
     
   //Add

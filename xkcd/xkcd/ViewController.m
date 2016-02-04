@@ -112,16 +112,6 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 
 #pragma mark - Actions
 
-//- (IBAction) refreshAction:(id)sender {
-//  self.loaderVisible = YES;
-//  __weak ViewController *weakSelf = self;
-//  [[XKCD sharedInstance] getComicWithIndex:self.currentIndex
-//                                completion:^(XKCDComic *comic) {
-//    [weakSelf updateViewsWithComic:comic];
-//    weakSelf.loaderVisible = NO;
-//  }];
-//}
-
 - (IBAction) previousAction:(id)sender {
   NSLog(@"previous button pressed");
   
@@ -300,6 +290,13 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 }
 
 #pragma mark - FavoritesViewControllerDelegte
+
+- (void) favoritesViewController:(FavoritesViewController *)favoritesViewController
+      didDeleteFavoriteWithIndex:(NSNumber *)index {
+  if ([index equals:self.currentComic.index]) {
+    [self updateToggleFavoritesButton:self.currentComic];
+  }
+}
 
 - (void) favoritesViewController:(FavoritesViewController *)favoritesViewController
          didSelectComicWithIndex:(NSNumber *)index {

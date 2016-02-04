@@ -19,6 +19,7 @@
 
 - (void) setComic:(XKCDComic *)comic {
   self.textLabel.text = comic.title;
+  self.detailTextLabel.text = [NSString stringWithFormat:@"%@", comic.favorite];
 }
 
 @end
