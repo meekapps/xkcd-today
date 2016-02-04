@@ -24,6 +24,7 @@
 		412191B81C5D12720005971C /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191B71C5D12720005971C /* TodayViewController.m */; };
 		412191BB1C5D12720005971C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 412191B91C5D12720005971C /* MainInterface.storyboard */; };
 		412191BF1C5D12720005971C /* xkcd today.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 412191B11C5D12720005971C /* xkcd today.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		412E38E71C63A4BF00EB5B0D /* UIImage+XKCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 412E38E61C63A4BF00EB5B0D /* UIImage+XKCD.m */; };
 		414207991C5D284F009853D7 /* XKCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191A11C5C64F20005971C /* XKCD.m */; };
 		4142079B1C5D28F5009853D7 /* PersistenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4121919E1C5C643B0005971C /* PersistenceManager.m */; };
 		4142079C1C5D295C009853D7 /* xkcd.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 412191651C5C624E0005971C /* xkcd.xcdatamodeld */; };
@@ -114,6 +115,8 @@
 		412191B71C5D12720005971C /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
 		412191BA1C5D12720005971C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		412191BC1C5D12720005971C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		412E38E51C63A4BF00EB5B0D /* UIImage+XKCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+XKCD.h"; sourceTree = "<group>"; };
+		412E38E61C63A4BF00EB5B0D /* UIImage+XKCD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+XKCD.m"; sourceTree = "<group>"; };
 		4142079F1C5D4998009853D7 /* NSNumber+Operations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Operations.h"; sourceTree = "<group>"; };
 		414207A01C5D4998009853D7 /* NSNumber+Operations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Operations.m"; sourceTree = "<group>"; };
 		417024611C5DB98F0084531D /* ComicScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComicScrollView.h; sourceTree = "<group>"; };
@@ -300,6 +303,8 @@
 				412191A81C5C70A70005971C /* UIColor+XKCD.m */,
 				412191AA1C5C73FB0005971C /* UIImage+AsyncImage.h */,
 				412191AB1C5C73FB0005971C /* UIImage+AsyncImage.m */,
+				412E38E51C63A4BF00EB5B0D /* UIImage+XKCD.h */,
+				412E38E61C63A4BF00EB5B0D /* UIImage+XKCD.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -507,6 +512,7 @@
 				412191A21C5C64F20005971C /* XKCD.m in Sources */,
 				41FD61D21C61C8C10096C39F /* FavoritesViewController.m in Sources */,
 				414207A11C5D4998009853D7 /* NSNumber+Operations.m in Sources */,
+				412E38E71C63A4BF00EB5B0D /* UIImage+XKCD.m in Sources */,
 				41FD61C41C61B5230096C39F /* ShortcutsManager.m in Sources */,
 				417062A31C606FC30003A3FD /* SpotlightManager.m in Sources */,
 				412191671C5C624E0005971C /* xkcd.xcdatamodeld in Sources */,

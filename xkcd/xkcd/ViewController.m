@@ -12,6 +12,7 @@
 #import "ViewController.h"
 #import "UIColor+XKCD.h"
 #import "UIImage+AsyncImage.h"
+#import "UIImage+XKCD.h"
 #import "XKCD.h"
 
 static NSInteger kHoverboardIndex = 1608;
@@ -230,10 +231,10 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   self.scrollView.barInsets = UIEdgeInsetsMake(topBarsHeight, 0.0F, toolbarHeight, 0.0F);
 }
 
+//update the favorites button
 - (void) updateToggleFavoritesButton:(XKCDComic*)comic {
-  //update the favorites button
-  //TODO: use real images
-  self.toggleFavoriteButton.image = comic.favorite ? [UIImage imageNamed:@"heart-filled"] : [UIImage imageNamed:@"heart-outline"];
+  BOOL favorite = comic.favorite != nil;
+  self.toggleFavoriteButton.image = [UIImage heartImage:favorite];
 
 }
 
