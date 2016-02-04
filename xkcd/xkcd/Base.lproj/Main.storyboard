@@ -103,7 +103,7 @@
                                     <action selector="showFavoritesAction:" destination="VAm-ex-Dun" id="uF4-94-2FV"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem systemItem="add" id="JWV-6E-O5i">
+                            <barButtonItem image="heart-outline" id="JWV-6E-O5i">
                                 <connections>
                                     <action selector="toggleFavoriteAction:" destination="VAm-ex-Dun" id="7Ce-gk-Xf4"/>
                                 </connections>
@@ -127,4 +127,7 @@
             <point key="canvasLocation" x="125.5" y="-36.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="heart-outline" width="24" height="22"/>
+    </resources>
 </document>

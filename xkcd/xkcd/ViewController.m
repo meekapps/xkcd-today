@@ -168,6 +168,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 
 - (IBAction) toggleFavoriteAction:(id)sender {
   [[XKCD sharedInstance] toggleFavorite:self.currentComic.index];
+  [self updateToggleFavoritesButton:self.currentComic];
 }
 
 #pragma mark - Private
@@ -229,18 +230,21 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   self.scrollView.barInsets = UIEdgeInsetsMake(topBarsHeight, 0.0F, toolbarHeight, 0.0F);
 }
 
+- (void) updateToggleFavoritesButton:(XKCDComic*)comic {
+  //update the favorites button
+  //TODO: use real images
+  self.toggleFavoriteButton.image = comic.favorite ? [UIImage imageNamed:@"heart-filled"] : [UIImage imageNamed:@"heart-outline"];
+
+}
+
 - (void) updateViewsWithComic:(XKCDComic*)comic {
   if (!comic) return;
   
   //nav bar title
   self.title = comic.title;
   
-  //update the favorites button
-  if (comic.favorite != nil) {
-    //TODO: show
-  } else {
-    //TODO: hide
-  }
+  //favorites button
+  [self updateToggleFavoritesButton:comic];
   
   //update the toolbar buttons
   if (self.currentComic.index) {
