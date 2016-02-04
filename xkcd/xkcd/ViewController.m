@@ -18,7 +18,8 @@ static NSInteger kHoverboardIndex = 1608;
 static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 
 @interface ViewController ()
-@property (copy, nonatomic) NSNumber *currentIndex, *launchIndex;
+@property (strong, nonatomic) XKCDComic *currentComic;
+@property (copy, nonatomic) NSNumber *launchIndex;
 @property (strong, nonatomic) UIActivityIndicatorView *loaderView;
 @property (nonatomic) BOOL loaderVisible;
 @end
@@ -124,9 +125,9 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   NSLog(@"previous button pressed");
   
   NSNumber *oldestIndex = @(0);
-  if ([self.currentIndex equals:oldestIndex]) return;
+  if ([self.currentComic.index equals:oldestIndex]) return;
   
-  NSNumber *previousIndex = [self.currentIndex subtract:1];
+  NSNumber *previousIndex = [self.currentComic.index subtract:1];
   [self loadComicWithIndex:previousIndex];
 }
 
@@ -134,9 +135,9 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   NSLog(@"next button pressed");
   
   NSNumber *latestIndex = [XKCD sharedInstance].latestComicIndex;
-  if (self.currentIndex && latestIndex && [self.currentIndex equals:latestIndex]) return;
+  if (self.currentComic.index && latestIndex && [self.currentComic.index equals:latestIndex]) return;
   
-  NSNumber *nextIndex = [self.currentIndex add:1];
+  NSNumber *nextIndex = [self.currentComic.index add:1];
   [self loadComicWithIndex:nextIndex];
   
 }
@@ -153,7 +154,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   [self loadComicWithIndex:randomIndex];
 }
 
-- (IBAction)favoritesAction:(id)sender {
+- (IBAction)showFavoritesAction:(id)sender {
   UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Favorites"
                                                        bundle:[NSBundle mainBundle]];
   UINavigationController *favoritesNavigationController = [storyboard instantiateInitialViewController];
@@ -165,8 +166,8 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
                                         }];
 }
 
-- (IBAction) addToFavoritesAction:(id)sender {
-  [[XKCD sharedInstance] addToFavorites:self.currentIndex];
+- (IBAction) toggleFavoriteAction:(id)sender {
+  [[XKCD sharedInstance] toggleFavorite:self.currentComic.index];
 }
 
 #pragma mark - Private
@@ -176,14 +177,14 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   __weak ViewController *weakSelf = self;
   XKCDComic *fetchedComic = [[XKCD sharedInstance] fetchLatestComic];
   if (fetchedComic) {
-    weakSelf.currentIndex = [fetchedComic.index copy];
+    weakSelf.currentComic = fetchedComic;
     [weakSelf updateViewsWithComic:fetchedComic];
   }
   
   //GET latest comic from HTTP request, update UI if it is new.
   [[XKCD sharedInstance] getLatestComic:^(XKCDComic *httpComic) {
     if (![fetchedComic.index equals:httpComic.index]) {
-      weakSelf.currentIndex = [httpComic.index copy];
+      weakSelf.currentComic = httpComic;
       [weakSelf updateViewsWithComic:httpComic];
     }
   }];
@@ -196,7 +197,9 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   
   __weak ViewController *weakSelf = self;
   void(^finalizeWithComic)(XKCDComic *comic) = ^void(XKCDComic *comic) {
-    if (comic) weakSelf.currentIndex = [index copy];
+    if (comic) {
+      weakSelf.currentComic = comic;
+    }
     
     [weakSelf updateViewsWithComic:comic];
     
@@ -240,14 +243,14 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   }
   
   //update the toolbar buttons
-  if (self.currentIndex) {
+  if (self.currentComic.index) {
     //latest comic
     NSNumber *latestIndex = [XKCD sharedInstance].latestComicIndex;
-    self.nextButton.enabled = ![self.currentIndex equals:latestIndex];
+    self.nextButton.enabled = ![self.currentComic.index equals:latestIndex];
     
     //oldest comic
     NSNumber *firstIndex = @(1);
-    self.previousButton.enabled = ![self.currentIndex equals:firstIndex];
+    self.previousButton.enabled = ![self.currentComic.index equals:firstIndex];
   }
   
   //set the stored image, if possible

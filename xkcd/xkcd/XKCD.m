@@ -32,16 +32,19 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
   return instance;
 }
 
-- (void) addToFavorites:(NSNumber *)index {
+- (void) toggleFavorite:(NSNumber *)index {
   XKCDComic *comic = [[XKCD sharedInstance] fetchComicWithIndex:index];
-  NSNumber *favoritesCount = @([[XKCD sharedInstance] fetchFavorites].count);
-  comic.favorite = favoritesCount; //add to end of favorites list.
-  [[PersistenceManager sharedManager] saveContext];
-}
-
-- (void) removeFromFavorites:(NSNumber *)index {
-  XKCDComic *comic = [[XKCD sharedInstance] fetchComicWithIndex:index];
-  comic.favorite = nil;
+  
+  //Remove
+  if (comic.favorite) {
+    comic.favorite = nil;
+    
+  //Add
+  } else {
+    NSNumber *favoritesCount = @([[XKCD sharedInstance] fetchFavorites].count);
+    comic.favorite = favoritesCount; //add to end of favorites list.
+  }
+  
   [[PersistenceManager sharedManager] saveContext];
 }
 

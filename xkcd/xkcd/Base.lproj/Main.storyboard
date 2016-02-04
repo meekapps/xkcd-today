@@ -100,24 +100,24 @@
                         <rightBarButtonItems>
                             <barButtonItem systemItem="bookmarks" id="jtG-7f-OYn">
                                 <connections>
-                                    <action selector="favoritesAction:" destination="VAm-ex-Dun" id="IXM-jK-hrx"/>
+                                    <action selector="showFavoritesAction:" destination="VAm-ex-Dun" id="uF4-94-2FV"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="add" id="JWV-6E-O5i">
                                 <connections>
-                                    <action selector="addToFavoritesAction:" destination="VAm-ex-Dun" id="0u1-9c-kQa"/>
+                                    <action selector="toggleFavoriteAction:" destination="VAm-ex-Dun" id="7Ce-gk-Xf4"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="addToFavoritesButton" destination="JWV-6E-O5i" id="RqH-hI-wFR"/>
-                        <outlet property="favoritesButton" destination="jtG-7f-OYn" id="FyB-AQ-pu2"/>
                         <outlet property="nextButton" destination="R52-au-fWt" id="tYJ-d5-gEc"/>
                         <outlet property="previousButton" destination="byj-ar-CdK" id="P57-wP-Jll"/>
                         <outlet property="randomButton" destination="1lh-Qm-eUx" id="kLy-Fv-3Cg"/>
                         <outlet property="scrollView" destination="5Xz-kH-D38" id="DTz-Vx-O8E"/>
+                        <outlet property="showFavoritesButton" destination="jtG-7f-OYn" id="Jpy-1b-HUY"/>
+                        <outlet property="toggleFavoriteButton" destination="JWV-6E-O5i" id="IbF-GN-WqK"/>
                         <outlet property="toolbar" destination="eiZ-Gg-gto" id="3Of-b6-7Zs"/>
                         <outlet property="view" destination="kKz-r4-rUW" id="8eG-qf-7g0"/>
                     </connections>

@@ -14,13 +14,13 @@
 
 @property (weak, nonatomic) IBOutlet ComicScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *nextButton, *previousButton, *randomButton, *addToFavoritesButton, *favoritesButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *nextButton, *previousButton, *randomButton, *toggleFavoriteButton, *showFavoritesButton;
 
 - (IBAction) previousAction:(id)sender;
 - (IBAction) nextAction:(id)sender;
 - (IBAction) randomAction:(id)sender;
-- (IBAction) addToFavoritesAction:(id)sender;
-- (IBAction) favoritesAction:(id)sender;
+- (IBAction) toggleFavoriteAction:(id)sender;
+- (IBAction) showFavoritesAction:(id)sender;
 
 @end
 
