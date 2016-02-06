@@ -56,6 +56,9 @@
                                     <outlet property="comicImageView" destination="97a-9u-Nb9" id="lyY-FL-ifA"/>
                                 </connections>
                             </scrollView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="nAF-uW-4ao">
+                                <rect key="frame" x="177" y="324" width="20" height="20"/>
+                            </activityIndicatorView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eiZ-Gg-gto">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <constraints>
@@ -90,8 +93,10 @@
                             <constraint firstItem="eiZ-Gg-gto" firstAttribute="leading" secondItem="kKz-r4-rUW" secondAttribute="leading" id="2xb-8f-h9v"/>
                             <constraint firstAttribute="trailing" secondItem="eiZ-Gg-gto" secondAttribute="trailing" id="Axx-ft-NYq"/>
                             <constraint firstItem="5Xz-kH-D38" firstAttribute="top" secondItem="kKz-r4-rUW" secondAttribute="top" id="DUn-xT-oli"/>
+                            <constraint firstItem="nAF-uW-4ao" firstAttribute="centerX" secondItem="kKz-r4-rUW" secondAttribute="centerX" id="HGS-kN-xHl"/>
                             <constraint firstAttribute="trailing" secondItem="5Xz-kH-D38" secondAttribute="trailing" id="IG5-Zi-Zgt"/>
                             <constraint firstItem="5Xz-kH-D38" firstAttribute="leading" secondItem="kKz-r4-rUW" secondAttribute="leading" id="Ix4-Mt-RGo"/>
+                            <constraint firstItem="nAF-uW-4ao" firstAttribute="centerY" secondItem="kKz-r4-rUW" secondAttribute="centerY" id="WkW-sQ-fRH"/>
                             <constraint firstItem="L5d-ss-wZH" firstAttribute="top" secondItem="eiZ-Gg-gto" secondAttribute="bottom" id="hMt-8c-rDF"/>
                             <constraint firstItem="L5d-ss-wZH" firstAttribute="top" secondItem="5Xz-kH-D38" secondAttribute="bottom" id="hbd-z1-9NJ"/>
                         </constraints>
@@ -112,6 +117,7 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="loaderView" destination="nAF-uW-4ao" id="kUA-bO-daP"/>
                         <outlet property="nextButton" destination="R52-au-fWt" id="tYJ-d5-gEc"/>
                         <outlet property="previousButton" destination="byj-ar-CdK" id="P57-wP-Jll"/>
                         <outlet property="randomButton" destination="1lh-Qm-eUx" id="kLy-Fv-3Cg"/>

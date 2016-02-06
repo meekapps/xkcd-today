@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet ComicScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *nextButton, *previousButton, *randomButton, *toggleFavoriteButton, *showFavoritesButton;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loaderView;
 
 - (IBAction) previousAction:(id)sender;
 - (IBAction) nextAction:(id)sender;

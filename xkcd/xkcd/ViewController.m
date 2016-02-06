@@ -21,8 +21,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 @interface ViewController ()
 @property (strong, nonatomic) XKCDComic *currentComic;
 @property (copy, nonatomic) NSNumber *launchIndex;
-@property (strong, nonatomic) UIActivityIndicatorView *loaderView;
-@property (nonatomic) BOOL loaderVisible;
+@property (nonatomic) BOOL loading;
 @end
 
 @implementation ViewController
@@ -46,11 +45,8 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
-    if (self.launchIndex) {
-      [self loadComicWithIndex:self.launchIndex];
-    } else {
-      [self initialLoad];
-    }
+    NSNumber *index = self.launchIndex ? self.launchIndex : nil;
+    [self loadComicWithIndex:index];
   });
 }
 
@@ -64,17 +60,14 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 
 #pragma mark - Properties
 
-- (void) setLoaderVisible:(BOOL)visible {
-  _loaderVisible = visible;
+- (void) setLoading:(BOOL)loading {
+  _loading = loading;
   
-  //TODO: new loader
-}
-
-- (UIActivityIndicatorView*) loaderView {
-  if (!_loaderView) {
-    _loaderView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+  self.loaderView.hidden = !loading;
+  
+  if (loading) {
+    [self clearViews];
   }
-  return _loaderView;
 }
 
 #pragma mark - Notifications
@@ -102,11 +95,8 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   self.launchIndex = userInfo[kIndexKey];
   
   if (self.isViewLoaded) {
-    if (self.launchIndex) {
-      [self loadComicWithIndex:self.launchIndex];
-    } else {
-      [self initialLoad];
-    }
+    NSNumber *index = self.launchIndex ? self.launchIndex : nil;
+    [self loadComicWithIndex:index];
   }
 }
 
@@ -164,28 +154,10 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 
 #pragma mark - Private
 
-- (void) initialLoad {
-  //Fetch most recent persisted comic from Core Data.
-  __weak ViewController *weakSelf = self;
-  XKCDComic *fetchedComic = [[XKCD sharedInstance] fetchLatestComic];
-  if (fetchedComic) {
-    weakSelf.currentComic = fetchedComic;
-    [weakSelf updateViewsWithComic:fetchedComic];
-  }
-  
-  //GET latest comic from HTTP request, update UI if it is new.
-  [[XKCD sharedInstance] getLatestComic:^(XKCDComic *httpComic) {
-    if (![fetchedComic.index equals:httpComic.index]) {
-      weakSelf.currentComic = httpComic;
-      [weakSelf updateViewsWithComic:httpComic];
-    }
-  }];
-}
-
 //Load comic with index. Attempts local Core Data load, if fails, performs HTTP request.
 - (void) loadComicWithIndex:(NSNumber*)index {
   
-  self.loaderVisible = YES;
+  self.loading = YES;
   
   __weak ViewController *weakSelf = self;
   void(^finalizeWithComic)(XKCDComic *comic) = ^void(XKCDComic *comic) {
@@ -195,7 +167,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
     
     [weakSelf updateViewsWithComic:comic];
     
-    weakSelf.loaderVisible = NO;
+    weakSelf.loading = NO;
   };
 
   XKCDComic *fetchedComic = [[XKCD sharedInstance] fetchComicWithIndex:index];
@@ -225,7 +197,14 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 - (void) updateToggleFavoritesButton:(XKCDComic*)comic {
   BOOL favorite = comic.favorite != nil;
   self.toggleFavoriteButton.image = [UIImage heartImage:favorite];
+  self.toggleFavoriteButton.enabled = YES;
+}
 
+- (void) clearViews {
+  self.title = nil;
+  self.toggleFavoriteButton.enabled = NO;
+  self.toggleFavoriteButton.image = [UIImage heartImage:NO];
+  [self.scrollView setImage:nil];
 }
 
 - (void) updateViewsWithComic:(XKCDComic*)comic {
