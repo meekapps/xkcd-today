@@ -33,6 +33,27 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
   return instance;
 }
 
+- (void) moveFavoriteFromIndex:(NSUInteger)fromIndex
+                       toIndex:(NSUInteger)toIndex {
+  NSArray *favorites = [self fetchFavorites];
+  
+  BOOL moveDown = toIndex > fromIndex;
+  NSUInteger minRow = MIN(fromIndex, toIndex);
+  NSUInteger maxRow = MAX(fromIndex, toIndex);
+  
+  for (NSUInteger i = minRow; i <= maxRow; i++) {
+    //move down, subtract, move up add.
+    XKCDComic *thisComic = favorites[i];
+    if (i == fromIndex) {
+      thisComic.favorite = moveDown ? @(maxRow) : @(minRow);
+    } else {
+      thisComic.favorite = moveDown ? [thisComic.favorite subtract:1] : [thisComic.favorite add:1];
+    }
+  }
+  
+  [[PersistenceManager sharedManager] saveContext];
+}
+
 //Adds favorite to top of the list, or removes favorite. Adjusts favorite index for sorting.
 - (void) toggleFavorite:(NSNumber *)index {
   XKCDComic *comic = [[XKCD sharedInstance] fetchComicWithIndex:index];

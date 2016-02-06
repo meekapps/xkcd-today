@@ -17,6 +17,10 @@ typedef void(^XKCDComicCompletion)(XKCDComic *comic);
 
 + (instancetype) sharedInstance;
 
+/// Adjusts favorite indices
+- (void) moveFavoriteFromIndex:(NSUInteger)fromIndex
+                       toIndex:(NSUInteger)toIndex;
+
 /// Adds or removes comic to/from favorites.
 - (void) toggleFavorite:(NSNumber*)index;
 

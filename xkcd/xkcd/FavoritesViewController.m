@@ -96,6 +96,8 @@
 - (void) tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
        toIndexPath:(NSIndexPath *)destinationIndexPath {
   
+  [[XKCD sharedInstance] moveFavoriteFromIndex:sourceIndexPath.row
+                                       toIndex:destinationIndexPath.row];
 }
 
 #pragma mark - UITableViewDelegate
