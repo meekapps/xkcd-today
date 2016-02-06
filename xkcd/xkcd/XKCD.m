@@ -33,24 +33,23 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
   return instance;
 }
 
+//Adds favorite to top of the list, or removes favorite. Adjusts favorite index for sorting.
 - (void) toggleFavorite:(NSNumber *)index {
   XKCDComic *comic = [[XKCD sharedInstance] fetchComicWithIndex:index];
+  BOOL adding = comic.favorite == nil;
   
-  //Remove
-  if (comic.favorite) {
-    NSArray *favorites = [self fetchFavorites];
-    for (NSUInteger i = comic.favorite.unsignedIntegerValue + 1; i < favorites.count; i++) {
-      XKCDComic *thisComic = favorites[i];
-      thisComic.favorite = [thisComic.favorite subtract:1];
-    }
-    
-    comic.favorite = nil;
-    
-  //Add
-  } else {
-    NSNumber *favoritesCount = @([[XKCD sharedInstance] fetchFavorites].count);
-    comic.favorite = favoritesCount; //add to end of favorites list.
+  //Adjust existing favorite indices - add or subtract by one after this index
+  NSArray *favorites = [self fetchFavorites];
+  NSUInteger startingIndex = adding ? 0 : comic.favorite.unsignedIntegerValue + 1;
+  for (NSUInteger i = startingIndex; i < favorites.count; i++) {
+    XKCDComic *thisComic = favorites[i];
+    //If removing this comic, subtract one from indices after this.
+    //If adding, add one to indices after 0.
+    thisComic.favorite = comic.favorite ? [thisComic.favorite subtract:1] : [thisComic.favorite add:1];
   }
+  
+  //If removing, clear this property, if adding, set to 0 (top of list).
+  comic.favorite = comic.favorite ? nil : @(0);
   
   [[PersistenceManager sharedManager] saveContext];
 }
