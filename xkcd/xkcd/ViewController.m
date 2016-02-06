@@ -141,10 +141,10 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   UINavigationController *favoritesNavigationController = [storyboard instantiateInitialViewController];
   FavoritesViewController *favoritesViewController = favoritesNavigationController.viewControllers.firstObject;
   favoritesViewController.delegate = self;
+  
   [self.navigationController presentViewController:favoritesNavigationController
                                           animated:YES
-                                        completion:^{
-                                        }];
+                                        completion:^{}];
 }
 
 - (IBAction) toggleFavoriteAction:(id)sender {
