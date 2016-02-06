@@ -67,10 +67,17 @@
                                 </constraints>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="kE3-d6-Q2t"/>
-                                    <barButtonItem title="&lt;Prev" style="plain" id="byj-ar-CdK">
-                                        <connections>
-                                            <action selector="previousAction:" destination="VAm-ex-Dun" id="QKZ-YJ-tYA"/>
-                                        </connections>
+                                    <barButtonItem style="plain" id="rx8-0Y-e6c">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="YIQ-WR-aab">
+                                            <rect key="frame" x="58" y="7" width="46" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <gestureRecognizers/>
+                                            <state key="normal" title="&lt;Prev"/>
+                                            <connections>
+                                                <action selector="previousAction:" destination="VAm-ex-Dun" eventType="touchUpInside" id="F1D-cQ-Uyd"/>
+                                                <outletCollection property="gestureRecognizers" destination="Omk-X7-jwQ" appends="YES" id="qQi-DO-pXe"/>
+                                            </connections>
+                                        </button>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="9Gm-av-Kdk"/>
                                     <barButtonItem title="Random" id="1lh-Qm-eUx">
@@ -79,10 +86,17 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="TnK-YX-oTP"/>
-                                    <barButtonItem title="Next&gt;" id="R52-au-fWt">
-                                        <connections>
-                                            <action selector="nextAction:" destination="VAm-ex-Dun" id="bD9-7C-btl"/>
-                                        </connections>
+                                    <barButtonItem style="plain" id="5cB-LR-1F4">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9ty-6P-4pf">
+                                            <rect key="frame" x="271" y="7" width="46" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <gestureRecognizers/>
+                                            <state key="normal" title="Next&gt;"/>
+                                            <connections>
+                                                <action selector="nextAction:" destination="VAm-ex-Dun" eventType="touchUpInside" id="aVG-RH-0SG"/>
+                                                <outletCollection property="gestureRecognizers" destination="KtN-oK-NSA" appends="YES" id="e1D-gW-teq"/>
+                                            </connections>
+                                        </button>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="xMh-Gh-ob9"/>
                                 </items>
@@ -118,8 +132,8 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="loaderView" destination="nAF-uW-4ao" id="kUA-bO-daP"/>
-                        <outlet property="nextButton" destination="R52-au-fWt" id="tYJ-d5-gEc"/>
-                        <outlet property="previousButton" destination="byj-ar-CdK" id="P57-wP-Jll"/>
+                        <outlet property="nextButton" destination="9ty-6P-4pf" id="hYB-ec-HRd"/>
+                        <outlet property="previousButton" destination="YIQ-WR-aab" id="3ud-XS-Uk6"/>
                         <outlet property="randomButton" destination="1lh-Qm-eUx" id="kLy-Fv-3Cg"/>
                         <outlet property="scrollView" destination="5Xz-kH-D38" id="DTz-Vx-O8E"/>
                         <outlet property="showFavoritesButton" destination="jtG-7f-OYn" id="Jpy-1b-HUY"/>
@@ -129,6 +143,16 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JzX-6w-MEE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="Omk-X7-jwQ" userLabel="Long Press Previous">
+                    <connections>
+                        <action selector="oldestAction:" destination="VAm-ex-Dun" id="byx-t2-xza"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="KtN-oK-NSA" userLabel="Long Press Next">
+                    <connections>
+                        <action selector="latestAction:" destination="VAm-ex-Dun" id="QaD-wk-NEn"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="125.5" y="-36.5"/>
         </scene>

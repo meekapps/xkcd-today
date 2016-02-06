@@ -36,6 +36,7 @@
 		417062A31C606FC30003A3FD /* SpotlightManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 417062A21C606FC30003A3FD /* SpotlightManager.m */; };
 		417062A41C60783F0003A3FD /* SpotlightManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 417062A21C606FC30003A3FD /* SpotlightManager.m */; };
 		417062A51C6078490003A3FD /* LaunchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 417062991C606E2F0003A3FD /* LaunchManager.m */; };
+		41E025791C66A67500235CAA /* UIAlertController+SimpleAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E025781C66A67500235CAA /* UIAlertController+SimpleAction.m */; };
 		41FD61C41C61B5230096C39F /* ShortcutsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD61C31C61B5230096C39F /* ShortcutsManager.m */; };
 		41FD61CE1C61C8810096C39F /* XKCDComic+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD61CB1C61C8810096C39F /* XKCDComic+CoreDataProperties.m */; };
 		41FD61CF1C61C8810096C39F /* XKCDComic.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD61CD1C61C8810096C39F /* XKCDComic.m */; };
@@ -125,6 +126,8 @@
 		417062991C606E2F0003A3FD /* LaunchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchManager.m; sourceTree = "<group>"; };
 		417062A11C606FC30003A3FD /* SpotlightManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightManager.h; sourceTree = "<group>"; };
 		417062A21C606FC30003A3FD /* SpotlightManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightManager.m; sourceTree = "<group>"; };
+		41E025771C66A67500235CAA /* UIAlertController+SimpleAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+SimpleAction.h"; sourceTree = "<group>"; };
+		41E025781C66A67500235CAA /* UIAlertController+SimpleAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+SimpleAction.m"; sourceTree = "<group>"; };
 		41FB0AAE1C5D221F00EE4732 /* xkcd today.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "xkcd today.entitlements"; sourceTree = "<group>"; };
 		41FB0AAF1C5D241300EE4732 /* xkcd.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = xkcd.entitlements; sourceTree = "<group>"; };
 		41FD61C21C61B5230096C39F /* ShortcutsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortcutsManager.h; sourceTree = "<group>"; };
@@ -299,6 +302,8 @@
 			children = (
 				4142079F1C5D4998009853D7 /* NSNumber+Operations.h */,
 				414207A01C5D4998009853D7 /* NSNumber+Operations.m */,
+				41E025771C66A67500235CAA /* UIAlertController+SimpleAction.h */,
+				41E025781C66A67500235CAA /* UIAlertController+SimpleAction.m */,
 				412191A71C5C70A70005971C /* UIColor+XKCD.h */,
 				412191A81C5C70A70005971C /* UIColor+XKCD.m */,
 				412191AA1C5C73FB0005971C /* UIImage+AsyncImage.h */,
@@ -508,6 +513,7 @@
 				412191AC1C5C73FB0005971C /* UIImage+AsyncImage.m in Sources */,
 				4121915E1C5C624E0005971C /* AppDelegate.m in Sources */,
 				4121915B1C5C624E0005971C /* main.m in Sources */,
+				41E025791C66A67500235CAA /* UIAlertController+SimpleAction.m in Sources */,
 				41FD61D81C61CD620096C39F /* FavoriteTableViewCell.m in Sources */,
 				412191A21C5C64F20005971C /* XKCD.m in Sources */,
 				41FD61D21C61C8C10096C39F /* FavoritesViewController.m in Sources */,

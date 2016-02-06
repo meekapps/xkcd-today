@@ -10,6 +10,7 @@
 #import "NSNumber+Operations.h"
 #import "PersistenceManager.h"
 #import "ViewController.h"
+#import "UIAlertController+SimpleAction.h"
 #import "UIColor+XKCD.h"
 #import "UIImage+AsyncImage.h"
 #import "UIImage+XKCD.h"
@@ -101,6 +102,35 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 }
 
 #pragma mark - Actions
+
+//Long pressed previous button
+- (IBAction) oldestAction:(UILongPressGestureRecognizer*)sender {
+  if (sender.state == UIGestureRecognizerStateBegan) {
+    __weak ViewController *weakSelf = self;
+    UIAlertController *alertController = [UIAlertController alertControllerWithOkButtonTitle:@"Jump to oldest"
+                                                                             okButtonHandler:^{
+                                                                               [weakSelf loadComicWithIndex:@(1)];
+                                                                             }];
+    
+    [self.navigationController presentViewController:alertController
+                                            animated:YES
+                                          completion:^{}];
+  }
+}
+
+- (IBAction) latestAction:(UILongPressGestureRecognizer*)sender {
+  if (sender.state == UIGestureRecognizerStateBegan) {
+    __weak ViewController *weakSelf = self;
+    UIAlertController *alertController = [UIAlertController alertControllerWithOkButtonTitle:@"Jump to newest"
+                                                                             okButtonHandler:^{
+                                                                               [weakSelf loadComicWithIndex:nil];
+                                                                             }];
+    
+    [self.navigationController presentViewController:alertController
+                                            animated:YES
+                                          completion:^{}];
+  }
+}
 
 - (IBAction) previousAction:(id)sender {
   NSLog(@"previous button pressed");

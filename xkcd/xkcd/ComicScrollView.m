@@ -42,6 +42,7 @@ static CGFloat const kDefaultPadding = 10.0F;
 }
 
 - (void) setImage:(UIImage*)image {
+
   self.comicImageView.image = image;
   self.contentSize = image.size;
 
