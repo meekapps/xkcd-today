@@ -7,10 +7,12 @@
 //
 
 #import "FavoriteTableViewCell.h"
+#import "XKCDComic.h"
 
 @implementation FavoriteTableViewCell
 
 - (void)awakeFromNib {
+  self.imageView.contentMode = UIViewContentModeScaleAspectFill;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -18,8 +20,13 @@
 }
 
 - (void) setComic:(XKCDComic *)comic {
-  self.textLabel.text = comic.title;
-  self.detailTextLabel.text = [NSString stringWithFormat:@"%@", comic.favorite];
+  self.titleLabel.text = comic.title;
+
+  __weak FavoriteTableViewCell *weakSelf = self;
+  [comic getImage:^(UIImage * _Nonnull image) {
+    weakSelf.previewImageView.image = image;
+  }];
+  
 }
 
 @end

@@ -22,6 +22,8 @@
   
   self.favorites = [[XKCD sharedInstance] fetchFavorites];
   [self.tableView reloadData];
+  self.tableView.estimatedRowHeight = 60.0F;
+  self.tableView.rowHeight = UITableViewAutomaticDimension;
   
   [self showOrHideEditButton];
 }

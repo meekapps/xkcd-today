@@ -12,5 +12,7 @@
 @interface FavoriteTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) XKCDComic *comic;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *previewImageView;
 
 @end
