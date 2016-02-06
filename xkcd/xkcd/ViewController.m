@@ -307,23 +307,30 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   [self.previousButton setTitle:@"<Prev" forState:UIControlStateNormal];
   [self.previousButton addTarget:self action:@selector(previousAction:) forControlEvents:UIControlEventTouchUpInside];
   self.previousButton.frame = CGRectMake(0.0F, 0.0F, 60.0F, 34.0F);
+  UILongPressGestureRecognizer *previousLongPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(oldestAction:)];
+  [self.previousButton addGestureRecognizer:previousLongPressRecognizer];
   UIBarButtonItem *previousButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.previousButton];
   
   //Random
   self.randomButton = [UIButton buttonWithType:UIButtonTypeSystem];
   [self.randomButton setTitle:@"Random" forState:UIControlStateNormal];
   [self.randomButton addTarget:self action:@selector(randomAction:) forControlEvents:UIControlEventTouchUpInside];
+  self.randomButton.frame = CGRectMake(0.0F, 0.0F, 60.0F, 34.0F);
   UIBarButtonItem *randomButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.randomButton];
   
   //Next
   self.nextButton = [UIButton buttonWithType:UIButtonTypeSystem];
   [self.nextButton setTitle:@"Next>" forState:UIControlStateNormal];
   [self.nextButton addTarget:self action:@selector(nextAction:) forControlEvents:UIControlEventTouchUpInside];
+  self.nextButton.frame = CGRectMake(0.0F, 0.0F, 60.0F, 34.0F);
+  UILongPressGestureRecognizer *nextLongPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(latestAction:)];
+  [self.nextButton addGestureRecognizer:nextLongPressRecognizer];
   UIBarButtonItem *nextButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
   
-  NSArray <UIBarButtonItem*>*items = @[previousButtonItem, randomButtonItem, nextButtonItem];
-
-  [self.navigationController.toolbar setItems:items];
+  UIBarButtonItem *flexibleSpaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+  
+  NSArray <UIBarButtonItem*>*items = @[flexibleSpaceItem, previousButtonItem, flexibleSpaceItem, randomButtonItem, flexibleSpaceItem, nextButtonItem, flexibleSpaceItem];
+  [self setToolbarItems:items];
   
   [self.navigationController setToolbarHidden:NO];
 }
