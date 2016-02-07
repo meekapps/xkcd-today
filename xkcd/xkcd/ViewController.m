@@ -81,7 +81,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 
 #pragma mark - Notifications
 
-- (void) addNotificationObservers {  
+- (void) addNotificationObservers {
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(handleShowComicNotification:)
                                                name:ShowComicNotification
@@ -190,13 +190,13 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   
   __weak ViewController *weakSelf = self;
   void(^finalizeWithComic)(XKCDComic *comic) = ^void(XKCDComic *comic) {
+    weakSelf.loading = NO;
+    
     if (comic) {
       weakSelf.currentComic = comic;
     }
     
     [weakSelf updateViewsWithComic:comic];
-    
-    weakSelf.loading = NO;
   };
 
   XKCDComic *fetchedComic = [[XKCD sharedInstance] fetchComicWithIndex:index];
