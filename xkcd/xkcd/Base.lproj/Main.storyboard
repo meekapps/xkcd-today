@@ -35,22 +35,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="5Xz-kH-D38" customClass="ComicScrollView">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="5Xz-kH-D38" customClass="ComicScrollView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="97a-9u-Nb9">
-                                        <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="375" placeholder="YES" id="dFa-jr-KcB"/>
-                                            <constraint firstAttribute="height" constant="559" placeholder="YES" id="ydP-9k-sHR"/>
+                                            <constraint firstAttribute="height" constant="603" placeholder="YES" id="ydP-9k-sHR"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="97a-9u-Nb9" firstAttribute="leading" secondItem="5Xz-kH-D38" secondAttribute="leading" id="00r-sd-XXs"/>
                                     <constraint firstAttribute="trailing" secondItem="97a-9u-Nb9" secondAttribute="trailing" id="9uR-V2-pX5"/>
+                                    <constraint firstAttribute="bottom" secondItem="97a-9u-Nb9" secondAttribute="bottom" id="Ay5-X2-6gH"/>
                                     <constraint firstItem="97a-9u-Nb9" firstAttribute="top" secondItem="5Xz-kH-D38" secondAttribute="top" constant="64" id="eM7-pw-6ee"/>
-                                    <constraint firstAttribute="bottom" secondItem="97a-9u-Nb9" secondAttribute="bottom" constant="44" id="eWf-fq-WeP"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="comicImageView" destination="97a-9u-Nb9" id="lyY-FL-ifA"/>
@@ -59,59 +59,14 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="nAF-uW-4ao">
                                 <rect key="frame" x="177" y="324" width="20" height="20"/>
                             </activityIndicatorView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eiZ-Gg-gto">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="18z-6f-53D"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="KeF-N2-Igz"/>
-                                </constraints>
-                                <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="kE3-d6-Q2t"/>
-                                    <barButtonItem style="plain" id="rx8-0Y-e6c">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="YIQ-WR-aab">
-                                            <rect key="frame" x="58" y="7" width="46" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <gestureRecognizers/>
-                                            <state key="normal" title="&lt;Prev"/>
-                                            <connections>
-                                                <action selector="previousAction:" destination="VAm-ex-Dun" eventType="touchUpInside" id="F1D-cQ-Uyd"/>
-                                                <outletCollection property="gestureRecognizers" destination="Omk-X7-jwQ" appends="YES" id="qQi-DO-pXe"/>
-                                            </connections>
-                                        </button>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="9Gm-av-Kdk"/>
-                                    <barButtonItem title="Random" id="1lh-Qm-eUx">
-                                        <connections>
-                                            <action selector="randomAction:" destination="VAm-ex-Dun" id="ixe-IM-m0J"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="TnK-YX-oTP"/>
-                                    <barButtonItem style="plain" id="5cB-LR-1F4">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9ty-6P-4pf">
-                                            <rect key="frame" x="271" y="7" width="46" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <gestureRecognizers/>
-                                            <state key="normal" title="Next&gt;"/>
-                                            <connections>
-                                                <action selector="nextAction:" destination="VAm-ex-Dun" eventType="touchUpInside" id="aVG-RH-0SG"/>
-                                                <outletCollection property="gestureRecognizers" destination="KtN-oK-NSA" appends="YES" id="e1D-gW-teq"/>
-                                            </connections>
-                                        </button>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="xMh-Gh-ob9"/>
-                                </items>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="eiZ-Gg-gto" firstAttribute="leading" secondItem="kKz-r4-rUW" secondAttribute="leading" id="2xb-8f-h9v"/>
-                            <constraint firstAttribute="trailing" secondItem="eiZ-Gg-gto" secondAttribute="trailing" id="Axx-ft-NYq"/>
                             <constraint firstItem="5Xz-kH-D38" firstAttribute="top" secondItem="kKz-r4-rUW" secondAttribute="top" id="DUn-xT-oli"/>
                             <constraint firstItem="nAF-uW-4ao" firstAttribute="centerX" secondItem="kKz-r4-rUW" secondAttribute="centerX" id="HGS-kN-xHl"/>
                             <constraint firstAttribute="trailing" secondItem="5Xz-kH-D38" secondAttribute="trailing" id="IG5-Zi-Zgt"/>
                             <constraint firstItem="5Xz-kH-D38" firstAttribute="leading" secondItem="kKz-r4-rUW" secondAttribute="leading" id="Ix4-Mt-RGo"/>
                             <constraint firstItem="nAF-uW-4ao" firstAttribute="centerY" secondItem="kKz-r4-rUW" secondAttribute="centerY" id="WkW-sQ-fRH"/>
-                            <constraint firstItem="L5d-ss-wZH" firstAttribute="top" secondItem="eiZ-Gg-gto" secondAttribute="bottom" id="hMt-8c-rDF"/>
                             <constraint firstItem="L5d-ss-wZH" firstAttribute="top" secondItem="5Xz-kH-D38" secondAttribute="bottom" id="hbd-z1-9NJ"/>
                         </constraints>
                     </view>
@@ -131,14 +86,11 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="imageTopConstraint" destination="eM7-pw-6ee" id="eXe-h5-XZZ"/>
                         <outlet property="loaderView" destination="nAF-uW-4ao" id="kUA-bO-daP"/>
-                        <outlet property="nextButton" destination="9ty-6P-4pf" id="hYB-ec-HRd"/>
-                        <outlet property="previousButton" destination="YIQ-WR-aab" id="3ud-XS-Uk6"/>
-                        <outlet property="randomButton" destination="1lh-Qm-eUx" id="kLy-Fv-3Cg"/>
                         <outlet property="scrollView" destination="5Xz-kH-D38" id="DTz-Vx-O8E"/>
                         <outlet property="showFavoritesButton" destination="jtG-7f-OYn" id="Jpy-1b-HUY"/>
                         <outlet property="toggleFavoriteButton" destination="JWV-6E-O5i" id="IbF-GN-WqK"/>
-                        <outlet property="toolbar" destination="eiZ-Gg-gto" id="3Of-b6-7Zs"/>
                         <outlet property="view" destination="kKz-r4-rUW" id="8eG-qf-7g0"/>
                     </connections>
                 </viewController>
