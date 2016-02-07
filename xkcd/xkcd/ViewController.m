@@ -81,20 +81,11 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 
 #pragma mark - Notifications
 
-- (void) addNotificationObservers {
-  [[NSNotificationCenter defaultCenter] addObserver:self
-                                           selector:@selector(handleOrientationChangeNotification:)
-                                               name:UIDeviceOrientationDidChangeNotification
-                                             object:nil];
-  
+- (void) addNotificationObservers {  
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(handleShowComicNotification:)
                                                name:ShowComicNotification
                                              object:nil];
-}
-
-- (void) handleOrientationChangeNotification:(NSNotification*)notification {
-//  [self setScrollViewInsets];
 }
 
 - (void) handleShowComicNotification:(NSNotification*)notification {
@@ -273,13 +264,11 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   UIImage *image = [UIImage imageWithData:comic.image];
   if (image) {
     [self.scrollView setImage:image];
-//    [self setScrollViewInsets];
     return;
   }
   __weak ViewController *weakSelf = self;
   [comic getImage:^(UIImage * _Nonnull image) {
     [weakSelf.scrollView setImage:image];
-//    [weakSelf setScrollViewInsets];
   }];
   
   //hoverboard
