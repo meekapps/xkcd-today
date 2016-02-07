@@ -52,6 +52,8 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
     NSNumber *index = self.launchIndex ? self.launchIndex : nil;
     [self loadComicWithIndex:index];
   });
+  
+  [self setScrollViewInsets];
 }
 
 - (void) didReceiveMemoryWarning {
@@ -89,7 +91,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 }
 
 - (void) handleOrientationChangeNotification:(NSNotification*)notification {
-  [self setScrollViewInsets];
+//  [self setScrollViewInsets];
 }
 
 - (void) handleShowComicNotification:(NSNotification*)notification {
@@ -220,10 +222,12 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 //Sets UIEdgeInsets propert to on scroll view with current orientation bar sizes.
 - (void) setScrollViewInsets {
   CGFloat navBarHeight = self.navigationController.navigationBar.bounds.size.height;
-  CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+  BOOL statusBarHidden = [UIApplication sharedApplication].statusBarHidden;
+  CGFloat statusBarHeight = statusBarHidden ? 0.0F : [UIApplication sharedApplication].statusBarFrame.size.height;
   CGFloat topBarsHeight = navBarHeight + statusBarHeight;
-  CGFloat toolbarHeight = self.navigationController.toolbar.bounds.size.height;
-  self.scrollView.barInsets = UIEdgeInsetsMake(topBarsHeight, 0.0F, toolbarHeight, 0.0F);
+  self.scrollView.barInsets = UIEdgeInsetsMake(topBarsHeight, 0.0F, 0.0F, 0.0F);
+  
+  self.imageTopConstraint.constant = topBarsHeight;
 }
 
 //update the favorites button
@@ -266,13 +270,13 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   UIImage *image = [UIImage imageWithData:comic.image];
   if (image) {
     [self.scrollView setImage:image];
-    [self setScrollViewInsets];
+//    [self setScrollViewInsets];
     return;
   }
   __weak ViewController *weakSelf = self;
   [comic getImage:^(UIImage * _Nonnull image) {
     [weakSelf.scrollView setImage:image];
-    [weakSelf setScrollViewInsets];
+//    [weakSelf setScrollViewInsets];
   }];
   
   //hoverboard

@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
@@ -36,7 +35,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="5Xz-kH-D38" customClass="ComicScrollView">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="5Xz-kH-D38" customClass="ComicScrollView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="97a-9u-Nb9">
@@ -50,7 +49,7 @@
                                 <constraints>
                                     <constraint firstItem="97a-9u-Nb9" firstAttribute="leading" secondItem="5Xz-kH-D38" secondAttribute="leading" id="00r-sd-XXs"/>
                                     <constraint firstAttribute="trailing" secondItem="97a-9u-Nb9" secondAttribute="trailing" id="9uR-V2-pX5"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="97a-9u-Nb9" secondAttribute="bottom" constant="8" id="B55-vw-omq"/>
+                                    <constraint firstAttribute="bottom" secondItem="97a-9u-Nb9" secondAttribute="bottom" id="Ay5-X2-6gH"/>
                                     <constraint firstItem="97a-9u-Nb9" firstAttribute="top" secondItem="5Xz-kH-D38" secondAttribute="top" constant="64" id="eM7-pw-6ee"/>
                                 </constraints>
                                 <connections>
@@ -87,6 +86,7 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="imageTopConstraint" destination="eM7-pw-6ee" id="eXe-h5-XZZ"/>
                         <outlet property="loaderView" destination="nAF-uW-4ao" id="kUA-bO-daP"/>
                         <outlet property="scrollView" destination="5Xz-kH-D38" id="DTz-Vx-O8E"/>
                         <outlet property="showFavoritesButton" destination="jtG-7f-OYn" id="Jpy-1b-HUY"/>
