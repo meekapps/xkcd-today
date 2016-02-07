@@ -98,6 +98,7 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
 
 - (void) updatePreferredSize {
   CGFloat height = MAX(200.0F, self.imageView.bounds.size.height);
+  height = MAX(400.0F, height);
   self.preferredContentSize = CGSizeMake(self.view.bounds.size.width, height);
 }
 
