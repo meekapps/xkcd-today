@@ -70,6 +70,9 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   _loading = loading;
   
   self.loaderView.hidden = !loading;
+  self.previousButton.enabled = !loading;
+  self.randomButton.enabled = !loading;
+  self.nextButton.enabled = !loading;
   
   if (loading) {
     [self clearViews];
