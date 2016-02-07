@@ -10,6 +10,7 @@
 
 @interface UIImage (XKCD)
 
-+ (UIImage*) heartImage:(BOOL)filled;
++ (UIImage*) heartImageFilled:(BOOL)filled
+                    landscape:(BOOL)landscape;
 
 @end

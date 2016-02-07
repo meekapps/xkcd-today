@@ -229,14 +229,16 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 //update the favorites button
 - (void) updateToggleFavoritesButton:(XKCDComic*)comic {
   BOOL favorite = comic.favorite != nil;
-  self.toggleFavoriteButton.image = [UIImage heartImage:favorite];
+  self.toggleFavoriteButton.image = [UIImage heartImageFilled:favorite landscape:NO];
+  self.toggleFavoriteButton.landscapeImagePhone = [UIImage heartImageFilled:favorite landscape:YES];
   self.toggleFavoriteButton.enabled = YES;
 }
 
 - (void) clearViews {
   self.title = nil;
   self.toggleFavoriteButton.enabled = NO;
-  self.toggleFavoriteButton.image = [UIImage heartImage:NO];
+  self.toggleFavoriteButton.image = [UIImage heartImageFilled:NO landscape:NO];
+  self.toggleFavoriteButton.landscapeImagePhone = [UIImage heartImageFilled:NO landscape:YES];
   [self.scrollView setImage:nil];
 }
 
