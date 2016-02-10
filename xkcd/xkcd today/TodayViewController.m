@@ -6,6 +6,7 @@
 //  Copyright © 2016 Meek Apps. All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
 #import "TodayViewController.h"
 #import "PersistenceManager.h"
 #import <NotificationCenter/NotificationCenter.h>
@@ -14,6 +15,7 @@
 #import "XKCD.h"
 
 static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
+static CGFloat const kMaxHeight = 360.0F;
 
 @interface TodayViewController () <NCWidgetProviding>
 @end
@@ -24,6 +26,7 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  self.imageView.translatesAutoresizingMaskIntoConstraints = NO;
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -50,14 +53,15 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
   
   //Fetch most recent persisted comic from Core Data.
   __weak TodayViewController *weakSelf = self;
-  XKCDComic *fetchedComic = [[XKCD sharedInstance] fetchLatestComic];
+  XKCDComic *fetchedComic = [[XKCD sharedInstance] fetchComicWithIndex:nil];
     
   if (fetchedComic) {
     [weakSelf updateViewsWithComic:fetchedComic];
   }
   
   //GET latest comic from HTTP request, update UI if it is new.
-  [[XKCD sharedInstance] getLatestComic:^(XKCDComic *httpComic) {
+  [[XKCD sharedInstance] getComicWithIndex:@(1636)
+                                completion:^(XKCDComic *httpComic) {
     NCUpdateResult updateResult = NCUpdateResultFailed;
     
     if (![fetchedComic.index equals:httpComic.index]) {
@@ -85,20 +89,28 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
       self.imageView.image = cachedImage;
       [self updatePreferredSize];
       return;
+      
     }
   }
   
   //Image
   __weak TodayViewController *weakSelf = self;
+  
   [comic getImage:^(UIImage * _Nonnull image) {
     weakSelf.imageView.image = image;
     [weakSelf updatePreferredSize];
   }];
 }
 
+
 - (void) updatePreferredSize {
-  CGFloat height = MAX(200.0F, self.imageView.bounds.size.height);
-  self.preferredContentSize = CGSizeMake(self.view.bounds.size.width, height);
+  CGRect imageRect = AVMakeRectWithAspectRatioInsideRect(self.imageView.image.size,
+                                                         CGRectMake(0.0F,
+                                                                    0.0F,
+                                                                    self.imageView.bounds.size.width,
+                                                                    kMaxHeight));
+  imageRect.size.height += self.imageView.frame.origin.y;
+  self.preferredContentSize = imageRect.size;
 }
 
 @end
