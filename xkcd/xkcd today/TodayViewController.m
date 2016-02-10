@@ -60,7 +60,7 @@ static CGFloat const kMaxHeight = 360.0F;
   }
   
   //GET latest comic from HTTP request, update UI if it is new.
-  [[XKCD sharedInstance] getComicWithIndex:@(1636)
+  [[XKCD sharedInstance] getComicWithIndex:nil
                                 completion:^(XKCDComic *httpComic) {
     NCUpdateResult updateResult = NCUpdateResultFailed;
     
@@ -104,6 +104,8 @@ static CGFloat const kMaxHeight = 360.0F;
 
 
 - (void) updatePreferredSize {
+  //Use scaled content size for preferredContentSize. Theoretically this should "just work" without
+  // doing this. But it don't.
   CGRect imageRect = AVMakeRectWithAspectRatioInsideRect(self.imageView.image.size,
                                                          CGRectMake(0.0F,
                                                                     0.0F,
