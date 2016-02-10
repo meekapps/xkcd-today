@@ -15,7 +15,6 @@
 #import "XKCD.h"
 
 static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
-static CGFloat const kMaxHeight = 360.0F;
 
 @interface TodayViewController () <NCWidgetProviding>
 @end
@@ -37,6 +36,12 @@ static CGFloat const kMaxHeight = 360.0F;
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
+}
+
+- (void) widgetPerformUpdateWithCompletionHandler:(void (^)(NCUpdateResult))completionHandler {
+  [self loadLatestWithCompletion:^(NCUpdateResult updateResult) {
+    completionHandler(updateResult);
+  }];
 }
 
 #pragma mark - Actions
@@ -87,9 +92,7 @@ static CGFloat const kMaxHeight = 360.0F;
     UIImage *cachedImage = [UIImage imageWithData:cachedImageData];
     if (cachedImage) {
       self.imageView.image = cachedImage;
-      [self updatePreferredSize];
       return;
-      
     }
   }
   
@@ -98,21 +101,7 @@ static CGFloat const kMaxHeight = 360.0F;
   
   [comic getImage:^(UIImage * _Nonnull image) {
     weakSelf.imageView.image = image;
-    [weakSelf updatePreferredSize];
   }];
-}
-
-
-- (void) updatePreferredSize {
-  //Use scaled content size for preferredContentSize. Theoretically this should "just work" without
-  // doing this. But it don't.
-  CGRect imageRect = AVMakeRectWithAspectRatioInsideRect(self.imageView.image.size,
-                                                         CGRectMake(0.0F,
-                                                                    0.0F,
-                                                                    self.imageView.bounds.size.width,
-                                                                    kMaxHeight));
-  imageRect.size.height += self.imageView.frame.origin.y;
-  self.preferredContentSize = imageRect.size;
 }
 
 @end
