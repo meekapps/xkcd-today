@@ -86,6 +86,7 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
                                   
                                   //new comic
                                   if (![fetchedComic.index equals:httpComic.index]) {
+                                    weakSelf.currentComic = httpComic;
                                     [weakSelf updateViewsWithComic:httpComic];
                                     completion(NCUpdateResultNewData);
                                     
