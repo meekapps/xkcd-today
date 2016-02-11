@@ -7,9 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "PersistenceManager.h"
 #import "ShortcutsManager.h"
 #import "SpotlightManager.h"
-#import "PersistenceManager.h"
+#import "TodayViewManager.h"
 
 @interface AppDelegate ()
 @end
@@ -21,7 +22,9 @@
   self.window.tintColor = [UIColor blackColor];
   
   if (![[ShortcutsManager sharedManager] handleLaunchOptions:launchOptions]) {
-    [[SpotlightManager sharedManager] handleLaunchOptions:launchOptions];
+    if (![[SpotlightManager sharedManager] handleLaunchOptions:launchOptions]) {
+      [[TodayViewManager sharedManager] handleLaunchOptions:launchOptions];
+    }
   }
   
   return YES;
@@ -54,6 +57,12 @@ continueUserActivity:(NSUserActivity *)userActivity
 performActionForShortcutItem:(nonnull UIApplicationShortcutItem *)shortcutItem
    completionHandler:(nonnull void (^)(BOOL))completionHandler {
   completionHandler([[ShortcutsManager sharedManager] handleLaunchObject:shortcutItem]);
+}
+
+- (BOOL) application:(UIApplication *)app
+             openURL:(NSURL *)url
+             options:(NSDictionary<NSString *,id> *)options {
+  return [[TodayViewManager sharedManager] handleLaunchObject:url];
 }
 
 @end

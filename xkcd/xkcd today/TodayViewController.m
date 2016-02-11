@@ -17,6 +17,7 @@
 static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
 
 @interface TodayViewController () <NCWidgetProviding>
+@property (strong, nonatomic) XKCDComic *currentComic;
 @end
 
 #pragma mark - Lifecycle
@@ -25,7 +26,6 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  self.imageView.translatesAutoresizingMaskIntoConstraints = NO;
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -47,8 +47,14 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
 #pragma mark - Actions
 
 - (IBAction)tappedView:(id)sender {
-  NSURL *containerAppUrl = [NSURL URLWithString:kContainerAppUrlScheme];
-  [self.extensionContext openURL:containerAppUrl completionHandler:^(BOOL success) {}];
+  //e.g. xkcd-today://1636
+  NSString *urlString = self.currentComic.index ?
+  [NSString stringWithFormat:@"%@%@", kContainerAppUrlScheme, self.currentComic.index]
+  : kContainerAppUrlScheme;
+  
+  NSURL *containerAppUrl = [NSURL URLWithString:urlString];
+  [self.extensionContext openURL:containerAppUrl
+               completionHandler:^(BOOL success) {}];
 }
 
 #pragma mark - Private
@@ -61,20 +67,28 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
   XKCDComic *fetchedComic = [[XKCD sharedInstance] fetchComicWithIndex:nil];
     
   if (fetchedComic) {
+    self.currentComic = fetchedComic;
     [weakSelf updateViewsWithComic:fetchedComic];
   }
   
   //GET latest comic from HTTP request, update UI if it is new.
   [[XKCD sharedInstance] getComicWithIndex:nil
                                 completion:^(XKCDComic *httpComic) {
-    NCUpdateResult updateResult = NCUpdateResultFailed;
-    
-    if (![fetchedComic.index equals:httpComic.index]) {
-      [weakSelf updateViewsWithComic:httpComic];
-      updateResult = NCUpdateResultNewData;
-    }
-    
-    completion(updateResult);
+                                  
+                                  //no comic, fail
+                                  if (!httpComic) {
+                                    completion(NCUpdateResultFailed);
+                                    return;
+                                  }
+                                  
+                                  //new comic
+                                  if (![fetchedComic.index equals:httpComic.index]) {
+                                    [weakSelf updateViewsWithComic:httpComic];
+                                    completion(NCUpdateResultNewData);
+                                    
+                                  } else {
+                                    completion(NCUpdateResultNoData);
+                                  }
   }];
 }
 
