@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		41075C061C6C077600E18573 /* TodayViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 41075C051C6C077600E18573 /* TodayViewManager.m */; };
+		41075C091C6C0F8900E18573 /* NSDate+ShortDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 41075C081C6C0F8900E18573 /* NSDate+ShortDate.m */; };
+		41075C0A1C6C0FD100E18573 /* NSDate+ShortDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 41075C081C6C0F8900E18573 /* NSDate+ShortDate.m */; };
 		4121915B1C5C624E0005971C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4121915A1C5C624E0005971C /* main.m */; };
 		4121915E1C5C624E0005971C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4121915D1C5C624E0005971C /* AppDelegate.m */; };
 		412191611C5C624E0005971C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191601C5C624E0005971C /* ViewController.m */; };
@@ -88,6 +90,8 @@
 /* Begin PBXFileReference section */
 		41075C041C6C077600E18573 /* TodayViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayViewManager.h; sourceTree = "<group>"; };
 		41075C051C6C077600E18573 /* TodayViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayViewManager.m; sourceTree = "<group>"; };
+		41075C071C6C0F8900E18573 /* NSDate+ShortDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ShortDate.h"; sourceTree = "<group>"; };
+		41075C081C6C0F8900E18573 /* NSDate+ShortDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ShortDate.m"; sourceTree = "<group>"; };
 		412191561C5C624E0005971C /* xkcd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = xkcd.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4121915A1C5C624E0005971C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4121915C1C5C624E0005971C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -305,6 +309,8 @@
 		412191A61C5C68370005971C /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				41075C071C6C0F8900E18573 /* NSDate+ShortDate.h */,
+				41075C081C6C0F8900E18573 /* NSDate+ShortDate.m */,
 				4142079F1C5D4998009853D7 /* NSNumber+Operations.h */,
 				414207A01C5D4998009853D7 /* NSNumber+Operations.m */,
 				41E025771C66A67500235CAA /* UIAlertController+SimpleAction.h */,
@@ -524,6 +530,7 @@
 				412191A21C5C64F20005971C /* XKCD.m in Sources */,
 				41FD61D21C61C8C10096C39F /* FavoritesViewController.m in Sources */,
 				414207A11C5D4998009853D7 /* NSNumber+Operations.m in Sources */,
+				41075C091C6C0F8900E18573 /* NSDate+ShortDate.m in Sources */,
 				412E38E71C63A4BF00EB5B0D /* UIImage+XKCD.m in Sources */,
 				41FD61C41C61B5230096C39F /* ShortcutsManager.m in Sources */,
 				417062A31C606FC30003A3FD /* SpotlightManager.m in Sources */,
@@ -565,6 +572,7 @@
 				4142079B1C5D28F5009853D7 /* PersistenceManager.m in Sources */,
 				414207991C5D284F009853D7 /* XKCD.m in Sources */,
 				412191B81C5D12720005971C /* TodayViewController.m in Sources */,
+				41075C0A1C6C0FD100E18573 /* NSDate+ShortDate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

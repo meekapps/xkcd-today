@@ -24,9 +24,6 @@ static CGFloat const kDefaultPadding = 10.0F;
     tapRecognizer.numberOfTapsRequired = 2;
     [self addGestureRecognizer:tapRecognizer];
     
-    self.translatesAutoresizingMaskIntoConstraints = NO;
-    self.comicImageView.translatesAutoresizingMaskIntoConstraints = NO;
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateZoomLevels)
                                                  name:UIDeviceOrientationDidChangeNotification
@@ -44,7 +41,6 @@ static CGFloat const kDefaultPadding = 10.0F;
 - (void) setImage:(UIImage*)image {
 
   self.comicImageView.image = image;
-  self.contentSize = image.size;
 
   [self updateZoomLevels];
   [self centerContent];

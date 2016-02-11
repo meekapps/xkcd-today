@@ -7,10 +7,11 @@
 //
 
 #import <AVFoundation/AVFoundation.h>
-#import "TodayViewController.h"
-#import "PersistenceManager.h"
+#import "NSDate+ShortDate.h"
 #import <NotificationCenter/NotificationCenter.h>
 #import "NSNumber+Operations.h"
+#import "PersistenceManager.h"
+#import "TodayViewController.h"
 #import "UIImage+AsyncImage.h"
 #import "XKCD.h"
 
@@ -26,6 +27,8 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  self.titleLabel.text = @"loading";
+  self.dateLabel.text = nil;
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -98,6 +101,12 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
   NSString *title = comic.title;
   if (title) {
     self.titleLabel.text = title;
+  }
+  
+  //Date
+  NSString *dateString = [comic.date shortDate];
+  if (dateString) {
+    self.dateLabel.text = dateString;
   }
   
   //Image

@@ -106,7 +106,7 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
   fetchRequest.sortDescriptors = @[sortDescriptor];
   fetchRequest.fetchLimit = 1;
 
-  //Fetch explicit index if argument is passed - fetches highgest index (newest) otherwise.
+  //Fetch explicit index if argument is passed - fetches highest index (newest) otherwise.
   if (index) {
     fetchRequest.predicate = [NSPredicate predicateWithFormat:@"index == %@", index, nil];
   }

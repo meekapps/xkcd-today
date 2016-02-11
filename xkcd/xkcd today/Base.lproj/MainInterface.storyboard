@@ -15,13 +15,13 @@
                         <viewControllerLayoutGuide type="bottom" id="FKl-LY-JtV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="400"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="429"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jup-9z-opz">
-                                <rect key="frame" x="16" y="37" width="280" height="355"/>
+                                <rect key="frame" x="16" y="37" width="280" height="359"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="xkcd" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="GcN-lo-r42">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="loading" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="GcN-lo-r42">
                                 <rect key="frame" x="16" y="8" width="278" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="2GL-Pg-fEy"/>
@@ -30,16 +30,25 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ui7-qt-itD">
+                                <rect key="frame" x="16" y="404" width="284" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="ui7-qt-itD" secondAttribute="bottom" priority="250" constant="8" id="279-rX-PMu"/>
                             <constraint firstItem="jup-9z-opz" firstAttribute="top" secondItem="GcN-lo-r42" secondAttribute="bottom" constant="8" id="3k0-Zu-MaX"/>
-                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="jup-9z-opz" secondAttribute="bottom" constant="8" symbolic="YES" id="AmK-mS-zJU"/>
+                            <constraint firstItem="ui7-qt-itD" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="57K-Ok-Bkp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="jup-9z-opz" secondAttribute="trailing" constant="8" id="AnC-ew-0D6"/>
                             <constraint firstItem="jup-9z-opz" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="IAQ-nI-qIa"/>
                             <constraint firstItem="GcN-lo-r42" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="MqG-iG-dsg"/>
                             <constraint firstItem="GcN-lo-r42" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="8" id="Uap-9S-usg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="GcN-lo-r42" secondAttribute="trailing" constant="10" id="hKx-Qf-EY8"/>
+                            <constraint firstItem="ui7-qt-itD" firstAttribute="top" secondItem="jup-9z-opz" secondAttribute="bottom" constant="8" id="hPp-jP-eXr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ui7-qt-itD" secondAttribute="trailing" constant="4" id="wWU-5e-QkP"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="SAa-jq-CxU" appends="YES" id="ka9-kl-bL7"/>
@@ -50,8 +59,9 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="400"/>
+                    <size key="freeformSize" width="320" height="429"/>
                     <connections>
+                        <outlet property="dateLabel" destination="ui7-qt-itD" id="lEJ-sp-sgl"/>
                         <outlet property="imageView" destination="jup-9z-opz" id="PPn-QU-dKe"/>
                         <outlet property="titleLabel" destination="GcN-lo-r42" id="sMt-hZ-Wo3"/>
                     </connections>
@@ -63,7 +73,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="516" y="285"/>
+            <point key="canvasLocation" x="516" y="284.5"/>
         </scene>
     </scenes>
 </document>
