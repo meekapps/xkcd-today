@@ -26,7 +26,7 @@
       [[TodayViewManager sharedManager] handleLaunchOptions:launchOptions];
     }
   }
-  
+
   return YES;
 }
 
