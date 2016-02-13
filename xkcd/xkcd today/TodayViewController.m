@@ -27,14 +27,20 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  self.titleLabel.text = @"loading";
-  self.dateLabel.text = nil;
 }
 
 - (void) viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
   
-  [self loadLatestWithCompletion:^(NCUpdateResult updateResult) {}];
+  //Fetch most recent persisted comic from Core Data.
+  __weak TodayViewController *weakSelf = self;
+  XKCDComic *fetchedComic = [[XKCD sharedInstance] fetchComicWithIndex:nil];
+  
+  if (fetchedComic) {
+    self.currentComic = fetchedComic;
+    [weakSelf updateViewsWithComic:fetchedComic];
+  }
+  
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,18 +69,9 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
 #pragma mark - Private
 
 - (void) loadLatestWithCompletion:(void(^)(NCUpdateResult updateResult))completion {
-  self.titleLabel.text = nil;
-  
-  //Fetch most recent persisted comic from Core Data.
-  __weak TodayViewController *weakSelf = self;
-  XKCDComic *fetchedComic = [[XKCD sharedInstance] fetchComicWithIndex:nil];
-    
-  if (fetchedComic) {
-    self.currentComic = fetchedComic;
-    [weakSelf updateViewsWithComic:fetchedComic];
-  }
   
   //GET latest comic from HTTP request, update UI if it is new.
+  __weak TodayViewController *weakSelf = self;
   [[XKCD sharedInstance] getComicWithIndex:nil
                                 completion:^(XKCDComic *httpComic) {
                                   
@@ -85,7 +82,7 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
                                   }
                                   
                                   //new comic
-                                  if (![fetchedComic.index equals:httpComic.index]) {
+                                  if (![weakSelf.currentComic.index equals:httpComic.index]) {
                                     weakSelf.currentComic = httpComic;
                                     [weakSelf updateViewsWithComic:httpComic];
                                     completion(NCUpdateResultNewData);
@@ -103,19 +100,14 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
   if (title) {
     self.titleLabel.text = title;
   }
-  
-  //Date
-  NSString *dateString = [comic.date shortDate];
-  if (dateString) {
-    self.dateLabel.text = dateString;
-  }
-  
+
   //Image
   NSData *cachedImageData = comic.image;
   if (cachedImageData) {
     UIImage *cachedImage = [UIImage imageWithData:cachedImageData];
     if (cachedImage) {
       self.imageView.image = cachedImage;
+      [self updateContentHeight];
       return;
     }
   }
@@ -125,7 +117,18 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
   
   [comic getImage:^(UIImage * _Nonnull image) {
     weakSelf.imageView.image = image;
+    [weakSelf updateContentHeight];
   }];
+}
+
+- (void) updateContentHeight {
+  CGFloat kMaxHeight = 300.0F;
+  CGRect boundingRect = CGRectMake(0.0F, 0.0F, self.view.bounds.size.width, kMaxHeight);
+  CGRect contentFrame = AVMakeRectWithAspectRatioInsideRect(self.imageView.image.size, boundingRect);
+  contentFrame.size.height += self.imageView.frame.origin.y + self.view.layoutMargins.bottom;
+  self.preferredContentSize = contentFrame.size;
+  
+  NSLog(@"image height: %f, bounding height: %f, content height: %f", self.imageView.image.size.height,  boundingRect.size.height, contentFrame.size.height);
 }
 
 @end
