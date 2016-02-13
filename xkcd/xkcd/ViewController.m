@@ -6,9 +6,11 @@
 //  Copyright © 2016 meek apps. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "LaunchManager.h"
 #import "NSNumber+Operations.h"
 #import "PersistenceManager.h"
+#import "Reachability.h"
 #import "ViewController.h"
 #import "UIAlertController+SimpleAction.h"
 #import "UIColor+XKCD.h"
@@ -54,10 +56,6 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   });
   
   [self setScrollViewInsets];
-}
-
-- (void) didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];
 }
 
 - (void) dealloc {
@@ -186,6 +184,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 //Load comic with index. Attempts local Core Data load, if fails, performs HTTP request.
 - (void) loadComicWithIndex:(NSNumber*)index {
   
+  
   self.loading = YES;
   
   __weak ViewController *weakSelf = self;
@@ -204,13 +203,26 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   if (fetchedComic) {
     finalizeWithComic(fetchedComic);
                                       
-  //Not in Core Data, get from http.
+  //Not in Core Data, get from http if you have a network connection.
   } else {
+    
+    //Return early and show error if not reachable.
+    BOOL reachable = [self isReachable];
+    if (!reachable) {
+      self.noNetworkLabel.hidden = NO;
+      self.loading = NO;
+      return;
+    }
+    
     [[XKCD sharedInstance] getComicWithIndex:index
                                   completion:^(XKCDComic *comic) {
                                     finalizeWithComic(comic);
                                   }];
   }
+}
+
+- (BOOL) isReachable {
+  return [Reachability reachabilityForInternetConnection].currentReachabilityStatus != NotReachable;
 }
 
 //Sets UIEdgeInsets propert to on scroll view with current orientation bar sizes.
@@ -234,6 +246,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 
 - (void) clearViews {
   self.title = nil;
+  self.noNetworkLabel.hidden = YES;
   self.toggleFavoriteButton.enabled = NO;
   self.toggleFavoriteButton.image = [UIImage heartImageFilled:NO landscape:NO];
   self.toggleFavoriteButton.landscapeImagePhone = [UIImage heartImageFilled:NO landscape:YES];
@@ -242,6 +255,9 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 
 - (void) updateViewsWithComic:(XKCDComic*)comic {
   if (!comic) return;
+  
+  //hide no network error.
+  self.noNetworkLabel.hidden = YES;
   
   //nav bar title
   self.title = comic.title;

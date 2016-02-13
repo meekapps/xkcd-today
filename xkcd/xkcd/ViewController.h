@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *toggleFavoriteButton, *showFavoritesButton;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loaderView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageTopConstraint;
+@property (weak, nonatomic) IBOutlet UILabel *noNetworkLabel;
 
 - (IBAction) toggleFavoriteAction:(id)sender;
 - (IBAction) showFavoritesAction:(id)sender;

@@ -59,6 +59,12 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="nAF-uW-4ao">
                                 <rect key="frame" x="177" y="324" width="20" height="20"/>
                             </activityIndicatorView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No network connection." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dtg-27-hne">
+                                <rect key="frame" x="96" y="323" width="183" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -88,6 +94,7 @@
                     <connections>
                         <outlet property="imageTopConstraint" destination="eM7-pw-6ee" id="eXe-h5-XZZ"/>
                         <outlet property="loaderView" destination="nAF-uW-4ao" id="kUA-bO-daP"/>
+                        <outlet property="noNetworkLabel" destination="Dtg-27-hne" id="84M-nS-xpE"/>
                         <outlet property="scrollView" destination="5Xz-kH-D38" id="DTz-Vx-O8E"/>
                         <outlet property="showFavoritesButton" destination="jtG-7f-OYn" id="Jpy-1b-HUY"/>
                         <outlet property="toggleFavoriteButton" destination="JWV-6E-O5i" id="IbF-GN-WqK"/>

@@ -10,6 +10,7 @@
 		41075C061C6C077600E18573 /* TodayViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 41075C051C6C077600E18573 /* TodayViewManager.m */; };
 		41075C091C6C0F8900E18573 /* NSDate+ShortDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 41075C081C6C0F8900E18573 /* NSDate+ShortDate.m */; };
 		41075C0A1C6C0FD100E18573 /* NSDate+ShortDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 41075C081C6C0F8900E18573 /* NSDate+ShortDate.m */; };
+		410DF1A11C6FEFF4000A19F6 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 410DF1A01C6FEFF4000A19F6 /* Reachability.m */; };
 		4121915B1C5C624E0005971C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4121915A1C5C624E0005971C /* main.m */; };
 		4121915E1C5C624E0005971C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4121915D1C5C624E0005971C /* AppDelegate.m */; };
 		412191611C5C624E0005971C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191601C5C624E0005971C /* ViewController.m */; };
@@ -92,6 +93,8 @@
 		41075C051C6C077600E18573 /* TodayViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayViewManager.m; sourceTree = "<group>"; };
 		41075C071C6C0F8900E18573 /* NSDate+ShortDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ShortDate.h"; sourceTree = "<group>"; };
 		41075C081C6C0F8900E18573 /* NSDate+ShortDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ShortDate.m"; sourceTree = "<group>"; };
+		410DF19F1C6FEFF4000A19F6 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		410DF1A01C6FEFF4000A19F6 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		412191561C5C624E0005971C /* xkcd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = xkcd.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4121915A1C5C624E0005971C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4121915C1C5C624E0005971C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -279,6 +282,8 @@
 				417062991C606E2F0003A3FD /* LaunchManager.m */,
 				4121919D1C5C643B0005971C /* PersistenceManager.h */,
 				4121919E1C5C643B0005971C /* PersistenceManager.m */,
+				410DF19F1C6FEFF4000A19F6 /* Reachability.h */,
+				410DF1A01C6FEFF4000A19F6 /* Reachability.m */,
 				41FD61C21C61B5230096C39F /* ShortcutsManager.h */,
 				41FD61C31C61B5230096C39F /* ShortcutsManager.m */,
 				417062A11C606FC30003A3FD /* SpotlightManager.h */,
@@ -533,6 +538,7 @@
 				41075C091C6C0F8900E18573 /* NSDate+ShortDate.m in Sources */,
 				412E38E71C63A4BF00EB5B0D /* UIImage+XKCD.m in Sources */,
 				41FD61C41C61B5230096C39F /* ShortcutsManager.m in Sources */,
+				410DF1A11C6FEFF4000A19F6 /* Reachability.m in Sources */,
 				417062A31C606FC30003A3FD /* SpotlightManager.m in Sources */,
 				412191671C5C624E0005971C /* xkcd.xcdatamodeld in Sources */,
 				4121919F1C5C643B0005971C /* PersistenceManager.m in Sources */,
