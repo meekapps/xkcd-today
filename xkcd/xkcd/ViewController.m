@@ -86,7 +86,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
                                              object:nil];
   
   [[NSNotificationCenter defaultCenter] addObserver:self
-                                           selector:@selector(handleDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification
+                                           selector:@selector(handleWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification
                                              object:nil];
 }
 
@@ -102,7 +102,8 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   }
 }
 
-- (void) handleDidBecomeActive:(NSNotification*)notification {
+//Update layouts when re-entering foreground.
+- (void) handleWillEnterForeground:(NSNotification*)notification {
   [self setScrollViewInsets];
   
   NSNumber *index = nil;
