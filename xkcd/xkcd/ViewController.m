@@ -84,6 +84,10 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
                                            selector:@selector(handleShowComicNotification:)
                                                name:ShowComicNotification
                                              object:nil];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(handleDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification
+                                             object:nil];
 }
 
 - (void) handleShowComicNotification:(NSNotification*)notification {
@@ -96,6 +100,18 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
     NSNumber *index = self.launchIndex ? self.launchIndex : nil;
     [self loadComicWithIndex:index];
   }
+}
+
+- (void) handleDidBecomeActive:(NSNotification*)notification {
+  [self setScrollViewInsets];
+  
+  NSNumber *index = nil;
+  if (self.launchIndex) {
+    index = self.launchIndex;
+  } else if (self.currentComic) {
+    index = self.currentComic.index;
+  }
+  [self loadComicWithIndex:index];
 }
 
 #pragma mark - Actions
