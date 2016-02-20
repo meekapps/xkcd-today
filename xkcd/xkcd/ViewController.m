@@ -219,23 +219,21 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   //Fetched comic from Core Data
   if (fetchedComic) {
     finalizeWithComic(fetchedComic);
-                                      
-  //Not in Core Data, get from http if you have a network connection.
-  } else {
-    
-    //Return early and show error if not reachable.
-    BOOL reachable = [self isReachable];
-    if (!reachable) {
-      self.noNetworkLabel.hidden = NO;
-      self.loading = NO;
-      return;
-    }
-    
-    [[XKCD sharedInstance] getComicWithIndex:index
-                                  completion:^(XKCDComic *comic) {
-                                    finalizeWithComic(comic);
-                                  }];
   }
+  
+  //Get from http if you have a network connection.
+  //Return early and show error if not reachable.
+  BOOL reachable = [self isReachable];
+  if (!reachable) {
+    self.noNetworkLabel.hidden = NO;
+    self.loading = NO;
+    return;
+  }
+  
+  [[XKCD sharedInstance] getComicWithIndex:index
+                                completion:^(XKCDComic *comic) {
+                                  finalizeWithComic(comic);
+                                }];
 }
 
 - (BOOL) isReachable {
