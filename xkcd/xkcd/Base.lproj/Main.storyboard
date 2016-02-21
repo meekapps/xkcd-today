@@ -77,6 +77,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="HoG-Kd-eFH">
+                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="8JJ-bF-ZLc">
+                            <connections>
+                                <action selector="shareAction:" destination="VAm-ex-Dun" id="jUX-Hb-dck"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="bookmarks" id="jtG-7f-OYn">
                                 <connections>
@@ -96,6 +101,7 @@
                         <outlet property="loaderView" destination="nAF-uW-4ao" id="kUA-bO-daP"/>
                         <outlet property="noNetworkLabel" destination="Dtg-27-hne" id="84M-nS-xpE"/>
                         <outlet property="scrollView" destination="5Xz-kH-D38" id="DTz-Vx-O8E"/>
+                        <outlet property="shareButton" destination="8JJ-bF-ZLc" id="0j6-Mi-EDh"/>
                         <outlet property="showFavoritesButton" destination="jtG-7f-OYn" id="Jpy-1b-HUY"/>
                         <outlet property="toggleFavoriteButton" destination="JWV-6E-O5i" id="IbF-GN-WqK"/>
                         <outlet property="view" destination="kKz-r4-rUW" id="8eG-qf-7g0"/>

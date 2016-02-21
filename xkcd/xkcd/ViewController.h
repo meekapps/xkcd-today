@@ -13,11 +13,12 @@
 @interface ViewController : UIViewController <FavoritesViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet ComicScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *toggleFavoriteButton, *showFavoritesButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *shareButton, *toggleFavoriteButton, *showFavoritesButton;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loaderView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageTopConstraint;
 @property (weak, nonatomic) IBOutlet UILabel *noNetworkLabel;
 
+- (IBAction) shareAction:(id)sender;
 - (IBAction) toggleFavoriteAction:(id)sender;
 - (IBAction) showFavoritesAction:(id)sender;
 
