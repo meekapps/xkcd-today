@@ -11,6 +11,7 @@
 #import "NSNumber+Operations.h"
 #import "PersistenceManager.h"
 #import "Reachability.h"
+#import "ShareController.h"
 #import "ViewController.h"
 #import "UIAlertController+SimpleAction.h"
 #import "UIColor+XKCD.h"
@@ -25,7 +26,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 @property (strong, nonatomic) UIButton *previousButton, *nextButton, *randomButton;
 @property (strong, nonatomic) XKCDComic *currentComic;
 @property (copy, nonatomic) NSNumber *launchIndex;
-@property (nonatomic) BOOL loading;
+@property (nonatomic) BOOL loading, imageLoading;
 @end
 
 @implementation ViewController
@@ -63,6 +64,12 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 }
 
 #pragma mark - Properties
+
+- (void) setImageLoading:(BOOL)imageLoading {
+  _imageLoading = imageLoading;
+  
+  self.shareButton.enabled =  !imageLoading;
+}
 
 - (void) setLoading:(BOOL)loading {
   _loading = loading;
@@ -186,7 +193,14 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
                forceUpdate:NO];
 }
 
-- (IBAction)showFavoritesAction:(id)sender {
+- (IBAction) shareAction:(id)sender {
+  ShareController *shareController = [[ShareController alloc] initWithComic:self.currentComic];
+  [self.navigationController presentViewController:shareController
+                                          animated:YES
+                                        completion:^{}];
+}
+
+- (IBAction) showFavoritesAction:(id)sender {
   UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Favorites"
                                                        bundle:[NSBundle mainBundle]];
   UINavigationController *favoritesNavigationController = [storyboard instantiateInitialViewController];
@@ -210,6 +224,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 - (void) loadComicWithIndex:(NSNumber*)index forceUpdate:(BOOL)forceUpdate {
   
   self.loading = YES;
+  self.imageLoading = YES;
   
   //Finialize fetch of load from http.
   __weak ViewController *weakSelf = self;
@@ -302,15 +317,11 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
     self.previousButton.enabled = ![self.currentComic.index equals:firstIndex];
   }
   
-  //set the stored image, if possible
-  UIImage *image = [UIImage imageWithData:comic.image];
-  if (image) {
-    [self.scrollView setImage:image];
-    return;
-  }
+  //image
   __weak ViewController *weakSelf = self;
   [comic getImage:^(UIImage * _Nonnull image) {
     [weakSelf.scrollView setImage:image];
+    weakSelf.imageLoading = NO;
   }];
   
   //hoverboard
