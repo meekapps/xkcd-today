@@ -52,7 +52,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
     NSNumber *index = self.launchIndex ? self.launchIndex : nil;
-    [self loadComicWithIndex:index];
+    [self loadComicWithIndex:index forceUpdate:YES];
   });
   
   [self setScrollViewInsets];
@@ -98,7 +98,8 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   
   if (self.isViewLoaded) {
     NSNumber *index = self.launchIndex ? self.launchIndex : nil;
-    [self loadComicWithIndex:index];
+    BOOL forceUpdate = self.launchIndex == nil; //force update if not given explicit index.
+    [self loadComicWithIndex:index forceUpdate:forceUpdate];
   }
 }
 
@@ -112,7 +113,8 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   } else if (self.currentComic) {
     index = self.currentComic.index;
   }
-  [self loadComicWithIndex:index];
+  [self loadComicWithIndex:index
+               forceUpdate:NO];
 }
 
 #pragma mark - Actions
@@ -123,7 +125,8 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
     __weak ViewController *weakSelf = self;
     UIAlertController *alertController = [UIAlertController alertControllerWithOkButtonTitle:@"Jump to oldest"
                                                                              okButtonHandler:^{
-                                                                               [weakSelf loadComicWithIndex:@(1)];
+                                                                               [weakSelf loadComicWithIndex:@(1)
+                                                                                               forceUpdate:NO];
                                                                              }];
     
     [self.navigationController presentViewController:alertController
@@ -137,7 +140,8 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
     __weak ViewController *weakSelf = self;
     UIAlertController *alertController = [UIAlertController alertControllerWithOkButtonTitle:@"Jump to newest"
                                                                              okButtonHandler:^{
-                                                                               [weakSelf loadComicWithIndex:nil];
+                                                                               [weakSelf loadComicWithIndex:nil
+                                                                                               forceUpdate:NO];
                                                                              }];
     
     [self.navigationController presentViewController:alertController
@@ -153,7 +157,8 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   if ([self.currentComic.index equals:oldestIndex]) return;
   
   NSNumber *previousIndex = [self.currentComic.index subtract:1];
-  [self loadComicWithIndex:previousIndex];
+  [self loadComicWithIndex:previousIndex
+              forceUpdate:NO];
 }
 
 - (void) nextAction:(UIButton*)sender {
@@ -163,7 +168,8 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   if (self.currentComic.index && latestIndex && [self.currentComic.index equals:latestIndex]) return;
   
   NSNumber *nextIndex = [self.currentComic.index add:1];
-  [self loadComicWithIndex:nextIndex];
+  [self loadComicWithIndex:nextIndex
+               forceUpdate:NO];
   
 }
 
@@ -176,7 +182,8 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
                                               maximum:latestIndex];
   if (!randomIndex) return;
   
-  [self loadComicWithIndex:randomIndex];
+  [self loadComicWithIndex:randomIndex
+               forceUpdate:NO];
 }
 
 - (IBAction)showFavoritesAction:(id)sender {
@@ -199,11 +206,12 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 #pragma mark - Private
 
 //Load comic with index. Attempts local Core Data load, if fails, performs HTTP request.
-- (void) loadComicWithIndex:(NSNumber*)index {
-  
+//pass forceUpdate = YES to force http GET even after successul fetch.
+- (void) loadComicWithIndex:(NSNumber*)index forceUpdate:(BOOL)forceUpdate {
   
   self.loading = YES;
   
+  //Finialize fetch of load from http.
   __weak ViewController *weakSelf = self;
   void(^finalizeWithComic)(XKCDComic *comic) = ^void(XKCDComic *comic) {
     weakSelf.loading = NO;
@@ -219,12 +227,15 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   //Fetched comic from Core Data
   if (fetchedComic) {
     finalizeWithComic(fetchedComic);
+    
+    //No need to for http update, return early after successful fetch.
+    if (!forceUpdate) return;
   }
   
-  //Get from http if you have a network connection.
+  //Get from http if you have a network connection (or shouldUpdate==YES)
   //Return early and show error if not reachable.
   BOOL reachable = [self isReachable];
-  if (!reachable) {
+  if (!reachable && !fetchedComic) {
     self.noNetworkLabel.hidden = NO;
     self.loading = NO;
     return;
@@ -375,7 +386,8 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 
 - (void) favoritesViewController:(FavoritesViewController *)favoritesViewController
          didSelectComicWithIndex:(NSNumber *)index {
-  [self loadComicWithIndex:index];
+  [self loadComicWithIndex:index
+               forceUpdate:NO];
 }
 
 @end
