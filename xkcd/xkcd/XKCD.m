@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import "NSNumber+Operations.h"
 #import "PersistenceManager.h"
-#import "SpotlightManager.h"
 #import "XKCD.h"
 
 static NSString *const kXKCDServerBase = @"https://xkcd.com/";
@@ -153,7 +152,6 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
                                     [weakSelf unpackPayload:data
                                              completion:^(XKCDComic *comic) {
                                                dispatch_async(dispatch_get_main_queue(), ^{
-                                                 [[SpotlightManager sharedManager] indexComic:comic];
                                                  NSLog(@"got comic from http, %@", index ? index : @"latest");
                                                  completion(comic);
                                                });
