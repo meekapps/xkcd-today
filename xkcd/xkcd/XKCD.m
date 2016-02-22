@@ -142,33 +142,55 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
 - (void) getComicWithIndex:(NSNumber *)index
                 completion:(XKCDComicCompletion)completion {
   
-  NSURLSession *session = nil;
-  NSURLSessionConfiguration *backgroundSessionConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:[self backgroundSessionIdentifier]];
-  backgroundSessionConfiguration.sharedContainerIdentifier = @"group.com.meekapps.xkcd";
-  session =  [NSURLSession sessionWithConfiguration:backgroundSessionConfiguration
-                                           delegate:self
-                                      delegateQueue:nil];
-  backgroundSessionConfiguration.sessionSendsLaunchEvents = YES;
-  backgroundSessionConfiguration.discretionary = YES;
-  backgroundSessionConfiguration.allowsCellularAccess = YES;
-  backgroundSessionConfiguration.timeoutIntervalForRequest = 15.0F;
-  backgroundSessionConfiguration.timeoutIntervalForResource = 15.0F;
+  NSLog(@"getting comic with index: %@", index);
   
   NSString *urlString = [self comicUrlStringWithIndex:index];
   NSURL *url = [NSURL URLWithString:urlString];
   NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+  __weak XKCD *weakSelf = self;
+  [[[NSURLSession sharedSession] dataTaskWithRequest:request
+                                  completionHandler:^(NSData * _Nullable data,
+                                                      NSURLResponse * _Nullable response,
+                                                      NSError * _Nullable error) {
+                                    [weakSelf unpackPayload:data
+                                             completion:^(XKCDComic *comic) {
+                                               dispatch_async(dispatch_get_main_queue(), ^{
+                                                 [[SpotlightManager sharedManager] indexComic:comic];
+                                                 NSLog(@"got comic from http, %@", index ? index : @"latest");
+                                                 completion(comic);
+                                               });
+                                             }];
+                                  }] resume];
   
-  NSURLSessionDownloadTask *downloadTask = [session downloadTaskWithRequest:request];
-  self.completion = ^void(XKCDComic *comic) {
-    [session finishTasksAndInvalidate];
-    dispatch_async(dispatch_get_main_queue(), ^{
-      [[SpotlightManager sharedManager] indexComic:comic];
-      NSLog(@"got comic from http, %@", index ? index : @"latest");
-      completion(comic);
-    });
-  };
-  
-  [downloadTask resume];
+//  return;
+//  
+//  NSURLSession *session = nil;
+//  NSURLSessionConfiguration *backgroundSessionConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:[self backgroundSessionIdentifier]];
+//  backgroundSessionConfiguration.sharedContainerIdentifier = @"group.com.meekapps.xkcd";
+//  session =  [NSURLSession sessionWithConfiguration:backgroundSessionConfiguration
+//                                           delegate:self
+//                                      delegateQueue:nil];
+//  backgroundSessionConfiguration.sessionSendsLaunchEvents = YES;
+//  backgroundSessionConfiguration.discretionary = YES;
+//  backgroundSessionConfiguration.allowsCellularAccess = YES;
+//  backgroundSessionConfiguration.timeoutIntervalForRequest = 15.0F;
+//  backgroundSessionConfiguration.timeoutIntervalForResource = 15.0F;
+//  
+//  NSString *urlString = [self comicUrlStringWithIndex:index];
+//  NSURL *url = [NSURL URLWithString:urlString];
+//  NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+//  
+//  NSURLSessionDownloadTask *downloadTask = [session downloadTaskWithRequest:request];
+//  self.completion = ^void(XKCDComic *comic) {
+//    [session finishTasksAndInvalidate];
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//      [[SpotlightManager sharedManager] indexComic:comic];
+//      NSLog(@"got comic from http, %@", index ? index : @"latest");
+//      completion(comic);
+//    });
+//  };
+//  
+//  [downloadTask resume];
   
 }
 

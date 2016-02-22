@@ -107,6 +107,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
     NSNumber *index = self.launchIndex ? self.launchIndex : nil;
     BOOL forceUpdate = self.launchIndex == nil; //force update if not given explicit index.
     [self loadComicWithIndex:index forceUpdate:forceUpdate];
+    self.launchIndex = nil;
   }
 }
 
