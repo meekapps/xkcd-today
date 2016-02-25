@@ -253,7 +253,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
     if (!forceUpdate) return;
   }
   
-  //Get from http if you have a network connection (or shouldUpdate==YES)
+  //Get from http if you have a network connection (or forceUpdate==YES)
   //Return early and show error if not reachable.
   BOOL reachable = [self isReachable];
   if (!reachable && !fetchedComic) {
