@@ -12,6 +12,7 @@
 #import "PersistenceManager.h"
 #import "Reachability.h"
 #import "ShareController.h"
+#import "SpotlightManager.h"
 #import "ViewController.h"
 #import "UIAlertController+SimpleAction.h"
 #import "UIColor+XKCD.h"
@@ -107,6 +108,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
     NSNumber *index = self.launchIndex ? self.launchIndex : nil;
     BOOL forceUpdate = self.launchIndex == nil; //force update if not given explicit index.
     [self loadComicWithIndex:index forceUpdate:forceUpdate];
+    self.launchIndex = nil;
   }
 }
 
@@ -258,6 +260,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   
   [[XKCD sharedInstance] getComicWithIndex:index
                                 completion:^(XKCDComic *comic) {
+                                  [[SpotlightManager sharedManager] indexComic:comic];
                                   finalizeWithComic(comic);
                                 }];
 }

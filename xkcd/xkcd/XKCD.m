@@ -9,10 +9,7 @@
 #import "AppDelegate.h"
 #import "NSNumber+Operations.h"
 #import "PersistenceManager.h"
-#import "SpotlightManager.h"
 #import "XKCD.h"
-
-static NSString *const kBackgroundSessionIdentifier = @"com.meekapps.xkcd.backgroundSession";
 
 static NSString *const kXKCDServerBase = @"https://xkcd.com/";
 static NSString *const kXKCDComicExtention = @"info.0.json";
@@ -142,34 +139,24 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
 - (void) getComicWithIndex:(NSNumber *)index
                 completion:(XKCDComicCompletion)completion {
   
-  NSURLSession *session = nil;
-  NSURLSessionConfiguration *backgroundSessionConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:[self backgroundSessionIdentifier]];
-  backgroundSessionConfiguration.sharedContainerIdentifier = @"group.com.meekapps.xkcd";
-  session =  [NSURLSession sessionWithConfiguration:backgroundSessionConfiguration
-                                           delegate:self
-                                      delegateQueue:nil];
-  backgroundSessionConfiguration.sessionSendsLaunchEvents = YES;
-  backgroundSessionConfiguration.discretionary = YES;
-  backgroundSessionConfiguration.allowsCellularAccess = YES;
-  backgroundSessionConfiguration.timeoutIntervalForRequest = 15.0F;
-  backgroundSessionConfiguration.timeoutIntervalForResource = 15.0F;
+  NSLog(@"getting comic with index: %@", index);
   
   NSString *urlString = [self comicUrlStringWithIndex:index];
   NSURL *url = [NSURL URLWithString:urlString];
   NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
-  
-  NSURLSessionDownloadTask *downloadTask = [session downloadTaskWithRequest:request];
-  self.completion = ^void(XKCDComic *comic) {
-    [session finishTasksAndInvalidate];
-    dispatch_async(dispatch_get_main_queue(), ^{
-      [[SpotlightManager sharedManager] indexComic:comic];
-      NSLog(@"got comic from http, %@", index ? index : @"latest");
-      completion(comic);
-    });
-  };
-  
-  [downloadTask resume];
-  
+  __weak XKCD *weakSelf = self;
+  [[[NSURLSession sharedSession] dataTaskWithRequest:request
+                                  completionHandler:^(NSData * _Nullable data,
+                                                      NSURLResponse * _Nullable response,
+                                                      NSError * _Nullable error) {
+                                    [weakSelf unpackPayload:data
+                                             completion:^(XKCDComic *comic) {
+                                               dispatch_async(dispatch_get_main_queue(), ^{
+                                                 NSLog(@"got comic from http, %@", index ? index : @"latest");
+                                                 completion(comic);
+                                               });
+                                             }];
+                                  }] resume];
 }
 
 //Returns comic with highest index.
@@ -180,39 +167,6 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
   return comic.index;
 }
 
-#pragma mark - NSURLSession Delegate
-
-- (void) URLSession:(NSURLSession *)session
-       downloadTask:(NSURLSessionDownloadTask *)downloadTask
-didFinishDownloadingToURL:(NSURL *)location {
-  
-  NSData *data = [NSData dataWithContentsOfURL:location];
-  __weak XKCD *weakSelf = self;
-  [self unpackPayload:data
-           completion:^(XKCDComic *comic) {
-             weakSelf.completion(comic);
-  }];
-}
-
-- (void) URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask
-       didWriteData:(int64_t)bytesWritten
-  totalBytesWritten:(int64_t)totalBytesWritten
-totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
-  NSLog(@"did write data: %lld/%lld", bytesWritten, totalBytesExpectedToWrite);
-}
-
-- (void) URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
-  if (error) {
-    NSLog(@"completed download task, error: %@", error);
-  }
-}
-
-- (void) URLSession:(NSURLSession *)session didBecomeInvalidWithError:(NSError *)error {
-  if (error) {
-    NSLog(@"session became invalid: %@", error);
-  }
-}
-
 #pragma mark - Private
 
 // Returns NSString URL for comic with index. Passing index = nil returns latest comic URL.
@@ -221,14 +175,6 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
   NSString *optionalIndexComponent = index ? [NSString stringWithFormat:@"%@/", index] : @"";
   NSString *path = [NSString stringWithFormat:@"%@%@%@", kXKCDServerBase, optionalIndexComponent, kXKCDComicExtention];
   return path;
-}
-
-// com.meekapps.xkcd.backgroundSession.<UUID>
-- (NSString*) backgroundSessionIdentifier {
-  NSUUID *randomUuid = [NSUUID UUID];
-  NSString *uuidString = [randomUuid UUIDString];
-  NSString *identifier = [NSString stringWithFormat:@"%@.%@", kBackgroundSessionIdentifier, uuidString];
-  return identifier;
 }
 
 // Unpacks payload NSData into XKCDComic object.
