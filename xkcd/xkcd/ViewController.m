@@ -46,22 +46,25 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   [super viewDidLoad];
   
   [self setupToolbar];
+  
+  [self loadComicWithIndex:nil
+               forceUpdate:YES];
 }
 
 - (void) viewDidLayoutSubviews {
   [super viewDidLayoutSubviews];
-  
-  static dispatch_once_t onceToken;
-  dispatch_once(&onceToken, ^{
-    NSNumber *index = self.launchIndex ? self.launchIndex : nil;
-    [self loadComicWithIndex:index forceUpdate:YES];
-  });
   
   [self setScrollViewInsets];
 }
 
 - (void) dealloc {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void) didReceiveMemoryWarning {
+  if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
+    self.currentComic = nil;
+  }
 }
 
 #pragma mark - Properties
@@ -105,9 +108,8 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   self.launchIndex = userInfo[kIndexKey];
   
   if (self.isViewLoaded) {
-    NSNumber *index = self.launchIndex ? self.launchIndex : nil;
     BOOL forceUpdate = self.launchIndex == nil; //force update if not given explicit index.
-    [self loadComicWithIndex:index forceUpdate:forceUpdate];
+    [self loadComicWithIndex:self.launchIndex forceUpdate:forceUpdate];
     self.launchIndex = nil;
   }
 }
@@ -122,8 +124,10 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
   } else if (self.currentComic) {
     index = self.currentComic.index;
   }
+  
+  BOOL forceUpdate = index == nil;
   [self loadComicWithIndex:index
-               forceUpdate:NO];
+               forceUpdate:forceUpdate];
 }
 
 #pragma mark - Actions

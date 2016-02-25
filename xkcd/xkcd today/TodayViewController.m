@@ -45,6 +45,8 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
+  
+  self.currentComic = nil;
 }
 
 - (void) widgetPerformUpdateWithCompletionHandler:(void (^)(NCUpdateResult))completionHandler {
