@@ -149,13 +149,23 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
                                   completionHandler:^(NSData * _Nullable data,
                                                       NSURLResponse * _Nullable response,
                                                       NSError * _Nullable error) {
-                                    [weakSelf unpackPayload:data
-                                             completion:^(XKCDComic *comic) {
-                                               dispatch_async(dispatch_get_main_queue(), ^{
-                                                 NSLog(@"got comic from http, %@", index ? index : @"latest");
-                                                 completion(comic);
-                                               });
-                                             }];
+                                    
+                                    //Error or no data.
+                                    if (!data || error) {
+                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                          completion(nil);
+                                        });
+                                      
+                                    //Received data.
+                                    } else {
+                                      [weakSelf unpackPayload:data
+                                               completion:^(XKCDComic *comic) {
+                                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                                   NSLog(@"got comic from http, %@", index ? index : @"latest");
+                                                   completion(comic);
+                                                 });
+                                               }];
+                                    }
                                   }] resume];
 }
 
@@ -180,6 +190,11 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
 // Unpacks payload NSData into XKCDComic object.
 - (void) unpackPayload:(NSData*)data
             completion:(XKCDComicCompletion)completion {
+  if (!data) {
+    completion(nil);
+    return;
+  }
+  
   NSError *error = nil;
   id unpackedPayload = [NSJSONSerialization JSONObjectWithData:data
                                                        options:kNilOptions
