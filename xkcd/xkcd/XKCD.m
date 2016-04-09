@@ -11,12 +11,15 @@
 #import "PersistenceManager.h"
 #import "XKCD.h"
 
-static NSString *const kXKCDServerBase = @"https://xkcd.com/";
+static NSUInteger const kXKCDHoverboardIndex = 1608;
+static NSUInteger const kXKCDGardenIndex = 1663;
+NSString *const kXKCDServerBase = @"https://xkcd.com/";
 static NSString *const kXKCDComicExtention = @"info.0.json";
 
 @interface XKCD()
 @property (copy) XKCDComicCompletion completion;
 @property (strong, readwrite, nonatomic) NSNumber *latestComicIndex;
+@property (strong, nonatomic) NSArray<NSNumber*> *comicIndexBlacklist;
 @end
 
 @implementation XKCD
@@ -28,6 +31,22 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
     instance = [[XKCD alloc] init];
   });
   return instance;
+}
+
+- (BOOL) comicIsBlacklisted:(NSNumber*)index {
+  for (NSNumber *blacklistIndex in self.comicIndexBlacklist) {
+    if ([blacklistIndex equals:index]) {
+      return YES;
+    }
+  }
+  return NO;
+}
+
+- (NSArray<NSNumber*>*) comicIndexBlacklist {
+  if (!_comicIndexBlacklist) {
+    _comicIndexBlacklist = @[@(kXKCDHoverboardIndex), @(kXKCDGardenIndex)];
+  }
+  return _comicIndexBlacklist;
 }
 
 - (void) moveFavoriteFromIndex:(NSUInteger)fromIndex
@@ -175,6 +194,11 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
   if (!comic) return nil;
   
   return comic.index;
+}
+
+- (void) showBlacklistErrorWithComic:(XKCDComic*)comic
+                  fromViewController:(UIViewController*)viewController {
+
 }
 
 #pragma mark - Private
