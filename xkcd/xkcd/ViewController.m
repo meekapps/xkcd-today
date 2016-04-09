@@ -72,7 +72,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 - (void) setImageLoading:(BOOL)imageLoading {
   _imageLoading = imageLoading;
   
-  self.shareButton.enabled =  !imageLoading;
+  self.shareButton.enabled =  !imageLoading && self.currentComic.image;
 }
 
 - (void) setLoading:(BOOL)loading {
@@ -201,6 +201,8 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 
 - (IBAction) shareAction:(id)sender {
   ShareController *shareController = [[ShareController alloc] initWithComic:self.currentComic];
+  if (!shareController) return;
+  
   [self.navigationController presentViewController:shareController
                                           animated:YES
                                         completion:^{}];

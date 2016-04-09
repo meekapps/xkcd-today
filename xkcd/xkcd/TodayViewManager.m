@@ -32,7 +32,7 @@ static NSString *const kAppUrlScheme = @"xkcd-today://";
   
   NSNumber *indexNumber = @(indexString.integerValue);
   
-  return index ? indexNumber : nil;
+  return indexNumber ? indexNumber : nil;
 }
 
 - (id) launchObjectFromLaunchOptions:(NSDictionary *)launchOptions {
