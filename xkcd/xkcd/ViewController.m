@@ -19,9 +19,7 @@
 #import "UIImage+AsyncImage.h"
 #import "UIImage+XKCD.h"
 #import "XKCD.h"
-
-static NSInteger kHoverboardIndex = 1608;
-static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
+#import "XKCDAlertController.h"
 
 @interface ViewController ()
 @property (strong, nonatomic) UIButton *previousButton, *nextButton, *randomButton;
@@ -72,7 +70,7 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 - (void) setImageLoading:(BOOL)imageLoading {
   _imageLoading = imageLoading;
   
-  self.shareButton.enabled =  !imageLoading;
+  self.shareButton.enabled =  !imageLoading && self.currentComic.image;
 }
 
 - (void) setLoading:(BOOL)loading {
@@ -201,6 +199,8 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
 
 - (IBAction) shareAction:(id)sender {
   ShareController *shareController = [[ShareController alloc] initWithComic:self.currentComic];
+  if (!shareController) return;
+  
   [self.navigationController presentViewController:shareController
                                           animated:YES
                                         completion:^{}];
@@ -324,39 +324,28 @@ static NSString *kHoverboardUrl = @"https://xkcd.com/1608/";
     self.previousButton.enabled = ![self.currentComic.index equals:firstIndex];
   }
   
+  //blacklist
+  if ([[XKCD sharedInstance] comicIsBlacklisted:comic.index]) {
+    XKCDAlertController *blacklistAlertController = [XKCDAlertController blacklistAlertControllerWithComic:comic];
+    [self.navigationController presentViewController:blacklistAlertController
+                                            animated:YES
+                                          completion:^{}];
+    return;
+  }
+  
   //image
   __weak ViewController *weakSelf = self;
   [comic getImage:^(UIImage * _Nonnull image) {
     [weakSelf.scrollView setImage:image];
     weakSelf.imageLoading = NO;
+    
+    if (!image) {
+      XKCDAlertController *imageAlertController = [XKCDAlertController imageErrorAlertControllerWithComic:comic];
+      [self.navigationController presentViewController:imageAlertController
+                                              animated:YES
+                                            completion:^{}];
+    }
   }];
-  
-  //hoverboard
-  if ([comic.index equals:@(kHoverboardIndex)]) {
-    [self showHoverboardError];
-    return;
-  }
-}
-
-- (void) showHoverboardError {
-  NSString *message = @"This app is not hoverboard enabled. Play in browser?";
-  UIAlertController *hoverboardAlert = [UIAlertController alertControllerWithTitle:@"Error -41"
-                                                                           message:message
-                                                                    preferredStyle:UIAlertControllerStyleAlert];
-  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"No"
-                                                         style:UIAlertActionStyleCancel
-                                                       handler:^(UIAlertAction * _Nonnull action) {
-                                                       }];
-  [hoverboardAlert addAction:cancelAction];
-  UIAlertAction *playAction = [UIAlertAction actionWithTitle:@"Play"
-                                                       style:UIAlertActionStyleDefault
-                                                     handler:^(UIAlertAction * _Nonnull action) {
-                                                       [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kHoverboardUrl]];
-                                                     }];
-  [hoverboardAlert addAction:playAction];
-  [self.navigationController presentViewController:hoverboardAlert animated:YES completion:^{
-  }];
-  
 }
 
 - (void) setupToolbar {

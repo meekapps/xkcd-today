@@ -9,13 +9,19 @@
 #import <Foundation/Foundation.h>
 #import "XKCDComic.h"
 
+FOUNDATION_EXPORT NSString *const kXKCDServerBase;
+
 typedef void(^XKCDComicCompletion)(XKCDComic *comic);
 
 @interface XKCD : NSObject <NSURLSessionDelegate>
 
 @property (strong, readonly, nonatomic) NSNumber *latestComicIndex;
 
+
 + (instancetype) sharedInstance;
+
+/// Returns YES if index cannot be loaded natively.
+- (BOOL) comicIsBlacklisted:(NSNumber*)index;
 
 /// Adjusts favorite indices
 - (void) moveFavoriteFromIndex:(NSUInteger)fromIndex

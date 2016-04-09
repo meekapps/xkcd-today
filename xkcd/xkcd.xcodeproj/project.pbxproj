@@ -10,6 +10,8 @@
 		41075C061C6C077600E18573 /* TodayViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 41075C051C6C077600E18573 /* TodayViewManager.m */; };
 		41075C091C6C0F8900E18573 /* NSDate+ShortDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 41075C081C6C0F8900E18573 /* NSDate+ShortDate.m */; };
 		41075C0A1C6C0FD100E18573 /* NSDate+ShortDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 41075C081C6C0F8900E18573 /* NSDate+ShortDate.m */; };
+		4108CA681CB9AF80006CF7F9 /* NSString+XKCDImageUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4108CA671CB9AF80006CF7F9 /* NSString+XKCDImageUrl.m */; };
+		4108CA6B1CB9C192006CF7F9 /* XKCDAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4108CA6A1CB9C192006CF7F9 /* XKCDAlertController.m */; };
 		410DF1A11C6FEFF4000A19F6 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 410DF1A01C6FEFF4000A19F6 /* Reachability.m */; };
 		4121915B1C5C624E0005971C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4121915A1C5C624E0005971C /* main.m */; };
 		4121915E1C5C624E0005971C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4121915D1C5C624E0005971C /* AppDelegate.m */; };
@@ -94,6 +96,10 @@
 		41075C051C6C077600E18573 /* TodayViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayViewManager.m; sourceTree = "<group>"; };
 		41075C071C6C0F8900E18573 /* NSDate+ShortDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ShortDate.h"; sourceTree = "<group>"; };
 		41075C081C6C0F8900E18573 /* NSDate+ShortDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ShortDate.m"; sourceTree = "<group>"; };
+		4108CA661CB9AF80006CF7F9 /* NSString+XKCDImageUrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+XKCDImageUrl.h"; sourceTree = "<group>"; };
+		4108CA671CB9AF80006CF7F9 /* NSString+XKCDImageUrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XKCDImageUrl.m"; sourceTree = "<group>"; };
+		4108CA691CB9C192006CF7F9 /* XKCDAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XKCDAlertController.h; sourceTree = "<group>"; };
+		4108CA6A1CB9C192006CF7F9 /* XKCDAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XKCDAlertController.m; sourceTree = "<group>"; };
 		410DF19F1C6FEFF4000A19F6 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		410DF1A01C6FEFF4000A19F6 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		412191561C5C624E0005971C /* xkcd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = xkcd.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -218,7 +224,6 @@
 				41FB0AAF1C5D241300EE4732 /* xkcd.entitlements */,
 				412191A61C5C68370005971C /* Categories */,
 				412191981C5C63AA0005971C /* Core */,
-				412191991C5C63B10005971C /* Views */,
 				412191971C5C63980005971C /* NSManagedObjects */,
 				412191961C5C63830005971C /* Storyboards */,
 				412191591C5C624E0005971C /* Supporting Files */,
@@ -297,6 +302,7 @@
 				41075C051C6C077600E18573 /* TodayViewManager.m */,
 				412191A01C5C64F20005971C /* XKCD.h */,
 				412191A11C5C64F20005971C /* XKCD.m */,
+				412191991C5C63B10005971C /* Views */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -312,6 +318,8 @@
 				41FD61D71C61CD620096C39F /* FavoriteTableViewCell.m */,
 				4121915F1C5C624E0005971C /* ViewController.h */,
 				412191601C5C624E0005971C /* ViewController.m */,
+				4108CA691CB9C192006CF7F9 /* XKCDAlertController.h */,
+				4108CA6A1CB9C192006CF7F9 /* XKCDAlertController.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -323,6 +331,8 @@
 				41075C081C6C0F8900E18573 /* NSDate+ShortDate.m */,
 				4142079F1C5D4998009853D7 /* NSNumber+Operations.h */,
 				414207A01C5D4998009853D7 /* NSNumber+Operations.m */,
+				4108CA661CB9AF80006CF7F9 /* NSString+XKCDImageUrl.h */,
+				4108CA671CB9AF80006CF7F9 /* NSString+XKCDImageUrl.m */,
 				41E025771C66A67500235CAA /* UIAlertController+SimpleAction.h */,
 				41E025781C66A67500235CAA /* UIAlertController+SimpleAction.m */,
 				412191A71C5C70A70005971C /* UIColor+XKCD.h */,
@@ -532,8 +542,10 @@
 				41075C061C6C077600E18573 /* TodayViewManager.m in Sources */,
 				412191611C5C624E0005971C /* ViewController.m in Sources */,
 				417024631C5DB98F0084531D /* ComicScrollView.m in Sources */,
+				4108CA6B1CB9C192006CF7F9 /* XKCDAlertController.m in Sources */,
 				412191AC1C5C73FB0005971C /* UIImage+AsyncImage.m in Sources */,
 				4121915E1C5C624E0005971C /* AppDelegate.m in Sources */,
+				4108CA681CB9AF80006CF7F9 /* NSString+XKCDImageUrl.m in Sources */,
 				4121915B1C5C624E0005971C /* main.m in Sources */,
 				41E025791C66A67500235CAA /* UIAlertController+SimpleAction.m in Sources */,
 				41FD61D81C61CD620096C39F /* FavoriteTableViewCell.m in Sources */,

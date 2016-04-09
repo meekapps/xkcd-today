@@ -6,6 +6,7 @@
 //  Copyright © 2016 Perka. All rights reserved.
 //
 
+#import "NSString+XKCDImageUrl.h"
 #import "PersistenceManager.h"
 #import "UIImage+AsyncImage.h"
 #import "XKCDComic.h"
@@ -22,6 +23,12 @@
   //Haven't yet stored image data, fetch over http
   } else {
     NSString *urlString = self.imageUrl;
+    
+    //Invalid imageUrl string, happens for non-standard comics, e.g. 1663 "Garden"
+    if (![urlString isValidImageUrl]) {
+      completion(nil);
+      return;
+    }
     __weak XKCDComic *weakSelf = self;
     [UIImage imageFromUrl:urlString
                completion:^(UIImage *image) {
@@ -35,8 +42,6 @@
                  completion(image);
                }];
   }
-  
-  
 }
 
 @end
