@@ -14,14 +14,18 @@
   if (self.length < 12) return NO; //at least as long as http + filename + suffix http://a.png
   
   //check for presence of image suffix
-  if ([self rangeOfString:@".gif"].location == NSNotFound &&
-      [self rangeOfString:@".jpeg"].location == NSNotFound &&
-      [self rangeOfString:@".jpg"].location == NSNotFound &&
-      [self rangeOfString:@".png"].location == NSNotFound) {
-    return NO;
-  };
-  
-  return YES;
+  @try {
+    if ([self rangeOfString:@".gif"].location == NSNotFound &&
+        [self rangeOfString:@".jpeg"].location == NSNotFound &&
+        [self rangeOfString:@".jpg"].location == NSNotFound &&
+        [self rangeOfString:@".png"].location == NSNotFound) {
+      return NO;
+    };
+  } @catch (NSException *exception) {
+    NSLog(@"Exception was caught checking url string: %@", exception);
+  } @finally {
+    return YES;
+  }
 }
 
 @end
