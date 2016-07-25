@@ -60,6 +60,7 @@
 }
 
 - (void) didReceiveMemoryWarning {
+  [super didReceiveMemoryWarning];
   if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
     self.currentComic = nil;
   }
