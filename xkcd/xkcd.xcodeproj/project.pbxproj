@@ -224,6 +224,7 @@
 				41FB0AAF1C5D241300EE4732 /* xkcd.entitlements */,
 				412191A61C5C68370005971C /* Categories */,
 				412191981C5C63AA0005971C /* Core */,
+				412191991C5C63B10005971C /* Views */,
 				412191971C5C63980005971C /* NSManagedObjects */,
 				412191961C5C63830005971C /* Storyboards */,
 				412191591C5C624E0005971C /* Supporting Files */,
@@ -302,7 +303,6 @@
 				41075C051C6C077600E18573 /* TodayViewManager.m */,
 				412191A01C5C64F20005971C /* XKCD.h */,
 				412191A11C5C64F20005971C /* XKCD.m */,
-				412191991C5C63B10005971C /* Views */,
 			);
 			name = Core;
 			sourceTree = "<group>";

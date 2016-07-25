@@ -25,7 +25,7 @@
 @property (strong, nonatomic) UIButton *previousButton, *nextButton, *randomButton;
 @property (strong, nonatomic) XKCDComic *currentComic;
 @property (copy, nonatomic) NSNumber *launchIndex;
-@property (nonatomic) BOOL loading, imageLoading;
+@property (nonatomic) BOOL loading, showingLatestComic, showingOldestComic;
 @end
 
 @implementation ViewController
@@ -67,19 +67,18 @@
 
 #pragma mark - Properties
 
-- (void) setImageLoading:(BOOL)imageLoading {
-  _imageLoading = imageLoading;
-  
-  self.shareButton.enabled =  !imageLoading && self.currentComic.image;
-}
-
 - (void) setLoading:(BOOL)loading {
   _loading = loading;
   
-  self.loaderView.hidden = !loading;
-  self.previousButton.enabled = !loading;
-  self.randomButton.enabled = !loading;
-  self.nextButton.enabled = !loading;
+  self.loaderView.hidden = !self.loading;
+  self.shareButton.enabled = !self.loading;
+  self.randomButton.enabled = !self.loading;
+  
+  BOOL enableNextButton = !self.loading && !self.showingLatestComic;
+  self.nextButton.enabled = enableNextButton;
+  
+  BOOL enablePreviousButton = !self.loading && !self.showingOldestComic;
+  self.previousButton.enabled = enablePreviousButton;
   
   if (loading) {
     [self clearViews];
@@ -230,12 +229,10 @@
 - (void) loadComicWithIndex:(NSNumber*)index forceUpdate:(BOOL)forceUpdate {
   
   self.loading = YES;
-  self.imageLoading = YES;
   
   //Finialize fetch of load from http.
   __weak ViewController *weakSelf = self;
   void(^finalizeWithComic)(XKCDComic *comic) = ^void(XKCDComic *comic) {
-    weakSelf.loading = NO;
     
     if (comic) {
       weakSelf.currentComic = comic;
@@ -310,18 +307,15 @@
   //nav bar title
   self.title = comic.title;
   
-  //favorites button
-  [self updateToggleFavoritesButton:comic];
-  
   //update the toolbar buttons
   if (self.currentComic.index) {
     //latest comic
     NSNumber *latestIndex = [XKCD sharedInstance].latestComicIndex;
-    self.nextButton.enabled = ![self.currentComic.index equals:latestIndex];
+    self.showingLatestComic = [self.currentComic.index equals:latestIndex];
     
     //oldest comic
     NSNumber *firstIndex = @(1);
-    self.previousButton.enabled = ![self.currentComic.index equals:firstIndex];
+    self.showingOldestComic = [self.currentComic.index equals:firstIndex];
   }
   
   //blacklist
@@ -337,7 +331,10 @@
   __weak ViewController *weakSelf = self;
   [comic getImage:^(UIImage * _Nonnull image) {
     [weakSelf.scrollView setImage:image];
-    weakSelf.imageLoading = NO;
+    weakSelf.loading = NO;
+    
+    //favorites button
+    [weakSelf updateToggleFavoritesButton:comic];
     
     if (!image) {
       XKCDAlertController *imageAlertController = [XKCDAlertController imageErrorAlertControllerWithComic:comic];
