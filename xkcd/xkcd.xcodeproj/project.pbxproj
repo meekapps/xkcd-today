@@ -44,6 +44,7 @@
 		417062A51C6078490003A3FD /* LaunchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 417062991C606E2F0003A3FD /* LaunchManager.m */; };
 		41C79A131C7A6F3B0073237C /* ShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C79A121C7A6F3B0073237C /* ShareController.m */; };
 		41E025791C66A67500235CAA /* UIAlertController+SimpleAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E025781C66A67500235CAA /* UIAlertController+SimpleAction.m */; };
+		41F26A561D5407BA002242AE /* XKCDExplainedManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F26A551D5407BA002242AE /* XKCDExplainedManager.m */; };
 		41FD61C41C61B5230096C39F /* ShortcutsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD61C31C61B5230096C39F /* ShortcutsManager.m */; };
 		41FD61CE1C61C8810096C39F /* XKCDComic+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD61CB1C61C8810096C39F /* XKCDComic+CoreDataProperties.m */; };
 		41FD61CF1C61C8810096C39F /* XKCDComic.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD61CD1C61C8810096C39F /* XKCDComic.m */; };
@@ -147,6 +148,8 @@
 		41C79A121C7A6F3B0073237C /* ShareController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareController.m; sourceTree = "<group>"; };
 		41E025771C66A67500235CAA /* UIAlertController+SimpleAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+SimpleAction.h"; sourceTree = "<group>"; };
 		41E025781C66A67500235CAA /* UIAlertController+SimpleAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+SimpleAction.m"; sourceTree = "<group>"; };
+		41F26A541D5407BA002242AE /* XKCDExplainedManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XKCDExplainedManager.h; sourceTree = "<group>"; };
+		41F26A551D5407BA002242AE /* XKCDExplainedManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XKCDExplainedManager.m; sourceTree = "<group>"; };
 		41FB0AAE1C5D221F00EE4732 /* xkcd today.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "xkcd today.entitlements"; sourceTree = "<group>"; };
 		41FB0AAF1C5D241300EE4732 /* xkcd.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = xkcd.entitlements; sourceTree = "<group>"; };
 		41FD61C21C61B5230096C39F /* ShortcutsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortcutsManager.h; sourceTree = "<group>"; };
@@ -303,6 +306,8 @@
 				41075C051C6C077600E18573 /* TodayViewManager.m */,
 				412191A01C5C64F20005971C /* XKCD.h */,
 				412191A11C5C64F20005971C /* XKCD.m */,
+				41F26A541D5407BA002242AE /* XKCDExplainedManager.h */,
+				41F26A551D5407BA002242AE /* XKCDExplainedManager.m */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -551,6 +556,7 @@
 				41FD61D81C61CD620096C39F /* FavoriteTableViewCell.m in Sources */,
 				412191A21C5C64F20005971C /* XKCD.m in Sources */,
 				41FD61D21C61C8C10096C39F /* FavoritesViewController.m in Sources */,
+				41F26A561D5407BA002242AE /* XKCDExplainedManager.m in Sources */,
 				414207A11C5D4998009853D7 /* NSNumber+Operations.m in Sources */,
 				41075C091C6C0F8900E18573 /* NSDate+ShortDate.m in Sources */,
 				412E38E71C63A4BF00EB5B0D /* UIImage+XKCD.m in Sources */,
