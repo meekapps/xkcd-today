@@ -11,6 +11,8 @@
 #import "UIImage+AsyncImage.h"
 #import "XKCDComic.h"
 
+static NSString *const kExplainUrl = @"http://www.explainxkcd.com/wiki/index.php";
+
 @implementation XKCDComic
 
 - (void) getImage:(void(^)(UIImage *image))completion {

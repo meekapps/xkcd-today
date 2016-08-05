@@ -20,14 +20,13 @@
 #import "UIImage+XKCD.h"
 #import "XKCD.h"
 #import "XKCDAlertController.h"
-#import "XKCDExplainedManager.h"
+#import "XKCDExplained.h"
 
 @interface ViewController ()
 @property (strong, nonatomic) UIButton *previousButton, *nextButton, *randomButton;
 @property (strong, nonatomic) XKCDComic *currentComic;
 @property (copy, nonatomic) NSNumber *launchIndex;
 @property (nonatomic) BOOL loading, showingLatestComic, showingOldestComic;
-@property (strong, nonatomic) XKCDExplainedManager *explained;
 @end
 
 @implementation ViewController
@@ -49,13 +48,6 @@
   
   [self loadComicWithIndex:nil
                forceUpdate:YES];
-}
-
-- (void) viewDidAppear:(BOOL)animated {
-  [super viewDidAppear:animated];
-  
-  self.explained = [[XKCDExplainedManager alloc] init];
-  [self.explained explain];
 }
 
 - (void) viewDidLayoutSubviews {
@@ -138,6 +130,11 @@
 }
 
 #pragma mark - Actions
+
+- (void) explainAction:(id)sender {
+  XKCDComic *comic = self.currentComic;
+  [XKCDExplained explain:comic];
+}
 
 //Long pressed previous button
 - (void) oldestAction:(UILongPressGestureRecognizer*)sender {
@@ -387,6 +384,10 @@
   [self setToolbarItems:items];
   
   [self.navigationController setToolbarHidden:NO];
+  
+  //Explain
+  UILongPressGestureRecognizer *explainGestureRecognizer =[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(explainAction:)];
+  [self.view addGestureRecognizer:explainGestureRecognizer];
 }
 
 #pragma mark - FavoritesViewControllerDelegte
