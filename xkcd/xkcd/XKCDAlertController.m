@@ -7,6 +7,7 @@
 //
 
 #import "XKCDAlertController.h"
+#import "XKCDExplained.h"
 #import "XKCD.h"
 
 static NSString *const kDefaultAlertMessage = @"Unable to load comic. Show in browser?";

@@ -39,11 +39,26 @@ static CGFloat const kDefaultPadding = 10.0F;
 }
 
 - (void) setImage:(UIImage*)image {
+  [self setImage:image
+        animated:NO];
+}
 
+- (void) setImage:(UIImage *)image
+         animated:(BOOL)animated {
+  
   self.comicImageView.image = image;
-
+  
   [self updateZoomLevels];
   [self centerContent];
+  
+  if (animated) {
+    [UIView transitionWithView:self
+                      duration:0.2F
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:NULL
+                    completion:NULL];
+  }
+  
 }
 
 - (void) setBarInsets:(UIEdgeInsets)barInsets {

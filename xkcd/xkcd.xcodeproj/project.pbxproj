@@ -15,7 +15,7 @@
 		410DF1A11C6FEFF4000A19F6 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 410DF1A01C6FEFF4000A19F6 /* Reachability.m */; };
 		4121915B1C5C624E0005971C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4121915A1C5C624E0005971C /* main.m */; };
 		4121915E1C5C624E0005971C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4121915D1C5C624E0005971C /* AppDelegate.m */; };
-		412191611C5C624E0005971C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191601C5C624E0005971C /* ViewController.m */; };
+		412191611C5C624E0005971C /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191601C5C624E0005971C /* MainViewController.m */; };
 		412191641C5C624E0005971C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 412191621C5C624E0005971C /* Main.storyboard */; };
 		412191671C5C624E0005971C /* xkcd.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 412191651C5C624E0005971C /* xkcd.xcdatamodeld */; };
 		412191691C5C624E0005971C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 412191681C5C624E0005971C /* Assets.xcassets */; };
@@ -107,8 +107,8 @@
 		4121915A1C5C624E0005971C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4121915C1C5C624E0005971C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4121915D1C5C624E0005971C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		4121915F1C5C624E0005971C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		412191601C5C624E0005971C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4121915F1C5C624E0005971C /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MainViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		412191601C5C624E0005971C /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MainViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		412191631C5C624E0005971C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		412191661C5C624E0005971C /* xkcd.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = xkcd.xcdatamodel; sourceTree = "<group>"; };
 		412191681C5C624E0005971C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -321,8 +321,8 @@
 				41FD61D11C61C8C10096C39F /* FavoritesViewController.m */,
 				41FD61D61C61CD620096C39F /* FavoriteTableViewCell.h */,
 				41FD61D71C61CD620096C39F /* FavoriteTableViewCell.m */,
-				4121915F1C5C624E0005971C /* ViewController.h */,
-				412191601C5C624E0005971C /* ViewController.m */,
+				4121915F1C5C624E0005971C /* MainViewController.h */,
+				412191601C5C624E0005971C /* MainViewController.m */,
 				4108CA691CB9C192006CF7F9 /* XKCDAlertController.h */,
 				4108CA6A1CB9C192006CF7F9 /* XKCDAlertController.m */,
 			);
@@ -545,7 +545,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41075C061C6C077600E18573 /* TodayViewManager.m in Sources */,
-				412191611C5C624E0005971C /* ViewController.m in Sources */,
+				412191611C5C624E0005971C /* MainViewController.m in Sources */,
 				417024631C5DB98F0084531D /* ComicScrollView.m in Sources */,
 				4108CA6B1CB9C192006CF7F9 /* XKCDAlertController.m in Sources */,
 				412191AC1C5C73FB0005971C /* UIImage+AsyncImage.m in Sources */,

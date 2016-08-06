@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MainViewController.h
 //  xkcd
 //
 //  Created by Mike Keller on 1/29/16.
@@ -10,7 +10,7 @@
 #import "FavoritesViewController.h"
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController <FavoritesViewControllerDelegate>
+@interface MainViewController : UIViewController <FavoritesViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet ComicScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *shareButton, *toggleFavoriteButton, *showFavoritesButton;
@@ -19,7 +19,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *noNetworkLabel;
 
 - (IBAction) shareAction:(id)sender;
-- (IBAction) explainAction:(id)sender;
 - (IBAction) showFavoritesAction:(id)sender;
 - (IBAction) toggleFavoriteAction:(id)sender;
 
