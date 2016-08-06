@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *comicImageView;
 
 - (void) setImage:(UIImage*)image;
+- (void) setImage:(UIImage*)image animated:(BOOL)animated;
 
 @end

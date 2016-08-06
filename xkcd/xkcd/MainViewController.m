@@ -337,7 +337,7 @@
   //image
   __weak typeof(self) weakSelf = self;
   [comic getImage:^(UIImage * _Nonnull image) {
-    [weakSelf.scrollView setImage:image];
+    [weakSelf.scrollView setImage:image animated:YES];
     weakSelf.loading = NO;
     
     //favorites button
