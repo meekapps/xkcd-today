@@ -42,6 +42,7 @@
 		417062A31C606FC30003A3FD /* SpotlightManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 417062A21C606FC30003A3FD /* SpotlightManager.m */; };
 		417062A41C60783F0003A3FD /* SpotlightManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 417062A21C606FC30003A3FD /* SpotlightManager.m */; };
 		417062A51C6078490003A3FD /* LaunchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 417062991C606E2F0003A3FD /* LaunchManager.m */; };
+		419856A71D569F4B008B5EA5 /* UINavigationItem+Animate.m in Sources */ = {isa = PBXBuildFile; fileRef = 419856A61D569F4B008B5EA5 /* UINavigationItem+Animate.m */; };
 		41C79A131C7A6F3B0073237C /* ShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C79A121C7A6F3B0073237C /* ShareController.m */; };
 		41E025791C66A67500235CAA /* UIAlertController+SimpleAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E025781C66A67500235CAA /* UIAlertController+SimpleAction.m */; };
 		41F26A561D5407BA002242AE /* XKCDExplained.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F26A551D5407BA002242AE /* XKCDExplained.m */; };
@@ -144,6 +145,8 @@
 		417062991C606E2F0003A3FD /* LaunchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchManager.m; sourceTree = "<group>"; };
 		417062A11C606FC30003A3FD /* SpotlightManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightManager.h; sourceTree = "<group>"; };
 		417062A21C606FC30003A3FD /* SpotlightManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightManager.m; sourceTree = "<group>"; };
+		419856A51D569F4B008B5EA5 /* UINavigationItem+Animate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+Animate.h"; sourceTree = "<group>"; };
+		419856A61D569F4B008B5EA5 /* UINavigationItem+Animate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+Animate.m"; sourceTree = "<group>"; };
 		41C79A111C7A6F3B0073237C /* ShareController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareController.h; sourceTree = "<group>"; };
 		41C79A121C7A6F3B0073237C /* ShareController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareController.m; sourceTree = "<group>"; };
 		41E025771C66A67500235CAA /* UIAlertController+SimpleAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+SimpleAction.h"; sourceTree = "<group>"; };
@@ -346,6 +349,8 @@
 				412191AB1C5C73FB0005971C /* UIImage+AsyncImage.m */,
 				412E38E51C63A4BF00EB5B0D /* UIImage+XKCD.h */,
 				412E38E61C63A4BF00EB5B0D /* UIImage+XKCD.m */,
+				419856A51D569F4B008B5EA5 /* UINavigationItem+Animate.h */,
+				419856A61D569F4B008B5EA5 /* UINavigationItem+Animate.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -563,6 +568,7 @@
 				41FD61C41C61B5230096C39F /* ShortcutsManager.m in Sources */,
 				410DF1A11C6FEFF4000A19F6 /* Reachability.m in Sources */,
 				417062A31C606FC30003A3FD /* SpotlightManager.m in Sources */,
+				419856A71D569F4B008B5EA5 /* UINavigationItem+Animate.m in Sources */,
 				41C79A131C7A6F3B0073237C /* ShareController.m in Sources */,
 				412191671C5C624E0005971C /* xkcd.xcdatamodeld in Sources */,
 				4121919F1C5C643B0005971C /* PersistenceManager.m in Sources */,

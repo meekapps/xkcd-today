@@ -18,6 +18,7 @@
 #import "UIColor+XKCD.h"
 #import "UIImage+AsyncImage.h"
 #import "UIImage+XKCD.h"
+#import "UINavigationItem+Animate.h"
 #import "XKCD.h"
 #import "XKCDAlertController.h"
 #import "XKCDExplained.h"
@@ -320,7 +321,9 @@
   self.noNetworkLabel.hidden = YES;
   
   //nav bar title
-  self.title = comic.title;
+  [self.navigationItem setTitle:comic.title
+                inNavigationBar:self.navigationController.navigationBar
+                       animated:YES];
   
   //update the toolbar buttons
   if (self.currentComic.index) {
