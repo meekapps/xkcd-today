@@ -8,12 +8,12 @@
 
 #import "AppDelegate.h"
 #import "LaunchManager.h"
+#import "MainViewController.h"
 #import "NSNumber+Operations.h"
 #import "PersistenceManager.h"
 #import "Reachability.h"
 #import "ShareController.h"
 #import "SpotlightManager.h"
-#import "ViewController.h"
 #import "UIAlertController+SimpleAction.h"
 #import "UIColor+XKCD.h"
 #import "UIImage+AsyncImage.h"
@@ -22,14 +22,14 @@
 #import "XKCDAlertController.h"
 #import "XKCDExplained.h"
 
-@interface ViewController ()
+@interface MainViewController ()
 @property (strong, nonatomic) UIButton *previousButton, *nextButton, *randomButton;
 @property (strong, nonatomic) XKCDComic *currentComic;
 @property (copy, nonatomic) NSNumber *launchIndex;
 @property (nonatomic) BOOL loading, showingLatestComic, showingOldestComic;
 @end
 
-@implementation ViewController
+@implementation MainViewController
 
 #pragma mark - Lifecycle
 
@@ -139,7 +139,7 @@
 //Long pressed previous button
 - (void) oldestAction:(UILongPressGestureRecognizer*)sender {
   if (sender.state == UIGestureRecognizerStateBegan) {
-    __weak ViewController *weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     UIAlertController *alertController = [UIAlertController alertControllerWithOkButtonTitle:@"Jump to oldest"
                                                                              okButtonHandler:^{
                                                                                [weakSelf loadComicWithIndex:@(1)
@@ -154,7 +154,7 @@
 
 - (void) latestAction:(UILongPressGestureRecognizer*)sender {
   if (sender.state == UIGestureRecognizerStateBegan) {
-    __weak ViewController *weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     UIAlertController *alertController = [UIAlertController alertControllerWithOkButtonTitle:@"Jump to newest"
                                                                              okButtonHandler:^{
                                                                                [weakSelf loadComicWithIndex:nil
@@ -238,7 +238,7 @@
   self.loading = YES;
   
   //Finialize fetch of load from http.
-  __weak ViewController *weakSelf = self;
+  __weak typeof(self) weakSelf = self;
   void(^finalizeWithComic)(XKCDComic *comic) = ^void(XKCDComic *comic) {
     
     if (comic) {
@@ -335,7 +335,7 @@
   }
   
   //image
-  __weak ViewController *weakSelf = self;
+  __weak typeof(self) weakSelf = self;
   [comic getImage:^(UIImage * _Nonnull image) {
     [weakSelf.scrollView setImage:image];
     weakSelf.loading = NO;

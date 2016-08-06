@@ -23,10 +23,10 @@
             </objects>
             <point key="canvasLocation" x="-353.5" y="-36.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="L2V-wg-pGR">
             <objects>
-                <viewController id="VAm-ex-Dun" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="VAm-ex-Dun" customClass="MainViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Wgy-eI-hxS"/>
                         <viewControllerLayoutGuide type="bottom" id="L5d-ss-wZH"/>
