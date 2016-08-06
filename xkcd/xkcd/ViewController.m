@@ -20,6 +20,7 @@
 #import "UIImage+XKCD.h"
 #import "XKCD.h"
 #import "XKCDAlertController.h"
+#import "XKCDExplained.h"
 
 @interface ViewController ()
 @property (strong, nonatomic) UIButton *previousButton, *nextButton, *randomButton;
@@ -129,6 +130,11 @@
 }
 
 #pragma mark - Actions
+
+- (void) explainAction:(id)sender {
+  XKCDComic *comic = self.currentComic;
+  [XKCDExplained explain:comic];
+}
 
 //Long pressed previous button
 - (void) oldestAction:(UILongPressGestureRecognizer*)sender {
@@ -378,6 +384,10 @@
   [self setToolbarItems:items];
   
   [self.navigationController setToolbarHidden:NO];
+  
+  //Explain
+  UILongPressGestureRecognizer *explainGestureRecognizer =[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(explainAction:)];
+  [self.view addGestureRecognizer:explainGestureRecognizer];
 }
 
 #pragma mark - FavoritesViewControllerDelegte

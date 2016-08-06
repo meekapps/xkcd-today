@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Iz4-tc-9HO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Iz4-tc-9HO">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
@@ -40,6 +40,7 @@
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="97a-9u-Nb9">
                                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="375" placeholder="YES" id="dFa-jr-KcB"/>
                                             <constraint firstAttribute="height" constant="603" placeholder="YES" id="ydP-9k-sHR"/>
@@ -116,6 +117,11 @@
                 <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="KtN-oK-NSA" userLabel="Long Press Next">
                     <connections>
                         <action selector="latestAction:" destination="VAm-ex-Dun" id="QaD-wk-NEn"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="s7M-Jh-evj" userLabel="Long Press Explain">
+                    <connections>
+                        <action selector="explainAction:" destination="VAm-ex-Dun" id="rR8-aj-3yj"/>
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
