@@ -9,6 +9,7 @@
 #import "ComicScrollView.h"
 
 static CGFloat const kDefaultPadding = 10.0F;
+static NSTimeInterval const kScrollViewTransitionDuration = 0.12;
 
 @interface ComicScrollView()
 @end
@@ -53,7 +54,7 @@ static CGFloat const kDefaultPadding = 10.0F;
   
   if (animated) {
     [UIView transitionWithView:self
-                      duration:0.2F
+                      duration:kScrollViewTransitionDuration
                        options:UIViewAnimationOptionTransitionCrossDissolve
                     animations:NULL
                     completion:NULL];
