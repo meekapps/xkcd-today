@@ -19,7 +19,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *noNetworkLabel;
 
 - (IBAction) shareAction:(id)sender;
-- (IBAction) explainAction:(id)sender;
 - (IBAction) showFavoritesAction:(id)sender;
 - (IBAction) toggleFavoriteAction:(id)sender;
 

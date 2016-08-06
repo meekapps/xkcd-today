@@ -12,6 +12,7 @@
 @interface XKCDAlertController : UIAlertController
 
 + (instancetype) blacklistAlertControllerWithComic:(XKCDComic*)comic;
+
 + (instancetype) imageErrorAlertControllerWithComic:(XKCDComic*)comic;
 
 @end

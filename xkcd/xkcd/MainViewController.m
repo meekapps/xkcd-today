@@ -133,7 +133,15 @@
 
 - (void) explainAction:(id)sender {
   XKCDComic *comic = self.currentComic;
-  [XKCDExplained explain:comic];
+  UIAlertController *alertController = [UIAlertController alertControllerWithOkButtonTitle:@"Explain?"
+                                                                           okButtonHandler:^{
+                                                                             [XKCDExplained explain:comic];
+                                                                           }];
+  [self.navigationController presentViewController:alertController
+                                          animated:YES
+                                        completion:^{
+                                          //Do nothing.
+                                        }];
 }
 
 //Long pressed previous button
