@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/meekapps/xkcd-today.svg?branch=master)](https://travis-ci.org/meekapps/xkcd-today)
+
 # xkcd-today
 
 xkcd reader app and today view widget for iOS.
