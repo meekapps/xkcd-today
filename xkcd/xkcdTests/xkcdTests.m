@@ -6,6 +6,9 @@
 //  Copyright © 2016 meek apps. All rights reserved.
 //
 
+#import "NSDate+ShortDate.h"
+#import "NSError+Message.h"
+#import "NSNumber+Operations.h"
 #import <XCTest/XCTest.h>
 
 @interface xkcdTests : XCTestCase
@@ -15,25 +18,36 @@
 @implementation xkcdTests
 
 - (void)setUp {
-    [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+  [super setUp];
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
+  [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
+#pragma mark - NSDate+ShortDate
+
+- (void)testShortDate {
+  NSDate *date = [NSDate dateWithTimeIntervalSince1970:0];
+  NSString *shortDate = [date shortDate];
+  XCTAssert([shortDate isEqualToString:@"12/31/69"]);
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+#pragma mark - NSError+Message
+- (void) testErrorMessage {
+  NSError *error = [NSError errorWithDomain:@"domain"
+                                       code:42
+                                    message:@"message"];
+  
+  XCTAssert([error.domain isEqualToString:@"domain"]);
+  XCTAssert(error.code == 42);
+  XCTAssert([error.userInfo[@"error"] isEqualToString:@"message"]);
+}
+
+#pragma mark - NSNumber+Operations
+- (void) testAdd {
+  NSNumber *sum = [@(5) add:3];
+  XCTAssert([sum compare:@(8)] == NSOrderedSame);
 }
 
 @end
