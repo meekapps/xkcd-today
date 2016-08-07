@@ -136,7 +136,14 @@
   XKCDComic *comic = self.currentComic;
   UIAlertController *alertController = [UIAlertController alertControllerWithOkButtonTitle:@"Explain?"
                                                                            okButtonHandler:^{
-                                                                             [XKCDExplained explain:comic];
+//                                                                             [XKCDExplained explain:comic];
+                                                                             
+                                                                             [XKCDExplained explain:comic
+                                                                                         completion:^(NSString *explanation,
+                                                                                                      NSError *error) {
+                                                                                           NSLog(@"explain request: %@, error: %@", explanation, error);
+                                                                                           
+                                                                                         }];
                                                                            }];
   [self.navigationController presentViewController:alertController
                                           animated:YES
