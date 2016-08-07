@@ -7,6 +7,7 @@
 //
 
 #import "NSError+Message.h"
+#import "NSString+StripTags.h"
 #import "XKCDExplained.h"
 #import "XKCDComic.h"
 
@@ -31,14 +32,16 @@ static NSString *const kXKCDExplainedWildcardKey = @"*";
                                          completionHandler:^(NSData * _Nullable data,
                                                              NSURLResponse * _Nullable response,
                                                              NSError * _Nullable error) {
-                                           //Success
-                                           if (data && !error) {
-                                             [weakSelf handleSuccess:data completion:completion];
-             
-                                             //Error
-                                           } else {
-                                             [weakSelf handleError:error completion:completion];
-                                           }
+                                           dispatch_async(dispatch_get_main_queue(), ^{
+                                             //Success
+                                             if (data && !error) {
+                                               [weakSelf handleSuccess:data completion:completion];
+               
+                                               //Error
+                                             } else {
+                                               [weakSelf handleError:error completion:completion];
+                                             }
+                                           });
                                          }];
   [request resume];
 }
@@ -118,9 +121,10 @@ static NSString *const kXKCDExplainedWildcardKey = @"*";
     return;
   }
   
-  //TODO: remove tags.
+  NSString *sanitized = [explanationHtml stripTags];
+  
   //Success, complete
-  completion(explanationHtml, nil);
+  completion(sanitized, nil);
 }
 
 + (void) handleError:(NSError*)error

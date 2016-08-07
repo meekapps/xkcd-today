@@ -47,6 +47,7 @@
 		419856AD1D57A81D008B5EA5 /* XKCDExplainedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 419856AC1D57A81D008B5EA5 /* XKCDExplainedViewController.m */; };
 		419856B11D57A8C1008B5EA5 /* Explained.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 419856B01D57A8C1008B5EA5 /* Explained.storyboard */; };
 		419856B41D57A94C008B5EA5 /* UIStoryboard+XKCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 419856B31D57A94C008B5EA5 /* UIStoryboard+XKCD.m */; };
+		419856B71D57AE10008B5EA5 /* NSString+StripTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 419856B61D57AE10008B5EA5 /* NSString+StripTags.m */; };
 		41C79A131C7A6F3B0073237C /* ShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C79A121C7A6F3B0073237C /* ShareController.m */; };
 		41E025791C66A67500235CAA /* UIAlertController+SimpleAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E025781C66A67500235CAA /* UIAlertController+SimpleAction.m */; };
 		41F26A561D5407BA002242AE /* XKCDExplained.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F26A551D5407BA002242AE /* XKCDExplained.m */; };
@@ -158,6 +159,8 @@
 		419856B01D57A8C1008B5EA5 /* Explained.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Explained.storyboard; sourceTree = "<group>"; };
 		419856B21D57A94C008B5EA5 /* UIStoryboard+XKCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIStoryboard+XKCD.h"; sourceTree = "<group>"; };
 		419856B31D57A94C008B5EA5 /* UIStoryboard+XKCD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIStoryboard+XKCD.m"; sourceTree = "<group>"; };
+		419856B51D57AE10008B5EA5 /* NSString+StripTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+StripTags.h"; sourceTree = "<group>"; };
+		419856B61D57AE10008B5EA5 /* NSString+StripTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StripTags.m"; sourceTree = "<group>"; };
 		41C79A111C7A6F3B0073237C /* ShareController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareController.h; sourceTree = "<group>"; };
 		41C79A121C7A6F3B0073237C /* ShareController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareController.m; sourceTree = "<group>"; };
 		41E025771C66A67500235CAA /* UIAlertController+SimpleAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+SimpleAction.h"; sourceTree = "<group>"; };
@@ -355,6 +358,8 @@
 				419856A91D57950D008B5EA5 /* NSError+Message.m */,
 				4142079F1C5D4998009853D7 /* NSNumber+Operations.h */,
 				414207A01C5D4998009853D7 /* NSNumber+Operations.m */,
+				419856B51D57AE10008B5EA5 /* NSString+StripTags.h */,
+				419856B61D57AE10008B5EA5 /* NSString+StripTags.m */,
 				4108CA661CB9AF80006CF7F9 /* NSString+XKCDImageUrl.h */,
 				4108CA671CB9AF80006CF7F9 /* NSString+XKCDImageUrl.m */,
 				41E025771C66A67500235CAA /* UIAlertController+SimpleAction.h */,
@@ -593,6 +598,7 @@
 				41C79A131C7A6F3B0073237C /* ShareController.m in Sources */,
 				412191671C5C624E0005971C /* xkcd.xcdatamodeld in Sources */,
 				4121919F1C5C643B0005971C /* PersistenceManager.m in Sources */,
+				419856B71D57AE10008B5EA5 /* NSString+StripTags.m in Sources */,
 				41FD61CE1C61C8810096C39F /* XKCDComic+CoreDataProperties.m in Sources */,
 				4170629A1C606E2F0003A3FD /* LaunchManager.m in Sources */,
 				412191A91C5C70A70005971C /* UIColor+XKCD.m in Sources */,

@@ -11,6 +11,7 @@
 
 @interface XKCDExplainedViewController()
 @property (copy, nonatomic) NSString *explanation;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
 @end
 
 @implementation XKCDExplainedViewController
@@ -43,6 +44,7 @@
   
   //TODO: update view with explanation.
   
+  self.textView.text = explanation;
   
 }
 
