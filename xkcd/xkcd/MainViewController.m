@@ -19,9 +19,11 @@
 #import "UIImage+AsyncImage.h"
 #import "UIImage+XKCD.h"
 #import "UINavigationItem+Animate.h"
+#import "UIStoryboard+XKCD.h"
 #import "XKCD.h"
 #import "XKCDAlertController.h"
 #import "XKCDExplained.h"
+#import "XKCDExplainedViewController.h"
 
 @interface MainViewController ()
 @property (strong, nonatomic) UIButton *previousButton, *nextButton, *randomButton;
@@ -132,12 +134,24 @@
 
 #pragma mark - Actions
 
-- (void) explainAction:(id)sender {
+- (void) explainAction:(UILongPressGestureRecognizer*)sender {
+  if (sender.state != UIGestureRecognizerStateBegan) return;
+  
   XKCDComic *comic = self.currentComic;
-  UIAlertController *alertController = [UIAlertController alertControllerWithOkButtonTitle:@"Explain?"
-                                                                           okButtonHandler:^{
-                                                                             [XKCDExplained explain:comic];
-                                                                           }];
+  
+  __weak typeof(self) weakSelf = self;
+  void(^showExplain)(void) = ^{
+    UINavigationController *explainNavigationController = [UIStoryboard explainedRootNavigationController];
+    XKCDExplainedViewController *explainViewController = explainNavigationController.viewControllers.firstObject;
+    explainViewController.comic = comic;
+    explainNavigationController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [weakSelf.navigationController presentViewController:explainNavigationController
+                                                animated:YES
+                                              completion:^{}];
+  };
+  
+  UIAlertController *alertController = [UIAlertController alertControllerWithOkButtonTitle:@"Explain"
+                                                                           okButtonHandler:showExplain];
   [self.navigationController presentViewController:alertController
                                           animated:YES
                                         completion:^{
@@ -147,33 +161,32 @@
 
 //Long pressed previous button
 - (void) oldestAction:(UILongPressGestureRecognizer*)sender {
-  if (sender.state == UIGestureRecognizerStateBegan) {
-    __weak typeof(self) weakSelf = self;
-    UIAlertController *alertController = [UIAlertController alertControllerWithOkButtonTitle:@"Jump to oldest"
-                                                                             okButtonHandler:^{
-                                                                               [weakSelf loadComicWithIndex:@(1)
-                                                                                               forceUpdate:NO];
-                                                                             }];
-    
-    [self.navigationController presentViewController:alertController
-                                            animated:YES
-                                          completion:^{}];
-  }
+  if (sender.state != UIGestureRecognizerStateBegan) return;
+  __weak typeof(self) weakSelf = self;
+  UIAlertController *alertController = [UIAlertController alertControllerWithOkButtonTitle:@"Jump to oldest"
+                                                                           okButtonHandler:^{
+                                                                             [weakSelf loadComicWithIndex:@(1)
+                                                                                             forceUpdate:NO];
+                                                                           }];
+  
+  [self.navigationController presentViewController:alertController
+                                          animated:YES
+                                        completion:^{}];
 }
 
 - (void) latestAction:(UILongPressGestureRecognizer*)sender {
-  if (sender.state == UIGestureRecognizerStateBegan) {
-    __weak typeof(self) weakSelf = self;
-    UIAlertController *alertController = [UIAlertController alertControllerWithOkButtonTitle:@"Jump to newest"
-                                                                             okButtonHandler:^{
-                                                                               [weakSelf loadComicWithIndex:nil
-                                                                                               forceUpdate:NO];
-                                                                             }];
-    
-    [self.navigationController presentViewController:alertController
-                                            animated:YES
-                                          completion:^{}];
-  }
+  if (sender.state != UIGestureRecognizerStateBegan) return;
+  
+  __weak typeof(self) weakSelf = self;
+  UIAlertController *alertController = [UIAlertController alertControllerWithOkButtonTitle:@"Jump to newest"
+                                                                           okButtonHandler:^{
+                                                                             [weakSelf loadComicWithIndex:nil
+                                                                                             forceUpdate:NO];
+                                                                           }];
+  
+  [self.navigationController presentViewController:alertController
+                                          animated:YES
+                                        completion:^{}];
 }
 
 - (void) previousAction:(UIButton*)sender {
@@ -222,9 +235,8 @@
 }
 
 - (IBAction) showFavoritesAction:(id)sender {
-  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Favorites"
-                                                       bundle:[NSBundle mainBundle]];
-  UINavigationController *favoritesNavigationController = [storyboard instantiateInitialViewController];
+  
+  UINavigationController *favoritesNavigationController = [UIStoryboard favoritesRootNavigationController];
   FavoritesViewController *favoritesViewController = favoritesNavigationController.viewControllers.firstObject;
   favoritesViewController.delegate = self;
   
@@ -369,7 +381,8 @@
   [self.previousButton setTitle:@"<Prev" forState:UIControlStateNormal];
   [self.previousButton addTarget:self action:@selector(previousAction:) forControlEvents:UIControlEventTouchUpInside];
   self.previousButton.frame = CGRectMake(0.0F, 0.0F, 60.0F, 34.0F);
-  UILongPressGestureRecognizer *previousLongPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(oldestAction:)];
+  UILongPressGestureRecognizer *previousLongPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                                                                            action:@selector(oldestAction:)];
   [self.previousButton addGestureRecognizer:previousLongPressRecognizer];
   UIBarButtonItem *previousButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.previousButton];
   
@@ -385,11 +398,14 @@
   [self.nextButton setTitle:@"Next>" forState:UIControlStateNormal];
   [self.nextButton addTarget:self action:@selector(nextAction:) forControlEvents:UIControlEventTouchUpInside];
   self.nextButton.frame = CGRectMake(0.0F, 0.0F, 60.0F, 34.0F);
-  UILongPressGestureRecognizer *nextLongPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(latestAction:)];
+  UILongPressGestureRecognizer *nextLongPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                                                                        action:@selector(latestAction:)];
   [self.nextButton addGestureRecognizer:nextLongPressRecognizer];
   UIBarButtonItem *nextButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
   
-  UIBarButtonItem *flexibleSpaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+  UIBarButtonItem *flexibleSpaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                     target:nil
+                                                                                     action:nil];
   
   NSArray <UIBarButtonItem*>*items = @[flexibleSpaceItem, previousButtonItem, flexibleSpaceItem, randomButtonItem, flexibleSpaceItem, nextButtonItem, flexibleSpaceItem];
   [self setToolbarItems:items];
@@ -397,7 +413,8 @@
   [self.navigationController setToolbarHidden:NO];
   
   //Explain
-  UILongPressGestureRecognizer *explainGestureRecognizer =[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(explainAction:)];
+  UILongPressGestureRecognizer *explainGestureRecognizer =[[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                                                                        action:@selector(explainAction:)];
   [self.view addGestureRecognizer:explainGestureRecognizer];
 }
 

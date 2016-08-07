@@ -10,8 +10,15 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void(^XKCDExplainedCompletion)(NSString *explanation, NSError *error);
+
 @interface XKCDExplained : NSObject
 
-+ (void) explain:(XKCDComic*)comic;
+/// Calls Wikimedia API. Completes with plain text of explanation.
++ (void) explain:(XKCDComic*)comic
+      completion:(XKCDExplainedCompletion)completion;
+
+/// Opens Safari to explanation.
++ (void) openExplanationInSafari:(XKCDComic*)comic;
 
 @end
