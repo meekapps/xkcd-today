@@ -10,6 +10,17 @@
 
 @interface NSString (StripTags)
 
+/// Returns string with <p> tags converted to newlines.
+- (NSString*) convertParagraphTagsToNewlines;
+
+/// Removes any "[edit]" wiki text.
+- (NSString*) stripEdits;
+
+/// Returns plain string with HTML tags stripped out.
 - (NSString*) stripTags;
+
+
+/// Returns string trimmed before Explanation.
+- (NSString*) trimStringBeforeExplanation;
 
 @end

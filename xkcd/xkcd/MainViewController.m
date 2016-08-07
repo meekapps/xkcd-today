@@ -150,7 +150,7 @@
                                               completion:^{}];
   };
   
-  UIAlertController *alertController = [UIAlertController alertControllerWithOkButtonTitle:@"Explain?"
+  UIAlertController *alertController = [UIAlertController alertControllerWithOkButtonTitle:@"Explain"
                                                                            okButtonHandler:showExplain];
   [self.navigationController presentViewController:alertController
                                           animated:YES

@@ -19,6 +19,6 @@ typedef void(^XKCDExplainedCompletion)(NSString *explanation, NSError *error);
       completion:(XKCDExplainedCompletion)completion;
 
 /// Opens Safari to explanation.
-+ (void) explain:(XKCDComic*)comic;
++ (void) openExplanationInSafari:(XKCDComic*)comic;
 
 @end

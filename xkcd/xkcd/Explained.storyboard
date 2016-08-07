@@ -40,14 +40,17 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" indicatorStyle="white" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sHf-iZ-5sb">
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" indicatorStyle="white" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sHf-iZ-5sb">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <inset key="scrollIndicatorInsets" minX="0.0" minY="64" maxX="0.0" maxY="0.0"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Hxe-8E-i6N">
+                                            <rect key="frame" x="177" y="324" width="20" height="20"/>
+                                        </activityIndicatorView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
@@ -55,6 +58,8 @@
                                         <constraint firstAttribute="trailing" secondItem="sHf-iZ-5sb" secondAttribute="trailing" id="3cv-fv-xNU"/>
                                         <constraint firstItem="sHf-iZ-5sb" firstAttribute="top" secondItem="cmb-Gh-Esi" secondAttribute="top" id="Mj5-L8-tda"/>
                                         <constraint firstAttribute="bottom" secondItem="sHf-iZ-5sb" secondAttribute="bottom" id="f3s-97-faR"/>
+                                        <constraint firstItem="Hxe-8E-i6N" firstAttribute="centerX" secondItem="cmb-Gh-Esi" secondAttribute="centerX" id="gBB-s2-ZTu"/>
+                                        <constraint firstItem="Hxe-8E-i6N" firstAttribute="centerY" secondItem="cmb-Gh-Esi" secondAttribute="centerY" id="zE8-rD-1m7"/>
                                     </constraints>
                                 </view>
                                 <blurEffect style="dark"/>
@@ -69,6 +74,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xdd-yo-rrT">
+                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="I1S-Up-f8d">
+                            <connections>
+                                <action selector="openInSafariAction:" destination="5ob-uv-VYR" id="Thd-Ye-XyZ"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="z3m-me-mvC">
                             <connections>
                                 <action selector="closeAction:" destination="5ob-uv-VYR" id="tni-hm-v3b"/>
@@ -76,6 +86,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="loaderView" destination="Hxe-8E-i6N" id="DWX-yD-4XN"/>
                         <outlet property="textView" destination="sHf-iZ-5sb" id="mDw-ff-BGf"/>
                     </connections>
                 </viewController>

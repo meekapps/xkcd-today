@@ -46,7 +46,7 @@ static NSString *const kXKCDExplainedWildcardKey = @"*";
   [request resume];
 }
 
-+ (void) explain:(XKCDComic*)comic {
++ (void) openExplanationInSafari:(XKCDComic*)comic {
   NSNumber *comicIndex = comic.index;
   NSString *explainUrl = [NSString stringWithFormat:@"%@/%@", kExplainUrl, comicIndex];
   NSURL *url = [NSURL URLWithString:explainUrl];
@@ -121,7 +121,7 @@ static NSString *const kXKCDExplainedWildcardKey = @"*";
     return;
   }
   
-  NSString *sanitized = [explanationHtml stripTags];
+  NSString *sanitized = [self sanitizedStringFromHtml:explanationHtml];
   
   //Success, complete
   completion(sanitized, nil);
@@ -139,6 +139,14 @@ static NSString *const kXKCDExplainedWildcardKey = @"*";
   //No NSError, make one.
   error = [self errorWithMessage:@"Unknown error."];
   completion(nil, error);
+}
+
++ (NSString*) sanitizedStringFromHtml:(NSString*)htmlString {
+  NSString *string = [htmlString convertParagraphTagsToNewlines];
+  string = [string stripTags];
+  string = [string stripEdits];
+  string = [string trimStringBeforeExplanation];
+  return string;
 }
 
 @end

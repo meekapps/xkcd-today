@@ -10,15 +10,41 @@
 
 @implementation NSString (StripTags)
 
--(NSString*) stripTags {
+- (NSString*) convertParagraphTagsToNewlines {
+  NSString *string = [self copy];
+  
+  string = [string stringByReplacingOccurrencesOfString:@"<p>" withString:@"\n"];
+  
+  return string;
+}
+
+- (NSString*) stripEdits {
+  NSString *string = [self copy];
+  
+  string = [string stringByReplacingOccurrencesOfString:@"[edit] " withString:@""];
+  
+  return string;
+}
+
+- (NSString*) stripTags {
   
   NSString *string = [self copy];
+  
   NSRange range;
   while ((range = [string rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound) {
     
     string = [string stringByReplacingCharactersInRange:range
                                              withString:@""];
   }
+  return string;
+}
+
+- (NSString*) trimStringBeforeExplanation {
+  NSString *string = [self copy];
+  
+  NSRange explanationRange = [string rangeOfString:@"Explanation"];
+  string = [string substringFromIndex:explanationRange.location];
+  
   return string;
 }
 
