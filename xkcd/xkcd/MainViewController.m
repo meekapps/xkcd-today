@@ -19,9 +19,11 @@
 #import "UIImage+AsyncImage.h"
 #import "UIImage+XKCD.h"
 #import "UINavigationItem+Animate.h"
+#import "UIStoryboard+XKCD.h"
 #import "XKCD.h"
 #import "XKCDAlertController.h"
 #import "XKCDExplained.h"
+#import "XKCDExplainedViewController.h"
 
 @interface MainViewController ()
 @property (strong, nonatomic) UIButton *previousButton, *nextButton, *randomButton;
@@ -133,18 +135,22 @@
 #pragma mark - Actions
 
 - (void) explainAction:(id)sender {
+  
   XKCDComic *comic = self.currentComic;
+  
+  __weak typeof(self) weakSelf = self;
+  void(^showExplain)(void) = ^{
+    UINavigationController *explainNavigationController = [UIStoryboard explainedRootNavigationController];
+    XKCDExplainedViewController *explainViewController = explainNavigationController.viewControllers.firstObject;
+    explainViewController.comic = comic;
+    explainNavigationController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [weakSelf.navigationController presentViewController:explainNavigationController
+                                                animated:YES
+                                              completion:^{}];
+  };
+  
   UIAlertController *alertController = [UIAlertController alertControllerWithOkButtonTitle:@"Explain?"
-                                                                           okButtonHandler:^{
-//                                                                             [XKCDExplained explain:comic];
-                                                                             
-                                                                             [XKCDExplained explain:comic
-                                                                                         completion:^(NSString *explanation,
-                                                                                                      NSError *error) {
-                                                                                           NSLog(@"explain request: %@, error: %@", explanation, error);
-                                                                                           
-                                                                                         }];
-                                                                           }];
+                                                                           okButtonHandler:showExplain];
   [self.navigationController presentViewController:alertController
                                           animated:YES
                                         completion:^{
@@ -229,9 +235,8 @@
 }
 
 - (IBAction) showFavoritesAction:(id)sender {
-  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Favorites"
-                                                       bundle:[NSBundle mainBundle]];
-  UINavigationController *favoritesNavigationController = [storyboard instantiateInitialViewController];
+  
+  UINavigationController *favoritesNavigationController = [UIStoryboard favoritesRootNavigationController];
   FavoritesViewController *favoritesViewController = favoritesNavigationController.viewControllers.firstObject;
   favoritesViewController.delegate = self;
   

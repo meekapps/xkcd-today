@@ -44,6 +44,9 @@
 		417062A51C6078490003A3FD /* LaunchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 417062991C606E2F0003A3FD /* LaunchManager.m */; };
 		419856A71D569F4B008B5EA5 /* UINavigationItem+Animate.m in Sources */ = {isa = PBXBuildFile; fileRef = 419856A61D569F4B008B5EA5 /* UINavigationItem+Animate.m */; };
 		419856AA1D57950D008B5EA5 /* NSError+Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 419856A91D57950D008B5EA5 /* NSError+Message.m */; };
+		419856AD1D57A81D008B5EA5 /* XKCDExplainedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 419856AC1D57A81D008B5EA5 /* XKCDExplainedViewController.m */; };
+		419856B11D57A8C1008B5EA5 /* Explained.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 419856B01D57A8C1008B5EA5 /* Explained.storyboard */; };
+		419856B41D57A94C008B5EA5 /* UIStoryboard+XKCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 419856B31D57A94C008B5EA5 /* UIStoryboard+XKCD.m */; };
 		41C79A131C7A6F3B0073237C /* ShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C79A121C7A6F3B0073237C /* ShareController.m */; };
 		41E025791C66A67500235CAA /* UIAlertController+SimpleAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E025781C66A67500235CAA /* UIAlertController+SimpleAction.m */; };
 		41F26A561D5407BA002242AE /* XKCDExplained.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F26A551D5407BA002242AE /* XKCDExplained.m */; };
@@ -150,6 +153,11 @@
 		419856A61D569F4B008B5EA5 /* UINavigationItem+Animate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+Animate.m"; sourceTree = "<group>"; };
 		419856A81D57950D008B5EA5 /* NSError+Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+Message.h"; sourceTree = "<group>"; };
 		419856A91D57950D008B5EA5 /* NSError+Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+Message.m"; sourceTree = "<group>"; };
+		419856AB1D57A81D008B5EA5 /* XKCDExplainedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XKCDExplainedViewController.h; sourceTree = "<group>"; };
+		419856AC1D57A81D008B5EA5 /* XKCDExplainedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XKCDExplainedViewController.m; sourceTree = "<group>"; };
+		419856B01D57A8C1008B5EA5 /* Explained.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Explained.storyboard; sourceTree = "<group>"; };
+		419856B21D57A94C008B5EA5 /* UIStoryboard+XKCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIStoryboard+XKCD.h"; sourceTree = "<group>"; };
+		419856B31D57A94C008B5EA5 /* UIStoryboard+XKCD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIStoryboard+XKCD.m"; sourceTree = "<group>"; };
 		41C79A111C7A6F3B0073237C /* ShareController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareController.h; sourceTree = "<group>"; };
 		41C79A121C7A6F3B0073237C /* ShareController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareController.m; sourceTree = "<group>"; };
 		41E025771C66A67500235CAA /* UIAlertController+SimpleAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+SimpleAction.h"; sourceTree = "<group>"; };
@@ -273,6 +281,7 @@
 		412191961C5C63830005971C /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				419856B01D57A8C1008B5EA5 /* Explained.storyboard */,
 				41FD61D31C61C8E90096C39F /* Favorites.storyboard */,
 				4121916A1C5C624E0005971C /* LaunchScreen.storyboard */,
 				412191621C5C624E0005971C /* Main.storyboard */,
@@ -331,6 +340,8 @@
 				412191601C5C624E0005971C /* MainViewController.m */,
 				4108CA691CB9C192006CF7F9 /* XKCDAlertController.h */,
 				4108CA6A1CB9C192006CF7F9 /* XKCDAlertController.m */,
+				419856AB1D57A81D008B5EA5 /* XKCDExplainedViewController.h */,
+				419856AC1D57A81D008B5EA5 /* XKCDExplainedViewController.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -356,6 +367,8 @@
 				412E38E61C63A4BF00EB5B0D /* UIImage+XKCD.m */,
 				419856A51D569F4B008B5EA5 /* UINavigationItem+Animate.h */,
 				419856A61D569F4B008B5EA5 /* UINavigationItem+Animate.m */,
+				419856B21D57A94C008B5EA5 /* UIStoryboard+XKCD.h */,
+				419856B31D57A94C008B5EA5 /* UIStoryboard+XKCD.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -520,6 +533,7 @@
 			files = (
 				4121916C1C5C624E0005971C /* LaunchScreen.storyboard in Resources */,
 				412191691C5C624E0005971C /* Assets.xcassets in Resources */,
+				419856B11D57A8C1008B5EA5 /* Explained.storyboard in Resources */,
 				41FD61D41C61C8E90096C39F /* Favorites.storyboard in Resources */,
 				412191641C5C624E0005971C /* Main.storyboard in Resources */,
 			);
@@ -561,10 +575,12 @@
 				412191AC1C5C73FB0005971C /* UIImage+AsyncImage.m in Sources */,
 				4121915E1C5C624E0005971C /* AppDelegate.m in Sources */,
 				4108CA681CB9AF80006CF7F9 /* NSString+XKCDImageUrl.m in Sources */,
+				419856AD1D57A81D008B5EA5 /* XKCDExplainedViewController.m in Sources */,
 				4121915B1C5C624E0005971C /* main.m in Sources */,
 				41E025791C66A67500235CAA /* UIAlertController+SimpleAction.m in Sources */,
 				41FD61D81C61CD620096C39F /* FavoriteTableViewCell.m in Sources */,
 				412191A21C5C64F20005971C /* XKCD.m in Sources */,
+				419856B41D57A94C008B5EA5 /* UIStoryboard+XKCD.m in Sources */,
 				41FD61D21C61C8C10096C39F /* FavoritesViewController.m in Sources */,
 				41F26A561D5407BA002242AE /* XKCDExplained.m in Sources */,
 				414207A11C5D4998009853D7 /* NSNumber+Operations.m in Sources */,
