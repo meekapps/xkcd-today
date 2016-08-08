@@ -5,6 +5,7 @@ script:
     -workspace xkcd.xcworkspace 
     -scheme xkcdTests 
     -sdk iphonesimulator
+    -arch i386
     build test
     CODE_SIGN_IDENTITY="" 
     CODE_SIGNING_REQUIRED=NO
