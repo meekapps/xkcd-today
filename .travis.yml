@@ -7,5 +7,6 @@ script:
     -sdk iphonesimulator
     -arch i386
     build test
+    ONLY_ACTIVE_ARCH=NO
     CODE_SIGN_IDENTITY="" 
     CODE_SIGNING_REQUIRED=NO
