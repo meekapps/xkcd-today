@@ -47,7 +47,44 @@
 #pragma mark - NSNumber+Operations
 - (void) testAdd {
   NSNumber *sum = [@(5) add:3];
-  XCTAssert([sum compare:@(8)] == NSOrderedSame);
+  XCTAssert([sum equals:@(8)]);
+}
+
+- (void) testEquals {
+  NSNumber *five = @(5);
+  NSNumber *anotherFive = @(5);
+  NSNumber *six = @(6);
+  XCTAssertTrue([five equals:anotherFive]);
+  XCTAssertFalse([five equals:six]);
+}
+
+- (void) testGreaterThan {
+  NSNumber *ten = @(10);
+  NSNumber *five = @(5);
+  XCTAssertTrue([ten greaterThan:five]);
+  XCTAssertFalse([five greaterThan:ten]);
+}
+
+- (void) testLessThan {
+  NSNumber *ten = @(10);
+  NSNumber *five = @(5);
+  XCTAssertTrue([five lessThan:ten]);
+  XCTAssertFalse([ten lessThan:five]);
+}
+
+- (void) testSubtract {
+  NSNumber *difference = [@(10) subtract:5];
+  XCTAssert([difference equals:@(5)]);
+}
+
+- (void) testRandom {
+  NSNumber *min = @(10);
+  NSNumber *max = @(100);
+  for (int i = 0; i < 10000; i++) {
+    NSNumber *random = [NSNumber randomWithMinimum:min maximum:max];
+    XCTAssert([random lessThan:[max add:1]]);
+    XCTAssert([random greaterThan:[min subtract:1]]);
+  }
 }
 
 @end
