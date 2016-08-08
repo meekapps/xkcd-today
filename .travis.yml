@@ -1,5 +1,12 @@
 language: objective-c
-xcode_workspace: xkcd.xcworkspace
-xcode_scheme: xkcdTests
+
 script:
-  - xcodebuild [DEFAULT_OPTIONS] CODE_SIGNING_REQUIRED=NO
+  xctool
+  -workspace xkcd.xcworkspace
+  -scheme xkcdTests
+  -sdk iphonesimulator
+  -destination 'platform=iOS Simulator, name=iPhone 6s'
+  build
+  test
+  CODE_SIGN_IDENTITY=""
+  CODE_SIGNING_REQUIRED=NO
