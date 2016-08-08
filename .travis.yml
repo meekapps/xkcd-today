@@ -5,7 +5,7 @@ script:
   -workspace xkcd.xcworkspace
   -scheme xkcdTests
   -sdk iphonesimulator
-  -destination 'platform=iOS Simulator, name=iPhone 6s'
+  -destination 'platform=iOS Simulator, name=iPhone 6'
   build
   test
   CODE_SIGN_IDENTITY=""
