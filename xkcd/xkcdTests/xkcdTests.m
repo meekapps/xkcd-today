@@ -25,13 +25,13 @@
   [super tearDown];
 }
 
-#pragma mark - NSDate+ShortDate
-
-- (void)testShortDate {
-  NSDate *date = [NSDate dateWithTimeIntervalSince1970:0];
-  NSString *shortDate = [date shortDate];
-  XCTAssert([shortDate isEqualToString:@"12/31/69"]);
-}
+//#pragma mark - NSDate+ShortDate
+//
+//- (void)testShortDate {
+//  NSDate *date = [NSDate dateWithTimeIntervalSince1970:0];
+//  NSString *shortDate = [date shortDate];
+//  XCTAssert([shortDate isEqualToString:@"12/31/69"]);
+//}
 
 #pragma mark - NSError+Message
 - (void) testErrorMessage {
