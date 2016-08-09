@@ -19,7 +19,6 @@
 /// Returns plain string with HTML tags stripped out.
 - (NSString*) stripTags;
 
-
 /// Returns string trimmed before Explanation.
 - (NSString*) trimStringBeforeExplanation;
 
