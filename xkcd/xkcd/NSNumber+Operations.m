@@ -26,7 +26,7 @@
   if (!number) return NO;
   
   NSComparisonResult result = [self compare:number];
-  BOOL greater = result == NSOrderedAscending;
+  BOOL greater = result == NSOrderedDescending;
   return greater;
 }
 
@@ -34,7 +34,7 @@
   if (!number) return NO;
   
   NSComparisonResult result = [self compare:number];
-  BOOL less = result == NSOrderedDescending;
+  BOOL less = result == NSOrderedAscending;
   return less;
 }
 
@@ -44,9 +44,11 @@
 
 + (NSNumber*) randomWithMinimum:(NSNumber*)minimum
                         maximum:(NSNumber*)maximum {
+  if ([minimum greaterThan:maximum]) return @0;
+  
   int minInt = (int)minimum.integerValue;
   int maxInt = (int)maximum.integerValue;
-  int random = arc4random_uniform(maxInt);
+  int random = arc4random_uniform(maxInt - minInt + 1);
   int boundedRandom = minInt + random;
   return @(boundedRandom);
 }
