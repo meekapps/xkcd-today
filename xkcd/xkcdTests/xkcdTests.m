@@ -9,6 +9,8 @@
 #import "NSDate+ShortDate.h"
 #import "NSError+Message.h"
 #import "NSNumber+Operations.h"
+#import "NSString+StripTags.h"
+#import "NSString+XKCDImageUrl.h"
 #import <XCTest/XCTest.h>
 
 @interface xkcdTests : XCTestCase
@@ -25,13 +27,14 @@
   [super tearDown];
 }
 
-//#pragma mark - NSDate+ShortDate
-//
-//- (void)testShortDate {
+#pragma mark - NSDate+ShortDate
+
+- (void)testShortDate {
+  //TODO: this fails in travis but not in xcode. wat?
 //  NSDate *date = [NSDate dateWithTimeIntervalSince1970:0];
 //  NSString *shortDate = [date shortDate];
 //  XCTAssert([shortDate isEqualToString:@"12/31/69"]);
-//}
+}
 
 #pragma mark - NSError+Message
 - (void) testErrorMessage {
@@ -85,6 +88,60 @@
     XCTAssert([random lessThan:[max add:1]]);
     XCTAssert([random greaterThan:[min subtract:1]]);
   }
+}
+
+#pragma mark - NSString+StripTags
+
+- (void) testParagraphTagNewlines {
+  NSString *paragraphTags = @"<p>hello<p>world";
+  NSString *converted = [paragraphTags convertParagraphTagsToNewlines];
+  NSString *expected = @"\nhello\nworld";
+  XCTAssert([converted isEqualToString:expected]);
+}
+
+- (void) testStripEdits {
+  NSString *edits = @"[edit] hello there.";
+  NSString *stripped = [edits stripEdits];
+  NSString *expected = @"hello there.";
+  XCTAssert([stripped isEqualToString:expected]);
+}
+
+- (void) testStripTags {
+  NSString *html = @"<html><h1>i am html. </h1><h2>hear me roar.</h2></html>";
+  NSString *stripped = [html stripTags];
+  NSString *expected = @"i am html. hear me roar.";
+  XCTAssert([stripped isEqualToString:expected]);
+}
+
+- (void) testTrimBeforeExplanation {
+  NSString *text = @"Useless metadata. Explanation: The good stuff.";
+  NSString *trimmed = [text trimStringBeforeExplanation];
+  NSString *expected = @"Explanation: The good stuff.";
+  XCTAssert([trimmed isEqualToString:expected]);
+}
+
+#pragma mark - NSString+XKCDImageUrl
+
+- (void) testXKCDUrl {
+  NSString *url1 = @"testurl";
+  BOOL url1Valid = [url1 isValidImageUrl];
+  XCTAssertFalse(url1Valid);
+  
+  NSString *url2 = @"http://testurl";
+  BOOL url2Valid = [url2 isValidImageUrl];
+  XCTAssertFalse(url2Valid);
+  
+  NSString *url3 = @"http://testurl.com/image";
+  BOOL url3Valid = [url3 isValidImageUrl];
+  XCTAssertFalse(url3Valid);
+  
+  NSString *url4 = @"http://testurl.com/image.svg";
+  BOOL url4Valid = [url4 isValidImageUrl];
+  XCTAssertFalse(url4Valid);
+  
+  NSString *url5 = @"http://testurl.com/image.png";
+  BOOL url5Valid = [url5 isValidImageUrl];
+  XCTAssertTrue(url5Valid);
 }
 
 @end
