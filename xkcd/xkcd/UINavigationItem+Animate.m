@@ -15,11 +15,13 @@ static CFTimeInterval kUINavigationItemAnimationDefaultDuration = 0.12;
 - (void) setTitle:(NSString *)title
   inNavigationBar:(UINavigationBar*)navigationBar
          animated:(BOOL)animated {
-  CATransition *fadeTextAnimation = [CATransition animation];
-  fadeTextAnimation.duration = kUINavigationItemAnimationDefaultDuration;
-  fadeTextAnimation.type = kCATransitionFade;
-  
-  [navigationBar.layer addAnimation: fadeTextAnimation forKey: @"fadeText"];
+  if (animated) {
+    CATransition *fadeTextAnimation = [CATransition animation];
+    fadeTextAnimation.duration = kUINavigationItemAnimationDefaultDuration;
+    fadeTextAnimation.type = kCATransitionFade;
+    
+    [navigationBar.layer addAnimation: fadeTextAnimation forKey: @"fadeText"];
+  }
   self.title = title;
 }
 

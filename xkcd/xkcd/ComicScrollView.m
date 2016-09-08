@@ -73,6 +73,8 @@ static NSTimeInterval const kScrollViewTransitionDuration = 0.12;
 
 - (void) handleDoubleTap:(UITapGestureRecognizer*)recognizer {
   
+  if (self.loading) return;
+  
   //Zoomed out any amount, zoom out
   if(self.zoomScale > self.minimumZoomScale) {
     [self setZoomScale:self.minimumZoomScale animated:YES];

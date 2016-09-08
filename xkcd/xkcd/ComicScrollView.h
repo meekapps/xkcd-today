@@ -12,6 +12,7 @@
 
 @property (nonatomic) UIEdgeInsets barInsets;
 @property (weak, nonatomic) IBOutlet UIImageView *comicImageView;
+@property (nonatomic) BOOL loading;
 
 - (void) setImage:(UIImage*)image;
 - (void) setImage:(UIImage*)image animated:(BOOL)animated;

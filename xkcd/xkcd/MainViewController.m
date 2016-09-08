@@ -75,6 +75,8 @@
 - (void) setLoading:(BOOL)loading {
   _loading = loading;
   
+  self.scrollView.loading = loading;
+  
   self.loaderView.hidden = !self.loading;
   self.shareButton.enabled = !self.loading;
   self.randomButton.enabled = !self.loading;
@@ -318,7 +320,10 @@
 }
 
 - (void) clearViews {
-  self.title = nil;
+  [self.navigationItem setTitle:nil
+                inNavigationBar:self.navigationController.navigationBar
+                       animated:NO];
+  
   self.noNetworkLabel.hidden = YES;
   self.toggleFavoriteButton.enabled = NO;
   self.toggleFavoriteButton.image = [UIImage heartImageFilled:NO landscape:NO];
