@@ -157,7 +157,6 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
 
 - (void) getComicWithIndex:(NSNumber *)index
                 completion:(XKCDComicCompletion)completion {
-  
   NSLog(@"getting comic with index: %@", index);
   
   NSString *urlString = [self comicUrlStringWithIndex:index];

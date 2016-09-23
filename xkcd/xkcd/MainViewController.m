@@ -353,9 +353,14 @@
   //blacklist
   if ([[XKCD sharedInstance] comicIsBlacklisted:comic.index]) {
     XKCDAlertController *blacklistAlertController = [XKCDAlertController blacklistAlertControllerWithComic:comic];
+    __weak typeof(self) weakSelf = self;
     [self.navigationController presentViewController:blacklistAlertController
                                             animated:YES
-                                          completion:^{}];
+                                          completion:^{
+                                            weakSelf.loading = NO;
+                                            weakSelf.shareButton.enabled = NO;
+                                            weakSelf.toggleFavoriteButton.enabled = NO;
+                                          }];
     return;
   }
   

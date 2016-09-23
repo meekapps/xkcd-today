@@ -47,14 +47,14 @@ static NSString *const kDefaultAlertMessage = @"Unable to load comic. Show in br
                                                        }];
   [blacklistAlert addAction:cancelAction];
   
-  NSString *playString = @"Play";
-  UIAlertAction *playAction = [UIAlertAction actionWithTitle:playString
-                                                       style:UIAlertActionStyleDefault
-                                                     handler:^(UIAlertAction * _Nonnull action) {
-                                                       NSURL *url = [XKCDAlertController blacklistComicUrlWithIndex:index];
-                                                       [[UIApplication sharedApplication] openURL:url];
-                                                     }];
-  [blacklistAlert addAction:playAction];
+  NSString *yesString = @"Yes";
+  UIAlertAction *yesAction = [UIAlertAction actionWithTitle:yesString
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action) {
+                                                      NSURL *url = [XKCDAlertController blacklistComicUrlWithIndex:index];
+                                                      [[UIApplication sharedApplication] openURL:url];
+                                                    }];
+  [blacklistAlert addAction:yesAction];
   return blacklistAlert;
 }
 
