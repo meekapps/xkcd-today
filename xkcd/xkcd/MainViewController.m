@@ -18,7 +18,6 @@
 #import "UIColor+XKCD.h"
 #import "UIImage+AsyncImage.h"
 #import "UIImage+XKCD.h"
-#import "UINavigationItem+Animate.h"
 #import "UIStoryboard+XKCD.h"
 #import "XKCD.h"
 #import "XKCDAlertController.h"
@@ -26,6 +25,7 @@
 #import "XKCDExplainedViewController.h"
 
 @interface MainViewController ()
+@property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UIButton *previousButton, *nextButton, *randomButton;
 @property (strong, nonatomic) XKCDComic *currentComic;
 @property (copy, nonatomic) NSNumber *launchIndex;
@@ -47,6 +47,7 @@
 - (void) viewDidLoad {
   [super viewDidLoad];
   
+  [self setupTitleView];
   [self setupToolbar];
   
   [self loadComicWithIndex:nil
@@ -320,9 +321,7 @@
 }
 
 - (void) clearViews {
-  [self.navigationItem setTitle:nil
-                inNavigationBar:self.navigationController.navigationBar
-                       animated:NO];
+  self.titleLabel.text = nil;
   
   self.noNetworkLabel.hidden = YES;
   self.toggleFavoriteButton.enabled = NO;
@@ -338,9 +337,7 @@
   self.noNetworkLabel.hidden = YES;
   
   //nav bar title
-  [self.navigationItem setTitle:comic.title
-                inNavigationBar:self.navigationController.navigationBar
-                       animated:YES];
+  self.titleLabel.text = comic.title;
   
   //update the toolbar buttons
   if (self.currentComic.index) {
@@ -378,6 +375,14 @@
                                             completion:^{}];
     }
   }];
+}
+
+- (void) setupTitleView {
+  self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0F, 0.0F, 200.0F, 44.0F)];
+  self.titleLabel.numberOfLines = 2;
+  self.titleLabel.textAlignment = NSTextAlignmentCenter;
+  self.titleLabel.font = [UIFont boldSystemFontOfSize:18.0F];
+  self.navigationItem.titleView = self.titleLabel;
 }
 
 - (void) setupToolbar {
