@@ -43,7 +43,6 @@
 		417062A31C606FC30003A3FD /* SpotlightManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 417062A21C606FC30003A3FD /* SpotlightManager.m */; };
 		417062A41C60783F0003A3FD /* SpotlightManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 417062A21C606FC30003A3FD /* SpotlightManager.m */; };
 		417062A51C6078490003A3FD /* LaunchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 417062991C606E2F0003A3FD /* LaunchManager.m */; };
-		419856A71D569F4B008B5EA5 /* UINavigationItem+Animate.m in Sources */ = {isa = PBXBuildFile; fileRef = 419856A61D569F4B008B5EA5 /* UINavigationItem+Animate.m */; };
 		419856AA1D57950D008B5EA5 /* NSError+Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 419856A91D57950D008B5EA5 /* NSError+Message.m */; };
 		419856AD1D57A81D008B5EA5 /* XKCDExplainedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 419856AC1D57A81D008B5EA5 /* XKCDExplainedViewController.m */; };
 		419856B11D57A8C1008B5EA5 /* Explained.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 419856B01D57A8C1008B5EA5 /* Explained.storyboard */; };
@@ -151,8 +150,6 @@
 		417062991C606E2F0003A3FD /* LaunchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchManager.m; sourceTree = "<group>"; };
 		417062A11C606FC30003A3FD /* SpotlightManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightManager.h; sourceTree = "<group>"; };
 		417062A21C606FC30003A3FD /* SpotlightManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightManager.m; sourceTree = "<group>"; };
-		419856A51D569F4B008B5EA5 /* UINavigationItem+Animate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+Animate.h"; sourceTree = "<group>"; };
-		419856A61D569F4B008B5EA5 /* UINavigationItem+Animate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+Animate.m"; sourceTree = "<group>"; };
 		419856A81D57950D008B5EA5 /* NSError+Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+Message.h"; sourceTree = "<group>"; };
 		419856A91D57950D008B5EA5 /* NSError+Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+Message.m"; sourceTree = "<group>"; };
 		419856AB1D57A81D008B5EA5 /* XKCDExplainedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XKCDExplainedViewController.h; sourceTree = "<group>"; };
@@ -371,8 +368,6 @@
 				412191AB1C5C73FB0005971C /* UIImage+AsyncImage.m */,
 				412E38E51C63A4BF00EB5B0D /* UIImage+XKCD.h */,
 				412E38E61C63A4BF00EB5B0D /* UIImage+XKCD.m */,
-				419856A51D569F4B008B5EA5 /* UINavigationItem+Animate.h */,
-				419856A61D569F4B008B5EA5 /* UINavigationItem+Animate.m */,
 				419856B21D57A94C008B5EA5 /* UIStoryboard+XKCD.h */,
 				419856B31D57A94C008B5EA5 /* UIStoryboard+XKCD.m */,
 			);
@@ -595,7 +590,6 @@
 				41FD61C41C61B5230096C39F /* ShortcutsManager.m in Sources */,
 				410DF1A11C6FEFF4000A19F6 /* Reachability.m in Sources */,
 				417062A31C606FC30003A3FD /* SpotlightManager.m in Sources */,
-				419856A71D569F4B008B5EA5 /* UINavigationItem+Animate.m in Sources */,
 				41C79A131C7A6F3B0073237C /* ShareController.m in Sources */,
 				412191671C5C624E0005971C /* xkcd.xcdatamodeld in Sources */,
 				4121919F1C5C643B0005971C /* PersistenceManager.m in Sources */,
