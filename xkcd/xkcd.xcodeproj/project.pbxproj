@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4105C5AA1D9589DD00852F1F /* NSString+XKCDImageUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4108CA671CB9AF80006CF7F9 /* NSString+XKCDImageUrl.m */; };
 		41075C061C6C077600E18573 /* TodayViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 41075C051C6C077600E18573 /* TodayViewManager.m */; };
 		41075C091C6C0F8900E18573 /* NSDate+ShortDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 41075C081C6C0F8900E18573 /* NSDate+ShortDate.m */; };
 		41075C0A1C6C0FD100E18573 /* NSDate+ShortDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 41075C081C6C0F8900E18573 /* NSDate+ShortDate.m */; };
@@ -479,7 +480,7 @@
 		4121914E1C5C624E0005971C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Perka;
 				TargetAttributes = {
 					412191551C5C624E0005971C = {
@@ -627,6 +628,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4105C5AA1D9589DD00852F1F /* NSString+XKCDImageUrl.m in Sources */,
 				41FD61D51C61CAA30096C39F /* XKCDComic.m in Sources */,
 				417062A51C6078490003A3FD /* LaunchManager.m in Sources */,
 				417062A41C60783F0003A3FD /* SpotlightManager.m in Sources */,
@@ -702,8 +704,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -748,8 +752,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

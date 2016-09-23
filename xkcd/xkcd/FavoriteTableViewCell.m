@@ -12,6 +12,7 @@
 @implementation FavoriteTableViewCell
 
 - (void)awakeFromNib {
+  [super awakeFromNib];
   self.imageView.contentMode = UIViewContentModeScaleAspectFill;
 }
 
