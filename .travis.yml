@@ -6,6 +6,7 @@ script:
     -workspace xkcd.xcworkspace 
     -scheme xkcdTests 
     -sdk iphonesimulator
+    -destination 'platform=iOS Simulator,name=iPhone 7'
     build test
     ONLY_ACTIVE_ARCH=NO
     CODE_SIGN_IDENTITY="" 
