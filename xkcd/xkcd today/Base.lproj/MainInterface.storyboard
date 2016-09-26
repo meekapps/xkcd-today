@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="jup-9z-opz">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jup-9z-opz">
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="GcN-lo-r42">
@@ -37,7 +37,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="jup-9z-opz" secondAttribute="trailing" constant="8" id="AnC-ew-0D6"/>
                             <constraint firstItem="jup-9z-opz" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="IAQ-nI-qIa"/>
                             <constraint firstItem="GcN-lo-r42" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="MqG-iG-dsg"/>
-                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="jup-9z-opz" secondAttribute="bottom" priority="750" constant="8" id="Nqp-Yi-vyg"/>
+                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="jup-9z-opz" secondAttribute="bottom" constant="8" id="Nqp-Yi-vyg"/>
                             <constraint firstItem="GcN-lo-r42" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="8" id="Uap-9S-usg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="GcN-lo-r42" secondAttribute="trailing" constant="10" id="hKx-Qf-EY8"/>
                         </constraints>
