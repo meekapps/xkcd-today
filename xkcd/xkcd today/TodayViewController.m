@@ -16,6 +16,7 @@
 #import "XKCD.h"
 
 static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
+static CGFloat const kMaxHeight = 300.0F;
 
 @interface TodayViewController () <NCWidgetProviding>
 @property (strong, nonatomic) XKCDComic *currentComic;
@@ -60,7 +61,9 @@ static NSString *const kContainerAppUrlScheme = @"xkcd-today://";
 
 - (void) widgetActiveDisplayModeDidChange:(NCWidgetDisplayMode)activeDisplayMode
                           withMaximumSize:(CGSize)maxSize {
-  self.preferredContentSize = maxSize;
+  CGFloat maxHeight = MIN(maxSize.height, kMaxHeight);
+  CGSize max = CGSizeMake(0.0F, maxHeight);
+  self.preferredContentSize = max;
 }
 
 #pragma mark - Actions
