@@ -29,8 +29,13 @@ static CGFloat const kMaxHeight = 300.0F;
 - (void)viewDidLoad {
   [super viewDidLoad];
   
+  //Allow show more/show less button on iOS 10. Adjust text color (it was dark by default pre-
+  //iOS 10, it is light by default in iOS 10.
   if ([self.extensionContext respondsToSelector:@selector(widgetLargestAvailableDisplayMode)]) {
     self.extensionContext.widgetLargestAvailableDisplayMode = NCWidgetDisplayModeExpanded;
+    self.titleLabel.textColor = [UIColor darkTextColor];
+  } else {
+    self.titleLabel.textColor = [UIColor lightTextColor];
   }
 }
 
