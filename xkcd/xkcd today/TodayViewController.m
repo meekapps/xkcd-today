@@ -66,9 +66,12 @@ static CGFloat const kMaxHeight = 300.0F;
 
 - (void) widgetActiveDisplayModeDidChange:(NCWidgetDisplayMode)activeDisplayMode
                           withMaximumSize:(CGSize)maxSize {
-  CGFloat maxHeight = MIN(maxSize.height, kMaxHeight);
-  CGSize max = CGSizeMake(0.0F, maxHeight);
-  self.preferredContentSize = max;
+  if (activeDisplayMode == NCWidgetDisplayModeCompact) {
+    self.preferredContentSize = maxSize;
+  } else {
+    //TODO: figure out how to constrain this content size in iOS 10.
+    self.preferredContentSize = CGSizeMake(maxSize.width, kMaxHeight);
+  }
 }
 
 #pragma mark - Actions
