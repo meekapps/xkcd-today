@@ -50,7 +50,9 @@ static NSString *const kXKCDExplainedWildcardKey = @"*";
   NSNumber *comicIndex = comic.index;
   NSString *explainUrl = [NSString stringWithFormat:@"%@/%@", kExplainUrl, comicIndex];
   NSURL *url = [NSURL URLWithString:explainUrl];
-  [[UIApplication sharedApplication] openURL:url];
+  [[UIApplication sharedApplication] openURL:url
+                                     options:@{}
+                           completionHandler:^(BOOL success) {}];
 }
 
 #pragma mark - Private

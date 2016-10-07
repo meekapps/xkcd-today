@@ -52,7 +52,9 @@ static NSString *const kDefaultAlertMessage = @"Unable to load comic. Show in br
                                                       style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * _Nonnull action) {
                                                       NSURL *url = [XKCDAlertController blacklistComicUrlWithIndex:index];
-                                                      [[UIApplication sharedApplication] openURL:url];
+                                                      [[UIApplication sharedApplication] openURL:url
+                                                                                         options:@{}
+                                                                               completionHandler:^(BOOL success) {}];
                                                     }];
   [blacklistAlert addAction:yesAction];
   return blacklistAlert;
