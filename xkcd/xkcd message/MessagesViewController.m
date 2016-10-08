@@ -17,14 +17,9 @@
 
 @implementation MessagesViewController
 
-- (void)viewDidLoad {
-  [super viewDidLoad];
-  
-}
-
 #pragma mark - Conversation Handling
 
--(void)didBecomeActiveWithConversation:(MSConversation *)conversation {
+-(void) didBecomeActiveWithConversation:(MSConversation *)conversation {
   
   //Fetch most recent persisted comic from Core Data.
   __weak typeof(self) weakSelf = self;
