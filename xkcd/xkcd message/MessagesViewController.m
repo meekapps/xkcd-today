@@ -48,29 +48,22 @@
 - (IBAction) shareAction:(id)sender {
   if (!self.activeConversation) return;
   
-  NSData *data = self.currentComic.image;
-  
-  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-  NSString *documentsDirectory = paths.firstObject;
-  NSString *imagePath = [NSString stringWithFormat:@"%@/image.png", documentsDirectory];
-  
-  BOOL didWrite = [data writeToFile:imagePath atomically:YES];
-  if (!didWrite) return;
-  
-  NSString *fullPath = [NSString stringWithFormat:@"file:///%@", imagePath];
-  
-  NSURL *url = [NSURL URLWithString:fullPath];
   NSString *title = self.currentComic.title;
   
-  NSError *error = nil;
-  MSSticker *sticker = [[MSSticker alloc] initWithContentsOfFileURL:url
-                                               localizedDescription:title
-                                                              error:&error];
-  if (error) return;
-  
-  [self.activeConversation insertSticker:sticker
-                       completionHandler:^(NSError * _Nullable error) {}];
-  
+  typeof(self) weakSelf = self;
+  [self.currentComic getImage:^(UIImage * _Nonnull image) {
+    
+    MSMessage *message = [[MSMessage alloc] init];
+    MSMessageTemplateLayout *layout = [[MSMessageTemplateLayout alloc] init];
+    layout.caption = title;
+    layout.image = image;
+    layout.subcaption = @"XKCD";
+    
+    message.layout = layout;
+    [weakSelf.activeConversation insertMessage:message
+                             completionHandler:^(NSError * _Nullable error) {
+                             }];
+  }];
 }
 
 #pragma mark - Private
