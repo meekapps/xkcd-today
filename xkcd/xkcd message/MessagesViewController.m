@@ -12,7 +12,7 @@
 
 @interface MessagesViewController ()
 @property (strong, nonatomic) XKCDComic *currentComic;
-@property (strong, nonatomic) MSConversation *activeConversation;
+
 @end
 
 @implementation MessagesViewController
@@ -25,7 +25,6 @@
 #pragma mark - Conversation Handling
 
 -(void)didBecomeActiveWithConversation:(MSConversation *)conversation {
-  self.activeConversation = conversation;
   
   //Fetch most recent persisted comic from Core Data.
   __weak typeof(self) weakSelf = self;
@@ -37,10 +36,6 @@
     
     [weakSelf loadLatestWithCompletion:^{}];
   }
-}
-
--(void)willResignActiveWithConversation:(MSConversation *)conversation {
-  self.activeConversation = nil;
 }
 
 #pragma mark - IBActions
