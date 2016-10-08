@@ -10,4 +10,9 @@
 
 @interface MessagesViewController : MSMessagesAppViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
+- (IBAction)shareAction:(id)sender;
+
 @end

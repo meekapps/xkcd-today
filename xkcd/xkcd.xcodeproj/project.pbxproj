@@ -55,6 +55,13 @@
 		41F1B5901DA8644D000042D4 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41F1B58E1DA8644D000042D4 /* MainInterface.storyboard */; };
 		41F1B5921DA8644D000042D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41F1B5911DA8644D000042D4 /* Assets.xcassets */; };
 		41F1B5961DA8644D000042D4 /* xkcd message.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 41F1B5871DA8644D000042D4 /* xkcd message.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		41F1B59A1DA865A0000042D4 /* XKCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191A11C5C64F20005971C /* XKCD.m */; };
+		41F1B59B1DA865A0000042D4 /* XKCDComic.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD61CD1C61C8810096C39F /* XKCDComic.m */; };
+		41F1B59C1DA865A9000042D4 /* PersistenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4121919E1C5C643B0005971C /* PersistenceManager.m */; };
+		41F1B59D1DA865F1000042D4 /* xkcd.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 412191651C5C624E0005971C /* xkcd.xcdatamodeld */; };
+		41F1B59F1DA872D7000042D4 /* NSNumber+Operations.m in Sources */ = {isa = PBXBuildFile; fileRef = 414207A01C5D4998009853D7 /* NSNumber+Operations.m */; };
+		41F1B5A01DA87343000042D4 /* NSString+XKCDImageUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4108CA671CB9AF80006CF7F9 /* NSString+XKCDImageUrl.m */; };
+		41F1B5A11DA97900000042D4 /* UIImage+AsyncImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191AB1C5C73FB0005971C /* UIImage+AsyncImage.m */; };
 		41F26A561D5407BA002242AE /* XKCDExplained.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F26A551D5407BA002242AE /* XKCDExplained.m */; };
 		41FD61C41C61B5230096C39F /* ShortcutsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD61C31C61B5230096C39F /* ShortcutsManager.m */; };
 		41FD61CE1C61C8810096C39F /* XKCDComic+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD61CB1C61C8810096C39F /* XKCDComic+CoreDataProperties.m */; };
@@ -183,6 +190,7 @@
 		41F1B58F1DA8644D000042D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		41F1B5911DA8644D000042D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		41F1B5931DA8644D000042D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		41F1B59E1DA86616000042D4 /* xkcd message.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "xkcd message.entitlements"; sourceTree = "<group>"; };
 		41F26A541D5407BA002242AE /* XKCDExplained.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XKCDExplained.h; sourceTree = "<group>"; };
 		41F26A551D5407BA002242AE /* XKCDExplained.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XKCDExplained.m; sourceTree = "<group>"; };
 		41FB0AAE1C5D221F00EE4732 /* xkcd today.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "xkcd today.entitlements"; sourceTree = "<group>"; };
@@ -428,6 +436,7 @@
 		41F1B58A1DA8644D000042D4 /* xkcd message */ = {
 			isa = PBXGroup;
 			children = (
+				41F1B59E1DA86616000042D4 /* xkcd message.entitlements */,
 				41F1B58B1DA8644D000042D4 /* MessagesViewController.h */,
 				41F1B58C1DA8644D000042D4 /* MessagesViewController.m */,
 				41F1B58E1DA8644D000042D4 /* MainInterface.storyboard */,
@@ -569,6 +578,11 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = TFCWAQ62U3;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -716,6 +730,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41F1B5A11DA97900000042D4 /* UIImage+AsyncImage.m in Sources */,
+				41F1B5A01DA87343000042D4 /* NSString+XKCDImageUrl.m in Sources */,
+				41F1B59F1DA872D7000042D4 /* NSNumber+Operations.m in Sources */,
+				41F1B59D1DA865F1000042D4 /* xkcd.xcdatamodeld in Sources */,
+				41F1B59C1DA865A9000042D4 /* PersistenceManager.m in Sources */,
+				41F1B59A1DA865A0000042D4 /* XKCD.m in Sources */,
+				41F1B59B1DA865A0000042D4 /* XKCDComic.m in Sources */,
 				41F1B58D1DA8644D000042D4 /* MessagesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -988,6 +1009,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_ENTITLEMENTS = "xkcd message/xkcd message.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = TFCWAQ62U3;
@@ -1006,6 +1028,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_ENTITLEMENTS = "xkcd message/xkcd message.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = TFCWAQ62U3;
