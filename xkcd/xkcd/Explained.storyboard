@@ -1,8 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="CGu-zr-LqC">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="CGu-zr-LqC">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -35,24 +38,36 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pOz-te-MPS">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="cmb-Gh-Esi">
-                                    <frame key="frameInset"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" indicatorStyle="white" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sHf-iZ-5sb">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                             <inset key="scrollIndicatorInsets" minX="0.0" minY="64" maxX="0.0" maxY="0.0"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="textColor" red="0.9529411792755127" green="0.9529411792755127" blue="0.9529411792755127" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
-                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Hxe-8E-i6N"/>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Hxe-8E-i6N">
+                                            <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                                        </activityIndicatorView>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No explanation available" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kPr-8e-rnk">
+                                            <rect key="frame" x="95" y="323" width="184.5" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstItem="sHf-iZ-5sb" firstAttribute="leading" secondItem="cmb-Gh-Esi" secondAttribute="leading" id="26c-Ve-AZx"/>
                                         <constraint firstAttribute="trailing" secondItem="sHf-iZ-5sb" secondAttribute="trailing" id="3cv-fv-xNU"/>
+                                        <constraint firstItem="kPr-8e-rnk" firstAttribute="centerY" secondItem="cmb-Gh-Esi" secondAttribute="centerY" id="Hvi-oV-if6"/>
                                         <constraint firstItem="sHf-iZ-5sb" firstAttribute="top" secondItem="cmb-Gh-Esi" secondAttribute="top" id="Mj5-L8-tda"/>
+                                        <constraint firstItem="kPr-8e-rnk" firstAttribute="centerX" secondItem="cmb-Gh-Esi" secondAttribute="centerX" id="WU1-QV-myT"/>
                                         <constraint firstAttribute="bottom" secondItem="sHf-iZ-5sb" secondAttribute="bottom" id="f3s-97-faR"/>
                                         <constraint firstItem="Hxe-8E-i6N" firstAttribute="centerX" secondItem="cmb-Gh-Esi" secondAttribute="centerX" id="gBB-s2-ZTu"/>
                                         <constraint firstItem="Hxe-8E-i6N" firstAttribute="centerY" secondItem="cmb-Gh-Esi" secondAttribute="centerY" id="zE8-rD-1m7"/>
@@ -82,6 +97,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="errorLabel" destination="kPr-8e-rnk" id="eUx-6B-6nC"/>
                         <outlet property="loaderView" destination="Hxe-8E-i6N" id="DWX-yD-4XN"/>
                         <outlet property="textView" destination="sHf-iZ-5sb" id="mDw-ff-BGf"/>
                     </connections>

@@ -41,11 +41,15 @@
 
 - (NSString*) trimStringBeforeExplanation {
   NSString *string = [self copy];
-  
-  NSRange explanationRange = [string rangeOfString:@"Explanation"];
-  string = [string substringFromIndex:explanationRange.location];
-  
-  return string;
+  @try {
+    NSRange explanationRange = [string rangeOfString:@"Explanation"];
+    string = [string substringFromIndex:explanationRange.location];
+  } @catch (NSException *exception) {
+    string = nil;
+  } @finally {
+    return string;
+  }
+
 }
 
 @end

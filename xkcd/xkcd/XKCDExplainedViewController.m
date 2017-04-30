@@ -14,7 +14,9 @@ static NSTimeInterval const kExplaintedTextViewAnimationDuration = 0.12;
 
 @interface XKCDExplainedViewController()
 @property (copy, nonatomic) NSString *explanation;
+@property (nonatomic) BOOL hasError;
 @property (nonatomic) BOOL loading;
+@property (weak, nonatomic) IBOutlet UILabel *errorLabel;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loaderView;
 @end
@@ -63,9 +65,19 @@ static NSTimeInterval const kExplaintedTextViewAnimationDuration = 0.12;
   __weak typeof(self) weakSelf = self;
   [XKCDExplained explain:comic
               completion:^(NSString *explanation, NSError *error) {
-                weakSelf.explanation = explanation;
+                if (explanation && !error) {
+                  weakSelf.explanation = explanation;
+                  weakSelf.hasError = NO;
+                } else {
+                  weakSelf.hasError = YES;
+                }
                 weakSelf.loading = NO;
               }];
+}
+
+- (void) setHasError:(BOOL)hasError {
+  _hasError = hasError;
+  self.errorLabel.hidden = !hasError;
 }
 
 - (void) setExplanation:(NSString *)explanation {
@@ -84,6 +96,7 @@ static NSTimeInterval const kExplaintedTextViewAnimationDuration = 0.12;
 - (void) setLoading:(BOOL)loading {
   _loading = loading;
   if (loading) {
+    self.hasError = NO;
     [self.loaderView startAnimating];
   } else {
     [self.loaderView stopAnimating];
