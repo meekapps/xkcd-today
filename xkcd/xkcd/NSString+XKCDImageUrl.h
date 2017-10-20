@@ -6,7 +6,7 @@
 //  Copyright © 2016 Perka. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @interface NSString (XKCDImageUrl)
 

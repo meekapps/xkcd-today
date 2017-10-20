@@ -6,7 +6,7 @@
 //  Copyright © 2016 Meek Apps. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface TodayViewController : UIViewController
 

@@ -12,6 +12,7 @@ static CGFloat const kDefaultPadding = 10.0F;
 static NSTimeInterval const kScrollViewTransitionDuration = 0.12;
 
 @interface ComicScrollView()
+@property (weak, nonatomic) IBOutlet UIImageView *comicImageView;
 @end
 
 @implementation ComicScrollView

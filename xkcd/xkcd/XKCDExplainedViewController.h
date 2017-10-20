@@ -8,7 +8,7 @@
 
 @class XKCDComic;
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface XKCDExplainedViewController : UIViewController
 

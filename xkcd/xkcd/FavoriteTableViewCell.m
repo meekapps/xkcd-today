@@ -9,6 +9,12 @@
 #import "FavoriteTableViewCell.h"
 #import "XKCDComic.h"
 
+@interface FavoriteTableViewCell()
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *previewImageView;
+@end
+
+
 @implementation FavoriteTableViewCell
 
 - (void)awakeFromNib {

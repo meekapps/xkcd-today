@@ -6,7 +6,7 @@
 //  Copyright © 2016 meek apps. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface UIImage (AsyncImage)
 

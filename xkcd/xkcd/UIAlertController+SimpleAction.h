@@ -7,7 +7,7 @@
 //
 //  Simple UIAlertControllerStyleActionSheet UIAlertController with one ok button, and one cancel button.
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface UIAlertController (SimpleAction)
 

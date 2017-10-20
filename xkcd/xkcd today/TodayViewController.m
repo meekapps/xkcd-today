@@ -6,9 +6,10 @@
 //  Copyright © 2016 Meek Apps. All rights reserved.
 //
 
-#import <AVFoundation/AVFoundation.h>
+@import AVFoundation;
+@import NotificationCenter;
+
 #import "NSDate+ShortDate.h"
-#import <NotificationCenter/NotificationCenter.h>
 #import "NSNumber+Operations.h"
 #import "PersistenceManager.h"
 #import "TodayViewController.h"

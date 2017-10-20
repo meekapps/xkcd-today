@@ -11,7 +11,8 @@
 #import "NSNumber+Operations.h"
 #import "NSString+StripTags.h"
 #import "NSString+XKCDImageUrl.h"
-#import <XCTest/XCTest.h>
+
+@import XCTest;
 
 @interface xkcdTests : XCTestCase
 

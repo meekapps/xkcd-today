@@ -6,7 +6,7 @@
 //  Copyright © 2016 Perka. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @class FavoritesViewController;
 @protocol FavoritesViewControllerDelegate <NSObject>
@@ -18,7 +18,6 @@
 
 @interface FavoritesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) id<FavoritesViewControllerDelegate>delegate;
 
 - (IBAction)doneAction:(id)sender;

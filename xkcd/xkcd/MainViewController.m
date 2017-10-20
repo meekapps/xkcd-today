@@ -30,6 +30,12 @@
 @property (strong, nonatomic) XKCDComic *currentComic;
 @property (copy, nonatomic) NSNumber *launchIndex;
 @property (nonatomic) BOOL loading, showingLatestComic, showingOldestComic;
+
+@property (weak, nonatomic) IBOutlet ComicScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *shareButton, *toggleFavoriteButton, *showFavoritesButton;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loaderView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageTopConstraint;
+@property (weak, nonatomic) IBOutlet UILabel *noNetworkLabel;
 @end
 
 @implementation MainViewController

@@ -17,7 +17,7 @@
 //  application:continueUserActivity:restorationHandler:) should call handleLaunchObject on its corresponding
 //  LaunchHelper subclass.
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 FOUNDATION_EXPORT NSString *const kIndexKey;
 FOUNDATION_EXPORT NSString *const ShowComicNotification;

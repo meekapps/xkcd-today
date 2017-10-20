@@ -6,13 +6,8 @@
 //  Copyright © 2016 Perka. All rights reserved.
 //
 
-#import <Messages/Messages.h>
+@import Messages;
 
 @interface MessagesViewController : MSMessagesAppViewController
-
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-
-- (IBAction)shareAction:(id)sender;
 
 @end

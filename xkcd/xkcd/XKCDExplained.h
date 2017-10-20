@@ -8,7 +8,7 @@
 
 @class XKCDComic;
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 typedef void(^XKCDExplainedCompletion)(NSString *explanation, NSError *error);
 

@@ -7,7 +7,7 @@
 //
 
 #import "TodayViewManager.h"
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 static NSString *const kAppUrlScheme = @"xkcd-today://";
 

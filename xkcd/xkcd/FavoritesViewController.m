@@ -13,6 +13,7 @@
 
 @interface FavoritesViewController ()
 @property (strong, nonatomic) NSArray<XKCDComic*> *favorites;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
 
 @implementation FavoritesViewController

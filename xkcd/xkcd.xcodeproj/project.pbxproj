@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		086A58321F9AB94F00F370D0 /* OfflineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 086A58311F9AB94F00F370D0 /* OfflineViewController.m */; };
 		4105C5AA1D9589DD00852F1F /* NSString+XKCDImageUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4108CA671CB9AF80006CF7F9 /* NSString+XKCDImageUrl.m */; };
 		41075C061C6C077600E18573 /* TodayViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 41075C051C6C077600E18573 /* TodayViewManager.m */; };
 		41075C091C6C0F8900E18573 /* NSDate+ShortDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 41075C081C6C0F8900E18573 /* NSDate+ShortDate.m */; };
@@ -119,6 +120,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		086A58301F9AB94F00F370D0 /* OfflineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfflineViewController.h; sourceTree = "<group>"; };
+		086A58311F9AB94F00F370D0 /* OfflineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfflineViewController.m; sourceTree = "<group>"; };
 		41075C041C6C077600E18573 /* TodayViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayViewManager.h; sourceTree = "<group>"; };
 		41075C051C6C077600E18573 /* TodayViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayViewManager.m; sourceTree = "<group>"; };
 		41075C071C6C0F8900E18573 /* NSDate+ShortDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ShortDate.h"; sourceTree = "<group>"; };
@@ -375,6 +378,8 @@
 				41FD61D11C61C8C10096C39F /* FavoritesViewController.m */,
 				41FD61D61C61CD620096C39F /* FavoriteTableViewCell.h */,
 				41FD61D71C61CD620096C39F /* FavoriteTableViewCell.m */,
+				086A58301F9AB94F00F370D0 /* OfflineViewController.h */,
+				086A58311F9AB94F00F370D0 /* OfflineViewController.m */,
 				4121915F1C5C624E0005971C /* MainViewController.h */,
 				412191601C5C624E0005971C /* MainViewController.m */,
 				4108CA691CB9C192006CF7F9 /* XKCDAlertController.h */,
@@ -685,6 +690,7 @@
 				4121919F1C5C643B0005971C /* PersistenceManager.m in Sources */,
 				419856B71D57AE10008B5EA5 /* NSString+StripTags.m in Sources */,
 				41FD61CE1C61C8810096C39F /* XKCDComic+CoreDataProperties.m in Sources */,
+				086A58321F9AB94F00F370D0 /* OfflineViewController.m in Sources */,
 				4170629A1C606E2F0003A3FD /* LaunchManager.m in Sources */,
 				412191A91C5C70A70005971C /* UIColor+XKCD.m in Sources */,
 				41FD61CF1C61C8810096C39F /* XKCDComic.m in Sources */,

@@ -8,7 +8,7 @@
 
 #import "NSNumber+Operations.h"
 #import "ShortcutsManager.h"
-#import <UIKit/UIKit.h>
+@import UIKit;
 #import "XKCD.h"
 
 static NSString *const kShortcutTypeLatest = @"latest";

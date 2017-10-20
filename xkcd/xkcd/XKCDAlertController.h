@@ -6,7 +6,8 @@
 //  Copyright © 2016 Perka. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
+
 #import "XKCDComic.h"
 
 @interface XKCDAlertController : UIAlertController

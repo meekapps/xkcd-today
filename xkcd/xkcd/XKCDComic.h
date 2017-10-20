@@ -6,9 +6,9 @@
 //  Copyright © 2016 Perka. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
-#import <UIKit/UIKit.h>
+@import CoreData;
+@import Foundation;
+@import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -6,7 +6,7 @@
 //  Copyright © 2016 meek apps. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 #import "XKCDComic.h"
 
 FOUNDATION_EXPORT NSString *const kXKCDServerBase;

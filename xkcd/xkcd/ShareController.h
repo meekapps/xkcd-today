@@ -7,7 +7,7 @@
 //
 //  Default UIActivityController used for sharing an XKCDComic.
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @class XKCDComic;
 

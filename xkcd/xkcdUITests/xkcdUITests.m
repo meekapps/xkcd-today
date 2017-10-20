@@ -6,7 +6,7 @@
 //  Copyright © 2016 meek apps. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+@import XCTest;
 
 @interface xkcdUITests : XCTestCase
 
