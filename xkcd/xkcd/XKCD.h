@@ -16,7 +16,7 @@ typedef void(^XKCDComicCompletion)(XKCDComic *comic);
 @interface XKCD : NSObject <NSURLSessionDelegate>
 
 @property (strong, readonly, nonatomic) NSNumber *latestComicIndex;
-@property (class, nonatomic) XKCD *sharedInstance;
+@property (class, readonly, nonatomic) XKCD *sharedInstance;
 
 /// Returns YES if index cannot be loaded natively.
 - (BOOL) comicIsBlacklisted:(NSNumber*)index;
