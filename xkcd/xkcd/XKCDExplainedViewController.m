@@ -3,7 +3,7 @@
 //  xkcd
 //
 //  Created by Mike Keller on 8/7/16.
-//  Copyright © 2016 Perka. All rights reserved.
+//  Copyright © 2016 meek apps. All rights reserved.
 //
 
 #import "UIAlertController+SimpleAction.h"
@@ -113,10 +113,6 @@ static NSTimeInterval const kExplaintedTextViewAnimationDuration = 0.12;
   CGFloat padding = 8.0F;
   UIEdgeInsets textInsets = UIEdgeInsetsMake(insetTop + padding, padding, padding, padding);
   self.textView.textContainerInset = textInsets;
-  
-  //Scroll indicator
-  UIEdgeInsets scrollInsets = UIEdgeInsetsMake(insetTop, 0.0F, 0.0F, 0.0F);
-  self.textView.scrollIndicatorInsets = scrollInsets;
 }
 
 @end

@@ -6,9 +6,10 @@
 //  Copyright © 2016 Meek Apps. All rights reserved.
 //
 
-#import <AVFoundation/AVFoundation.h>
+@import AVFoundation;
+@import NotificationCenter;
+
 #import "NSDate+ShortDate.h"
-#import <NotificationCenter/NotificationCenter.h>
 #import "NSNumber+Operations.h"
 #import "PersistenceManager.h"
 #import "TodayViewController.h"
@@ -38,7 +39,7 @@ static CGFloat const kMaxHeight = 300.0F;
 
   //Fetch most recent persisted comic from Core Data.
   __weak TodayViewController *weakSelf = self;
-  XKCDComic *fetchedComic = [[XKCD sharedInstance] fetchComicWithIndex:nil];
+  XKCDComic *fetchedComic = [XKCD.sharedInstance fetchComicWithIndex:nil];
   
   if (fetchedComic) {
     self.currentComic = fetchedComic;
@@ -87,7 +88,7 @@ static CGFloat const kMaxHeight = 300.0F;
   
   //GET latest comic from HTTP request, update UI if it is new.
   __weak TodayViewController *weakSelf = self;
-  [[XKCD sharedInstance] getComicWithIndex:nil
+  [XKCD.sharedInstance getComicWithIndex:nil
                                 completion:^(XKCDComic *httpComic) {
                                   
                                   //no comic, fail

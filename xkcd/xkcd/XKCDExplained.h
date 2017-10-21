@@ -3,12 +3,12 @@
 //  xkcd
 //
 //  Created by Mike Keller on 8/4/16.
-//  Copyright © 2016 Perka. All rights reserved.
+//  Copyright © 2016 meek apps. All rights reserved.
 //
 
 @class XKCDComic;
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 typedef void(^XKCDExplainedCompletion)(NSString *explanation, NSError *error);
 

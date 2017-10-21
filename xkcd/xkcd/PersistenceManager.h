@@ -8,8 +8,8 @@
 //  Sets up and provides common access to Core Data.
 //  Single context stack.
 
-#import <CoreData/CoreData.h>
-#import <Foundation/Foundation.h>
+@import CoreData;
+@import Foundation;
 
 @interface PersistenceManager : NSObject
 

@@ -6,11 +6,12 @@
 //  Copyright © 2016 Meek Apps. All rights reserved.
 //
 
-#import <CoreSpotlight/CoreSpotlight.h>
-#import <MobileCoreServices/UTCoreTypes.h>
+@import CoreSpotlight;
+@import MobileCoreServices;
+@import UIKit;
+
 #import "SpotlightManager.h"
 #import "UIImage+AsyncImage.h"
-#import <UIKit/UIKit.h>
 
 @implementation SpotlightManager
 

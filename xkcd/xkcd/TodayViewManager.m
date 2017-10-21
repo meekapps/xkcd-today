@@ -3,11 +3,11 @@
 //  xkcd
 //
 //  Created by Mike Keller on 2/10/16.
-//  Copyright © 2016 Perka. All rights reserved.
+//  Copyright © 2016 meek apps. All rights reserved.
 //
 
 #import "TodayViewManager.h"
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 static NSString *const kAppUrlScheme = @"xkcd-today://";
 

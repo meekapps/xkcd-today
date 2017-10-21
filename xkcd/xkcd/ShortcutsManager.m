@@ -3,12 +3,12 @@
 //  xkcd
 //
 //  Created by Mike Keller on 2/2/16.
-//  Copyright © 2016 Perka. All rights reserved.
+//  Copyright © 2016 meek apps. All rights reserved.
 //
 
 #import "NSNumber+Operations.h"
 #import "ShortcutsManager.h"
-#import <UIKit/UIKit.h>
+@import UIKit;
 #import "XKCD.h"
 
 static NSString *const kShortcutTypeLatest = @"latest";
@@ -46,7 +46,7 @@ static NSString *const kShortcutTypeRandom = @"random";
   if ([shortcutType isEqualToString:kShortcutTypeLatest]) {
     return nil; //index = nil loads latest
   } else if ([shortcutType isEqualToString:kShortcutTypeRandom]) {
-    NSNumber *latestIndex = [XKCD sharedInstance].latestComicIndex;
+    NSNumber *latestIndex = XKCD.sharedInstance.latestComicIndex;
     if (!latestIndex) return nil;
     NSNumber *random = [NSNumber randomWithMinimum:@(1) maximum:latestIndex];
     return random;

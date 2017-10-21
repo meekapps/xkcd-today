@@ -3,12 +3,12 @@
 //  xkcd
 //
 //  Created by Mike Keller on 2/3/16.
-//  Copyright © 2016 Perka. All rights reserved.
+//  Copyright © 2016 meek apps. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
-#import <UIKit/UIKit.h>
+@import CoreData;
+@import Foundation;
+@import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
 

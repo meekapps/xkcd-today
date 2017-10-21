@@ -6,7 +6,7 @@
 //  Copyright © 2016 meek apps. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 #import "XKCDComic.h"
 
 FOUNDATION_EXPORT NSString *const kXKCDServerBase;
@@ -16,9 +16,7 @@ typedef void(^XKCDComicCompletion)(XKCDComic *comic);
 @interface XKCD : NSObject <NSURLSessionDelegate>
 
 @property (strong, readonly, nonatomic) NSNumber *latestComicIndex;
-
-
-+ (instancetype) sharedInstance;
+@property (class, readonly, nonatomic) XKCD *sharedInstance;
 
 /// Returns YES if index cannot be loaded natively.
 - (BOOL) comicIsBlacklisted:(NSNumber*)index;
@@ -29,6 +27,9 @@ typedef void(^XKCDComicCompletion)(XKCDComic *comic);
 
 /// Adds or removes comic to/from favorites.
 - (void) toggleFavorite:(NSNumber*)index;
+
+/// Fetches all downloaded comics.
+- (NSArray<XKCDComic*>*) fetchAllDownloaded;
 
 /// Fetches favorites.
 - (NSArray<XKCDComic*>*) fetchFavorites;

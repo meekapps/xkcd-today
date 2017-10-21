@@ -3,10 +3,10 @@
 //  xkcd
 //
 //  Created by Mike Keller on 2/3/16.
-//  Copyright © 2016 Perka. All rights reserved.
+//  Copyright © 2016 meek apps. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @class FavoritesViewController;
 @protocol FavoritesViewControllerDelegate <NSObject>
@@ -18,7 +18,6 @@
 
 @interface FavoritesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) id<FavoritesViewControllerDelegate>delegate;
 
 - (IBAction)doneAction:(id)sender;

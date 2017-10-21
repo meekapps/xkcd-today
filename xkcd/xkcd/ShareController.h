@@ -3,11 +3,11 @@
 //  xkcd
 //
 //  Created by Mike Keller on 2/21/16.
-//  Copyright © 2016 Perka. All rights reserved.
+//  Copyright © 2016 meek apps. All rights reserved.
 //
 //  Default UIActivityController used for sharing an XKCDComic.
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @class XKCDComic;
 

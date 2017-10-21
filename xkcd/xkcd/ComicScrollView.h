@@ -6,12 +6,11 @@
 //  Copyright © 2016 Meek Apps. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface ComicScrollView : UIScrollView <UIScrollViewDelegate>
 
 @property (nonatomic) UIEdgeInsets barInsets;
-@property (weak, nonatomic) IBOutlet UIImageView *comicImageView;
 @property (nonatomic) BOOL loading;
 
 - (void) setImage:(UIImage*)image;

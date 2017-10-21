@@ -6,8 +6,8 @@
  Basic demonstration of how to use the SystemConfiguration Reachablity APIs.
  */
 
-#import <Foundation/Foundation.h>
-#import <SystemConfiguration/SystemConfiguration.h>
+@import Foundation;
+@import SystemConfiguration;
 #import <netinet/in.h>
 
 
