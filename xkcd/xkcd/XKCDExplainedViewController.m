@@ -113,10 +113,6 @@ static NSTimeInterval const kExplaintedTextViewAnimationDuration = 0.12;
   CGFloat padding = 8.0F;
   UIEdgeInsets textInsets = UIEdgeInsetsMake(insetTop + padding, padding, padding, padding);
   self.textView.textContainerInset = textInsets;
-  
-  //Scroll indicator
-  UIEdgeInsets scrollInsets = UIEdgeInsetsMake(insetTop, 0.0F, 0.0F, 0.0F);
-  self.textView.scrollIndicatorInsets = scrollInsets;
 }
 
 @end
