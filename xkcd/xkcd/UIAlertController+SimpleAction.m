@@ -3,7 +3,7 @@
 //  xkcd
 //
 //  Created by Mike Keller on 2/6/16.
-//  Copyright © 2016 Perka. All rights reserved.
+//  Copyright © 2016 meek apps. All rights reserved.
 //
 //  Simple UIAlertControllerStyleActionSheet UIAlertController with one ok button, and one cancel button.
 

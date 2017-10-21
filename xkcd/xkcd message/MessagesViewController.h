@@ -3,7 +3,7 @@
 //  xkcd message
 //
 //  Created by Mike Keller on 10/7/16.
-//  Copyright © 2016 Perka. All rights reserved.
+//  Copyright © 2016 meek apps. All rights reserved.
 //
 
 @import Messages;
