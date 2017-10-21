@@ -72,7 +72,7 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
 
 //Adds favorite to top of the list, or removes favorite. Adjusts favorite index for sorting.
 - (void) toggleFavorite:(NSNumber *)index {
-  XKCDComic *comic = [[XKCD sharedInstance] fetchComicWithIndex:index];
+  XKCDComic *comic = [XKCD.sharedInstance fetchComicWithIndex:index];
   BOOL adding = comic.favorite == nil;
   
   //Adjust existing favorite indices - add or subtract by one after this index
@@ -89,6 +89,20 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
   comic.favorite = comic.favorite ? nil : @(0);
   
   [[PersistenceManager sharedManager] saveContext];
+}
+
+- (NSArray<XKCDComic*>*) fetchAllDownloaded {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"XKCDComic"];
+    request.predicate = [NSPredicate predicateWithFormat:@"index != nil"];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"index" ascending:YES];
+    request.sortDescriptors = @[sortDescriptor];
+    NSManagedObjectContext *context = [PersistenceManager sharedManager].managedObjectContext;
+    NSError *error = nil;
+    NSArray *results = [context executeFetchRequest:request
+                                              error:&error];
+    if (!results || error) return nil;
+    
+    return results;
 }
 
 - (NSArray<XKCDComic*>*) fetchFavorites {
@@ -236,7 +250,7 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
   
   //index
   id index = payload[@"num"];
-  XKCDComic *comic = [[XKCD sharedInstance] fetchComicWithIndex:index];
+  XKCDComic *comic = [XKCD.sharedInstance fetchComicWithIndex:index];
   if (!comic) {
     NSManagedObjectContext *managedObjectContext = [PersistenceManager sharedManager].managedObjectContext;
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass([XKCDComic class])

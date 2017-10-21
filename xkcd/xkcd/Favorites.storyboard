@@ -96,12 +96,15 @@
                     <navigationItem key="navigationItem" id="DPg-A4-T86">
                         <nil key="title"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="skH-wg-Rib">
-                            <rect key="frame" x="112.5" y="7" width="150" height="30"/>
+                            <rect key="frame" x="80" y="7" width="215" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
-                                <segment title="First"/>
-                                <segment title="Second"/>
+                                <segment title="Favorites"/>
+                                <segment title="All downloaded"/>
                             </segments>
+                            <connections>
+                                <action selector="changedSegment:" destination="TPj-hM-SnB" eventType="primaryActionTriggered" id="dog-2r-1iS"/>
+                            </connections>
                         </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="4Co-bc-UZ7">
                             <connections>

@@ -212,7 +212,7 @@
 - (void) nextAction:(UIButton*)sender {
   NSLog(@"next button pressed");
   
-  NSNumber *latestIndex = [XKCD sharedInstance].latestComicIndex;
+  NSNumber *latestIndex = XKCD.sharedInstance.latestComicIndex;
   if (self.currentComic.index && latestIndex && [self.currentComic.index equals:latestIndex]) return;
   
   NSNumber *nextIndex = [self.currentComic.index add:1];
@@ -223,7 +223,7 @@
 
 - (void) randomAction:(UIButton*)sender {
   NSLog(@"random button pressed");
-  NSNumber *latestIndex = [XKCD sharedInstance].latestComicIndex;
+  NSNumber *latestIndex = XKCD.sharedInstance.latestComicIndex;
   if (!latestIndex) return;
   
   NSNumber *randomIndex = [NSNumber randomWithMinimum:@(1)
@@ -255,7 +255,7 @@
 }
 
 - (IBAction) toggleFavoriteAction:(id)sender {
-  [[XKCD sharedInstance] toggleFavorite:self.currentComic.index];
+  [XKCD.sharedInstance toggleFavorite:self.currentComic.index];
   [self updateToggleFavoritesButton:self.currentComic];
 }
 
@@ -278,7 +278,7 @@
     [weakSelf updateViewsWithComic:comic];
   };
 
-  XKCDComic *fetchedComic = [[XKCD sharedInstance] fetchComicWithIndex:index];
+  XKCDComic *fetchedComic = [XKCD.sharedInstance fetchComicWithIndex:index];
   //Fetched comic from Core Data
   if (fetchedComic) {
     finalizeWithComic(fetchedComic);
@@ -296,7 +296,7 @@
     return;
   }
   
-  [[XKCD sharedInstance] getComicWithIndex:index
+  [XKCD.sharedInstance getComicWithIndex:index
                                 completion:^(XKCDComic *comic) {
                                   [[SpotlightManager sharedManager] indexComic:comic];
                                   finalizeWithComic(comic);
@@ -348,7 +348,7 @@
   //update the toolbar buttons
   if (self.currentComic.index) {
     //latest comic
-    NSNumber *latestIndex = [XKCD sharedInstance].latestComicIndex;
+    NSNumber *latestIndex = XKCD.sharedInstance.latestComicIndex;
     self.showingLatestComic = [self.currentComic.index equals:latestIndex];
     
     //oldest comic
@@ -357,7 +357,7 @@
   }
   
   //blacklist
-  if ([[XKCD sharedInstance] comicIsBlacklisted:comic.index]) {
+  if ([XKCD.sharedInstance comicIsBlacklisted:comic.index]) {
     XKCDAlertController *blacklistAlertController = [XKCDAlertController blacklistAlertControllerWithComic:comic];
     __weak typeof(self) weakSelf = self;
     [self.navigationController presentViewController:blacklistAlertController

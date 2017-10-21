@@ -16,9 +16,7 @@ typedef void(^XKCDComicCompletion)(XKCDComic *comic);
 @interface XKCD : NSObject <NSURLSessionDelegate>
 
 @property (strong, readonly, nonatomic) NSNumber *latestComicIndex;
-
-
-+ (instancetype) sharedInstance;
+@property (class, nonatomic) XKCD *sharedInstance;
 
 /// Returns YES if index cannot be loaded natively.
 - (BOOL) comicIsBlacklisted:(NSNumber*)index;
@@ -29,6 +27,9 @@ typedef void(^XKCDComicCompletion)(XKCDComic *comic);
 
 /// Adds or removes comic to/from favorites.
 - (void) toggleFavorite:(NSNumber*)index;
+
+/// Fetches all downloaded comics.
+- (NSArray<XKCDComic*>*) fetchAllDownloaded;
 
 /// Fetches favorites.
 - (NSArray<XKCDComic*>*) fetchFavorites;

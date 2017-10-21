@@ -26,7 +26,7 @@
   
   //Fetch most recent persisted comic from Core Data.
   __weak typeof(self) weakSelf = self;
-  XKCDComic *fetchedComic = [[XKCD sharedInstance] fetchComicWithIndex:nil];
+  XKCDComic *fetchedComic = [XKCD.sharedInstance fetchComicWithIndex:nil];
   
   if (fetchedComic) {
     weakSelf.currentComic = fetchedComic;
@@ -65,7 +65,7 @@
   
   //GET latest comic from HTTP request, update UI if it is new.
   __weak typeof(self) weakSelf = self;
-  [[XKCD sharedInstance] getComicWithIndex:nil
+  [XKCD.sharedInstance getComicWithIndex:nil
                                 completion:^(XKCDComic *httpComic) {
                                   
                                   //no comic, fail

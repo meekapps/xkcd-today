@@ -46,7 +46,7 @@ static NSString *const kShortcutTypeRandom = @"random";
   if ([shortcutType isEqualToString:kShortcutTypeLatest]) {
     return nil; //index = nil loads latest
   } else if ([shortcutType isEqualToString:kShortcutTypeRandom]) {
-    NSNumber *latestIndex = [XKCD sharedInstance].latestComicIndex;
+    NSNumber *latestIndex = XKCD.sharedInstance.latestComicIndex;
     if (!latestIndex) return nil;
     NSNumber *random = [NSNumber randomWithMinimum:@(1) maximum:latestIndex];
     return random;
