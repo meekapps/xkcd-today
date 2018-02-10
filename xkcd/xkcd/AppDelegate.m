@@ -11,6 +11,7 @@
 #import "ShortcutsManager.h"
 #import "SpotlightManager.h"
 #import "TodayViewManager.h"
+#import "UIApplication+Sessions.h"
 
 @interface AppDelegate ()
 @end
@@ -27,6 +28,8 @@
     }
   }
 
+  [UIApplication logSession];
+  
   return YES;
 }
 

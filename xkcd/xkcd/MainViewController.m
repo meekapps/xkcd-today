@@ -12,6 +12,7 @@
 #import "NSNumber+Operations.h"
 #import "PersistenceManager.h"
 #import "Reachability.h"
+#import "ReviewManager.h"
 #import "ShareController.h"
 #import "SpotlightManager.h"
 #import "UIAlertController+SimpleAction.h"
@@ -257,6 +258,11 @@
 - (IBAction) toggleFavoriteAction:(id)sender {
   [XKCD.sharedInstance toggleFavorite:self.currentComic.index];
   [self updateToggleFavoritesButton:self.currentComic];
+  
+  // if favorited, show the review prompt, if needed
+  if (self.currentComic.favorite != nil) {
+    [ReviewManager requestReviewIfNeeded];
+  }
 }
 
 #pragma mark - Private

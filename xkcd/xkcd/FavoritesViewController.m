@@ -83,14 +83,14 @@ typedef NS_ENUM(NSUInteger, Segment) {
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    switch (self.selectedSegment) {
-        case SegmentFavorites:
-            return self.favorites.count;
-        case SegmentAllDownloaded:
-            return self.allDownloaded.count;
-        default:
-            return 0;
-    }
+  switch (self.selectedSegment) {
+    case SegmentFavorites:
+      return self.favorites.count;
+    case SegmentAllDownloaded:
+      return self.allDownloaded.count;
+    default:
+      return 0;
+  }
 }
 
 - (NSString*) tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -100,37 +100,37 @@ typedef NS_ENUM(NSUInteger, Segment) {
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   FavoriteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([FavoriteTableViewCell class])];
   switch (self.selectedSegment) {
-      case SegmentFavorites:
-          cell.comic = self.favorites[indexPath.row];
-          break;
-      case SegmentAllDownloaded:
-          cell.comic = self.allDownloaded[indexPath.row];
-          break;
-      default:
-          cell.comic = nil;
-          break;
+    case SegmentFavorites:
+      cell.comic = self.favorites[indexPath.row];
+      break;
+    case SegmentAllDownloaded:
+      cell.comic = self.allDownloaded[indexPath.row];
+      break;
+    default:
+      cell.comic = nil;
+      break;
   }
   return cell;
 }
 
 - (BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (self.selectedSegment) {
-        case SegmentFavorites:
-            return YES;
-        case SegmentAllDownloaded: // Fall through
-        default:
-            return NO;
-    }
+  switch (self.selectedSegment) {
+    case SegmentFavorites:
+      return YES;
+    case SegmentAllDownloaded: // Fall through
+    default:
+      return NO;
+  }
 }
 
 - (BOOL) tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (self.selectedSegment) {
-        case SegmentFavorites:
-            return YES;
-        case SegmentAllDownloaded: // Fall through
-        default:
-            return NO;
-    }
+  switch (self.selectedSegment) {
+    case SegmentFavorites:
+      return YES;
+    case SegmentAllDownloaded: // Fall through
+    default:
+      return NO;
+  }
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {

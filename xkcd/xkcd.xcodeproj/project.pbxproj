@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0803BC8A1F9BE56000C4D100 /* ReviewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0803BC891F9BE56000C4D100 /* ReviewManager.m */; };
+		0803BC8D1F9BE6A800C4D100 /* UIApplication+Sessions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0803BC8C1F9BE6A800C4D100 /* UIApplication+Sessions.m */; };
 		4105C5AA1D9589DD00852F1F /* NSString+XKCDImageUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4108CA671CB9AF80006CF7F9 /* NSString+XKCDImageUrl.m */; };
 		41075C061C6C077600E18573 /* TodayViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 41075C051C6C077600E18573 /* TodayViewManager.m */; };
 		41075C091C6C0F8900E18573 /* NSDate+ShortDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 41075C081C6C0F8900E18573 /* NSDate+ShortDate.m */; };
@@ -111,6 +113,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0803BC881F9BE56000C4D100 /* ReviewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReviewManager.h; sourceTree = "<group>"; };
+		0803BC891F9BE56000C4D100 /* ReviewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReviewManager.m; sourceTree = "<group>"; };
+		0803BC8B1F9BE6A800C4D100 /* UIApplication+Sessions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIApplication+Sessions.h"; sourceTree = "<group>"; };
+		0803BC8C1F9BE6A800C4D100 /* UIApplication+Sessions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+Sessions.m"; sourceTree = "<group>"; };
 		41075C041C6C077600E18573 /* TodayViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayViewManager.h; sourceTree = "<group>"; };
 		41075C051C6C077600E18573 /* TodayViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayViewManager.m; sourceTree = "<group>"; };
 		41075C071C6C0F8900E18573 /* NSDate+ShortDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ShortDate.h"; sourceTree = "<group>"; };
@@ -321,6 +327,8 @@
 				4121919E1C5C643B0005971C /* PersistenceManager.m */,
 				410DF19F1C6FEFF4000A19F6 /* Reachability.h */,
 				410DF1A01C6FEFF4000A19F6 /* Reachability.m */,
+				0803BC881F9BE56000C4D100 /* ReviewManager.h */,
+				0803BC891F9BE56000C4D100 /* ReviewManager.m */,
 				41C79A111C7A6F3B0073237C /* ShareController.h */,
 				41C79A121C7A6F3B0073237C /* ShareController.m */,
 				41FD61C21C61B5230096C39F /* ShortcutsManager.h */,
@@ -371,6 +379,8 @@
 				4108CA671CB9AF80006CF7F9 /* NSString+XKCDImageUrl.m */,
 				41E025771C66A67500235CAA /* UIAlertController+SimpleAction.h */,
 				41E025781C66A67500235CAA /* UIAlertController+SimpleAction.m */,
+				0803BC8B1F9BE6A800C4D100 /* UIApplication+Sessions.h */,
+				0803BC8C1F9BE6A800C4D100 /* UIApplication+Sessions.m */,
 				412191A71C5C70A70005971C /* UIColor+XKCD.h */,
 				412191A81C5C70A70005971C /* UIColor+XKCD.m */,
 				412191AA1C5C73FB0005971C /* UIImage+AsyncImage.h */,
@@ -606,6 +616,8 @@
 				4108CA6B1CB9C192006CF7F9 /* XKCDAlertController.m in Sources */,
 				412191AC1C5C73FB0005971C /* UIImage+AsyncImage.m in Sources */,
 				4121915E1C5C624E0005971C /* AppDelegate.m in Sources */,
+				0803BC8A1F9BE56000C4D100 /* ReviewManager.m in Sources */,
+				0803BC8D1F9BE6A800C4D100 /* UIApplication+Sessions.m in Sources */,
 				4108CA681CB9AF80006CF7F9 /* NSString+XKCDImageUrl.m in Sources */,
 				419856AD1D57A81D008B5EA5 /* XKCDExplainedViewController.m in Sources */,
 				4121915B1C5C624E0005971C /* main.m in Sources */,
@@ -776,7 +788,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -824,7 +836,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -896,7 +908,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = TFCWAQ62U3;
 				INFOPLIST_FILE = "xkcd today/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.meekapps.xkcd.today;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -913,7 +924,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = TFCWAQ62U3;
 				INFOPLIST_FILE = "xkcd today/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.meekapps.xkcd.today;
 				PRODUCT_NAME = "$(TARGET_NAME)";
