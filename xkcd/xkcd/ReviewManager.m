@@ -2,8 +2,8 @@
 //  ReviewManager.m
 //  xkcd
 //
-//  Created by mikeller on 10/21/17.
-//  Copyright © 2017 Perka. All rights reserved.
+//  Created by Mike Keller on 10/21/17.
+//  Copyright © 2017 meek apps. All rights reserved.
 //
 
 @import StoreKit;
@@ -16,13 +16,13 @@ static NSInteger const kMinimumSessionsToRequestReview = 3;
 
 @implementation ReviewManager
 
-+ (BOOL) didRequetReview {
++ (BOOL) didRequestReview {
   return [[NSUserDefaults standardUserDefaults] boolForKey:kDidRequestReviewKey];
 }
 
 + (void) requestReviewIfNeeded {
   if ([UIApplication numberOfLoggedSessions] >= kMinimumSessionsToRequestReview &&
-    !self.didRequetReview) {
+    !self.didRequestReview) {
     [SKStoreReviewController requestReview];
     [self setDidRequestReview:YES];
   }

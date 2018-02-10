@@ -2,8 +2,8 @@
 //  UIApplication+Sessions.h
 //  xkcd
 //
-//  Created by mikeller on 10/21/17.
-//  Copyright © 2017 Perka. All rights reserved.
+//  Created by Mike Keller on 10/21/17.
+//  Copyright © 2017 meek apps. All rights reserved.
 //
 
 @import UIKit;
