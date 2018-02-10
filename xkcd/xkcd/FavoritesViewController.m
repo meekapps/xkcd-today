@@ -148,7 +148,7 @@ typedef NS_ENUM(NSUInteger, Segment) {
        toIndexPath:(NSIndexPath *)destinationIndexPath {
   
   [XKCD.sharedInstance moveFavoriteFromIndex:sourceIndexPath.row
-                                       toIndex:destinationIndexPath.row];
+                                     toIndex:destinationIndexPath.row];
 }
 
 #pragma mark - UITableViewDelegate

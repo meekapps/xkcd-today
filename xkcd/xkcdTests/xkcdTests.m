@@ -31,10 +31,9 @@
 #pragma mark - NSDate+ShortDate
 
 - (void)testShortDate {
-  //TODO: this fails in travis but not in xcode. wat?
-//  NSDate *date = [NSDate dateWithTimeIntervalSince1970:0];
-//  NSString *shortDate = [date shortDate];
-//  XCTAssert([shortDate isEqualToString:@"12/31/69"]);
+  NSDate *date = [NSDate dateWithTimeIntervalSince1970:0];
+  NSString *shortDate = [date shortDate];
+  XCTAssert([shortDate isEqualToString:@"12/31/69"]);
 }
 
 #pragma mark - NSError+Message
