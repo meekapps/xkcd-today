@@ -54,7 +54,7 @@
                                                     <rect key="frame" x="8" y="8" width="54" height="54"/>
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="54" id="Qz4-GN-ldP"/>
+                                                        <constraint firstAttribute="height" priority="999" constant="54" id="Qz4-GN-ldP"/>
                                                         <constraint firstAttribute="width" secondItem="AO7-uF-zVf" secondAttribute="height" id="vZB-JY-Gqf"/>
                                                     </constraints>
                                                 </imageView>
@@ -85,9 +85,18 @@
                                     <outlet property="delegate" destination="TPj-hM-SnB" id="08j-HQ-vSl"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Empty label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Cw-oq-1ck">
+                                <rect key="frame" x="76" y="320" width="223" height="27"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="7Cw-oq-1ck" secondAttribute="trailing" constant="60" id="8VZ-wW-rdm"/>
+                            <constraint firstItem="7Cw-oq-1ck" firstAttribute="leading" secondItem="sp3-ro-GXB" secondAttribute="leadingMargin" constant="60" id="9Lb-Oe-Axo"/>
+                            <constraint firstItem="7Cw-oq-1ck" firstAttribute="centerY" secondItem="sp3-ro-GXB" secondAttribute="centerY" id="QK1-aN-hwb"/>
                             <constraint firstAttribute="trailing" secondItem="EI0-Np-7o5" secondAttribute="trailing" id="dDK-8K-q7E"/>
                             <constraint firstItem="EI0-Np-7o5" firstAttribute="top" secondItem="sp3-ro-GXB" secondAttribute="top" id="eu8-MQ-rh4"/>
                             <constraint firstItem="EI0-Np-7o5" firstAttribute="leading" secondItem="sp3-ro-GXB" secondAttribute="leading" id="oFA-fA-C5W"/>
@@ -114,6 +123,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="emptyLabel" destination="7Cw-oq-1ck" id="HGN-G3-0sP"/>
                         <outlet property="tableView" destination="EI0-Np-7o5" id="Grm-3p-3qw"/>
                     </connections>
                 </viewController>

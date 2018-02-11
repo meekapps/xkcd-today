@@ -20,6 +20,7 @@ typedef NS_ENUM(NSUInteger, Segment) {
 @interface FavoritesViewController ()
 @property (strong, nonatomic) NSArray<XKCDComic*> *allDownloaded;
 @property (strong, nonatomic) NSArray<XKCDComic*> *favorites;
+@property (weak, nonatomic) IBOutlet UILabel *emptyLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) Segment selectedSegment;
 @end
@@ -33,7 +34,8 @@ typedef NS_ENUM(NSUInteger, Segment) {
   self.favorites = [XKCD.sharedInstance fetchFavorites];
   self.selectedSegment = SegmentFavorites;
   
-  [self showOrHideEditButton];
+  [self updateEditButton];
+  [self updateEmptyLabel];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,9 +71,10 @@ typedef NS_ENUM(NSUInteger, Segment) {
 }
 
 - (IBAction)changedSegment:(UISegmentedControl *)sender {
-    self.selectedSegment = sender.selectedSegmentIndex;
-    [self.tableView reloadData];
-    [self showOrHideEditButton];
+  self.selectedSegment = sender.selectedSegmentIndex;
+  [self.tableView reloadData];
+  [self updateEditButton];
+  [self updateEmptyLabel];
 }
 
 #pragma mark - UITableViewDataSource
@@ -178,30 +181,58 @@ typedef NS_ENUM(NSUInteger, Segment) {
   self.favorites = [XKCD.sharedInstance fetchFavorites];
   
   //update table view
+  [CATransaction begin];
+  
+  //animation completion
+  [CATransaction setCompletionBlock:^{
+    [self updateEditButton];
+    [self updateEmptyLabel];
+    
+    //stop editing if that was the only favorite
+    if (self.favorites.count == 0 && self.editing) {
+      [self setEditing:NO animated:YES];
+    }
+    
+    //inform delegate
+    if ([self.delegate respondsToSelector:@selector(favoritesViewController:didDeleteFavoriteWithIndex:)]) {
+      [self.delegate favoritesViewController:self didDeleteFavoriteWithIndex:index];
+    }
+  }];
+  
+  //animation
   [self.tableView beginUpdates];
   [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
   [self.tableView endUpdates];
   
-  //edit button
-  [self showOrHideEditButton];
-  
-  //stop editing if that was the only favorite
-  if (self.favorites.count == 0 && self.editing) {
-    [self setEditing:NO animated:YES];
-  }
-  
-  //inform delegate
-  if ([self.delegate respondsToSelector:@selector(favoritesViewController:didDeleteFavoriteWithIndex:)]) {
-    [self.delegate favoritesViewController:self didDeleteFavoriteWithIndex:index];
-  }
+  [CATransaction commit];
 }
 
-- (void) showOrHideEditButton {
+- (void) updateEditButton {
   if (self.favorites && self.favorites.count > 0 && self.selectedSegment == SegmentFavorites) {
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
   } else {
     self.navigationItem.leftBarButtonItem = nil;
   }
+}
+
+- (void) updateEmptyLabel {
+  NSString *emptyMessage = nil;
+  BOOL shouldShow = NO;
+  switch (self.selectedSegment) {
+    case SegmentFavorites:
+      emptyMessage = @"No comics have been added to Favorites.";
+      shouldShow = self.favorites.count == 0;
+      break;
+    case SegmentAllDownloaded:
+      emptyMessage = @"No comics have been downloaded.";
+      shouldShow = self.allDownloaded.count == 0;
+    default:
+      // Do nothing
+      break;
+  }
+  self.emptyLabel.text = emptyMessage;
+  self.emptyLabel.hidden = !shouldShow;
+  self.tableView.hidden = shouldShow;
 }
 
 @end
