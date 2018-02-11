@@ -27,7 +27,8 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       language = ""
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -36,16 +37,6 @@
                BlueprintIdentifier = "412191711C5C624E0005971C"
                BuildableName = "xkcdTests.xctest"
                BlueprintName = "xkcdTests"
-               ReferencedContainer = "container:xkcd.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4121917C1C5C624E0005971C"
-               BuildableName = "xkcdUITests.xctest"
-               BlueprintName = "xkcdUITests"
                ReferencedContainer = "container:xkcd.xcodeproj">
             </BuildableReference>
          </TestableReference>
