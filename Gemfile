@@ -1,3 +1,3 @@
-gem 'coveralls', require: false
+gem 'coveralls'
 gem 'slather'
 
