@@ -73,5 +73,7 @@
 	</array>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Because you tapped save.</string>
 </dict>
 </plist>

@@ -22,7 +22,7 @@
 
 #pragma mark - Conversation Handling
 
--(void) didBecomeActiveWithConversation:(MSConversation *)conversation {
+- (void) didBecomeActiveWithConversation:(MSConversation *)conversation {
   
   //Fetch most recent persisted comic from Core Data.
   __weak typeof(self) weakSelf = self;
@@ -43,8 +43,8 @@
   
   NSString *title = self.currentComic.title;
   
-  typeof(self) weakSelf = self;
-  [self.currentComic getImage:^(UIImage * _Nonnull image) {
+  __weak typeof(self) weakSelf = self;
+  [self.currentComic getImage:^(UIImage *image) {
     
     MSMessage *message = [[MSMessage alloc] init];
     MSMessageTemplateLayout *layout = [[MSMessageTemplateLayout alloc] init];

@@ -11,6 +11,12 @@
 #import "NSNumber+Operations.h"
 #import "NSString+StripTags.h"
 #import "NSString+XKCDImageUrl.h"
+#import "TodayViewManager.h"
+#import "UIColor+XKCD.h"
+#import "UIImage+AsyncImage.h"
+#import "UIImage+XKCD.h"
+#import "UIStoryboard+XKCD.h"
+#import "XKCD.h"
 
 @import XCTest;
 
@@ -18,15 +24,9 @@
 
 @end
 
+static NSTimeInterval const kDefaultAsyncTestTimeout = 10;
+
 @implementation xkcdTests
-
-- (void)setUp {
-  [super setUp];
-}
-
-- (void)tearDown {
-  [super tearDown];
-}
 
 #pragma mark - NSDate+ShortDate
 
@@ -48,6 +48,7 @@
 }
 
 #pragma mark - NSNumber+Operations
+
 - (void) testAdd {
   NSNumber *sum = [@(5) add:3];
   XCTAssert([sum equals:@(8)]);
@@ -142,6 +143,82 @@
   NSString *url5 = @"http://testurl.com/image.png";
   BOOL url5Valid = [url5 isValidImageUrl];
   XCTAssertTrue(url5Valid);
+}
+
+#pragma mark - TodayViewManager
+
+- (void)testTodayViewManager {
+    TodayViewManager *todayViewManager = [TodayViewManager sharedManager];
+    XCTAssertNotNil(todayViewManager);
+}
+
+#pragma mark - UIColor+XKCD
+
+- (void) testColors {
+    UIColor *themeColor = [UIColor themeColor];
+    XCTAssertNotNil(themeColor);
+    
+    CGFloat red = 0.0F;
+    CGFloat green = 0.0F;
+    CGFloat blue = 0.0F;
+    CGFloat alpha = 0.0F;
+    [themeColor getRed:&red green:&green blue:&blue alpha:&alpha];
+    
+    XCTAssert(red == 151.0F/255.0F);
+    XCTAssert(green == 169.0F/255.0F);
+    XCTAssert(blue == 199.0F/255.0F);
+    XCTAssert(alpha == 1.0F);
+}
+
+#pragma mark - UIImage+AsyncImage
+
+- (void) testImageFromNilUrl {
+    XCTestExpectation *emptyExpectation = [[XCTestExpectation alloc] initWithDescription:@"image should be nil"];
+    [UIImage imageFromUrl:nil completion:^(UIImage *image) {
+        XCTAssertNil(image);
+        [emptyExpectation fulfill];
+    }];
+    
+    [self waitForExpectations:@[emptyExpectation] timeout:kDefaultAsyncTestTimeout];
+    
+}
+
+#pragma mark - UIImage+XKCD
+
+- (void) testImages {
+    UIImage *filledLandscapeImage = [UIImage heartImageFilled:YES
+                                                    landscape:YES];
+    XCTAssertNotNil(filledLandscapeImage);
+    
+    UIImage *filledPortraitImage = [UIImage heartImageFilled:YES
+                                                   landscape:NO];
+    XCTAssertNotNil(filledPortraitImage);
+    
+    UIImage *unfilledLandscapeImage = [UIImage heartImageFilled:NO
+                                                      landscape:YES];
+    XCTAssertNotNil(unfilledLandscapeImage);
+    
+    UIImage *unfilledPortraitImage = [UIImage heartImageFilled:NO
+                                                     landscape:NO];
+    XCTAssertNotNil(unfilledPortraitImage);
+}
+
+#pragma mark - UIStoryboard+XKCD
+
+- (void) testStoryboards {
+    UINavigationController *explainedNavigationController = [UIStoryboard explainedRootNavigationController];
+    XCTAssertNotNil(explainedNavigationController);
+    
+    UINavigationController *favoritesNavigationController = [UIStoryboard favoritesRootNavigationController];
+    XCTAssertNotNil(favoritesNavigationController);
+}
+
+#pragma mark - XKCD
+
+- (void) testXKCD {
+    XKCD *xkcd = [XKCD sharedInstance];
+    NSArray<XKCDComic *> *comics = [xkcd fetchAllDownloaded];
+    XCTAssertNotNil(comics);
 }
 
 @end
