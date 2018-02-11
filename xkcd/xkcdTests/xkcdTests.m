@@ -33,7 +33,7 @@ static NSTimeInterval const kDefaultAsyncTestTimeout = 10;
 - (void)testShortDate {
   NSDate *date = [NSDate dateWithTimeIntervalSince1970:0];
   NSString *shortDate = [date shortDate];
-  XCTAssert([shortDate isEqualToString:@"12/31/69"]);
+  XCTAssert([shortDate isEqualToString:@"12/31/69"], @"shortDate: %@", shortDate);
 }
 
 #pragma mark - NSError+Message

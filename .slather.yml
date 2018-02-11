@@ -1,0 +1,9 @@
+# .slather.yml
+
+coverage_service: coveralls
+xcodeproj: xkcd/xkcd.xcodeproj
+scheme: xkcd
+ignore:
+  - art/*
+  - screenshots/*
+
