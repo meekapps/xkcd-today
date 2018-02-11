@@ -2,6 +2,7 @@
 
 coverage_service: coveralls
 xcodeproj: xkcd/xkcd.xcodeproj
+workspace: xkcd.xcworkspace
 scheme: xkcd
 ignore:
   - art/*
