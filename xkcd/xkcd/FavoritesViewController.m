@@ -21,6 +21,7 @@ typedef NS_ENUM(NSUInteger, Segment) {
 @property (strong, nonatomic) NSArray<XKCDComic*> *allDownloaded;
 @property (strong, nonatomic) NSArray<XKCDComic*> *favorites;
 @property (weak, nonatomic) IBOutlet UILabel *emptyLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) Segment selectedSegment;
 @end
@@ -72,9 +73,21 @@ typedef NS_ENUM(NSUInteger, Segment) {
 
 - (IBAction)changedSegment:(UISegmentedControl *)sender {
   self.selectedSegment = sender.selectedSegmentIndex;
-  [self.tableView reloadData];
-  [self updateEditButton];
-  [self updateEmptyLabel];
+}
+
+- (IBAction)swipeAction:(UISwipeGestureRecognizer *)sender {
+  switch (sender.direction) {
+    case UISwipeGestureRecognizerDirectionLeft:
+      self.selectedSegment = SegmentAllDownloaded;
+      [self setSelectedSegment:SegmentAllDownloaded animated:YES];
+      break;
+    case UISwipeGestureRecognizerDirectionRight:
+      [self setSelectedSegment:SegmentFavorites animated:YES];
+      break;
+    default:
+      // Do nothing
+      break;
+  }
 }
 
 #pragma mark - UITableViewDataSource
@@ -205,6 +218,36 @@ typedef NS_ENUM(NSUInteger, Segment) {
   [self.tableView endUpdates];
   
   [CATransaction commit];
+}
+
+- (void) setSelectedSegment:(Segment)selectedSegment {
+  [self setSelectedSegment:selectedSegment animated:NO];
+}
+
+- (void) setSelectedSegment:(Segment)selectedSegment animated:(BOOL)animated {
+  _selectedSegment = selectedSegment;
+  
+  self.segmentedControl.selectedSegmentIndex = selectedSegment;
+  
+  if (animated) {
+    UITableViewRowAnimation animation = UITableViewRowAnimationNone;
+    switch (selectedSegment) {
+      case SegmentFavorites:
+        animation = UITableViewRowAnimationLeft;
+        break;
+      case SegmentAllDownloaded:
+        animation = UITableViewRowAnimationRight;
+        break;
+      default:
+        //Do nothing
+        break;
+    }
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:animation];
+  } else {
+    [self.tableView reloadData];
+  }
+  [self updateEditButton];
+  [self updateEmptyLabel];
 }
 
 - (void) updateEditButton {
