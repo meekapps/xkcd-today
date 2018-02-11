@@ -8,6 +8,7 @@
 
 #import "FavoriteTableViewCell.h"
 #import "FavoritesViewController.h"
+#import "UIAlertController+SimpleAction.h"
 #import "XKCD.h"
 #import "XKCDComic.h"
 
@@ -31,9 +32,6 @@ typedef NS_ENUM(NSUInteger, Segment) {
   self.allDownloaded = [XKCD.sharedInstance fetchAllDownloaded];
   self.favorites = [XKCD.sharedInstance fetchFavorites];
   self.selectedSegment = SegmentFavorites;
-  [self.tableView reloadData];
-  self.tableView.estimatedRowHeight = 60.0F;
-  self.tableView.rowHeight = UITableViewAutomaticDimension;
   
   [self showOrHideEditButton];
 }
@@ -99,17 +97,7 @@ typedef NS_ENUM(NSUInteger, Segment) {
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   FavoriteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([FavoriteTableViewCell class])];
-  switch (self.selectedSegment) {
-    case SegmentFavorites:
-      cell.comic = self.favorites[indexPath.row];
-      break;
-    case SegmentAllDownloaded:
-      cell.comic = self.allDownloaded[indexPath.row];
-      break;
-    default:
-      cell.comic = nil;
-      break;
-  }
+  cell.comic = [self comicAtIndexPath:indexPath];
   return cell;
 }
 
@@ -146,7 +134,6 @@ typedef NS_ENUM(NSUInteger, Segment) {
 
 - (void) tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
        toIndexPath:(NSIndexPath *)destinationIndexPath {
-  
   [XKCD.sharedInstance moveFavoriteFromIndex:sourceIndexPath.row
                                      toIndex:destinationIndexPath.row];
 }
@@ -155,18 +142,34 @@ typedef NS_ENUM(NSUInteger, Segment) {
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   if ([self.delegate respondsToSelector:@selector(favoritesViewController:didSelectComicWithIndex:)]) {
-    XKCDComic *comic = self.favorites[indexPath.row];
+    XKCDComic *comic = [self comicAtIndexPath:indexPath];
     [self.delegate favoritesViewController:self didSelectComicWithIndex:comic.index];
   }
   
   [self.navigationController dismissViewControllerAnimated:YES
-                                                completion:^{
-  }];
+                                                completion:nil];
 }
 
 #pragma mark - Private
 
+- (XKCDComic *) comicAtIndexPath:(NSIndexPath *)indexPath {
+  NSInteger row = indexPath.row;
+  switch (self.selectedSegment) {
+    case SegmentFavorites:
+      return self.favorites.count > row ? self.favorites[row] : nil;
+      break;
+    case SegmentAllDownloaded:
+      return self.allDownloaded.count > row ? self.allDownloaded[row] : nil;
+      break;
+    default:
+      return nil;
+      break;
+  }
+}
+
 - (void) deleteFavoriteAtIndexPath:(NSIndexPath*)indexPath {
+  if (indexPath.row >= self.favorites.count) return;
+  
   XKCDComic *comic = self.favorites[indexPath.row];
   NSNumber *index = comic.index;
   
