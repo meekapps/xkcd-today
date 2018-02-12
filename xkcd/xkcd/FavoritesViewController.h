@@ -8,8 +8,8 @@
 
 @import UIKit;
 
+@class InteractiveDismissTransition;
 @class FavoritesViewController;
-@class PanInteractiveTransition;
 
 @protocol FavoritesViewControllerDelegate <NSObject>
 - (void) favoritesViewController:(FavoritesViewController*)favoritesViewController
@@ -21,7 +21,7 @@
 @interface FavoritesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) id<FavoritesViewControllerDelegate>delegate;
-@property (weak, nonatomic) PanInteractiveTransition *panInteractiveTransition;
+@property (weak, nonatomic) InteractiveDismissTransition *interactiveDismissTransition;
 
 - (IBAction)doneAction:(id)sender;
 

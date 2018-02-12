@@ -8,7 +8,7 @@
 
 #import "FavoriteTableViewCell.h"
 #import "FavoritesViewController.h"
-#import "PanInteractiveTransition.h"
+#import "InteractiveDismissTransition.h"
 #import "UIAlertController+SimpleAction.h"
 #import "XKCD.h"
 #import "XKCDComic.h"
@@ -37,7 +37,6 @@ typedef NS_ENUM(NSUInteger, Segment) {
   self.allDownloaded = [XKCD.sharedInstance fetchAllDownloaded];
   self.favorites = [XKCD.sharedInstance fetchFavorites];
   self.selectedSegment = SegmentFavorites;
-  
   [self.tableView.panGestureRecognizer addTarget:self action:@selector(pan:)];
   
   [self updateEditButton];
@@ -80,15 +79,53 @@ typedef NS_ENUM(NSUInteger, Segment) {
   self.selectedSegment = sender.selectedSegmentIndex;
 }
 
-- (IBAction)pan:(UIPanGestureRecognizer *)sender {
-  CGPoint topOffset = CGPointMake(0.0F, -88.0F);
+- (void)pan:(UIPanGestureRecognizer *)sender {
+  CGPoint topOffset = CGPointMake(0.0F, -self.view.layoutMarginsGuide.layoutFrame.origin.y);
   
-  if (sender.view == self.tableView && self.tableView.contentOffset.y > topOffset.y) return;
-
-  __weak typeof(self) weakSelf = self;
-  [self.panInteractiveTransition handlePanRecognizer:sender view:self.view shouldDismiss:^{
-    [weakSelf.navigationController dismissViewControllerAnimated:YES completion:nil];
-  }];
+  CGFloat percentThreshold = 0.3F;
+  // convert y-position to downward pull progress (percentage)
+  
+  CGPoint translation = [sender translationInView:self.view];
+  CGFloat verticalMovement = translation.y / CGRectGetHeight(self.view.bounds);
+  CGFloat downwardMovement = fmaxf(verticalMovement, 0.0F);
+  CGFloat progress = fminf(downwardMovement, 1.0F);
+  
+  
+  if (sender.view == self.tableView && self.tableView.contentOffset.y > topOffset.y) {
+    [self.interactiveDismissTransition cancelInteractiveTransition];
+    return;
+  }
+  
+  switch (sender.state) {
+    case UIGestureRecognizerStateBegan:
+      self.interactiveDismissTransition.hasStarted = YES;
+      [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+      break;
+      
+    case UIGestureRecognizerStateChanged:
+      self.tableView.contentOffset = topOffset;
+      self.interactiveDismissTransition.shouldFinish = progress > percentThreshold;
+      [self.interactiveDismissTransition updateInteractiveTransition:progress];
+      break;
+      
+    case UIGestureRecognizerStateCancelled:
+      self.interactiveDismissTransition.hasStarted = NO;
+      [self.interactiveDismissTransition cancelInteractiveTransition];
+      break;
+      
+    case UIGestureRecognizerStateEnded:
+      self.interactiveDismissTransition.hasStarted = NO;
+      if (self.interactiveDismissTransition.shouldFinish) {
+        [self.interactiveDismissTransition finishInteractiveTransition];
+      } else {
+        [self.interactiveDismissTransition cancelInteractiveTransition];
+      }
+      break;
+      
+    default:
+      // Do nothing
+      break;
+  }
 }
 
 #pragma mark - UITableViewDataSource
@@ -256,7 +293,7 @@ typedef NS_ENUM(NSUInteger, Segment) {
   }
   self.emptyLabel.text = emptyMessage;
   self.emptyLabel.hidden = !shouldShow;
-  self.tableView.hidden = shouldShow;
+//  self.tableView.hidden = shouldShow;
 }
 
 @end

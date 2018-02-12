@@ -1,62 +1,20 @@
 //
-//  PanInteractiveTransition.m
+//  InteractiveDismissTransition.m
 //  xkcd
 //
 //  Created by mikeller on 2/10/18.
 //  Copyright © 2018 Perka. All rights reserved.
 //
 
-#import "PanInteractiveTransition.h"
+#import "InteractiveDismissTransition.h"
 
-@implementation PanInteractiveTransition
+@implementation InteractiveDismissTransition
 
 - (DismissTransition *)dismissTransition {
   if (!_dismissTransition) {
     _dismissTransition = [[DismissTransition alloc] init];
   }
   return _dismissTransition;
-}
-
-- (void)handlePanRecognizer:(UIPanGestureRecognizer *)panRecognizer
-                       view:(UIView *)view 
-              shouldDismiss:(void(^)(void))shouldDismiss {
-  CGFloat percentThreshold = 0.3F;
-  // convert y-position to downward pull progress (percentage)
-  
-  CGPoint translation = [panRecognizer translationInView:view];
-  CGFloat verticalMovement = translation.y / CGRectGetHeight(view.bounds);
-  CGFloat downwardMovement = fmaxf(verticalMovement, 0.0F);
-  CGFloat progress = fminf(downwardMovement, 1.0F);
-  
-  switch (panRecognizer.state) {
-    case UIGestureRecognizerStateBegan:
-      self.hasStarted = YES;
-      shouldDismiss();
-      break;
-      
-    case UIGestureRecognizerStateChanged:
-      self.shouldFinish = progress > percentThreshold;
-      [self updateInteractiveTransition:progress];
-      break;
-      
-    case UIGestureRecognizerStateCancelled:
-      self.hasStarted = NO;
-      [self cancelInteractiveTransition];
-      break;
-      
-    case UIGestureRecognizerStateEnded:
-      self.hasStarted = NO;
-      if (self.shouldFinish) {
-        [self finishInteractiveTransition];
-      } else {
-        [self cancelInteractiveTransition];
-      }
-      break;
-      
-    default:
-      // Do nothing
-      break;
-  }
 }
 
 @end

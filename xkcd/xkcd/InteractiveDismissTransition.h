@@ -1,5 +1,5 @@
 //
-//  PanInteractiveTransition.h
+//  InteractiveDismissTransition.h
 //  xkcd
 //
 //  Created by mikeller on 2/10/18.
@@ -11,14 +11,10 @@
 @interface DismissTransition : NSObject <UIViewControllerAnimatedTransitioning>
 @end
 
-@interface PanInteractiveTransition : UIPercentDrivenInteractiveTransition
+@interface InteractiveDismissTransition : UIPercentDrivenInteractiveTransition
 
 @property (strong, nonatomic) DismissTransition *dismissTransition;
 @property (nonatomic) BOOL hasStarted;
 @property (nonatomic) BOOL shouldFinish;
-
-- (void)handlePanRecognizer:(UIPanGestureRecognizer *)panRecognizer
-                       view:(UIView *)view
-              shouldDismiss:(void(^)(void))shouldDismiss;
 
 @end

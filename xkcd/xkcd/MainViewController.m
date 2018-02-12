@@ -7,10 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "InteractiveDismissTransition.h"
 #import "LaunchManager.h"
 #import "MainViewController.h"
 #import "NSNumber+Operations.h"
-#import "PanInteractiveTransition.h"
 #import "PersistenceManager.h"
 #import "Reachability.h"
 #import "ReviewManager.h"
@@ -31,7 +31,7 @@
 @property (strong, nonatomic) UIButton *previousButton, *nextButton, *randomButton;
 @property (strong, nonatomic) XKCDComic *currentComic;
 @property (copy, nonatomic) NSNumber *launchIndex;
-@property (strong, nonatomic) PanInteractiveTransition *panInteractiveTransition;
+@property (strong, nonatomic) InteractiveDismissTransition *interactiveDismissTransition;
 @property (nonatomic) BOOL loading, showingLatestComic, showingOldestComic;
 
 @property (weak, nonatomic) IBOutlet ComicScrollView *scrollView;
@@ -49,14 +49,14 @@
   self = [super initWithCoder:aDecoder];
   if (self) {
     [self addNotificationObservers];
+    
+    _interactiveDismissTransition = [[InteractiveDismissTransition alloc] init];
   }
   return self;
 }
 
 - (void) viewDidLoad {
   [super viewDidLoad];
-  
-  self.panInteractiveTransition = [[PanInteractiveTransition alloc] init];
   
   [self setupTitleView];
   [self setupToolbar];
@@ -254,7 +254,7 @@
   FavoritesViewController *favoritesViewController = favoritesNavigationController.viewControllers.firstObject;
   favoritesViewController.delegate = self;
   favoritesNavigationController.transitioningDelegate = self;
-  favoritesViewController.panInteractiveTransition = self.panInteractiveTransition;
+  favoritesViewController.interactiveDismissTransition = self.interactiveDismissTransition;
   
   [self.navigationController presentViewController:favoritesNavigationController
                                           animated:YES
@@ -274,11 +274,11 @@
 #pragma mark - UIViewControllerTransitioningDelegate
 
 - (id <UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id <UIViewControllerAnimatedTransitioning>)animator {
-  return self.panInteractiveTransition.hasStarted ? self.panInteractiveTransition : nil;
+  return self.interactiveDismissTransition.hasStarted ? self.interactiveDismissTransition : nil;
 }
 
 - (id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-  return self.panInteractiveTransition.dismissTransition;
+  return self.interactiveDismissTransition.dismissTransition;
 }
 
 #pragma mark - Private
