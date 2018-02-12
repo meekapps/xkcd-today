@@ -42,6 +42,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EI0-Np-7o5">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <gestureRecognizers/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavoriteTableViewCell" rowHeight="70" id="CH0-SY-jBM" customClass="FavoriteTableViewCell">
                                         <rect key="frame" x="0.0" y="28" width="375" height="70"/>
@@ -103,10 +104,6 @@
                             <constraint firstItem="EI0-Np-7o5" firstAttribute="leading" secondItem="sp3-ro-GXB" secondAttribute="leading" id="oFA-fA-C5W"/>
                             <constraint firstItem="Bt8-Wo-dWs" firstAttribute="top" secondItem="EI0-Np-7o5" secondAttribute="bottom" id="s82-ny-irk"/>
                         </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="eQi-fa-kTy" appends="YES" id="ShM-vK-2DV"/>
-                            <outletCollection property="gestureRecognizers" destination="87U-6t-v6l" appends="YES" id="AWG-37-dgU"/>
-                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="DPg-A4-T86">
                         <nil key="title"/>
@@ -134,16 +131,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1XX-Oj-qpW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="left" id="eQi-fa-kTy">
-                    <connections>
-                        <action selector="swipeAction:" destination="TPj-hM-SnB" id="8Yd-DT-aSK"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <swipeGestureRecognizer direction="right" id="87U-6t-v6l">
-                    <connections>
-                        <action selector="swipeAction:" destination="TPj-hM-SnB" id="Cml-MV-kiY"/>
-                    </connections>
-                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="694" y="239"/>
         </scene>

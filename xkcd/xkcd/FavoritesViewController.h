@@ -9,6 +9,8 @@
 @import UIKit;
 
 @class FavoritesViewController;
+@class PanInteractiveTransition;
+
 @protocol FavoritesViewControllerDelegate <NSObject>
 - (void) favoritesViewController:(FavoritesViewController*)favoritesViewController
       didDeleteFavoriteWithIndex:(NSNumber*)index;
@@ -19,6 +21,7 @@
 @interface FavoritesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) id<FavoritesViewControllerDelegate>delegate;
+@property (weak, nonatomic) PanInteractiveTransition *panInteractiveTransition;
 
 - (IBAction)doneAction:(id)sender;
 

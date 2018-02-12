@@ -8,6 +8,7 @@
 
 #import "FavoriteTableViewCell.h"
 #import "FavoritesViewController.h"
+#import "PanInteractiveTransition.h"
 #import "UIAlertController+SimpleAction.h"
 #import "XKCD.h"
 #import "XKCDComic.h"
@@ -17,12 +18,14 @@ typedef NS_ENUM(NSUInteger, Segment) {
     SegmentAllDownloaded
 };
 
-@interface FavoritesViewController ()
+@interface FavoritesViewController () <UIGestureRecognizerDelegate>
 @property (strong, nonatomic) NSArray<XKCDComic*> *allDownloaded;
 @property (strong, nonatomic) NSArray<XKCDComic*> *favorites;
+
 @property (weak, nonatomic) IBOutlet UILabel *emptyLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @property (nonatomic) Segment selectedSegment;
 @end
 
@@ -34,6 +37,8 @@ typedef NS_ENUM(NSUInteger, Segment) {
   self.allDownloaded = [XKCD.sharedInstance fetchAllDownloaded];
   self.favorites = [XKCD.sharedInstance fetchFavorites];
   self.selectedSegment = SegmentFavorites;
+  
+  [self.tableView.panGestureRecognizer addTarget:self action:@selector(pan:)];
   
   [self updateEditButton];
   [self updateEmptyLabel];
@@ -75,19 +80,15 @@ typedef NS_ENUM(NSUInteger, Segment) {
   self.selectedSegment = sender.selectedSegmentIndex;
 }
 
-- (IBAction)swipeAction:(UISwipeGestureRecognizer *)sender {
-  switch (sender.direction) {
-    case UISwipeGestureRecognizerDirectionLeft:
-      self.selectedSegment = SegmentAllDownloaded;
-      [self setSelectedSegment:SegmentAllDownloaded animated:YES];
-      break;
-    case UISwipeGestureRecognizerDirectionRight:
-      [self setSelectedSegment:SegmentFavorites animated:YES];
-      break;
-    default:
-      // Do nothing
-      break;
-  }
+- (IBAction)pan:(UIPanGestureRecognizer *)sender {
+  CGPoint topOffset = CGPointMake(0.0F, -88.0F);
+  
+  if (sender.view == self.tableView && self.tableView.contentOffset.y > topOffset.y) return;
+
+  __weak typeof(self) weakSelf = self;
+  [self.panInteractiveTransition handlePanRecognizer:sender view:self.view shouldDismiss:^{
+    [weakSelf.navigationController dismissViewControllerAnimated:YES completion:nil];
+  }];
 }
 
 #pragma mark - UITableViewDataSource
@@ -221,31 +222,11 @@ typedef NS_ENUM(NSUInteger, Segment) {
 }
 
 - (void) setSelectedSegment:(Segment)selectedSegment {
-  [self setSelectedSegment:selectedSegment animated:NO];
-}
-
-- (void) setSelectedSegment:(Segment)selectedSegment animated:(BOOL)animated {
   _selectedSegment = selectedSegment;
   
   self.segmentedControl.selectedSegmentIndex = selectedSegment;
+  [self.tableView reloadData];
   
-  if (animated) {
-    UITableViewRowAnimation animation = UITableViewRowAnimationNone;
-    switch (selectedSegment) {
-      case SegmentFavorites:
-        animation = UITableViewRowAnimationLeft;
-        break;
-      case SegmentAllDownloaded:
-        animation = UITableViewRowAnimationRight;
-        break;
-      default:
-        //Do nothing
-        break;
-    }
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:animation];
-  } else {
-    [self.tableView reloadData];
-  }
   [self updateEditButton];
   [self updateEmptyLabel];
 }
