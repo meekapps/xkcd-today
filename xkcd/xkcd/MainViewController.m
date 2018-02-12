@@ -317,7 +317,7 @@
   
   //Get from http if you have a network connection (or forceUpdate==YES)
   //Return early and show error if not reachable.
-  BOOL reachable = [Reachability reachabilityForInternetConnection].currentReachabilityStatus != NotReachable;
+  BOOL reachable = Reachability.isReachable;
   if (!reachable && !fetchedComic) {
     self.noNetworkLabel.hidden = NO;
     self.loading = NO;

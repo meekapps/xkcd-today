@@ -64,6 +64,10 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 	SCNetworkReachabilityRef _reachabilityRef;
 }
 
++ (BOOL) isReachable {
+  return [Reachability reachabilityForInternetConnection].currentReachabilityStatus != NotReachable;
+}
+
 + (instancetype)reachabilityWithHostName:(NSString *)hostName
 {
 	Reachability* returnValue = NULL;
