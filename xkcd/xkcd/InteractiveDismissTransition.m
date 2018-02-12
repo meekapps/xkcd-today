@@ -8,7 +8,7 @@
 
 #import "InteractiveDismissTransition.h"
 
-static CGFloat const kPercentThreshold = 0.3F;
+static CGFloat const kPercentThreshold = 0.4F;
 static NSTimeInterval const kAnimationDuration = 0.3;
 
 @implementation InteractiveDismissTransition
@@ -25,17 +25,12 @@ static NSTimeInterval const kAnimationDuration = 0.3;
                shouldDismiss:(void(^)(void))shouldDismiss {
   CGPoint translation = [panRecognizer translationInView:view];
   CGFloat progress = [self progressWithTranslation:translation viewHeight:CGRectGetHeight(view.bounds)];
-  
   UIScrollView *scrollView = [panRecognizer.view isKindOfClass:[UIScrollView class]] ? (UIScrollView *)panRecognizer.view : nil;
   
   CGPoint topOffset = CGPointMake(0.0F, -view.layoutMarginsGuide.layoutFrame.origin.y);
-  if ([panRecognizer.view isKindOfClass:[UIScrollView class]] && scrollView.contentOffset.y > topOffset.y && self.hasStarted) {
+  if (scrollView.contentOffset.y > topOffset.y) {
     [self cancelInteractiveTransition];
     return;
-  }
-  
-  if (scrollView) {
-    scrollView.contentOffset = topOffset;
   }
   
   switch (panRecognizer.state) {

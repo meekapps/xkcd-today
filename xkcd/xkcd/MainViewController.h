@@ -8,7 +8,6 @@
 
 @import UIKit;
 
-#import "ComicScrollView.h"
 #import "FavoritesViewController.h"
 
 @interface MainViewController : UIViewController <FavoritesViewControllerDelegate>

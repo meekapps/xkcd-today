@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ComicScrollView.h"
 #import "InteractiveDismissTransition.h"
 #import "LaunchManager.h"
 #import "MainViewController.h"
@@ -204,8 +205,6 @@
 }
 
 - (void) previousAction:(UIButton*)sender {
-  NSLog(@"previous button pressed");
-  
   NSNumber *oldestIndex = @(0);
   if ([self.currentComic.index equals:oldestIndex]) return;
   
@@ -215,8 +214,6 @@
 }
 
 - (void) nextAction:(UIButton*)sender {
-  NSLog(@"next button pressed");
-  
   NSNumber *latestIndex = XKCD.sharedInstance.latestComicIndex;
   if (self.currentComic.index && latestIndex && [self.currentComic.index equals:latestIndex]) return;
   
@@ -227,7 +224,6 @@
 }
 
 - (void) randomAction:(UIButton*)sender {
-  NSLog(@"random button pressed");
   NSNumber *latestIndex = XKCD.sharedInstance.latestComicIndex;
   if (!latestIndex) return;
   

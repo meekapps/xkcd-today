@@ -11,6 +11,7 @@
 @interface DismissTransition : NSObject <UIViewControllerAnimatedTransitioning>
 @end
 
+
 @interface InteractiveDismissTransition : UIPercentDrivenInteractiveTransition
 
 @property (strong, nonatomic) DismissTransition *dismissTransition;
@@ -21,4 +22,7 @@
                        view:(UIView *)view
               shouldDismiss:(void(^)(void))shouldDismiss;
 
+@end
+
+@interface InteractiveDismissPresenterViewController : UIViewController
 @end
