@@ -79,55 +79,6 @@ typedef NS_ENUM(NSUInteger, Segment) {
   self.selectedSegment = sender.selectedSegmentIndex;
 }
 
-- (void)pan:(UIPanGestureRecognizer *)sender {
-  CGPoint topOffset = CGPointMake(0.0F, -self.view.layoutMarginsGuide.layoutFrame.origin.y);
-  
-  CGFloat percentThreshold = 0.3F;
-  // convert y-position to downward pull progress (percentage)
-  
-  CGPoint translation = [sender translationInView:self.view];
-  CGFloat verticalMovement = translation.y / CGRectGetHeight(self.view.bounds);
-  CGFloat downwardMovement = fmaxf(verticalMovement, 0.0F);
-  CGFloat progress = fminf(downwardMovement, 1.0F);
-  
-  
-  if (sender.view == self.tableView && self.tableView.contentOffset.y > topOffset.y) {
-    [self.interactiveDismissTransition cancelInteractiveTransition];
-    return;
-  }
-  
-  switch (sender.state) {
-    case UIGestureRecognizerStateBegan:
-      self.interactiveDismissTransition.hasStarted = YES;
-      [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-      break;
-      
-    case UIGestureRecognizerStateChanged:
-      self.tableView.contentOffset = topOffset;
-      self.interactiveDismissTransition.shouldFinish = progress > percentThreshold;
-      [self.interactiveDismissTransition updateInteractiveTransition:progress];
-      break;
-      
-    case UIGestureRecognizerStateCancelled:
-      self.interactiveDismissTransition.hasStarted = NO;
-      [self.interactiveDismissTransition cancelInteractiveTransition];
-      break;
-      
-    case UIGestureRecognizerStateEnded:
-      self.interactiveDismissTransition.hasStarted = NO;
-      if (self.interactiveDismissTransition.shouldFinish) {
-        [self.interactiveDismissTransition finishInteractiveTransition];
-      } else {
-        [self.interactiveDismissTransition cancelInteractiveTransition];
-      }
-      break;
-      
-    default:
-      // Do nothing
-      break;
-  }
-}
-
 #pragma mark - UITableViewDataSource
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
@@ -256,6 +207,13 @@ typedef NS_ENUM(NSUInteger, Segment) {
   [self.tableView endUpdates];
   
   [CATransaction commit];
+}
+
+- (void) pan:(UIPanGestureRecognizer *)sender {
+  __weak typeof(self) weakSelf = self;
+  [self.interactiveDismissTransition handlePanRecognizer:sender view:self.view shouldDismiss:^{
+    [weakSelf.navigationController dismissViewControllerAnimated:YES completion:nil];
+  }];
 }
 
 - (void) setSelectedSegment:(Segment)selectedSegment {
