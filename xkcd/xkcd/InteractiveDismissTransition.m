@@ -21,8 +21,8 @@ static NSTimeInterval const kAnimationDuration = 0.3;
 }
 
 - (void) handlePanRecognizer:(UIPanGestureRecognizer *)panRecognizer
-                        view:(UIView *)view
                shouldDismiss:(void(^)(void))shouldDismiss {
+  UIView *view = panRecognizer.view;
   CGPoint translation = [panRecognizer translationInView:view];
   CGFloat progress = [self progressWithTranslation:translation viewHeight:CGRectGetHeight(view.bounds)];
   UIScrollView *scrollView = [panRecognizer.view isKindOfClass:[UIScrollView class]] ? (UIScrollView *)panRecognizer.view : nil;

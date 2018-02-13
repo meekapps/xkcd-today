@@ -19,7 +19,6 @@
 @property (nonatomic) BOOL shouldFinish;
 
 - (void)handlePanRecognizer:(UIPanGestureRecognizer *)panRecognizer
-                       view:(UIView *)view
               shouldDismiss:(void(^)(void))shouldDismiss;
 
 @end

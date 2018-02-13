@@ -211,7 +211,7 @@ typedef NS_ENUM(NSUInteger, Segment) {
 
 - (void) pan:(UIPanGestureRecognizer *)sender {
   __weak typeof(self) weakSelf = self;
-  [self.interactiveDismissTransition handlePanRecognizer:sender view:self.view shouldDismiss:^{
+  [self.interactiveDismissTransition handlePanRecognizer:sender shouldDismiss:^{
     [weakSelf.navigationController dismissViewControllerAnimated:YES completion:nil];
   }];
 }
