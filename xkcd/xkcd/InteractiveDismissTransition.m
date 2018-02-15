@@ -11,6 +11,10 @@
 static CGFloat const kPercentThreshold = 0.4F;
 static NSTimeInterval const kAnimationDuration = 0.3;
 
+@interface InteractiveDismissTransition()
+@property (nonatomic) CGFloat startingPositionY;
+@end
+
 @implementation InteractiveDismissTransition
 
 - (DismissTransition *) dismissTransition {
@@ -21,20 +25,24 @@ static NSTimeInterval const kAnimationDuration = 0.3;
 }
 
 - (void) handlePanRecognizer:(UIPanGestureRecognizer *)panRecognizer
+                  scrollView:(UIScrollView *)scrollView
                shouldDismiss:(void(^)(void))shouldDismiss {
   UIView *view = panRecognizer.view;
   CGPoint translation = [panRecognizer translationInView:view];
   CGFloat progress = [self progressWithTranslation:translation viewHeight:CGRectGetHeight(view.bounds)];
-  UIScrollView *scrollView = [panRecognizer.view isKindOfClass:[UIScrollView class]] ? (UIScrollView *)panRecognizer.view : nil;
-  
-  CGPoint topOffset = CGPointMake(0.0F, -view.layoutMarginsGuide.layoutFrame.origin.y);
-  if (scrollView.contentOffset.y > topOffset.y) {
-    [self cancelInteractiveTransition];
-    return;
-  }
+//  UIScrollView *scrollView = [panRecognizer.view isKindOfClass:[UIScrollView class]] ? (UIScrollView *)panRecognizer.view : nil;
+////
+//  CGPoint topOffset = CGPointMake(0.0F, -view.layoutMarginsGuide.layoutFrame.origin.y);
+//  if (scrollView.contentOffset.y > topOffset.y) {
+//    [self cancelInteractiveTransition];
+//    return;
+//  }
+  BOOL shouldDisallowScrolling = progress > 0.0F && scrollView && scrollView.contentOffset.y <= -64.0F;
+  scrollView.scrollEnabled = !shouldDisallowScrolling;
   
   switch (panRecognizer.state) {
     case UIGestureRecognizerStateBegan:
+      self.startingPositionY = scrollView.contentOffset.y;
       self.hasStarted = YES;
       shouldDismiss();
       break;

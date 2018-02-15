@@ -19,6 +19,7 @@
 @property (nonatomic) BOOL shouldFinish;
 
 - (void)handlePanRecognizer:(UIPanGestureRecognizer *)panRecognizer
+                 scrollView:(UIScrollView *)scrollView
               shouldDismiss:(void(^)(void))shouldDismiss;
 
 @end
