@@ -30,24 +30,22 @@ static NSTimeInterval const kAnimationDuration = 0.3;
   UIView *view = panRecognizer.view;
   CGPoint translation = [panRecognizer translationInView:view];
   CGFloat progress = [self progressWithTranslation:translation viewHeight:CGRectGetHeight(view.bounds)];
-//  UIScrollView *scrollView = [panRecognizer.view isKindOfClass:[UIScrollView class]] ? (UIScrollView *)panRecognizer.view : nil;
-////
-//  CGPoint topOffset = CGPointMake(0.0F, -view.layoutMarginsGuide.layoutFrame.origin.y);
-//  if (scrollView.contentOffset.y > topOffset.y) {
-//    [self cancelInteractiveTransition];
-//    return;
-//  }
+
   BOOL shouldDisallowScrolling = progress > 0.0F && scrollView && scrollView.contentOffset.y <= -64.0F;
   scrollView.scrollEnabled = !shouldDisallowScrolling;
   
   switch (panRecognizer.state) {
     case UIGestureRecognizerStateBegan:
-      self.startingPositionY = scrollView.contentOffset.y;
+      if (scrollView.contentOffset.y > -64.0F) return;
       self.hasStarted = YES;
       shouldDismiss();
       break;
       
     case UIGestureRecognizerStateChanged:
+      if (scrollView.contentOffset.y <= -64.0F && !self.hasStarted) {
+        self.hasStarted = YES;
+        shouldDismiss();
+      }
       self.shouldFinish = progress > kPercentThreshold;
       [self updateInteractiveTransition:progress];
       break;

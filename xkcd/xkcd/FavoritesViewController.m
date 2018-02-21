@@ -223,6 +223,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 }
 
 - (IBAction) pan:(UIPanGestureRecognizer *)sender {
+    
   __weak typeof(self) weakSelf = self;
   [self.interactiveDismissTransition handlePanRecognizer:sender scrollView:self.tableView shouldDismiss:^{
     [weakSelf.navigationController dismissViewControllerAnimated:YES completion:nil];
