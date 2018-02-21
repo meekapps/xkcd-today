@@ -39,11 +39,10 @@ typedef NS_ENUM(NSUInteger, Segment) {
   self.allDownloaded = [XKCD.sharedInstance fetchAllDownloaded];
   self.favorites = [XKCD.sharedInstance fetchFavorites];
   self.selectedSegment = SegmentFavorites;
-//  [self.tableView.panGestureRecognizer addTarget:self action:@selector(pan:)];
-  
+
   self.panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
   self.panRecognizer.delegate = self;
-  [self.navigationController.view addGestureRecognizer:self.panRecognizer];
+  [self.tableView addGestureRecognizer:self.panRecognizer];
   
   [self updateEditButton];
   [self updateEmptyLabel];
@@ -161,6 +160,13 @@ typedef NS_ENUM(NSUInteger, Segment) {
                                                 completion:nil];
 }
 
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+  return YES;
+}
+
 #pragma mark - Private
 
 - (XKCDComic *) comicAtIndexPath:(NSIndexPath *)indexPath {
@@ -215,17 +221,10 @@ typedef NS_ENUM(NSUInteger, Segment) {
   [CATransaction commit];
 }
 
-#pragma mark - UIGestureRecognizerDelegate
-
-- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
-shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-  return YES;
-}
-
-- (IBAction) pan:(UIPanGestureRecognizer *)sender {
-    
+- (void) pan:(UIPanGestureRecognizer *)sender {
+  
   __weak typeof(self) weakSelf = self;
-  [self.interactiveDismissTransition handlePanRecognizer:sender scrollView:self.tableView shouldDismiss:^{
+  [self.interactiveDismissTransition handlePanRecognizer:sender shouldDismiss:^{
     [weakSelf.navigationController dismissViewControllerAnimated:YES completion:nil];
   }];
 }

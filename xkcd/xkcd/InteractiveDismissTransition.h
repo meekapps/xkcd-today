@@ -14,12 +14,11 @@
 
 @interface InteractiveDismissTransition : UIPercentDrivenInteractiveTransition
 
-@property (strong, nonatomic) DismissTransition *dismissTransition;
-@property (nonatomic) BOOL hasStarted;
-@property (nonatomic) BOOL shouldFinish;
+@property (strong, nonatomic, readonly) DismissTransition *dismissTransition;
+@property (nonatomic, readonly) BOOL hasStarted;
+@property (nonatomic, readonly) BOOL shouldFinish;
 
 - (void)handlePanRecognizer:(UIPanGestureRecognizer *)panRecognizer
-                 scrollView:(UIScrollView *)scrollView
               shouldDismiss:(void(^)(void))shouldDismiss;
 
 @end

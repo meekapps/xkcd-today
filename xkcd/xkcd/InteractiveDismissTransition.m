@@ -12,7 +12,12 @@ static CGFloat const kPercentThreshold = 0.4F;
 static NSTimeInterval const kAnimationDuration = 0.3;
 
 @interface InteractiveDismissTransition()
-@property (nonatomic) CGFloat startingPositionY;
+@property (strong, nonatomic, readwrite) DismissTransition *dismissTransition;
+@property (nonatomic, readwrite) BOOL hasStarted;
+@property (nonatomic, readwrite) BOOL shouldFinish;
+
+@property (nonatomic) CGFloat startingScrollPositionY;
+@property (nonatomic) CGFloat startingPercent;
 @end
 
 @implementation InteractiveDismissTransition
@@ -25,27 +30,38 @@ static NSTimeInterval const kAnimationDuration = 0.3;
 }
 
 - (void) handlePanRecognizer:(UIPanGestureRecognizer *)panRecognizer
-                  scrollView:(UIScrollView *)scrollView
                shouldDismiss:(void(^)(void))shouldDismiss {
   UIView *view = panRecognizer.view;
   CGPoint translation = [panRecognizer translationInView:view];
   CGFloat progress = [self progressWithTranslation:translation viewHeight:CGRectGetHeight(view.bounds)];
 
-  BOOL shouldDisallowScrolling = progress > 0.0F && scrollView && scrollView.contentOffset.y <= -64.0F;
-  scrollView.scrollEnabled = !shouldDisallowScrolling;
+  // disbale scrolling during transition for UIScrollView.
+  BOOL isScrollViewAtTop = YES;
+  UIScrollView *scrollView = nil;
+  if ([panRecognizer.view isKindOfClass:[UIScrollView class]]) {
+    scrollView = (UIScrollView *)view;
+    isScrollViewAtTop = scrollView.contentOffset.y <= -scrollView.adjustedContentInset.top;
+    BOOL shouldDisallowScrolling = progress > 0.0F && isScrollViewAtTop;
+    scrollView.scrollEnabled = !shouldDisallowScrolling;
+  }
   
   switch (panRecognizer.state) {
     case UIGestureRecognizerStateBegan:
-      if (scrollView.contentOffset.y > -64.0F) return;
+      if (!isScrollViewAtTop) return;
+      
+      self.startingPercent = 0.0F;
+      self.startingScrollPositionY = scrollView.contentOffset.y;
       self.hasStarted = YES;
       shouldDismiss();
       break;
       
     case UIGestureRecognizerStateChanged:
-      if (scrollView.contentOffset.y <= -64.0F && !self.hasStarted) {
+      if (isScrollViewAtTop && !self.hasStarted) {
         self.hasStarted = YES;
+        self.startingPercent = translation.y / view.bounds.size.height;
         shouldDismiss();
       }
+      progress -= self.startingPercent;
       self.shouldFinish = progress > kPercentThreshold;
       [self updateInteractiveTransition:progress];
       break;
@@ -68,8 +84,8 @@ static NSTimeInterval const kAnimationDuration = 0.3;
 
 #pragma mark - Private
 
-- (CGFloat) progressWithTranslation:(CGPoint)translation viewHeight:(CGFloat)viewHeight{
-  CGFloat verticalMovement = translation.y / viewHeight;
+- (CGFloat) progressWithTranslation:(CGPoint)translation viewHeight:(CGFloat)viewHeight {
+  CGFloat verticalMovement = (translation.y + self.startingScrollPositionY) / viewHeight;
   CGFloat downwardMovement = fmaxf(verticalMovement, 0.0F);
   CGFloat progress = fminf(downwardMovement, 1.0F);
   return progress;
