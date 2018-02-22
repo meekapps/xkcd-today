@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		0803BC8A1F9BE56000C4D100 /* ReviewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0803BC891F9BE56000C4D100 /* ReviewManager.m */; };
 		0803BC8D1F9BE6A800C4D100 /* UIApplication+Sessions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0803BC8C1F9BE6A800C4D100 /* UIApplication+Sessions.m */; };
+		08048C36203E4F3F00A95C13 /* DismissTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 08048C35203E4F3F00A95C13 /* DismissTransition.m */; };
+		08048C39203E4FF600A95C13 /* InteractiveDismissPresentingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08048C38203E4FF600A95C13 /* InteractiveDismissPresentingViewController.m */; };
+		08048C3D203E52F900A95C13 /* InteractiveDismissPresentedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08048C3C203E52F900A95C13 /* InteractiveDismissPresentedViewController.m */; };
 		08602183202FF8B8001E2A3D /* InteractiveDismissTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 08602182202FF8B8001E2A3D /* InteractiveDismissTransition.m */; };
 		08602184202FF8B8001E2A3D /* InteractiveDismissTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 08602182202FF8B8001E2A3D /* InteractiveDismissTransition.m */; };
 		4105C5AA1D9589DD00852F1F /* NSString+XKCDImageUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4108CA671CB9AF80006CF7F9 /* NSString+XKCDImageUrl.m */; };
@@ -119,6 +122,12 @@
 		0803BC891F9BE56000C4D100 /* ReviewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReviewManager.m; sourceTree = "<group>"; };
 		0803BC8B1F9BE6A800C4D100 /* UIApplication+Sessions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIApplication+Sessions.h"; sourceTree = "<group>"; };
 		0803BC8C1F9BE6A800C4D100 /* UIApplication+Sessions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+Sessions.m"; sourceTree = "<group>"; };
+		08048C34203E4F3F00A95C13 /* DismissTransition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DismissTransition.h; sourceTree = "<group>"; };
+		08048C35203E4F3F00A95C13 /* DismissTransition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DismissTransition.m; sourceTree = "<group>"; };
+		08048C37203E4FF600A95C13 /* InteractiveDismissPresentingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InteractiveDismissPresentingViewController.h; sourceTree = "<group>"; };
+		08048C38203E4FF600A95C13 /* InteractiveDismissPresentingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InteractiveDismissPresentingViewController.m; sourceTree = "<group>"; };
+		08048C3B203E52F900A95C13 /* InteractiveDismissPresentedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InteractiveDismissPresentedViewController.h; sourceTree = "<group>"; };
+		08048C3C203E52F900A95C13 /* InteractiveDismissPresentedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InteractiveDismissPresentedViewController.m; sourceTree = "<group>"; };
 		08602181202FF8B8001E2A3D /* InteractiveDismissTransition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InteractiveDismissTransition.h; sourceTree = "<group>"; };
 		08602182202FF8B8001E2A3D /* InteractiveDismissTransition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InteractiveDismissTransition.m; sourceTree = "<group>"; };
 		41075C041C6C077600E18573 /* TodayViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayViewManager.h; sourceTree = "<group>"; };
@@ -241,6 +250,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08048C3A203E500400A95C13 /* InteractiveDismissTransition */ = {
+			isa = PBXGroup;
+			children = (
+				08048C34203E4F3F00A95C13 /* DismissTransition.h */,
+				08048C35203E4F3F00A95C13 /* DismissTransition.m */,
+				08048C3B203E52F900A95C13 /* InteractiveDismissPresentedViewController.h */,
+				08048C3C203E52F900A95C13 /* InteractiveDismissPresentedViewController.m */,
+				08048C37203E4FF600A95C13 /* InteractiveDismissPresentingViewController.h */,
+				08048C38203E4FF600A95C13 /* InteractiveDismissPresentingViewController.m */,
+				08602181202FF8B8001E2A3D /* InteractiveDismissTransition.h */,
+				08602182202FF8B8001E2A3D /* InteractiveDismissTransition.m */,
+			);
+			name = InteractiveDismissTransition;
+			sourceTree = "<group>";
+		};
 		4121914D1C5C624E0005971C = {
 			isa = PBXGroup;
 			children = (
@@ -327,8 +351,7 @@
 				4121915D1C5C624E0005971C /* AppDelegate.m */,
 				417062981C606E2F0003A3FD /* LaunchManager.h */,
 				417062991C606E2F0003A3FD /* LaunchManager.m */,
-				08602181202FF8B8001E2A3D /* InteractiveDismissTransition.h */,
-				08602182202FF8B8001E2A3D /* InteractiveDismissTransition.m */,
+				08048C3A203E500400A95C13 /* InteractiveDismissTransition */,
 				4121919D1C5C643B0005971C /* PersistenceManager.h */,
 				4121919E1C5C643B0005971C /* PersistenceManager.m */,
 				410DF19F1C6FEFF4000A19F6 /* Reachability.h */,
@@ -625,6 +648,8 @@
 				0803BC8A1F9BE56000C4D100 /* ReviewManager.m in Sources */,
 				0803BC8D1F9BE6A800C4D100 /* UIApplication+Sessions.m in Sources */,
 				4108CA681CB9AF80006CF7F9 /* NSString+XKCDImageUrl.m in Sources */,
+				08048C39203E4FF600A95C13 /* InteractiveDismissPresentingViewController.m in Sources */,
+				08048C36203E4F3F00A95C13 /* DismissTransition.m in Sources */,
 				419856AD1D57A81D008B5EA5 /* XKCDExplainedViewController.m in Sources */,
 				4121915B1C5C624E0005971C /* main.m in Sources */,
 				41E025791C66A67500235CAA /* UIAlertController+SimpleAction.m in Sources */,
@@ -643,6 +668,7 @@
 				412191671C5C624E0005971C /* xkcd.xcdatamodeld in Sources */,
 				08602183202FF8B8001E2A3D /* InteractiveDismissTransition.m in Sources */,
 				4121919F1C5C643B0005971C /* PersistenceManager.m in Sources */,
+				08048C3D203E52F900A95C13 /* InteractiveDismissPresentedViewController.m in Sources */,
 				419856B71D57AE10008B5EA5 /* NSString+StripTags.m in Sources */,
 				41FD61CE1C61C8810096C39F /* XKCDComic+CoreDataProperties.m in Sources */,
 				4170629A1C606E2F0003A3FD /* LaunchManager.m in Sources */,

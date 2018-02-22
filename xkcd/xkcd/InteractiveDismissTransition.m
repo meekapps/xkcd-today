@@ -3,15 +3,16 @@
 //  xkcd
 //
 //  Created by mikeller on 2/10/18.
-//  Copyright © 2018 Perka. All rights reserved.
+//  Copyright © 2018 meek apps. All rights reserved.
 //
 
 #import "InteractiveDismissTransition.h"
 
-static CGFloat const kPercentThreshold = 0.4F;
-static NSTimeInterval const kAnimationDuration = 0.3;
+#import "DismissTransition.h"
 
-@interface InteractiveDismissTransition()
+static CGFloat const kPercentThreshold = 0.4F;
+
+@interface InteractiveDismissTransition() <UIViewControllerTransitioningDelegate>
 @property (strong, nonatomic, readwrite) DismissTransition *dismissTransition;
 @property (nonatomic, readwrite) BOOL hasStarted;
 @property (nonatomic, readwrite) BOOL shouldFinish;
@@ -34,7 +35,7 @@ static NSTimeInterval const kAnimationDuration = 0.3;
   UIView *view = panRecognizer.view;
   CGPoint translation = [panRecognizer translationInView:view];
   CGFloat progress = [self progressWithTranslation:translation viewHeight:CGRectGetHeight(view.bounds)];
-
+  
   // disbale scrolling during transition for UIScrollView.
   BOOL isScrollViewAtTop = YES;
   UIScrollView *scrollView = nil;
@@ -89,37 +90,6 @@ static NSTimeInterval const kAnimationDuration = 0.3;
   CGFloat downwardMovement = fmaxf(verticalMovement, 0.0F);
   CGFloat progress = fminf(downwardMovement, 1.0F);
   return progress;
-}
-
-@end
-
-
-@implementation DismissTransition
-
-- (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
-  return kAnimationDuration;
-}
-
-- (void) animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
-  UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-  UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
-  UIView *containerView = transitionContext.containerView;
-  
-  if (!fromViewController || !toViewController || !containerView) {
-    [transitionContext completeTransition:NO];
-    return;
-  }
-  
-  [containerView insertSubview:toViewController.view belowSubview:fromViewController.view];
-  
-  CGRect endFrame = fromViewController.view.frame;
-  endFrame.origin.y = CGRectGetHeight(fromViewController.view.bounds);
-  [UIView animateWithDuration:[self transitionDuration:transitionContext]
-                   animations:^{
-                     fromViewController.view.frame = endFrame;
-                   } completion:^(BOOL finished) {
-                     [transitionContext completeTransition:!transitionContext.transitionWasCancelled];
-                   }];
 }
 
 @end

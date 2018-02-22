@@ -3,14 +3,12 @@
 //  xkcd
 //
 //  Created by mikeller on 2/10/18.
-//  Copyright © 2018 Perka. All rights reserved.
+//  Copyright © 2018 meek apps. All rights reserved.
 //
 
 @import UIKit;
 
-@interface DismissTransition : NSObject <UIViewControllerAnimatedTransitioning>
-@end
-
+@class DismissTransition;
 
 @interface InteractiveDismissTransition : UIPercentDrivenInteractiveTransition
 
@@ -21,7 +19,4 @@
 - (void)handlePanRecognizer:(UIPanGestureRecognizer *)panRecognizer
               shouldDismiss:(void(^)(void))shouldDismiss;
 
-@end
-
-@interface InteractiveDismissPresenterViewController : UIViewController
 @end

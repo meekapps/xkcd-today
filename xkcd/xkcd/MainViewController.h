@@ -8,9 +8,9 @@
 
 @import UIKit;
 
-#import "FavoritesViewController.h"
+#import "InteractiveDismissPresentingViewController.h"
 
-@interface MainViewController : UIViewController <FavoritesViewControllerDelegate>
+@interface MainViewController : InteractiveDismissPresentingViewController
 
 @end
 

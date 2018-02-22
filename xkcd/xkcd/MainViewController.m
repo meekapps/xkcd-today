@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ComicScrollView.h"
+#import "FavoritesViewController.h"
 #import "InteractiveDismissTransition.h"
 #import "LaunchManager.h"
 #import "MainViewController.h"
@@ -27,12 +28,11 @@
 #import "XKCDExplained.h"
 #import "XKCDExplainedViewController.h"
 
-@interface MainViewController () <UIViewControllerTransitioningDelegate>
+@interface MainViewController () <FavoritesViewControllerDelegate>
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UIButton *previousButton, *nextButton, *randomButton;
 @property (strong, nonatomic) XKCDComic *currentComic;
 @property (copy, nonatomic) NSNumber *launchIndex;
-@property (strong, nonatomic) InteractiveDismissTransition *interactiveDismissTransition;
 @property (nonatomic) BOOL loading, showingLatestComic, showingOldestComic;
 
 @property (weak, nonatomic) IBOutlet ComicScrollView *scrollView;
@@ -50,8 +50,6 @@
   self = [super initWithCoder:aDecoder];
   if (self) {
     [self addNotificationObservers];
-    
-    _interactiveDismissTransition = [[InteractiveDismissTransition alloc] init];
   }
   return self;
 }
@@ -249,7 +247,10 @@
   UINavigationController *favoritesNavigationController = [UIStoryboard favoritesRootNavigationController];
   FavoritesViewController *favoritesViewController = favoritesNavigationController.viewControllers.firstObject;
   favoritesViewController.delegate = self;
+  
+  // TODO: can i remove these somehow?
   favoritesNavigationController.transitioningDelegate = self;
+  favoritesViewController.interactiveDismissPresentingViewController = self;
   favoritesViewController.interactiveDismissTransition = self.interactiveDismissTransition;
   
   [self.navigationController presentViewController:favoritesNavigationController
@@ -265,16 +266,6 @@
   if (self.currentComic.favorite != nil) {
     [ReviewManager requestReviewIfNeeded];
   }
-}
-
-#pragma mark - UIViewControllerTransitioningDelegate
-
-- (id <UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id <UIViewControllerAnimatedTransitioning>)animator {
-  return self.interactiveDismissTransition.hasStarted ? self.interactiveDismissTransition : nil;
-}
-
-- (id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-  return self.interactiveDismissTransition.dismissTransition;
 }
 
 #pragma mark - Private

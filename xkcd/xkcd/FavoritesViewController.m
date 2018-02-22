@@ -18,15 +18,13 @@ typedef NS_ENUM(NSUInteger, Segment) {
     SegmentAllDownloaded
 };
 
-@interface FavoritesViewController () <UIGestureRecognizerDelegate>
+@interface FavoritesViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) NSArray<XKCDComic*> *allDownloaded;
 @property (strong, nonatomic) NSArray<XKCDComic*> *favorites;
 
 @property (weak, nonatomic) IBOutlet UILabel *emptyLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
-@property (strong, nonatomic) UIPanGestureRecognizer *panRecognizer;
 
 @property (nonatomic) Segment selectedSegment;
 @end
@@ -40,9 +38,7 @@ typedef NS_ENUM(NSUInteger, Segment) {
   self.favorites = [XKCD.sharedInstance fetchFavorites];
   self.selectedSegment = SegmentFavorites;
 
-  self.panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
-  self.panRecognizer.delegate = self;
-  [self.tableView addGestureRecognizer:self.panRecognizer];
+  self.interactiveDismissTransitionView = self.tableView;
   
   [self updateEditButton];
   [self updateEmptyLabel];
@@ -160,13 +156,6 @@ typedef NS_ENUM(NSUInteger, Segment) {
                                                 completion:nil];
 }
 
-#pragma mark - UIGestureRecognizerDelegate
-
-- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
-shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-  return YES;
-}
-
 #pragma mark - Private
 
 - (XKCDComic *) comicAtIndexPath:(NSIndexPath *)indexPath {
@@ -219,14 +208,6 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
   [self.tableView endUpdates];
   
   [CATransaction commit];
-}
-
-- (void) pan:(UIPanGestureRecognizer *)sender {
-  
-  __weak typeof(self) weakSelf = self;
-  [self.interactiveDismissTransition handlePanRecognizer:sender shouldDismiss:^{
-    [weakSelf.navigationController dismissViewControllerAnimated:YES completion:nil];
-  }];
 }
 
 - (void) setSelectedSegment:(Segment)selectedSegment {
