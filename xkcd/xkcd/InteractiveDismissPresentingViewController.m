@@ -17,15 +17,13 @@
 
 @implementation InteractiveDismissPresentingViewController
 
-#pragma mark - Lifecycle
-
-- (instancetype)initWithCoder:(NSCoder *)coder {
-  self = [super initWithCoder:coder];
-  if (self) {
+- (InteractiveDismissTransition *) interactiveDismissTransition {
+  if (!_interactiveDismissTransition) {
     _interactiveDismissTransition = [[InteractiveDismissTransition alloc] init];
   }
-  return self;
+  return _interactiveDismissTransition;
 }
+
 #pragma mark - UIViewControllerTransitioningDelegate
 
 - (id <UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id <UIViewControllerAnimatedTransitioning>)animator {

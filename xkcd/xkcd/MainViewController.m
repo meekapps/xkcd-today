@@ -247,11 +247,7 @@
   UINavigationController *favoritesNavigationController = [UIStoryboard favoritesRootNavigationController];
   FavoritesViewController *favoritesViewController = favoritesNavigationController.viewControllers.firstObject;
   favoritesViewController.delegate = self;
-  
-  // TODO: can i remove these somehow?
-  favoritesNavigationController.transitioningDelegate = self;
   favoritesViewController.interactiveDismissPresentingViewController = self;
-  favoritesViewController.interactiveDismissTransition = self.interactiveDismissTransition;
   
   [self.navigationController presentViewController:favoritesNavigationController
                                           animated:YES

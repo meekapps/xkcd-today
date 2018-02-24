@@ -13,13 +13,10 @@
 
 @interface InteractiveDismissPresentedViewController : UIViewController
 
-/// To be set by InteractiveDismissPresentingViewController
+/// To be set by subclass.
 @property (weak, nonatomic) UIView *interactiveDismissTransitionView;
 
-/// To be set by InteractiveDismissPresentingViewController
-@property (weak, nonatomic) InteractiveDismissTransition *interactiveDismissTransition;
-
-// TODO: override setter
+/// To be set by presenting view controller.
 @property (weak, nonatomic) InteractiveDismissPresentingViewController *interactiveDismissPresentingViewController;
 
 @end
