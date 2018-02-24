@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "ComicScrollView.h"
+#import "FavoritesViewController.h"
+#import "InteractiveDismissTransition.h"
 #import "LaunchManager.h"
 #import "MainViewController.h"
 #import "NSNumber+Operations.h"
@@ -25,7 +28,7 @@
 #import "XKCDExplained.h"
 #import "XKCDExplainedViewController.h"
 
-@interface MainViewController ()
+@interface MainViewController () <FavoritesViewControllerDelegate>
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UIButton *previousButton, *nextButton, *randomButton;
 @property (strong, nonatomic) XKCDComic *currentComic;
@@ -200,8 +203,6 @@
 }
 
 - (void) previousAction:(UIButton*)sender {
-  NSLog(@"previous button pressed");
-  
   NSNumber *oldestIndex = @(0);
   if ([self.currentComic.index equals:oldestIndex]) return;
   
@@ -211,8 +212,6 @@
 }
 
 - (void) nextAction:(UIButton*)sender {
-  NSLog(@"next button pressed");
-  
   NSNumber *latestIndex = XKCD.sharedInstance.latestComicIndex;
   if (self.currentComic.index && latestIndex && [self.currentComic.index equals:latestIndex]) return;
   
@@ -223,7 +222,6 @@
 }
 
 - (void) randomAction:(UIButton*)sender {
-  NSLog(@"random button pressed");
   NSNumber *latestIndex = XKCD.sharedInstance.latestComicIndex;
   if (!latestIndex) return;
   
@@ -249,6 +247,7 @@
   UINavigationController *favoritesNavigationController = [UIStoryboard favoritesRootNavigationController];
   FavoritesViewController *favoritesViewController = favoritesNavigationController.viewControllers.firstObject;
   favoritesViewController.delegate = self;
+  favoritesViewController.interactiveDismissPresentingViewController = self;
   
   [self.navigationController presentViewController:favoritesNavigationController
                                           animated:YES
@@ -266,6 +265,16 @@
 }
 
 #pragma mark - Private
+
+- (void) clearViews {
+  self.titleLabel.text = nil;
+  
+  self.noNetworkLabel.hidden = YES;
+  self.toggleFavoriteButton.enabled = NO;
+  self.toggleFavoriteButton.image = [UIImage heartImageFilled:NO landscape:NO];
+  self.toggleFavoriteButton.landscapeImagePhone = [UIImage heartImageFilled:NO landscape:YES];
+  [self.scrollView setImage:nil];
+}
 
 //Load comic with index. Attempts local Core Data load, if fails, performs HTTP request.
 //pass forceUpdate = YES to force http GET even after successul fetch.
@@ -295,7 +304,7 @@
   
   //Get from http if you have a network connection (or forceUpdate==YES)
   //Return early and show error if not reachable.
-  BOOL reachable = [self isReachable];
+  BOOL reachable = Reachability.isReachable;
   if (!reachable && !fetchedComic) {
     self.noNetworkLabel.hidden = NO;
     self.loading = NO;
@@ -307,10 +316,6 @@
                                   [[SpotlightManager sharedManager] indexComic:comic];
                                   finalizeWithComic(comic);
                                 }];
-}
-
-- (BOOL) isReachable {
-  return [Reachability reachabilityForInternetConnection].currentReachabilityStatus != NotReachable;
 }
 
 //Sets UIEdgeInsets propert to on scroll view with current orientation bar sizes.
@@ -332,14 +337,64 @@
   self.toggleFavoriteButton.enabled = YES;
 }
 
-- (void) clearViews {
-  self.titleLabel.text = nil;
+- (void) setupExplain {
+  UILongPressGestureRecognizer *explainGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                                                                         action:@selector(explainAction:)];
+  [self.view addGestureRecognizer:explainGestureRecognizer];
+}
+
+- (void) setupTitleView {
+  self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0F, 0.0F, 200.0F, 44.0F)];
+  self.titleLabel.numberOfLines = 2;
+  self.titleLabel.textAlignment = NSTextAlignmentCenter;
+  self.titleLabel.font = [UIFont boldSystemFontOfSize:18.0F];
+  self.navigationItem.titleView = self.titleLabel;
+}
+
+- (void) setupToolbar {
+  CGFloat buttonWidth = 60.0F;
+  CGFloat buttonHeight = 34.0F;
   
-  self.noNetworkLabel.hidden = YES;
-  self.toggleFavoriteButton.enabled = NO;
-  self.toggleFavoriteButton.image = [UIImage heartImageFilled:NO landscape:NO];
-  self.toggleFavoriteButton.landscapeImagePhone = [UIImage heartImageFilled:NO landscape:YES];
-  [self.scrollView setImage:nil];
+  //Previous
+  self.previousButton = [UIButton buttonWithType:UIButtonTypeSystem];
+  [self.previousButton setTitle:@"<Prev" forState:UIControlStateNormal];
+  [self.previousButton addTarget:self action:@selector(previousAction:) forControlEvents:UIControlEventTouchUpInside];
+  self.previousButton.frame = CGRectMake(0.0F, 0.0F, buttonWidth, buttonHeight);
+  UILongPressGestureRecognizer *previousLongPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                                                                            action:@selector(oldestAction:)];
+  [self.previousButton addGestureRecognizer:previousLongPressRecognizer];
+  UIBarButtonItem *previousButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.previousButton];
+  
+  //Random
+  self.randomButton = [UIButton buttonWithType:UIButtonTypeSystem];
+  [self.randomButton setTitle:@"Random" forState:UIControlStateNormal];
+  [self.randomButton addTarget:self action:@selector(randomAction:) forControlEvents:UIControlEventTouchUpInside];
+  self.randomButton.frame = CGRectMake(0.0F, 0.0F, buttonWidth, buttonHeight);
+  UIBarButtonItem *randomButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.randomButton];
+  
+  //Next
+  self.nextButton = [UIButton buttonWithType:UIButtonTypeSystem];
+  [self.nextButton setTitle:@"Next>" forState:UIControlStateNormal];
+  [self.nextButton addTarget:self action:@selector(nextAction:) forControlEvents:UIControlEventTouchUpInside];
+  self.nextButton.frame = CGRectMake(0.0F, 0.0F, buttonWidth, buttonHeight);
+  UILongPressGestureRecognizer *nextLongPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                                                                        action:@selector(latestAction:)];
+  [self.nextButton addGestureRecognizer:nextLongPressRecognizer];
+  UIBarButtonItem *nextButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
+  
+  UIBarButtonItem *flexibleSpaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                     target:nil
+                                                                                     action:nil];
+  
+  NSArray <UIBarButtonItem*>*items = @[flexibleSpaceItem,
+                                       previousButtonItem,
+                                       flexibleSpaceItem,
+                                       randomButtonItem,
+                                       flexibleSpaceItem,
+                                       nextButtonItem,
+                                       flexibleSpaceItem];
+  self.toolbarItems = items;
+  self.navigationController.toolbarHidden = NO;
 }
 
 - (void) updateViewsWithComic:(XKCDComic*)comic {
@@ -392,57 +447,6 @@
                                             completion:^{}];
     }
   }];
-}
-
-- (void) setupTitleView {
-  self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0F, 0.0F, 200.0F, 44.0F)];
-  self.titleLabel.numberOfLines = 2;
-  self.titleLabel.textAlignment = NSTextAlignmentCenter;
-  self.titleLabel.font = [UIFont boldSystemFontOfSize:18.0F];
-  self.navigationItem.titleView = self.titleLabel;
-}
-
-- (void) setupToolbar {
-  //Previous
-  self.previousButton = [UIButton buttonWithType:UIButtonTypeSystem];
-  [self.previousButton setTitle:@"<Prev" forState:UIControlStateNormal];
-  [self.previousButton addTarget:self action:@selector(previousAction:) forControlEvents:UIControlEventTouchUpInside];
-  self.previousButton.frame = CGRectMake(0.0F, 0.0F, 60.0F, 34.0F);
-  UILongPressGestureRecognizer *previousLongPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self
-                                                                                                            action:@selector(oldestAction:)];
-  [self.previousButton addGestureRecognizer:previousLongPressRecognizer];
-  UIBarButtonItem *previousButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.previousButton];
-  
-  //Random
-  self.randomButton = [UIButton buttonWithType:UIButtonTypeSystem];
-  [self.randomButton setTitle:@"Random" forState:UIControlStateNormal];
-  [self.randomButton addTarget:self action:@selector(randomAction:) forControlEvents:UIControlEventTouchUpInside];
-  self.randomButton.frame = CGRectMake(0.0F, 0.0F, 60.0F, 34.0F);
-  UIBarButtonItem *randomButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.randomButton];
-  
-  //Next
-  self.nextButton = [UIButton buttonWithType:UIButtonTypeSystem];
-  [self.nextButton setTitle:@"Next>" forState:UIControlStateNormal];
-  [self.nextButton addTarget:self action:@selector(nextAction:) forControlEvents:UIControlEventTouchUpInside];
-  self.nextButton.frame = CGRectMake(0.0F, 0.0F, 60.0F, 34.0F);
-  UILongPressGestureRecognizer *nextLongPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self
-                                                                                                        action:@selector(latestAction:)];
-  [self.nextButton addGestureRecognizer:nextLongPressRecognizer];
-  UIBarButtonItem *nextButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
-  
-  UIBarButtonItem *flexibleSpaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                                     target:nil
-                                                                                     action:nil];
-  
-  NSArray <UIBarButtonItem*>*items = @[flexibleSpaceItem, previousButtonItem, flexibleSpaceItem, randomButtonItem, flexibleSpaceItem, nextButtonItem, flexibleSpaceItem];
-  [self setToolbarItems:items];
-  
-  [self.navigationController setToolbarHidden:NO];
-  
-  //Explain
-  UILongPressGestureRecognizer *explainGestureRecognizer =[[UILongPressGestureRecognizer alloc] initWithTarget:self
-                                                                                                        action:@selector(explainAction:)];
-  [self.view addGestureRecognizer:explainGestureRecognizer];
 }
 
 #pragma mark - FavoritesViewControllerDelegte

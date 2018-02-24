@@ -38,7 +38,7 @@
   attributes.keywords = [self keywordsWithComic:comic];
   
   void(^finishIndexing)(void) = ^void(void) {
-    NSLog(@"finish indexing");
+    NSLog(@"finished indexing: %@", comic.index);
     //Index the comic
     NSString *indexString = [NSString stringWithFormat:@"%@", @(comic.index.integerValue)];
     NSString *bundleId = [NSBundle mainBundle].bundleIdentifier;

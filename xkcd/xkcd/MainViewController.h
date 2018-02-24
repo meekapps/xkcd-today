@@ -8,10 +8,9 @@
 
 @import UIKit;
 
-#import "ComicScrollView.h"
-#import "FavoritesViewController.h"
+#import "InteractiveDismissPresentingViewController.h"
 
-@interface MainViewController : UIViewController <FavoritesViewControllerDelegate>
+@interface MainViewController : InteractiveDismissPresentingViewController
 
 @end
 
