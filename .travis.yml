@@ -1,5 +1,5 @@
 language: objective-c
-osx_image: xcode8.3
+osx_image: xcode9.2
 
 before_install: rvm use $RVM_RUBY_VERSION
 install: bundle install --without=documentation
@@ -10,7 +10,7 @@ script:
     -workspace xkcd.xcworkspace 
     -scheme xkcdTests 
     -sdk iphonesimulator
-    -destination 'platform=iOS Simulator,name=iPhone 7'
+    -destination 'platform=iOS Simulator,name=iPhone 8'
     build test
     ONLY_ACTIVE_ARCH=NO
     CODE_SIGN_IDENTITY="" 
