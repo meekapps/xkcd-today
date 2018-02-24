@@ -23,6 +23,8 @@ extern NSString *kReachabilityChangedNotification;
 
 @interface Reachability : NSObject
 
+@property (class, nonatomic, readonly) BOOL isReachable;
+
 /*!
  * Use to check the reachability of a given host name.
  */

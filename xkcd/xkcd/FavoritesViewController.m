@@ -8,6 +8,8 @@
 
 #import "FavoriteTableViewCell.h"
 #import "FavoritesViewController.h"
+#import "InteractiveDismissTransition.h"
+#import "UIAlertController+SimpleAction.h"
 #import "XKCD.h"
 #import "XKCDComic.h"
 
@@ -16,10 +18,14 @@ typedef NS_ENUM(NSUInteger, Segment) {
     SegmentAllDownloaded
 };
 
-@interface FavoritesViewController ()
+@interface FavoritesViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) NSArray<XKCDComic*> *allDownloaded;
 @property (strong, nonatomic) NSArray<XKCDComic*> *favorites;
+
+@property (weak, nonatomic) IBOutlet UILabel *emptyLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @property (nonatomic) Segment selectedSegment;
 @end
 
@@ -31,11 +37,11 @@ typedef NS_ENUM(NSUInteger, Segment) {
   self.allDownloaded = [XKCD.sharedInstance fetchAllDownloaded];
   self.favorites = [XKCD.sharedInstance fetchFavorites];
   self.selectedSegment = SegmentFavorites;
-  [self.tableView reloadData];
-  self.tableView.estimatedRowHeight = 60.0F;
-  self.tableView.rowHeight = UITableViewAutomaticDimension;
+
+  self.interactiveDismissTransitionView = self.tableView;
   
-  [self showOrHideEditButton];
+  [self updateEditButton];
+  [self updateEmptyLabel];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -71,9 +77,7 @@ typedef NS_ENUM(NSUInteger, Segment) {
 }
 
 - (IBAction)changedSegment:(UISegmentedControl *)sender {
-    self.selectedSegment = sender.selectedSegmentIndex;
-    [self.tableView reloadData];
-    [self showOrHideEditButton];
+  self.selectedSegment = sender.selectedSegmentIndex;
 }
 
 #pragma mark - UITableViewDataSource
@@ -99,17 +103,7 @@ typedef NS_ENUM(NSUInteger, Segment) {
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   FavoriteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([FavoriteTableViewCell class])];
-  switch (self.selectedSegment) {
-    case SegmentFavorites:
-      cell.comic = self.favorites[indexPath.row];
-      break;
-    case SegmentAllDownloaded:
-      cell.comic = self.allDownloaded[indexPath.row];
-      break;
-    default:
-      cell.comic = nil;
-      break;
-  }
+  cell.comic = [self comicAtIndexPath:indexPath];
   return cell;
 }
 
@@ -146,7 +140,6 @@ typedef NS_ENUM(NSUInteger, Segment) {
 
 - (void) tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
        toIndexPath:(NSIndexPath *)destinationIndexPath {
-  
   [XKCD.sharedInstance moveFavoriteFromIndex:sourceIndexPath.row
                                      toIndex:destinationIndexPath.row];
 }
@@ -155,18 +148,34 @@ typedef NS_ENUM(NSUInteger, Segment) {
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   if ([self.delegate respondsToSelector:@selector(favoritesViewController:didSelectComicWithIndex:)]) {
-    XKCDComic *comic = self.favorites[indexPath.row];
+    XKCDComic *comic = [self comicAtIndexPath:indexPath];
     [self.delegate favoritesViewController:self didSelectComicWithIndex:comic.index];
   }
   
   [self.navigationController dismissViewControllerAnimated:YES
-                                                completion:^{
-  }];
+                                                completion:nil];
 }
 
 #pragma mark - Private
 
+- (XKCDComic *) comicAtIndexPath:(NSIndexPath *)indexPath {
+  NSInteger row = indexPath.row;
+  switch (self.selectedSegment) {
+    case SegmentFavorites:
+      return self.favorites.count > row ? self.favorites[row] : nil;
+      break;
+    case SegmentAllDownloaded:
+      return self.allDownloaded.count > row ? self.allDownloaded[row] : nil;
+      break;
+    default:
+      return nil;
+      break;
+  }
+}
+
 - (void) deleteFavoriteAtIndexPath:(NSIndexPath*)indexPath {
+  if (indexPath.row >= self.favorites.count) return;
+  
   XKCDComic *comic = self.favorites[indexPath.row];
   NSNumber *index = comic.index;
   
@@ -175,30 +184,67 @@ typedef NS_ENUM(NSUInteger, Segment) {
   self.favorites = [XKCD.sharedInstance fetchFavorites];
   
   //update table view
+  [CATransaction begin];
+  
+  //animation completion
+  [CATransaction setCompletionBlock:^{
+    [self updateEditButton];
+    [self updateEmptyLabel];
+    
+    //stop editing if that was the only favorite
+    if (self.favorites.count == 0 && self.editing) {
+      [self setEditing:NO animated:YES];
+    }
+    
+    //inform delegate
+    if ([self.delegate respondsToSelector:@selector(favoritesViewController:didDeleteFavoriteWithIndex:)]) {
+      [self.delegate favoritesViewController:self didDeleteFavoriteWithIndex:index];
+    }
+  }];
+  
+  //animation
   [self.tableView beginUpdates];
   [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
   [self.tableView endUpdates];
   
-  //edit button
-  [self showOrHideEditButton];
-  
-  //stop editing if that was the only favorite
-  if (self.favorites.count == 0 && self.editing) {
-    [self setEditing:NO animated:YES];
-  }
-  
-  //inform delegate
-  if ([self.delegate respondsToSelector:@selector(favoritesViewController:didDeleteFavoriteWithIndex:)]) {
-    [self.delegate favoritesViewController:self didDeleteFavoriteWithIndex:index];
-  }
+  [CATransaction commit];
 }
 
-- (void) showOrHideEditButton {
+- (void) setSelectedSegment:(Segment)selectedSegment {
+  _selectedSegment = selectedSegment;
+  
+  self.segmentedControl.selectedSegmentIndex = selectedSegment;
+  [self.tableView reloadData];
+  
+  [self updateEditButton];
+  [self updateEmptyLabel];
+}
+
+- (void) updateEditButton {
   if (self.favorites && self.favorites.count > 0 && self.selectedSegment == SegmentFavorites) {
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
   } else {
     self.navigationItem.leftBarButtonItem = nil;
   }
+}
+
+- (void) updateEmptyLabel {
+  NSString *emptyMessage = nil;
+  BOOL shouldShow = NO;
+  switch (self.selectedSegment) {
+    case SegmentFavorites:
+      emptyMessage = @"No comics have been added to Favorites.";
+      shouldShow = self.favorites.count == 0;
+      break;
+    case SegmentAllDownloaded:
+      emptyMessage = @"No comics have been downloaded.";
+      shouldShow = self.allDownloaded.count == 0;
+    default:
+      // Do nothing
+      break;
+  }
+  self.emptyLabel.text = emptyMessage;
+  self.emptyLabel.hidden = !shouldShow;
 }
 
 @end

@@ -8,7 +8,10 @@
 
 @import UIKit;
 
+#import "InteractiveDismissPresentedViewController.h"
+
 @class FavoritesViewController;
+
 @protocol FavoritesViewControllerDelegate <NSObject>
 - (void) favoritesViewController:(FavoritesViewController*)favoritesViewController
       didDeleteFavoriteWithIndex:(NSNumber*)index;
@@ -16,7 +19,7 @@
          didSelectComicWithIndex:(NSNumber*)index;
 @end
 
-@interface FavoritesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface FavoritesViewController : InteractiveDismissPresentedViewController
 
 @property (weak, nonatomic) id<FavoritesViewControllerDelegate>delegate;
 

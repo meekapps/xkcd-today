@@ -8,7 +8,7 @@
 
 @import UIKit;
 
-#import "XKCDComic.h"
+@class XKCDComic;
 
 @interface XKCDAlertController : UIAlertController
 
