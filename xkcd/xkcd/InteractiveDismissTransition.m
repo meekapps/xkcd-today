@@ -2,7 +2,7 @@
 //  InteractiveDismissTransition.m
 //  xkcd
 //
-//  Created by mikeller on 2/10/18.
+//  Created by Mike Keller on 2/10/18.
 //  Copyright © 2018 meek apps. All rights reserved.
 //
 

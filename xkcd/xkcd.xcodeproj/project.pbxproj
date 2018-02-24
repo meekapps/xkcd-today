@@ -538,7 +538,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0900;
-				ORGANIZATIONNAME = Perka;
+				ORGANIZATIONNAME = "meek apps";
 				TargetAttributes = {
 					412191551C5C624E0005971C = {
 						CreatedOnToolsVersion = 7.2;

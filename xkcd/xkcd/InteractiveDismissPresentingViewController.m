@@ -2,8 +2,8 @@
 //  InteractiveDismissPresentingViewController.m
 //  xkcd
 //
-//  Created by mikeller on 2/21/18.
-//  Copyright © 2018 Perka. All rights reserved.
+//  Created by Mike Keller on 2/21/18.
+//  Copyright © 2018 meek apps. All rights reserved.
 //
 
 #import "InteractiveDismissPresentingViewController.h"
