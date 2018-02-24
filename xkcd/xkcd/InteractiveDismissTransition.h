@@ -13,8 +13,7 @@
 @interface InteractiveDismissTransition : UIPercentDrivenInteractiveTransition
 
 @property (strong, nonatomic, readonly) DismissTransition *dismissTransition;
-@property (nonatomic, readonly) BOOL hasStarted;
-@property (nonatomic, readonly) BOOL shouldFinish;
+@property (nonatomic, readonly) BOOL hasStartedInteractiveTransition;
 
 - (void)handlePanRecognizer:(UIPanGestureRecognizer *)panRecognizer
               shouldDismiss:(void(^)(void))shouldDismiss;

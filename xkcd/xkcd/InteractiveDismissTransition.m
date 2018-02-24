@@ -14,8 +14,8 @@ static CGFloat const kPercentThreshold = 0.4F;
 
 @interface InteractiveDismissTransition() <UIViewControllerTransitioningDelegate>
 @property (strong, nonatomic, readwrite) DismissTransition *dismissTransition;
-@property (nonatomic, readwrite) BOOL hasStarted;
-@property (nonatomic, readwrite) BOOL shouldFinish;
+@property (nonatomic, readwrite) BOOL hasStartedInteractiveTransition;
+@property (nonatomic) BOOL shouldFinishInteractiveTransition;
 
 @property (nonatomic) CGFloat startingScrollPositionY;
 @property (nonatomic) CGFloat startingPercent;
@@ -52,29 +52,29 @@ static CGFloat const kPercentThreshold = 0.4F;
       
       self.startingPercent = 0.0F;
       self.startingScrollPositionY = scrollView.contentOffset.y;
-      self.hasStarted = YES;
+      self.hasStartedInteractiveTransition = YES;
       shouldDismiss();
       break;
       
     case UIGestureRecognizerStateChanged:
-      if (isScrollViewAtTop && !self.hasStarted) {
-        self.hasStarted = YES;
+      if (isScrollViewAtTop && !self.hasStartedInteractiveTransition) {
+        self.hasStartedInteractiveTransition = YES;
         self.startingPercent = translation.y / view.bounds.size.height;
         shouldDismiss();
       }
       progress -= self.startingPercent;
-      self.shouldFinish = progress > kPercentThreshold;
+      self.shouldFinishInteractiveTransition = progress > kPercentThreshold;
       [self updateInteractiveTransition:progress];
       break;
       
     case UIGestureRecognizerStateCancelled:
-      self.hasStarted = NO;
+      self.hasStartedInteractiveTransition = NO;
       [self cancelInteractiveTransition];
       break;
       
     case UIGestureRecognizerStateEnded:
-      self.hasStarted = NO;
-      self.shouldFinish ? [self finishInteractiveTransition] : [self cancelInteractiveTransition];
+      self.hasStartedInteractiveTransition = NO;
+      self.shouldFinishInteractiveTransition ? [self finishInteractiveTransition] : [self cancelInteractiveTransition];
       break;
       
     default:

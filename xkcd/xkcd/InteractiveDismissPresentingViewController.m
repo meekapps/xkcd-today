@@ -27,7 +27,7 @@
 #pragma mark - UIViewControllerTransitioningDelegate
 
 - (id <UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id <UIViewControllerAnimatedTransitioning>)animator {
-  return self.interactiveDismissTransition.hasStarted ? self.interactiveDismissTransition : nil;
+  return self.interactiveDismissTransition.hasStartedInteractiveTransition ? self.interactiveDismissTransition : nil;
 }
 
 - (id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
