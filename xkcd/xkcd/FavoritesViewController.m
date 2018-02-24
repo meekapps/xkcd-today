@@ -245,7 +245,6 @@ typedef NS_ENUM(NSUInteger, Segment) {
   }
   self.emptyLabel.text = emptyMessage;
   self.emptyLabel.hidden = !shouldShow;
-//  self.tableView.hidden = shouldShow;
 }
 
 @end
