@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "NSNumber+Operations.h"
+#import "NSString+StripTags.h"
 #import "PersistenceManager.h"
 #import "XKCD.h"
 
@@ -16,7 +17,7 @@ static NSUInteger const kXKCDGardenIndex = 1663;
 NSString *const kXKCDServerBase = @"https://xkcd.com/";
 static NSString *const kXKCDComicExtention = @"info.0.json";
 
-@interface XKCD()
+@interface XKCD() <NSURLSessionDelegate>
 @property (copy) XKCDComicCompletion completion;
 @property (strong, readwrite, nonatomic) NSNumber *latestComicIndex;
 @property (strong, nonatomic) NSArray<NSNumber*> *comicIndexBlacklist;
@@ -275,7 +276,7 @@ static NSString *const kXKCDComicExtention = @"info.0.json";
   
   //title
   id title = payload[@"title"];
-  if (title && [title isKindOfClass:[NSString class]]) comic.title = title;
+  if (title && [title isKindOfClass:[NSString class]]) comic.title = [title stripTags];
   
   NSLog(@"Inserting XKCDComic into NSManagedObjectContext: %@", comic);
   

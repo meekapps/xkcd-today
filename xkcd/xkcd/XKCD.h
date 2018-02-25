@@ -13,7 +13,7 @@ FOUNDATION_EXPORT NSString *const kXKCDServerBase;
 
 typedef void(^XKCDComicCompletion)(XKCDComic *comic);
 
-@interface XKCD : NSObject <NSURLSessionDelegate>
+@interface XKCD : NSObject
 
 @property (strong, readonly, nonatomic) NSNumber *latestComicIndex;
 @property (class, readonly, nonatomic) XKCD *sharedInstance;
