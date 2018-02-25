@@ -53,6 +53,9 @@ static CGFloat const kPercentThreshold = 0.4F;
       self.startingPercent = 0.0F;
       self.startingScrollPositionY = scrollView.contentOffset.y;
       self.hasStartedInteractiveTransition = YES;
+      
+      if (scrollView) scrollView.scrollEnabled = NO;
+      
       shouldDismiss();
       break;
       
