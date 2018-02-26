@@ -10,11 +10,11 @@
 
 @implementation NSDate (ShortDate)
 
-- (NSString*) shortDate {
+- (NSString *) shortDate {
   return [self shortDateWithTimeZone:[NSTimeZone localTimeZone]];
 }
 
-- (NSString*) shortDateWithTimeZone:(NSTimeZone *)timeZone {
+- (NSString *) shortDateWithTimeZone:(NSTimeZone *)timeZone {
   NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
   dateFormatter.dateStyle = NSDateFormatterShortStyle;
   dateFormatter.timeStyle = NSDateFormatterNoStyle;

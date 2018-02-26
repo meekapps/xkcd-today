@@ -10,7 +10,7 @@
 
 @interface NSDate (ShortDate)
 
-- (NSString*) shortDate;
-- (NSString*) shortDateWithTimeZone:(NSTimeZone *)timeZone;
+- (NSString *) shortDate;
+- (NSString *) shortDateWithTimeZone:(NSTimeZone *)timeZone;
 
 @end

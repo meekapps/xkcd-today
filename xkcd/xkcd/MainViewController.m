@@ -11,6 +11,7 @@
 #import "FavoritesViewController.h"
 #import "InteractiveDismissTransition.h"
 #import "LaunchManager.h"
+#import "MainTitleView.h"
 #import "MainViewController.h"
 #import "NSNumber+Operations.h"
 #import "PersistenceManager.h"
@@ -29,7 +30,7 @@
 #import "XKCDExplainedViewController.h"
 
 @interface MainViewController () <FavoritesViewControllerDelegate>
-@property (strong, nonatomic) UILabel *titleLabel;
+@property (strong, nonatomic) MainTitleView *titleView;
 @property (strong, nonatomic) UIButton *previousButton, *nextButton, *randomButton;
 @property (strong, nonatomic) XKCDComic *currentComic;
 @property (copy, nonatomic) NSNumber *launchIndex;
@@ -267,7 +268,7 @@
 #pragma mark - Private
 
 - (void) clearViews {
-  self.titleLabel.text = nil;
+  self.titleView.comic = nil;
   
   self.noNetworkLabel.hidden = YES;
   self.toggleFavoriteButton.enabled = NO;
@@ -344,11 +345,8 @@
 }
 
 - (void) setupTitleView {
-  self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0F, 0.0F, 200.0F, 44.0F)];
-  self.titleLabel.numberOfLines = 2;
-  self.titleLabel.textAlignment = NSTextAlignmentCenter;
-  self.titleLabel.font = [UIFont boldSystemFontOfSize:18.0F];
-  self.navigationItem.titleView = self.titleLabel;
+  self.titleView = [[MainTitleView alloc] initWithComic:nil];
+  self.navigationItem.titleView = self.titleView;
 }
 
 - (void) setupToolbar {
@@ -404,7 +402,7 @@
   self.noNetworkLabel.hidden = YES;
   
   //nav bar title
-  self.titleLabel.text = comic.title;
+  self.titleView.comic = comic;
   
   //update the toolbar buttons
   if (self.currentComic.index) {
