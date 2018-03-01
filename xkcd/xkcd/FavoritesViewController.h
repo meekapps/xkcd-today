@@ -19,7 +19,7 @@
          didSelectComicWithIndex:(NSNumber*)index;
 @end
 
-@interface FavoritesViewController : InteractiveDismissPresentedViewController
+@interface FavoritesViewController : UIViewController
 
 @property (weak, nonatomic) id<FavoritesViewControllerDelegate>delegate;
 

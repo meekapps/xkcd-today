@@ -41,7 +41,8 @@ static CGFloat const kPercentThreshold = 0.4F;
   UIScrollView *scrollView = nil;
   if ([panRecognizer.view isKindOfClass:[UIScrollView class]]) {
     scrollView = (UIScrollView *)view;
-    isScrollViewAtTop = scrollView.contentOffset.y <= -scrollView.adjustedContentInset.top;
+//    isScrollViewAtTop = scrollView.contentOffset.y <= -scrollView.adjustedContentInset.top;
+      isScrollViewAtTop = scrollView.contentOffset.y <= -64.0F;
     BOOL shouldDisallowScrolling = progress > 0.0F && isScrollViewAtTop;
     scrollView.scrollEnabled = !shouldDisallowScrolling;
   }
