@@ -12,6 +12,8 @@
 #import "NSNumber+Operations.h"
 #import "NSString+StripTags.h"
 #import "NSString+XKCDImageUrl.h"
+#import "ShortcutsManager.h"
+#import "SpotlightManager.h"
 #import "TodayViewManager.h"
 #import "UIColor+XKCD.h"
 #import "UIImage+AsyncImage.h"
@@ -19,6 +21,7 @@
 #import "UIStoryboard+XKCD.h"
 #import "XKCD.h"
 
+@import CoreSpotlight;
 @import XCTest;
 
 @interface xkcdTests : XCTestCase
@@ -157,11 +160,60 @@ static NSTimeInterval const kDefaultAsyncTestTimeout = 10;
   XCTAssertTrue(url5Valid);
 }
 
+#pragma mark - ShortcutsManager
+
+- (void)testShortcuts {
+  ShortcutsManager *shortcutsManager = [ShortcutsManager sharedManager];
+  XCTAssertNotNil(shortcutsManager);
+  
+  XCTAssertNil([shortcutsManager indexWithLaunchObject:@"not a UIApplicationShortcutItem"]);
+  XCTAssertNil([shortcutsManager indexWithLaunchObject:nil]);
+  
+  UIApplicationShortcutItem *unsupportedShortcutItem = [[UIApplicationShortcutItem alloc] initWithType:@"unsupported" localizedTitle:@"unsupported"];
+  XCTAssertNil([shortcutsManager indexWithLaunchObject:unsupportedShortcutItem]);
+  
+  UIApplicationShortcutItem *latestShortcutItem = [[UIApplicationShortcutItem alloc] initWithType:@"latest" localizedTitle:@"latest"];
+  XCTAssertNil([shortcutsManager indexWithLaunchObject:latestShortcutItem]);
+  
+  UIApplicationShortcutItem *randomShortcutItem = [[UIApplicationShortcutItem alloc] initWithType:@"random" localizedTitle:@"random"];
+  XCTAssertNotNil([shortcutsManager indexWithLaunchObject:randomShortcutItem]);
+  
+  XCTAssertNil([shortcutsManager launchObjectFromLaunchOptions:nil]);
+  XCTAssertNil([shortcutsManager launchObjectFromLaunchOptions:@{}]);
+  XCTAssertNotNil([shortcutsManager launchObjectFromLaunchOptions:@{UIApplicationLaunchOptionsShortcutItemKey:@{}}]);
+}
+
+#pragma mark - SpotlightManager
+
+- (void)testSpotlight {
+  SpotlightManager *spotlightManager = [SpotlightManager sharedManager];
+  XCTAssertNotNil(spotlightManager);
+  
+  XCTAssertNil([spotlightManager indexWithLaunchObject:@"not an NSUserActivity"]);
+  XCTAssertNil([spotlightManager indexWithLaunchObject:nil]);
+  
+  NSUserActivity *unsupportedActivity = [[NSUserActivity alloc] initWithActivityType:@"unsupported"];
+  XCTAssertNil([spotlightManager indexWithLaunchObject:unsupportedActivity]);
+  
+  NSUserActivity *searchableActivity = [[NSUserActivity alloc] initWithActivityType:CSSearchableItemActionType];
+  searchableActivity.userInfo = @{CSSearchableItemActivityIdentifier:@1234};
+  XCTAssertEqualObjects([spotlightManager indexWithLaunchObject:searchableActivity], @1234);
+  
+  XCTAssertNil([spotlightManager launchObjectFromLaunchOptions:nil]);
+  XCTAssertNil([spotlightManager launchObjectFromLaunchOptions:@{}]);
+  XCTAssertNotNil([spotlightManager launchObjectFromLaunchOptions:@{UIApplicationLaunchOptionsUserActivityDictionaryKey:@{@"activity": searchableActivity}}]);
+}
+
 #pragma mark - TodayViewManager
 
 - (void)testTodayViewManager {
   TodayViewManager *todayViewManager = [TodayViewManager sharedManager];
   XCTAssertNotNil(todayViewManager);
+    
+  XCTAssertNil([todayViewManager indexWithLaunchObject:@"not a url"]);
+  XCTAssertNil([todayViewManager indexWithLaunchObject:nil]);
+  
+  XCTAssertEqualObjects([todayViewManager indexWithLaunchObject:[NSURL URLWithString:@"xkcd-today://1234"]], @(1234));
 }
 
 #pragma mark - UIColor+XKCD
