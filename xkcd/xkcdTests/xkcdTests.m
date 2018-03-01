@@ -162,6 +162,11 @@ static NSTimeInterval const kDefaultAsyncTestTimeout = 10;
 - (void)testTodayViewManager {
   TodayViewManager *todayViewManager = [TodayViewManager sharedManager];
   XCTAssertNotNil(todayViewManager);
+    
+  XCTAssertNil([todayViewManager indexWithLaunchObject:@"not a url"]);
+  XCTAssertNil([todayViewManager indexWithLaunchObject:nil]);
+  
+  XCTAssertEqualObjects([todayViewManager indexWithLaunchObject:[NSURL URLWithString:@"xkcd-today://1234"]], @(1234));
 }
 
 #pragma mark - UIColor+XKCD
