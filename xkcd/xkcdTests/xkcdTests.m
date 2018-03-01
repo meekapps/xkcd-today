@@ -6,6 +6,7 @@
 //  Copyright © 2016 meek apps. All rights reserved.
 //
 
+#import "LaunchManager.h"
 #import "NSDate+ShortDate.h"
 #import "NSError+Message.h"
 #import "NSNumber+Operations.h"
@@ -28,12 +29,23 @@ static NSTimeInterval const kDefaultAsyncTestTimeout = 10;
 
 @implementation xkcdTests
 
+#pragma mark - LaunchManager
+
+- (void)testLaunchManager {
+  LaunchManager *launchManager = [[LaunchManager alloc] init];
+  XCTAssertFalse([launchManager handleLaunchObject:nil]);
+    
+  XCTAssertFalse([launchManager handleLaunchOptions:nil]);
+}
+
 #pragma mark - NSDate+ShortDate
 
 - (void)testShortDate {
   NSDate *date = [NSDate dateWithTimeIntervalSince1970:0];
   NSString *shortDate = [date shortDateWithTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
   XCTAssert([shortDate isEqualToString:@"1/1/70"]);
+    
+  XCTAssertNotNil([date shortDate]);
 }
 
 #pragma mark - NSError+Message
@@ -219,6 +231,9 @@ static NSTimeInterval const kDefaultAsyncTestTimeout = 10;
   XKCD *xkcd = [XKCD sharedInstance];
   NSArray<XKCDComic *> *comics = [xkcd fetchAllDownloaded];
   XCTAssertNotNil(comics);
+    
+  XCTAssertFalse([xkcd comicIsBlacklisted:@1]);
+  XCTAssertTrue([xkcd comicIsBlacklisted:@1608]);
 }
 
 @end

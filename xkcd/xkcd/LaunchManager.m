@@ -46,11 +46,12 @@ NSString *const ShowComicNotification = @"ShowComicNotification";
   return [self handleLaunchObject:launchObject];
 }
 
-// Default implementation acquires merchantLocationUuid from protocol, resets window and posts notification.
+// Default implementation acquires comic index from protocol and posts notification.
 - (BOOL) handleLaunchObject:(id)launchObject {
   
   NSNumber *index = [self indexWithLaunchObject:launchObject];
-  
+  if (!index) return NO;
+    
   NSDictionary *userInfo = index ? @{kIndexKey : index} : nil;
   NSNotification *notification = [NSNotification notificationWithName:ShowComicNotification
                                                                object:nil
