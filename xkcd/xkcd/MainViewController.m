@@ -249,7 +249,7 @@
   UINavigationController *favoritesNavigationController = [UIStoryboard favoritesRootNavigationController];
   FavoritesViewController *favoritesViewController = favoritesNavigationController.viewControllers.firstObject;
   favoritesViewController.delegate = self;
-  favoritesViewController.interactiveDismissPresentingViewController = self;
+//  favoritesViewController.interactiveDismissPresentingViewController = self;
   
   [self.navigationController presentViewController:favoritesNavigationController
                                           animated:YES

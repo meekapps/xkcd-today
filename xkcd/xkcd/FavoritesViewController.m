@@ -38,7 +38,7 @@ typedef NS_ENUM(NSUInteger, Segment) {
   self.favorites = [XKCD.sharedInstance fetchFavorites];
   self.selectedSegment = SegmentFavorites;
 
-  self.interactiveDismissTransitionView = self.tableView;
+//  self.interactiveDismissTransitionView = self.tableView;
   
   [self updateEditButton];
   [self updateEmptyLabel];

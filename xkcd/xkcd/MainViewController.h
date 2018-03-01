@@ -10,7 +10,7 @@
 
 #import "InteractiveDismissPresentingViewController.h"
 
-@interface MainViewController : InteractiveDismissPresentingViewController
+@interface MainViewController : UIViewController
 
 @end
 
