@@ -12,6 +12,7 @@
 #import "NSNumber+Operations.h"
 #import "NSString+StripTags.h"
 #import "NSString+XKCDImageUrl.h"
+#import "ShortcutsManager.h"
 #import "TodayViewManager.h"
 #import "UIColor+XKCD.h"
 #import "UIImage+AsyncImage.h"
@@ -155,6 +156,29 @@ static NSTimeInterval const kDefaultAsyncTestTimeout = 10;
   NSString *url5 = @"http://testurl.com/image.png";
   BOOL url5Valid = [url5 isValidImageUrl];
   XCTAssertTrue(url5Valid);
+}
+
+#pragma mark - ShortcutsManager
+
+- (void)testShortcuts {
+  ShortcutsManager *shortcutsManager = [ShortcutsManager sharedManager];
+  XCTAssertNotNil(shortcutsManager);
+  
+  XCTAssertNil([shortcutsManager indexWithLaunchObject:@"not a UIApplicationShortcutItem"]);
+  XCTAssertNil([shortcutsManager indexWithLaunchObject:nil]);
+  
+  UIApplicationShortcutItem *unsupportedShortcutItem = [[UIApplicationShortcutItem alloc] initWithType:@"unsupported" localizedTitle:@"unsupported"];
+  XCTAssertNil([shortcutsManager indexWithLaunchObject:unsupportedShortcutItem]);
+  
+  UIApplicationShortcutItem *latestShortcutItem = [[UIApplicationShortcutItem alloc] initWithType:@"latest" localizedTitle:@"latest"];
+  XCTAssertNil([shortcutsManager indexWithLaunchObject:latestShortcutItem]);
+  
+  UIApplicationShortcutItem *randomShortcutItem = [[UIApplicationShortcutItem alloc] initWithType:@"random" localizedTitle:@"random"];
+  XCTAssertNotNil([shortcutsManager indexWithLaunchObject:randomShortcutItem]);
+  
+  XCTAssertNil([shortcutsManager launchObjectFromLaunchOptions:nil]);
+  XCTAssertNil([shortcutsManager launchObjectFromLaunchOptions:@{}]);
+  XCTAssertNotNil([shortcutsManager launchObjectFromLaunchOptions:@{UIApplicationLaunchOptionsShortcutItemKey:@{}}]);
 }
 
 #pragma mark - TodayViewManager
