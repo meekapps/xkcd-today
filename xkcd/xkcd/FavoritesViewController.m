@@ -8,7 +8,6 @@
 
 #import "FavoriteTableViewCell.h"
 #import "FavoritesViewController.h"
-#import "InteractiveDismissTransition.h"
 #import "UIAlertController+SimpleAction.h"
 #import "XKCD.h"
 #import "XKCDComic.h"
@@ -38,8 +37,6 @@ typedef NS_ENUM(NSUInteger, Segment) {
   self.favorites = [XKCD.sharedInstance fetchFavorites];
   self.selectedSegment = SegmentFavorites;
 
-//  self.interactiveDismissTransitionView = self.tableView;
-  
   [self updateEditButton];
   [self updateEmptyLabel];
 }
