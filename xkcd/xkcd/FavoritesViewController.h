@@ -8,8 +8,6 @@
 
 @import UIKit;
 
-#import "InteractiveDismissPresentedViewController.h"
-
 @class FavoritesViewController;
 
 @protocol FavoritesViewControllerDelegate <NSObject>

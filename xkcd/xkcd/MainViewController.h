@@ -8,8 +8,6 @@
 
 @import UIKit;
 
-#import "InteractiveDismissPresentingViewController.h"
-
 @interface MainViewController : UIViewController
 
 @end
