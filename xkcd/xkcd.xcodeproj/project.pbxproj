@@ -39,6 +39,8 @@
 		412191BB1C5D12720005971C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 412191B91C5D12720005971C /* MainInterface.storyboard */; };
 		412191BF1C5D12720005971C /* xkcd today.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 412191B11C5D12720005971C /* xkcd today.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		412E38E71C63A4BF00EB5B0D /* UIImage+XKCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 412E38E61C63A4BF00EB5B0D /* UIImage+XKCD.m */; };
+		41322BE52047B0E700E93C2E /* NSString+StripTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 419856B61D57AE10008B5EA5 /* NSString+StripTags.m */; };
+		41322BE62047B0E800E93C2E /* NSString+StripTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 419856B61D57AE10008B5EA5 /* NSString+StripTags.m */; };
 		414207991C5D284F009853D7 /* XKCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191A11C5C64F20005971C /* XKCD.m */; };
 		4142079B1C5D28F5009853D7 /* PersistenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4121919E1C5C643B0005971C /* PersistenceManager.m */; };
 		4142079C1C5D295C009853D7 /* xkcd.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 412191651C5C624E0005971C /* xkcd.xcdatamodeld */; };
@@ -700,6 +702,7 @@
 				4105C5AA1D9589DD00852F1F /* NSString+XKCDImageUrl.m in Sources */,
 				41FD61D51C61CAA30096C39F /* XKCDComic.m in Sources */,
 				417062A51C6078490003A3FD /* LaunchManager.m in Sources */,
+				41322BE52047B0E700E93C2E /* NSString+StripTags.m in Sources */,
 				417062A41C60783F0003A3FD /* SpotlightManager.m in Sources */,
 				414207A31C5D6950009853D7 /* NSNumber+Operations.m in Sources */,
 				414207A21C5D6831009853D7 /* UIImage+AsyncImage.m in Sources */,
@@ -715,6 +718,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41322BE62047B0E800E93C2E /* NSString+StripTags.m in Sources */,
 				41F1B5A11DA97900000042D4 /* UIImage+AsyncImage.m in Sources */,
 				41F1B5A01DA87343000042D4 /* NSString+XKCDImageUrl.m in Sources */,
 				41F1B59F1DA872D7000042D4 /* NSNumber+Operations.m in Sources */,
@@ -786,7 +790,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUILD = 18;
+				BUILD = 19;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -840,7 +844,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUILD = 18;
+				BUILD = 19;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
