@@ -12,6 +12,7 @@ script:
     -sdk iphonesimulator
     -destination 'platform=iOS Simulator,name=iPhone 8'
     build test
-    ONLY_ACTIVE_ARCH=NO
+    ONLY_ACTIVE_ARCH=YES
+    VALID_ARCHS=x86_64
     CODE_SIGN_IDENTITY="" 
     CODE_SIGNING_REQUIRED=NO

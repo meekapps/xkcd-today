@@ -176,7 +176,11 @@ static NSTimeInterval const kDefaultAsyncTestTimeout = 10;
   XCTAssertNil([shortcutsManager indexWithLaunchObject:latestShortcutItem]);
   
   UIApplicationShortcutItem *randomShortcutItem = [[UIApplicationShortcutItem alloc] initWithType:@"random" localizedTitle:@"random"];
-  XCTAssertNotNil([shortcutsManager indexWithLaunchObject:randomShortcutItem]);
+  if (XKCD.sharedInstance.latestComicIndex) {
+    XCTAssertNotNil([shortcutsManager indexWithLaunchObject:randomShortcutItem]);
+  } else {
+    XCTAssertNil([shortcutsManager indexWithLaunchObject:randomShortcutItem]);
+  }
   
   XCTAssertNil([shortcutsManager launchObjectFromLaunchOptions:nil]);
   XCTAssertNil([shortcutsManager launchObjectFromLaunchOptions:@{}]);
