@@ -58,6 +58,7 @@
 - (void) viewDidLoad {
   [super viewDidLoad];
   
+  [self setupExplain];
   [self setupTitleView];
   [self setupToolbar];
   
