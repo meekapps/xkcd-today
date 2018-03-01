@@ -7,4 +7,5 @@
 
 [![View on the App Store](https://linkmaker.itunes.apple.com/images/badges/en-us/badge_appstore-lrg.svg)](https://itunes.apple.com/us/app/xkcd-today/id1082226820?ls=1&mt=8)
 
-![](/screenshots/4/main.png = 375x)
+<img src="/screenshots/4/main.png" width="320">
+
