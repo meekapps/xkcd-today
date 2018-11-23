@@ -52,6 +52,10 @@
 		419856B11D57A8C1008B5EA5 /* Explained.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 419856B01D57A8C1008B5EA5 /* Explained.storyboard */; };
 		419856B41D57A94C008B5EA5 /* UIStoryboard+XKCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 419856B31D57A94C008B5EA5 /* UIStoryboard+XKCD.m */; };
 		419856B71D57AE10008B5EA5 /* NSString+StripTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 419856B61D57AE10008B5EA5 /* NSString+StripTags.m */; };
+		41AEDA9921A8C487008D786E /* InteractiveDismissPresentedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41AEDA9621A8C487008D786E /* InteractiveDismissPresentedViewController.m */; };
+		41AEDA9A21A8C487008D786E /* InteractiveDismissTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 41AEDA9821A8C487008D786E /* InteractiveDismissTransition.m */; };
+		41AEDAA121A8C56A008D786E /* DismissTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 41AEDA9F21A8C50E008D786E /* DismissTransition.m */; };
+		41AEDAA221A8C593008D786E /* InteractiveDismissPresentingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41AEDA9D21A8C4D3008D786E /* InteractiveDismissPresentingViewController.m */; };
 		41C79A131C7A6F3B0073237C /* ShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C79A121C7A6F3B0073237C /* ShareController.m */; };
 		41E025791C66A67500235CAA /* UIAlertController+SimpleAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E025781C66A67500235CAA /* UIAlertController+SimpleAction.m */; };
 		41F1B5891DA8644D000042D4 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41F1B5881DA8644D000042D4 /* Messages.framework */; };
@@ -179,6 +183,14 @@
 		419856B31D57A94C008B5EA5 /* UIStoryboard+XKCD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIStoryboard+XKCD.m"; sourceTree = "<group>"; };
 		419856B51D57AE10008B5EA5 /* NSString+StripTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+StripTags.h"; sourceTree = "<group>"; };
 		419856B61D57AE10008B5EA5 /* NSString+StripTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StripTags.m"; sourceTree = "<group>"; };
+		41AEDA9621A8C487008D786E /* InteractiveDismissPresentedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractiveDismissPresentedViewController.m; sourceTree = "<group>"; };
+		41AEDA9721A8C487008D786E /* InteractiveDismissTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractiveDismissTransition.h; sourceTree = "<group>"; };
+		41AEDA9821A8C487008D786E /* InteractiveDismissTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractiveDismissTransition.m; sourceTree = "<group>"; };
+		41AEDA9B21A8C498008D786E /* InteractiveDismissPresentedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InteractiveDismissPresentedViewController.h; sourceTree = "<group>"; };
+		41AEDA9C21A8C4B7008D786E /* InteractiveDismissPresentingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InteractiveDismissPresentingViewController.h; sourceTree = "<group>"; };
+		41AEDA9D21A8C4D3008D786E /* InteractiveDismissPresentingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InteractiveDismissPresentingViewController.m; sourceTree = "<group>"; };
+		41AEDA9E21A8C4EF008D786E /* DismissTransition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DismissTransition.h; sourceTree = "<group>"; };
+		41AEDA9F21A8C50E008D786E /* DismissTransition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DismissTransition.m; sourceTree = "<group>"; };
 		41C79A111C7A6F3B0073237C /* ShareController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareController.h; sourceTree = "<group>"; };
 		41C79A121C7A6F3B0073237C /* ShareController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareController.m; sourceTree = "<group>"; };
 		41E025771C66A67500235CAA /* UIAlertController+SimpleAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+SimpleAction.h"; sourceTree = "<group>"; };
@@ -271,6 +283,7 @@
 				41FB0AAF1C5D241300EE4732 /* xkcd.entitlements */,
 				412191A61C5C68370005971C /* Categories */,
 				412191981C5C63AA0005971C /* Core */,
+				41AEDAA021A8C54F008D786E /* Transitions */,
 				412191991C5C63B10005971C /* Views */,
 				412191971C5C63980005971C /* NSManagedObjects */,
 				412191961C5C63830005971C /* Storyboards */,
@@ -421,6 +434,21 @@
 			path = "xkcd today";
 			sourceTree = "<group>";
 		};
+		41AEDAA021A8C54F008D786E /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				41AEDA9E21A8C4EF008D786E /* DismissTransition.h */,
+				41AEDA9F21A8C50E008D786E /* DismissTransition.m */,
+				41AEDA9B21A8C498008D786E /* InteractiveDismissPresentedViewController.h */,
+				41AEDA9621A8C487008D786E /* InteractiveDismissPresentedViewController.m */,
+				41AEDA9C21A8C4B7008D786E /* InteractiveDismissPresentingViewController.h */,
+				41AEDA9D21A8C4D3008D786E /* InteractiveDismissPresentingViewController.m */,
+				41AEDA9721A8C487008D786E /* InteractiveDismissTransition.h */,
+				41AEDA9821A8C487008D786E /* InteractiveDismissTransition.m */,
+			);
+			name = Transitions;
+			sourceTree = "<group>";
+		};
 		41F1B58A1DA8644D000042D4 /* xkcd message */ = {
 			isa = PBXGroup;
 			children = (
@@ -515,7 +543,7 @@
 		4121914E1C5C624E0005971C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "meek apps";
 				TargetAttributes = {
 					412191551C5C624E0005971C = {
@@ -618,7 +646,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				41075C061C6C077600E18573 /* TodayViewManager.m in Sources */,
+				41AEDAA221A8C593008D786E /* InteractiveDismissPresentingViewController.m in Sources */,
 				412191611C5C624E0005971C /* MainViewController.m in Sources */,
+				41AEDA9921A8C487008D786E /* InteractiveDismissPresentedViewController.m in Sources */,
 				417024631C5DB98F0084531D /* ComicScrollView.m in Sources */,
 				4108CA6B1CB9C192006CF7F9 /* XKCDAlertController.m in Sources */,
 				412191AC1C5C73FB0005971C /* UIImage+AsyncImage.m in Sources */,
@@ -640,6 +670,7 @@
 				41FD61C41C61B5230096C39F /* ShortcutsManager.m in Sources */,
 				410DF1A11C6FEFF4000A19F6 /* Reachability.m in Sources */,
 				08962E7320434B8900627736 /* MainTitleView.m in Sources */,
+				41AEDA9A21A8C487008D786E /* InteractiveDismissTransition.m in Sources */,
 				417062A31C606FC30003A3FD /* SpotlightManager.m in Sources */,
 				41C79A131C7A6F3B0073237C /* ShareController.m in Sources */,
 				412191671C5C624E0005971C /* xkcd.xcdatamodeld in Sources */,
@@ -648,6 +679,7 @@
 				41FD61CE1C61C8810096C39F /* XKCDComic+CoreDataProperties.m in Sources */,
 				4170629A1C606E2F0003A3FD /* LaunchManager.m in Sources */,
 				412191A91C5C70A70005971C /* UIColor+XKCD.m in Sources */,
+				41AEDAA121A8C56A008D786E /* DismissTransition.m in Sources */,
 				41FD61CF1C61C8810096C39F /* XKCDComic.m in Sources */,
 				419856AA1D57950D008B5EA5 /* NSError+Message.m in Sources */,
 			);
@@ -756,7 +788,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUILD = 21;
+				BUILD = 22;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -765,12 +797,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -798,7 +832,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -810,7 +844,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUILD = 21;
+				BUILD = 22;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -819,12 +853,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -846,7 +882,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
