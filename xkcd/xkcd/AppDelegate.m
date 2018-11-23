@@ -52,7 +52,7 @@
 
 - (BOOL)application:(UIApplication *)application
 continueUserActivity:(NSUserActivity *)userActivity
- restorationHandler:(void (^)(NSArray *))restorationHandler {
+ restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {
   return [[SpotlightManager sharedManager] handleLaunchObject:userActivity];
 }
 
