@@ -210,6 +210,8 @@ typedef NS_ENUM(NSUInteger, Segment) {
 - (void) setSelectedSegment:(Segment)selectedSegment {
   _selectedSegment = selectedSegment;
   
+  self.editing = NO;
+  
   self.segmentedControl.selectedSegmentIndex = selectedSegment;
   [self.tableView reloadData];
   
