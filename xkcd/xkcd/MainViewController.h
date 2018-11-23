@@ -8,7 +8,9 @@
 
 @import UIKit;
 
-@interface MainViewController : UIViewController
+#import "InteractiveDismissPresentingViewController.h"
+
+@interface MainViewController : InteractiveDismissPresentingViewController
 
 @end
 
