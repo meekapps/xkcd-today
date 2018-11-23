@@ -8,9 +8,7 @@
 
 #import "FavoriteTableViewCell.h"
 #import "FavoritesViewController.h"
-#import "UIAlertController+SimpleAction.h"
 #import "XKCD.h"
-#import "XKCDComic.h"
 
 typedef NS_ENUM(NSUInteger, Segment) {
     SegmentFavorites,
