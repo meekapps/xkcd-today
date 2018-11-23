@@ -43,6 +43,16 @@
   NSAssert(self.interactiveDismissPresentingViewController, @"Subclass should set interactiveDismissPresentingViewController");
 }
 
+- (void) setEditing:(BOOL)editing animated:(BOOL)animated {
+  [super setEditing:editing animated:animated];
+  
+  if (editing) {
+    [self.interactiveDismissTransitionView removeGestureRecognizer:self.panRecognizer];
+  } else {
+    [self.interactiveDismissTransitionView addGestureRecognizer:self.panRecognizer];
+  }
+}
+
 - (void) setInteractiveDismissTransitionView:(UIView *)interactiveDismissTransitionView {
   _interactiveDismissTransitionView = interactiveDismissTransitionView;
 
