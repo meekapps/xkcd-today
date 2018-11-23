@@ -7,10 +7,12 @@
 //
 
 #import "FavoriteTableViewCell.h"
+#import "NSDate+ShortDate.h"
 #import "XKCDComic.h"
 
 @interface FavoriteTableViewCell()
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *detailLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *previewImageView;
 @end
 
@@ -28,12 +30,12 @@
 
 - (void) setComic:(XKCDComic *)comic {
   self.titleLabel.text = comic.title;
+  self.detailLabel.text = [NSString stringWithFormat:@"#%@ - %@", comic.index, comic.date.shortDate];
 
   __weak FavoriteTableViewCell *weakSelf = self;
   [comic getImage:^(UIImage * _Nonnull image) {
     weakSelf.previewImageView.image = image;
   }];
-  
 }
 
 @end
