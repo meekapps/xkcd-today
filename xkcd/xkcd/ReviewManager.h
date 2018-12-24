@@ -10,10 +10,19 @@
 
 @interface ReviewManager : NSObject
 
-/// YES if review has already been requested.
+/// YES if review has already been requested for standard user defaults.
 @property (nonatomic, readonly, class) BOOL didRequestReview;
 
-/// Asks for App Store review if session count criteria is met and review has not yet been prompted.
-+ (void) requestReviewIfNeeded;
+/// Returns the number of sessions required to request a review.
+@property (nonatomic, readonly, class) NSInteger minimumSessionsToRequestReview;
+
+/// YES if review has already been requested for custom user defaults.
++ (BOOL)didRequestReviewWithUserDefaults:(NSUserDefaults *)userDefaults;
+
+/// Asks for App Store review if session count criteria is met and review has not yet been prompted for standard user defaults.
++ (void)requestReviewIfNeeded;
+
+/// Asks for App Store review if session count criteria is met and review has not yet been prompted for custom user defaults.
++ (void)requestReviewIfNeededWithUserDefaults:(NSUserDefaults *)userDefaults;
 
 @end

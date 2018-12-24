@@ -12,15 +12,24 @@ static NSString *const kNumberOfSessionsKey = @"numberOfSessions";
 
 @implementation UIApplication (Sessions)
 
-+ (NSInteger) numberOfLoggedSessions {
-  return [NSUserDefaults.standardUserDefaults integerForKey:kNumberOfSessionsKey];
++ (NSInteger)numberOfLoggedSessions {
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    return [self numberOfLoggedSessionsWithUserDefaults:userDefaults];
 }
 
-+ (void) logSession {
-  NSUInteger numberOfSessions = [self numberOfLoggedSessions] + 1;
-  NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
-  [userDefaults setInteger:numberOfSessions forKey:kNumberOfSessionsKey];
-  [userDefaults synchronize];
++ (void)logSession {
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    [self logSessionWithUserDefaults:userDefaults];
+}
+
++ (void)logSessionWithUserDefaults:(NSUserDefaults *)userDefaults {
+    NSUInteger numberOfSessions = [self numberOfLoggedSessionsWithUserDefaults:userDefaults] + 1;
+    [userDefaults setInteger:numberOfSessions forKey:kNumberOfSessionsKey];
+    [userDefaults synchronize];
+}
+
++ (NSInteger)numberOfLoggedSessionsWithUserDefaults:(NSUserDefaults *)userDefaults {
+    return [userDefaults integerForKey:kNumberOfSessionsKey];
 }
 
 @end

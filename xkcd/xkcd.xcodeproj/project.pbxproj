@@ -24,7 +24,6 @@
 		412191671C5C624E0005971C /* xkcd.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 412191651C5C624E0005971C /* xkcd.xcdatamodeld */; };
 		412191691C5C624E0005971C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 412191681C5C624E0005971C /* Assets.xcassets */; };
 		4121916C1C5C624E0005971C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4121916A1C5C624E0005971C /* LaunchScreen.storyboard */; };
-		412191771C5C624E0005971C /* xkcdTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191761C5C624E0005971C /* xkcdTests.m */; };
 		4121919F1C5C643B0005971C /* PersistenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4121919E1C5C643B0005971C /* PersistenceManager.m */; };
 		412191A21C5C64F20005971C /* XKCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191A11C5C64F20005971C /* XKCD.m */; };
 		412191A91C5C70A70005971C /* UIColor+XKCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191A81C5C70A70005971C /* UIColor+XKCD.m */; };
@@ -71,6 +70,23 @@
 		41F1B5A01DA87343000042D4 /* NSString+XKCDImageUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4108CA671CB9AF80006CF7F9 /* NSString+XKCDImageUrl.m */; };
 		41F1B5A11DA97900000042D4 /* UIImage+AsyncImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 412191AB1C5C73FB0005971C /* UIImage+AsyncImage.m */; };
 		41F26A561D5407BA002242AE /* XKCDExplained.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F26A551D5407BA002242AE /* XKCDExplained.m */; };
+		41FD396921D18A8300537E1E /* LaunchManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD396821D18A8300537E1E /* LaunchManagerTests.m */; };
+		41FD396B21D18AAC00537E1E /* NSDate+ShortDateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD396A21D18AAC00537E1E /* NSDate+ShortDateTests.m */; };
+		41FD396D21D18AD900537E1E /* NSError+MessageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD396C21D18AD900537E1E /* NSError+MessageTests.m */; };
+		41FD396F21D18B0000537E1E /* NSNumber+OperationsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD396E21D18B0000537E1E /* NSNumber+OperationsTests.m */; };
+		41FD397121D18B2E00537E1E /* NSString+StripTagsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD397021D18B2E00537E1E /* NSString+StripTagsTests.m */; };
+		41FD397321D18B6200537E1E /* NSString+XKCDImageUrlTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD397221D18B6200537E1E /* NSString+XKCDImageUrlTests.m */; };
+		41FD397521D18B8000537E1E /* ShortcutsManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD397421D18B8000537E1E /* ShortcutsManagerTests.m */; };
+		41FD397721D18B9E00537E1E /* SpotlightManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD397621D18B9E00537E1E /* SpotlightManagerTests.m */; };
+		41FD397921D18BC200537E1E /* TodayViewManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD397821D18BC200537E1E /* TodayViewManagerTests.m */; };
+		41FD397B21D18BDC00537E1E /* UIColor+XKCDTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD397A21D18BDC00537E1E /* UIColor+XKCDTests.m */; };
+		41FD397D21D18C0600537E1E /* UIImage+AsyncImageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD397C21D18C0600537E1E /* UIImage+AsyncImageTests.m */; };
+		41FD397F21D18C4400537E1E /* UIImage+XKCDTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD397E21D18C4400537E1E /* UIImage+XKCDTests.m */; };
+		41FD398121D18C6800537E1E /* UIStoryboard+XKCDTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD398021D18C6800537E1E /* UIStoryboard+XKCDTests.m */; };
+		41FD398521D18C9C00537E1E /* XKCDTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD398421D18C9C00537E1E /* XKCDTests.m */; };
+		41FD398B21D198F100537E1E /* UIApplication+SessionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD398A21D198F100537E1E /* UIApplication+SessionsTests.m */; };
+		41FD398D21D19AD400537E1E /* NSUserDefaultsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD398C21D19AD400537E1E /* NSUserDefaultsTestCase.m */; };
+		41FD399121D19E9C00537E1E /* ReviewManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD399021D19E9C00537E1E /* ReviewManagerTests.m */; };
 		41FD61C41C61B5230096C39F /* ShortcutsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD61C31C61B5230096C39F /* ShortcutsManager.m */; };
 		41FD61CE1C61C8810096C39F /* XKCDComic+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD61CB1C61C8810096C39F /* XKCDComic+CoreDataProperties.m */; };
 		41FD61CF1C61C8810096C39F /* XKCDComic.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FD61CD1C61C8810096C39F /* XKCDComic.m */; };
@@ -148,7 +164,6 @@
 		4121916B1C5C624E0005971C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4121916D1C5C624E0005971C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		412191721C5C624E0005971C /* xkcdTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = xkcdTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		412191761C5C624E0005971C /* xkcdTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = xkcdTests.m; sourceTree = "<group>"; };
 		412191781C5C624E0005971C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4121919D1C5C643B0005971C /* PersistenceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PersistenceManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4121919E1C5C643B0005971C /* PersistenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PersistenceManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -207,6 +222,24 @@
 		41F26A551D5407BA002242AE /* XKCDExplained.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XKCDExplained.m; sourceTree = "<group>"; };
 		41FB0AAE1C5D221F00EE4732 /* xkcd today.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "xkcd today.entitlements"; sourceTree = "<group>"; };
 		41FB0AAF1C5D241300EE4732 /* xkcd.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = xkcd.entitlements; sourceTree = "<group>"; };
+		41FD396821D18A8300537E1E /* LaunchManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LaunchManagerTests.m; sourceTree = "<group>"; };
+		41FD396A21D18AAC00537E1E /* NSDate+ShortDateTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ShortDateTests.m"; sourceTree = "<group>"; };
+		41FD396C21D18AD900537E1E /* NSError+MessageTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSError+MessageTests.m"; sourceTree = "<group>"; };
+		41FD396E21D18B0000537E1E /* NSNumber+OperationsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+OperationsTests.m"; sourceTree = "<group>"; };
+		41FD397021D18B2E00537E1E /* NSString+StripTagsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+StripTagsTests.m"; sourceTree = "<group>"; };
+		41FD397221D18B6200537E1E /* NSString+XKCDImageUrlTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+XKCDImageUrlTests.m"; sourceTree = "<group>"; };
+		41FD397421D18B8000537E1E /* ShortcutsManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShortcutsManagerTests.m; sourceTree = "<group>"; };
+		41FD397621D18B9E00537E1E /* SpotlightManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpotlightManagerTests.m; sourceTree = "<group>"; };
+		41FD397821D18BC200537E1E /* TodayViewManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewManagerTests.m; sourceTree = "<group>"; };
+		41FD397A21D18BDC00537E1E /* UIColor+XKCDTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+XKCDTests.m"; sourceTree = "<group>"; };
+		41FD397C21D18C0600537E1E /* UIImage+AsyncImageTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+AsyncImageTests.m"; sourceTree = "<group>"; };
+		41FD397E21D18C4400537E1E /* UIImage+XKCDTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+XKCDTests.m"; sourceTree = "<group>"; };
+		41FD398021D18C6800537E1E /* UIStoryboard+XKCDTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIStoryboard+XKCDTests.m"; sourceTree = "<group>"; };
+		41FD398421D18C9C00537E1E /* XKCDTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XKCDTests.m; sourceTree = "<group>"; };
+		41FD398A21D198F100537E1E /* UIApplication+SessionsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+SessionsTests.m"; sourceTree = "<group>"; };
+		41FD398C21D19AD400537E1E /* NSUserDefaultsTestCase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSUserDefaultsTestCase.m; sourceTree = "<group>"; };
+		41FD398F21D19B4100537E1E /* NSUserDefaultsTestCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSUserDefaultsTestCase.h; sourceTree = "<group>"; };
+		41FD399021D19E9C00537E1E /* ReviewManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReviewManagerTests.m; sourceTree = "<group>"; };
 		41FD61C21C61B5230096C39F /* ShortcutsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortcutsManager.h; sourceTree = "<group>"; };
 		41FD61C31C61B5230096C39F /* ShortcutsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortcutsManager.m; sourceTree = "<group>"; };
 		41FD61CA1C61C8810096C39F /* XKCDComic+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XKCDComic+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -306,8 +339,24 @@
 		412191751C5C624E0005971C /* xkcdTests */ = {
 			isa = PBXGroup;
 			children = (
-				412191761C5C624E0005971C /* xkcdTests.m */,
+				41FD396821D18A8300537E1E /* LaunchManagerTests.m */,
+				41FD396A21D18AAC00537E1E /* NSDate+ShortDateTests.m */,
+				41FD396C21D18AD900537E1E /* NSError+MessageTests.m */,
+				41FD396E21D18B0000537E1E /* NSNumber+OperationsTests.m */,
+				41FD397021D18B2E00537E1E /* NSString+StripTagsTests.m */,
+				41FD397221D18B6200537E1E /* NSString+XKCDImageUrlTests.m */,
+				41FD399021D19E9C00537E1E /* ReviewManagerTests.m */,
+				41FD397421D18B8000537E1E /* ShortcutsManagerTests.m */,
+				41FD397621D18B9E00537E1E /* SpotlightManagerTests.m */,
+				41FD397821D18BC200537E1E /* TodayViewManagerTests.m */,
+				41FD398A21D198F100537E1E /* UIApplication+SessionsTests.m */,
+				41FD397A21D18BDC00537E1E /* UIColor+XKCDTests.m */,
+				41FD397C21D18C0600537E1E /* UIImage+AsyncImageTests.m */,
+				41FD397E21D18C4400537E1E /* UIImage+XKCDTests.m */,
+				41FD398021D18C6800537E1E /* UIStoryboard+XKCDTests.m */,
+				41FD398421D18C9C00537E1E /* XKCDTests.m */,
 				412191781C5C624E0005971C /* Info.plist */,
+				41FD398E21D19B1700537E1E /* Helpers */,
 			);
 			path = xkcdTests;
 			sourceTree = "<group>";
@@ -460,6 +509,15 @@
 				41F1B5931DA8644D000042D4 /* Info.plist */,
 			);
 			path = "xkcd message";
+			sourceTree = "<group>";
+		};
+		41FD398E21D19B1700537E1E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				41FD398F21D19B4100537E1E /* NSUserDefaultsTestCase.h */,
+				41FD398C21D19AD400537E1E /* NSUserDefaultsTestCase.m */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -689,7 +747,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				412191771C5C624E0005971C /* xkcdTests.m in Sources */,
+				41FD396921D18A8300537E1E /* LaunchManagerTests.m in Sources */,
+				41FD399121D19E9C00537E1E /* ReviewManagerTests.m in Sources */,
+				41FD397B21D18BDC00537E1E /* UIColor+XKCDTests.m in Sources */,
+				41FD397721D18B9E00537E1E /* SpotlightManagerTests.m in Sources */,
+				41FD397D21D18C0600537E1E /* UIImage+AsyncImageTests.m in Sources */,
+				41FD396F21D18B0000537E1E /* NSNumber+OperationsTests.m in Sources */,
+				41FD398521D18C9C00537E1E /* XKCDTests.m in Sources */,
+				41FD397F21D18C4400537E1E /* UIImage+XKCDTests.m in Sources */,
+				41FD397521D18B8000537E1E /* ShortcutsManagerTests.m in Sources */,
+				41FD397121D18B2E00537E1E /* NSString+StripTagsTests.m in Sources */,
+				41FD397921D18BC200537E1E /* TodayViewManagerTests.m in Sources */,
+				41FD398121D18C6800537E1E /* UIStoryboard+XKCDTests.m in Sources */,
+				41FD398D21D19AD400537E1E /* NSUserDefaultsTestCase.m in Sources */,
+				41FD397321D18B6200537E1E /* NSString+XKCDImageUrlTests.m in Sources */,
+				41FD396B21D18AAC00537E1E /* NSDate+ShortDateTests.m in Sources */,
+				41FD396D21D18AD900537E1E /* NSError+MessageTests.m in Sources */,
+				41FD398B21D198F100537E1E /* UIApplication+SessionsTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

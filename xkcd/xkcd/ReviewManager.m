@@ -16,22 +16,35 @@ static NSInteger const kMinimumSessionsToRequestReview = 3;
 
 @implementation ReviewManager
 
-+ (BOOL) didRequestReview {
-  return [[NSUserDefaults standardUserDefaults] boolForKey:kDidRequestReviewKey];
++ (BOOL)didRequestReview {
+    NSUserDefaults *standardUserDefaults = NSUserDefaults.standardUserDefaults;
+    return [self didRequestReviewWithUserDefaults:standardUserDefaults];
 }
 
-+ (void) requestReviewIfNeeded {
-  if ([UIApplication numberOfLoggedSessions] >= kMinimumSessionsToRequestReview &&
-    !self.didRequestReview) {
-    [SKStoreReviewController requestReview];
-    [self setDidRequestReview:YES];
-  }
++ (BOOL)didRequestReviewWithUserDefaults:(NSUserDefaults *)userDefaults {
+    return [userDefaults boolForKey:kDidRequestReviewKey];
+}
+
++ (NSInteger)minimumSessionsToRequestReview {
+    return kMinimumSessionsToRequestReview;
+}
+
++ (void)requestReviewIfNeeded {
+    NSUserDefaults *standardUserDefaults = NSUserDefaults.standardUserDefaults;
+    [self requestReviewIfNeededWithUserDefaults:standardUserDefaults];
+}
+
++ (void)requestReviewIfNeededWithUserDefaults:(NSUserDefaults *)userDefaults {
+    if ([UIApplication numberOfLoggedSessionsWithUserDefaults:userDefaults] >= kMinimumSessionsToRequestReview &&
+        !self.didRequestReview) {
+        [SKStoreReviewController requestReview];
+        [self setDidRequestReview:YES userDefaults:userDefaults];
+    }
 }
 
 #pragma mark - Private
 
-+ (void) setDidRequestReview:(BOOL)didRequestReview {
-  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
++ (void)setDidRequestReview:(BOOL)didRequestReview userDefaults:(NSUserDefaults *)userDefaults {
   [userDefaults setBool:didRequestReview forKey:kDidRequestReviewKey];
   [userDefaults synchronize];
 }
