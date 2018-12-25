@@ -17,7 +17,7 @@ static NSString *const kAppStoreLink = @"https://itunes.apple.com/us/app/xkcd-to
 
 @implementation ShareController
 
-- (instancetype) initWithComic:(XKCDComic*)comic {
+- (instancetype)initWithComic:(XKCDComic*)comic {
   
   NSMutableArray *mutableItems = [NSMutableArray array];
   
@@ -41,14 +41,6 @@ static NSString *const kAppStoreLink = @"https://itunes.apple.com/us/app/xkcd-to
   if (self) {
   }
   return self;
-}
-
-- (void)viewDidLoad {
-  [super viewDidLoad];
-}
-
-- (void)didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];
 }
 
 @end

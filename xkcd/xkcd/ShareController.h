@@ -13,6 +13,8 @@
 
 @interface ShareController : UIActivityViewController
 
-- (instancetype) initWithComic:(XKCDComic*)comic;
+- (instancetype)initWithActivityItems:(NSArray *)activityItems applicationActivities:(NSArray<__kindof UIActivity *> *)applicationActivities NS_UNAVAILABLE;
+
+- (instancetype)initWithComic:(XKCDComic*)comic;
 
 @end

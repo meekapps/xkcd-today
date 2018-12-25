@@ -7,6 +7,8 @@
 //
 
 @import Foundation;
+
+#import "PersistenceManager.h"
 #import "XKCDComic.h"
 
 FOUNDATION_EXPORT NSString *const kXKCDServerBase;
@@ -17,6 +19,8 @@ typedef void(^XKCDComicCompletion)(XKCDComic *comic);
 
 @property (strong, readonly, nonatomic) NSNumber *latestComicIndex;
 @property (class, readonly, nonatomic) XKCD *sharedInstance;
+
+- (instancetype)initWithPersistenceManager:(PersistenceManager *)persistenceManager;
 
 /// Returns YES if index cannot be loaded natively.
 - (BOOL) comicIsBlacklisted:(NSNumber*)index;
